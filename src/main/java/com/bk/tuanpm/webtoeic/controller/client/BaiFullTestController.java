@@ -3,7 +3,12 @@ package com.bk.tuanpm.webtoeic.controller.client;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -24,10 +29,12 @@ import com.bk.tuanpm.webtoeic.entities.BaiThiThu;
 import com.bk.tuanpm.webtoeic.entities.CauHoiBaiThiThu;
 import com.bk.tuanpm.webtoeic.entities.KetQuaBaiTest;
 import com.bk.tuanpm.webtoeic.entities.NguoiDung;
+import com.bk.tuanpm.webtoeic.entities.PartToeic;
 import com.bk.tuanpm.webtoeic.service.BaiThiThuService;
 import com.bk.tuanpm.webtoeic.service.CauHoiBaiThiThuService;
 import com.bk.tuanpm.webtoeic.service.KetQuaBaiTestService;
 import com.bk.tuanpm.webtoeic.service.NguoiDungService;
+import com.bk.tuanpm.webtoeic.service.PartService;
 @Controller
 public class BaiFullTestController {
 	@Autowired
@@ -39,6 +46,9 @@ public class BaiFullTestController {
 	
 	@Autowired
 	KetQuaBaiTestService ketquabaitestService;
+	
+	@Autowired
+	PartService partService;
 	
 	@Autowired
 	private NguoiDungService nguoiDungService;
@@ -106,7 +116,13 @@ public class BaiFullTestController {
 		
 		try {
 				List<CauHoiBaiThiThu> list = cauhoibaithithuService.getListCauHoi(baithithuService.getBaiThiThu(id).get(0));
+				List<PartToeic> partToeicListening = partService.getPartByType("Listening");
+				
+				//Get mapping Part toeic and questions
+				Map<String, List<CauHoiBaiThiThu>> newMapPartQuestion = cauhoibaithithuService.getMapPartQuestionListen(list);
+				model.addAllAttributes(newMapPartQuestion);
 				model.addAttribute("listQuestion",list);
+				model.addAttribute("partListen",partToeicListening);
 				return "client/fullTestListen";
 				
 		}catch(Exception e) {

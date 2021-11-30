@@ -7,20 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Bài test Reading</title>
-
-<script
-	src="${pageContext.request.contextPath}/resources/js/jquery-1.js"></script>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-	crossorigin="anonymous">
-<script
-	src="${pageContext.request.contextPath}/resources/js/client/baiTestReading.js"></script>
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-
 </head>
-
 
 <style>
 .paragraph {
@@ -98,9 +85,7 @@
 </style>
 
 <script type="text/javascript">
-	$(document).ready(function() {
-
-	});
+	
 </script>
 <body>
 
@@ -157,144 +142,120 @@
 
 					<!--Nội dung bài test -->
 					<div id="main" class="col-md-8 web-font">
+
+						<ul class="nav nav-tabs" id="tabparts">
+							<c:forEach items="${partReading}" var="part">
+								<li><a partid="${part.idPart}" href="#${part.idPart}">${part.partName}</a></li>
+							</c:forEach>
+						</ul>
+						<c:forEach items="${partReading}" var="part">
+							<p class="part${part.idPart} parttoeic">
+								<b>${part.partName}: ${part.description}</b>
+							</p>
+						</c:forEach>
+						<div class="tab-content">
+							<div class="tab-pane active" id="5">
+								<c:forEach items="${part5}" var="list">
+									<div>
+										<p>
+											<b>Question ${list.number}:</b>
+										</p>
+										<pre class="paragraph">${list.question}</pre>
+
+										<input class="part5" type="radio"
+											name="question${list.number}" id="question.${list.number}"
+											value="A" onclick="markColorReading(this.id)" /> A.
+										${list.option1} <br> <input class="part5" type="radio"
+											name="question${list.number}" id="question.${list.number}"
+											value="B" onclick="markColorReading(this.id)" /> B.
+										${list.option2} <br> <input class="part5" type="radio"
+											name="question${list.number}" id="question.${list.number}"
+											value="C" onclick="markColorReading(this.id)" /> C.
+										${list.option3} <br> <input class="part5" type="radio"
+											name="question${list.number}" id="question.${list.number}"
+											value="D" onclick="markColorReading(this.id)" /> D.
+										${list.option4} <br>
+									</div>
+									<br>
+								</c:forEach>
+							</div>
+							<div class="tab-pane" id="6">
+								<c:forEach items="${part6}" var="list">
+									<c:if test="${not empty list.paragraph }">
+										<pre class="paragraph">${list.paragraph}</pre>
+									</c:if>
+
+									<p>
+										<b>Question ${list.number}:</b>
+									</p>
+									<input type="radio" name="question${list.number}"
+										id="question.${list.number}"
+										onclick="markColorReading(this.id)" value="A" /> A. ${list.option1} <br>
+									<input type="radio" name="question${list.number}"
+										id="question.${list.number}"
+										onclick="markColorReading(this.id)" value="B" /> B. ${list.option2} <br>
+									<input type="radio" name="question${list.number}"
+										id="question.${list.number}"
+										onclick="markColorReading(this.id)" value="C" /> C. ${list.option3} <br>
+									<input type="radio" name="question${list.number}"
+										id="question.${list.number}"
+										onclick="markColorReading(this.id)" value="D" /> D. ${list.option4} <br>
+									<br>
+								</c:forEach>
+							</div>
+							<div class="tab-pane" id="7">
+								<c:forEach items="${part7}" var="list">
+									<c:if test="${not empty list.paragraph}">
+										<pre class="paragraph">${list.paragraph}</pre>
+									</c:if>
+									<p>
+										<b>Question ${list.number}:</b> ${list.question}
+									</p>
+									<input type="radio" name="question${list.number}"
+										id="question.${list.number}"
+										onclick="markColorReading(this.id)" value="A" /> A. ${list.option1} <br>
+									<input type="radio" name="question${list.number}"
+										id="question.${list.number}"
+										onclick="markColorReading(this.id)" value="B" /> B. ${list.option2} <br>
+									<input type="radio" name="question${list.number}"
+										id="question.${list.number}"
+										onclick="markColorReading(this.id)" value="C" /> C. ${list.option3} <br>
+									<input type="radio" name="question${list.number}"
+										id="question.${list.number}"
+										onclick="markColorReading(this.id)" value="D" /> D. ${list.option4} <br>
+									<br>
+								</c:forEach>
+							</div>
+						</div>
 						<c:forEach items="${listQuestion}" var="list">
 							<input class="hidden" id="id_bai_exam"
 								value="${list.getBaithithu().getBaithithuid()}" />
 							<input class="hidden" id="correctanswer"
 								name="correctanswer${list.number}" value="${list.correctanswer}" />
-
-							<!-- show part5 -->
-							<c:if test="${list.number == 51 }">
-								<p class="web-font">
-									<b>Part 5: ${list.paragraph}</b>
-								</p>
-							</c:if>
-							<c:if test="${list.number >= 51 && list.number < 65}">
-								<div class="web-font">
-									<p>
-										<b>Question ${list.number}:</b>
-									</p>
-									<pre class="paragraph">${list.question}</pre>
-
-									<input class="part5" type="radio" name="question${list.number}"
-										id="question.${list.number}" value="A"
-										onclick="markColorReading(this.id)" /> A. ${list.option1} <br>
-									<input class="part5" type="radio" name="question${list.number}"
-										id="question.${list.number}" value="B"
-										onclick="markColorReading(this.id)" /> B. ${list.option2} <br>
-									<input class="part5" type="radio" name="question${list.number}"
-										id="question.${list.number}" value="C"
-										onclick="markColorReading(this.id)" /> C. ${list.option3} <br>
-									<input class="part5" type="radio" name="question${list.number}"
-										id="question.${list.number}" value="D"
-										onclick="markColorReading(this.id)" /> D. ${list.option4} <br>
-								</div>
-								<br>
-							</c:if>
-
-							<!-- show part 6 -->
-
-							<c:if test="${list.number >= 65 && list.number <74}">
-								<c:if test="${list.number==65}">
-									<p class="web-font">
-										<b>Part 6: ${list.question}</b>
-									</p>
-								</c:if>
-								<c:if test="${not empty list.paragraph }">
-									<pre class="paragraph">${list.paragraph}</pre>
-								</c:if>
-
-								<p class="web-font">
-									<b>Question ${list.number}:</b>
-								</p>
-								<input type="radio" name="question${list.number}"
-									id="question.${list.number}"
-									onclick="markColorReading(this.id)" value="A" /> A. ${list.option1} <br>
-								<input type="radio" name="question${list.number}"
-									id="question.${list.number}"
-									onclick="markColorReading(this.id)" value="B" /> B. ${list.option2} <br>
-								<input type="radio" name="question${list.number}"
-									id="question.${list.number}"
-									onclick="markColorReading(this.id)" value="C" /> C. ${list.option3} <br>
-								<input type="radio" name="question${list.number}"
-									id="question.${list.number}"
-									onclick="markColorReading(this.id)" value="D" /> D. ${list.option4} <br>
-								<br>
-							</c:if>
-
-							<!-- show part 7 -->
-
-							<c:if test="${list.number >= 74 && list.number <=100}">
-
-								<c:if test="${list.number==74}">
-									<p class="web-font">
-										<b>Part 7: Read the passage and choose the correct answer</b>
-									</p>
-								</c:if>
-								<c:if test="${not empty list.paragraph}">
-									<pre class="paragraph">${list.paragraph}</pre>
-								</c:if>
-
-
-								<p class="web-font">
-									<b>Question ${list.number}:</b> ${list.question}
-								</p>
-								<input type="radio" name="question${list.number}"
-									id="question.${list.number}"
-									onclick="markColorReading(this.id)" value="A" /> A. ${list.option1} <br>
-								<input type="radio" name="question${list.number}"
-									id="question.${list.number}"
-									onclick="markColorReading(this.id)" value="B" /> B. ${list.option2} <br>
-								<input type="radio" name="question${list.number}"
-									id="question.${list.number}"
-									onclick="markColorReading(this.id)" value="C" /> C. ${list.option3} <br>
-								<input type="radio" name="question${list.number}"
-									id="question.${list.number}"
-									onclick="markColorReading(this.id)" value="D" /> D. ${list.option4} <br>
-								<br>
-							</c:if>
-
 						</c:forEach>
-
-
-
 						<hr>
 						<p>Kết thúc bài Reading</p>
-
 					</div>
-
-
 				</div>
 			</form>
 		</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 		<!--Footer
 ==========================-->
+		<script type="text/javascript">
+		$(document).ready(function() {
+			$('#tabparts a').click(function(e) {
+				e.preventDefault();
+				$(this).tab('show');
+				$('.parttoeic').hide();
+				var a = '.part' + $(this).attr('partid');
+				console.log(a);
+				$(a).show();
 
-
-
+			});
+			$('.part5').show();
+		});
+		</script>
 		<!--/.Footer-->
-
 	</div>
 
 </body>

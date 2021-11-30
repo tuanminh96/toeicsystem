@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.bk.tuanpm.webtoeic.entities.NguoiDung;
-import com.bk.tuanpm.webtoeic.service.BaiTapTuVungService;
 import com.bk.tuanpm.webtoeic.service.NguoiDungService;
 import com.bk.tuanpm.webtoeic.service.SlideBannerService;
 
@@ -33,8 +32,6 @@ import com.bk.tuanpm.webtoeic.service.SlideBannerService;
 public class ClientController {
 	@Autowired
 	private SlideBannerService slideBannerService;
-	@Autowired
-	private BaiTapTuVungService baitaptuvungService;
 
 	@Autowired
 	private NguoiDungService nguoiDungService;

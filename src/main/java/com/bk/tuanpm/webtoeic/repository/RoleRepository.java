@@ -11,5 +11,7 @@ import com.bk.tuanpm.webtoeic.entities.Role;
 public interface RoleRepository extends JpaRepository<Role, Integer>{
 	public Role findByIdRole(int id);
 	
+	public Role findByCode(int code);
+	
 	public List<Role> findAll();
 }

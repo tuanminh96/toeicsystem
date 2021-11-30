@@ -46,6 +46,8 @@ public class QCauHoiBaiThiThu extends EntityPathBase<CauHoiBaiThiThu> {
 
     public final StringPath paragraph = createString("paragraph");
 
+    public final QPartToeic partToeic;
+
     public final StringPath question = createString("question");
 
     public QCauHoiBaiThiThu(String variable) {
@@ -67,6 +69,7 @@ public class QCauHoiBaiThiThu extends EntityPathBase<CauHoiBaiThiThu> {
     public QCauHoiBaiThiThu(Class<? extends CauHoiBaiThiThu> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.baithithu = inits.isInitialized("baithithu") ? new QBaiThiThu(forProperty("baithithu")) : null;
+        this.partToeic = inits.isInitialized("partToeic") ? new QPartToeic(forProperty("partToeic")) : null;
     }
 
 }

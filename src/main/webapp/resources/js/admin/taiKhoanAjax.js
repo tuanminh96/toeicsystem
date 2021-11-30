@@ -18,7 +18,7 @@ $(document).ready(function() {
 					                  '<td>' + taiKhoan.email + '</td>' +
 					                  '<td>' + taiKhoan.soDienThoai + '</td>' +
 					                  '<td>' + taiKhoan.diaChi + '</td>'+ 
-					                  '<td>' + taiKhoan.vaiTro + '</td>';				  
+					                  '<td>' + taiKhoan.role.role + '</td>';				  
 					  taiKhoanRow +='</td>' +
 					                  '<td width="0%">'+'<input type="hidden" id="idTaiKhoan" value=' + taiKhoan.id + '>'+ '</td>'+
 //					                  '<td><button class="btn btn-primary btnCapNhat" >Cập nhật</button></td>' + 

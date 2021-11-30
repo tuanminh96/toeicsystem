@@ -1,6 +1,7 @@
 package com.bk.tuanpm.webtoeic.controller.client;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bk.tuanpm.webtoeic.entities.CauHoiBaiThiThu;
+import com.bk.tuanpm.webtoeic.entities.PartToeic;
 import com.bk.tuanpm.webtoeic.service.BaiThiThuService;
 import com.bk.tuanpm.webtoeic.service.CauHoiBaiThiThuService;
+import com.bk.tuanpm.webtoeic.service.PartService;
 
 @Controller
 public class BaiFullTestReadingController {
@@ -24,14 +27,22 @@ public class BaiFullTestReadingController {
 	@Autowired
 	CauHoiBaiThiThuService cauhoibaithithuService;
 	
+	@Autowired
+	PartService partService;
 	@RequestMapping(value="/reading/{examId}/{socaudung}",method=RequestMethod.POST)
 	public String DetailReading(Model model,@RequestBody String[] jsonAnswerUser,
 			@PathVariable("examId") int id,@PathVariable("socaudung") String socaudung) {
 	
 		
 		List<CauHoiBaiThiThu> list = cauhoibaithithuService.getListCauHoi(baithithuServie.getBaiThiThu(id).get(0));
+		List<PartToeic> partReading = partService.getPartByType("Reading");
+		Map<String, List<CauHoiBaiThiThu>> map = cauhoibaithithuService.getMapPartQuestionReading(list);
+		
+		model.addAllAttributes(map);
 		model.addAttribute("listQuestion",list);
 		model.addAttribute("socauListeningCorrect",socaudung);
+		model.addAttribute("partReading", partReading);
+		
 		 return "client/fullTestReading";
 	}
 	

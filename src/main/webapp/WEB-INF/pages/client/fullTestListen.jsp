@@ -8,8 +8,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Bài test Toeic</title>
 
-<script
-	src="${pageContext.request.contextPath}/resources/js/jquery-1.js"></script>
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="<c:url value='/js/bootstrap.min.js' />"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
@@ -18,10 +18,7 @@
 	src="${pageContext.request.contextPath}/resources/js/client/baiTestListening.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/js/client/baiTestReading.js"></script>
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 </head>
-
 
 <style>
 .paragraph {
@@ -161,139 +158,146 @@
 
 					<!--Nội dung bài test -->
 					<div id="main" class="col-md-8 web-font">
+						<ul class="nav nav-tabs" id="tabs">
+							<c:forEach items="${partListen}" var="part">
+								<li><a partid="${part.idPart}" href="#${part.idPart}">${part.partName}</a></li>
+							</c:forEach>
+						</ul>
+						<c:forEach items="${partListen}" var="part">
+							<p class="part${part.idPart} parttoeic" style="display: none;">
+								<b>${part.partName}: ${part.description}</b>
+							</p>
+						</c:forEach>
 
-						<c:forEach items="${listQuestion}" var="list">
-							<input class="hidden" id="correctanswer"
-								name="correctanswer${list.number}" value="${list.correctanswer}" />
+						<div class="tab-content">
+							<div class="tab-pane active" id="1">
+								<c:forEach items="${part1}" var="list">
+									<c:if test="${list.number == 1 }">
+										<input class="hidden" id="id_bai_exam"
+											value="${list.getBaithithu().getBaithithuid()}" />
+									</c:if>
+									<c:if test="${not empty list.image}">
+										<div class="container">
+											<p>
+												<b>Question ${list.number}:</b>
+											</p>
 
-
-							<!-- show part1 -->
-							<c:if test="${list.number == 1 }">
-								<p>
-									<b>Part 1: ${list.paragraph}</b>
-								</p>
-								<input class="hidden" id="id_bai_exam"
-									value="${list.getBaithithu().getBaithithuid()}" />
-
-							</c:if>
-							<c:if test="${not empty list.image}">
-								<div class="container">
+											<img
+												src="${pageContext.request.contextPath}/resources/file/exams/${list.getBaithithu().getBaithithuid()}/images/${list.image}.jpg"
+												alt="image not found"
+												style="height: 300px; width: 400px; float: left; margin-right: 10px" />
+											<audio controls> <source
+												src="${pageContext.request.contextPath}/resources/file/exams/${list.getBaithithu().getBaithithuid()}/audio/${list.audiomp3}.mp3"
+												type="audio/wav"></audio>
+											<br> <input class="part1" type="radio"
+												name="question${list.number}" id="question.${list.number}"
+												value="A" onclick="markColor(this.id)" /> A <br> <input
+												class="part1" type="radio" name="question${list.number}"
+												id="question.${list.number}" value="B"
+												onclick="markColor(this.id)" /> B <br> <input
+												class="part1" type="radio" name="question${list.number}"
+												id="question.${list.number}" value="C"
+												onclick="markColor(this.id)" /> C <br> <input
+												class="part1" type="radio" name="question${list.number}"
+												id="question.${list.number}" value="D"
+												onclick="markColor(this.id)" /> D <br>
+										</div>
+										<br>
+									</c:if>
+								</c:forEach>
+							</div>
+							<div class="tab-pane" id="2">
+								<c:forEach items="${part2}" var="list">
+									<c:if test="${list.number >=4  && list.number <15}">
+										<p>
+											<b>Question ${list.number}:</b>
+										</p>
+										<audio controls> <source
+											src="${pageContext.request.contextPath}/resources/file/exams/${list.getBaithithu().getBaithithuid()}/audio/${list.audiomp3}.mp3"
+											type="audio/wav"></audio>
+										<br>
+										<input type="radio" name="question${list.number}"
+											id="question.${list.number}" onclick="markColor(this.id)"
+											value="A" /> A <br>
+										<input type="radio" name="question${list.number}"
+											id="question.${list.number}" onclick="markColor(this.id)"
+											value="B" /> B <br>
+										<input type="radio" name="question${list.number}"
+											id="question.${list.number}" onclick="markColor(this.id)"
+											value="C" /> C <br>
+										<br>
+									</c:if>
+								</c:forEach>
+							</div>
+							<div class="tab-pane" id="3">
+								<c:forEach items="${part3}" var="list">
 									<p>
 										<b>Question ${list.number}:</b>
 									</p>
-
-									<img
-										src="${pageContext.request.contextPath}/resources/file/exams/${list.getBaithithu().getBaithithuid()}/images/${list.image}.jpg"
-										alt="image not found"
-										style="height: 300px; width: 400px; float: left; margin-right: 10px" />
 									<audio controls> <source
-										src="${pageContext.request.contextPath}/resources/file/exams/${list.getBaithithu().getBaithithuid()}/audio/${list.audiomp3}.mp3"
+										src="${pageContext.request.contextPath}/resources/file/audio/exam/${list.audiomp3}.mp3"
 										type="audio/wav"></audio>
-									<br> <input class="part1" type="radio"
-										name="question${list.number}" id="question.${list.number}"
-										value="A" onclick="markColor(this.id)" /> A <br> <input
-										class="part1" type="radio" name="question${list.number}"
-										id="question.${list.number}" value="B"
-										onclick="markColor(this.id)" /> B <br> <input
-										class="part1" type="radio" name="question${list.number}"
-										id="question.${list.number}" value="C"
-										onclick="markColor(this.id)" /> C <br> <input
-										class="part1" type="radio" name="question${list.number}"
-										id="question.${list.number}" value="D"
-										onclick="markColor(this.id)" /> D <br>
-								</div>
-								<br>
-							</c:if>
+
+									<br>
+									<input type="radio" name="question${list.number}"
+										id="question.${list.number}" onclick="markColor(this.id)"
+										value="A" /> A.${list.option1} <br>
+									<input type="radio" name="question${list.number}"
+										id="question.${list.number}" onclick="markColor(this.id)"
+										value="B" /> B.${list.option2}  <br>
+									<input type="radio" name="question${list.number}"
+										id="question.${list.number}" onclick="markColor(this.id)"
+										value="C" /> C.${list.option3}  <br>
+									<input type="radio" name="question${list.number}"
+										id="question.${list.number}" onclick="markColor(this.id)"
+										value="D" /> D.${list.option4}  <br>
+									<br>
+								</c:forEach>
+							</div>
+							<div class="tab-pane" id="4">
+								<c:forEach items="${part4}" var="list">
+									<p>
+										<b>Question ${list.number}:</b>
+									</p>
+									<audio controls> <source
+										src="${pageContext.request.contextPath}/resources/file/audio/exam/${list.audiomp3}.mp3"
+										type="audio/wav"></audio>
+
+									<br>
+									<input type="radio" name="question${list.number}"
+										id="question.${list.number}" onclick="markColor(this.id)"
+										value="A" /> A.${list.option1} <br>
+									<input type="radio" name="question${list.number}"
+										id="question.${list.number}" onclick="markColor(this.id)"
+										value="B" /> B.${list.option2}  <br>
+									<input type="radio" name="question${list.number}"
+										id="question.${list.number}" onclick="markColor(this.id)"
+										value="C" /> C.${list.option3}  <br>
+									<input type="radio" name="question${list.number}"
+										id="question.${list.number}" onclick="markColor(this.id)"
+										value="D" /> D.${list.option4}  <br>
+									<br>
+								</c:forEach>
+							</div>
+						</div>
+						<c:forEach items="${listQuestion}" var="list2">
+							<input class="hidden" id="correctanswer"
+								name="correctanswer${list2.number}"
+								value="${list2.correctanswer}" />
+
+
+							<!-- show part1 -->
+
 
 							<!-- show part 2 -->
-							<c:if test="${list.number == 4 }">
-								<br>
-								<p>
-									<b>Part 2: ${list.paragraph}</b>
-								</p>
-							</c:if>
 
-							<c:if test="${list.number >=4  && list.number <15}">
-								<p>
-									<b>Question ${list.number}:</b>
-								</p>
-								<audio controls> <source
-									src="${pageContext.request.contextPath}/resources/file/exams/${list.getBaithithu().getBaithithuid()}/audio/${list.audiomp3}.mp3"
-									type="audio/wav"></audio>
-								<br>
-								<input type="radio" name="question${list.number}"
-									id="question.${list.number}" onclick="markColor(this.id)"
-									value="A" /> A <br>
-								<input type="radio" name="question${list.number}"
-									id="question.${list.number}" onclick="markColor(this.id)"
-									value="B" /> B <br>
-								<input type="radio" name="question${list.number}"
-									id="question.${list.number}" onclick="markColor(this.id)"
-									value="C" /> C <br>
-								<br>
-							</c:if>
 
 							<!-- show part 3 -->
 
-							<c:if test="${list.number == 15 }">
-								<br>
-								<p>
-									<b>Part 3: ${list.paragraph}</b>
-								</p>
-							</c:if>
-							<c:if test="${list.number >= 15 && list.number <=35}">
-								<p>
-									<b>Question ${list.number}:</b>
-								</p>
-								<audio controls> <source
-									src="${pageContext.request.contextPath}/resources/file/audio/exam/${list.audiomp3}.mp3"
-									type="audio/wav"></audio>
 
-								<br>
-								<input type="radio" name="question${list.number}"
-									id="question.${list.number}" onclick="markColor(this.id)"
-									value="A" /> A.${list.option1} <br>
-								<input type="radio" name="question${list.number}"
-									id="question.${list.number}" onclick="markColor(this.id)"
-									value="B" /> B.${list.option2}  <br>
-								<input type="radio" name="question${list.number}"
-									id="question.${list.number}" onclick="markColor(this.id)"
-									value="C" /> C.${list.option3}  <br>
-								<input type="radio" name="question${list.number}"
-									id="question.${list.number}" onclick="markColor(this.id)"
-									value="D" /> D.${list.option4}  <br>
-								<br>
-							</c:if>
 
 							<!-- show part 4 -->
-							<c:if test="${list.number == 36 }">
-								<p>
-									<b>Part 4: ${list.paragraph}</b>
-								</p>
-							</c:if>
-							<c:if test="${list.number >= 36 && list.number <=50 }">
-								<p>
-									<b>Question ${list.number}:</b>
-								</p>
-								<audio controls> <source
-									src="${pageContext.request.contextPath}/resources/file/audio/exam/${list.audiomp3}.mp3"
-									type="audio/wav"></audio>
 
-								<br>
-								<input type="radio" name="question${list.number}"
-									id="question.${list.number}" onclick="markColor(this.id)"
-									value="A" /> A.${list.option1} <br>
-								<input type="radio" name="question${list.number}"
-									id="question.${list.number}" onclick="markColor(this.id)"
-									value="B" /> B.${list.option2}  <br>
-								<input type="radio" name="question${list.number}"
-									id="question.${list.number}" onclick="markColor(this.id)"
-									value="C" /> C.${list.option3}  <br>
-								<input type="radio" name="question${list.number}"
-									id="question.${list.number}" onclick="markColor(this.id)"
-									value="D" /> D.${list.option4}  <br>
-								<br>
-							</c:if>
 
 						</c:forEach>
 
@@ -309,12 +313,39 @@
 			</form>
 		</div>
 
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('#tabs a').click(function(e) {
+					e.preventDefault();
+					$(this).tab('show');
+					$('.parttoeic').hide();
+					var a = '.part' + $(this).attr('partid');
+					console.log(a);
+					$(a).show();
+
+				});
+				$('.part1').show();
+			});
+		</script>
 	</div>
 
 	<!--Footer
 ==========================-->
 
 	<!--/.Footer-->
+	<script type="text/javascript">
+	 $('#testReading').bind("DOMSubtreeModified",function(){
+			$('#tabparts a').click(function(e) {
+				e.preventDefault();
+				$(this).tab('show');
+				$('.parttoeic').hide();
+				var a = '.part' + $(this).attr('partid');
+				console.log(a);
+				$(a).show();
 
+			});
+			$('.part5').show();
+	    });
+	</script>
 </body>
 </html>

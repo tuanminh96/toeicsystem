@@ -15,12 +15,14 @@
 		<ul class="nav nav-tabs" id="tabs">
 			<li class="active"><a href="#information">Cập nhật thông tin</a></li>
 			<li><a href="#changePass">Đổi mật khẩu</a></li>
+			<li><a href="#history">Lịch sử dự thi</a></li>
 		</ul>
 
 		<div>
-			<div class="tab-content">
+			<div class="tab-content" style="height: 300px;">
 				<div class="tab-pane active" id="information">
-					<form class="form-profile" action="/webtoeic/profile/update" method="post">
+					<form class="form-profile" action="/webtoeic/profile/update"
+						method="post">
 						<div class="form-group">
 							<label style="font-weight: bold" for="staticEmail"
 								class="col-sm-2 col-form-label">Email đăng ký</label>
@@ -39,8 +41,8 @@
 							<label for="staticEmail" style="font-weight: bold"
 								class="col-sm-2 col-form-label">Họ Tên</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control-plaintext" value="${user.hoTen }"
-									name="hoTen" required="required">
+								<input type="text" class="form-control-plaintext"
+									value="${user.hoTen }" name="hoTen" required="required">
 							</div>
 						</div>
 						<div class="form-group">
@@ -48,7 +50,8 @@
 								class="col-sm-2 col-form-label">Số điện thoại</label>
 							<div class="col-sm-10">
 								<input type="text" class="form-control-plaintext"
-									value="${user.soDienThoai }" name="soDienThoai" required="required">
+									value="${user.soDienThoai }" name="soDienThoai"
+									required="required">
 							</div>
 						</div>
 
@@ -68,7 +71,8 @@
 					<form class="formDoiMatKhau">
 
 						<div>
-							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+							<input type="hidden" name="${_csrf.parameterName}"
+								value="${_csrf.token}" />
 						</div>
 
 						<div class="form-group">
@@ -80,12 +84,17 @@
 								class="form-control" name="newPassword" required="required" />
 						</div>
 						<div class="form-group">
-							<label for="name">Nhắc lại mật khẩu mới</label> <input type="password"
-								class="form-control" name="confirmNewPassword" required="required" />
+							<label for="name">Nhắc lại mật khẩu mới</label> <input
+								type="password" class="form-control" name="confirmNewPassword"
+								required="required" />
 						</div>
 						<input class="btn btn-primary" type="button" id="btnXacNhanDoiMK"
 							value="Xác nhận" />
 					</form>
+				</div>
+
+				<div class="tab-pane" id="history">
+					<p>Bạn đã thi tổng cộng 4 lần</p>
 				</div>
 			</div>
 		</div>

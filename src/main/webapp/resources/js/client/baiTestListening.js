@@ -9,9 +9,10 @@ function markColor(id){
 function correctAnswer(){
 	var correctArr =[];	
 	for (var i = 1; i < 51; i++) {
-		 var nameRadio = "correctanswer"+i;	 	
-		 var x = document.getElementById("submitForm").elements.namedItem(nameRadio).value;
-		
+		 var nameRadio = "correctanswer"+i;	 
+		 if(document.getElementById("submitForm").elements.namedItem(nameRadio) !=null) {
+			 var x = document.getElementById("submitForm").elements.namedItem(nameRadio).value;
+		 }
 		 correctArr.push(x);}
 			
 	return correctArr;

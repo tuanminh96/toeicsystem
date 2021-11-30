@@ -19,32 +19,10 @@
         </div>
 
         <ul class="nav navbar-nav side-bar">       
-         
-          <li class="side-bar tmargin">
-            <a href="<c:url value='/admin/bai-nghe' />">
-              <span class="glyphicon glyphicon-shopping-cart">&nbsp;</span>Quản lý Bài Nghe</a>
-          </li>
-        
-          <li class="side-bar">
-            <a href='<c:url value="/admin/bai-doc"/>' >
-              <span class="glyphicon glyphicon-folder-open">&nbsp;</span>Quản lý Bài đọc</a>
-          </li>
-        
           <li class="side-bar">
             <a href='<c:url value="/admin/exam"/>'>
               <span class="glyphicon glyphicon-tasks">&nbsp;</span>Quản lý Đề thi</a>
           </li>
-          
-          <li class="side-bar">
-            <a href='<c:url value="/admin/grammar"/>' >
-              <span class="glyphicon glyphicon-flag">&nbsp;</span>Quản lý Bài Ngữ pháp</a>
-          </li>
-          
-          <li class="side-bar">
-            <a href='<c:url value="/admin/vocab"/>' >
-              <span class="glyphicon glyphicon-flag">&nbsp;</span>Quản lý Bài Từ vựng</a>
-          </li>
-
           <li class="side-bar main-menu">
             <a href="<c:url value='/admin/tai-khoan' />">
               <span class="glyphicon glyphicon-th-list">&nbsp;</span>Quản lý Tài khoản</a>

@@ -13,12 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.bk.tuanpm.webtoeic.entities.BaiTapTuVung;
 import com.bk.tuanpm.webtoeic.entities.NguoiDung;
 import com.bk.tuanpm.webtoeic.entities.Role;
-import com.bk.tuanpm.webtoeic.service.BaiTapNgheService;
-import com.bk.tuanpm.webtoeic.service.BaiTapTuVungService;
-import com.bk.tuanpm.webtoeic.service.CauHoiBaitapNgheService;
 import com.bk.tuanpm.webtoeic.service.NguoiDungService;
 import com.bk.tuanpm.webtoeic.service.RoleService;
 
@@ -27,17 +23,10 @@ import com.bk.tuanpm.webtoeic.service.RoleService;
 @SessionAttributes("loggedInUser")
 public class AdminController {
 
-	@Autowired
-	BaiTapTuVungService baitaptuvungService;
 	
 	@Autowired
 	NguoiDungService nguoiDungService;
 
-	@Autowired
-	BaiTapNgheService baiTapNgheService;
-	
-	@Autowired
-	CauHoiBaitapNgheService cauHoiBaiNgheService;
 	
 	@Autowired
 	RoleService roleService;
@@ -52,36 +41,11 @@ public class AdminController {
 //	public String adminPage() {
 //		return "admin/homepage";
 //	}
-
-	@GetMapping({"/bai-nghe", ""})
-	public String quanLyBaiNghePage() {
-		return "admin/quanLyBaiNghe";
-	}
-
-	@GetMapping("/bai-doc")
-	public String quanLyBaiDocPage() {
-		return "admin/quanLyBaiDoc";
-	}
-
-	@GetMapping("/grammar")
-	public String quanLyGrammar() {
-		return "admin/quanLyGrammar";
-	}
-
-	@GetMapping("/vocab")
-	public String quanLyVocab(Model model) {
-		model.addAttribute("listVocab", baitaptuvungService.findAll());
-		model.addAttribute("baitaptuvung", new BaiTapTuVung());
-
-		return "admin/quanLyVocab";
-	}
 	
-	@GetMapping("/exam")
+	@GetMapping({"/exam", ""})
 	public String quanLyExam(Model model) {
-		model.addAttribute("baithithu", new BaiTapTuVung());
 		return "admin/quanLyExam";
 	}
-	
 	@GetMapping("/tai-khoan")
 	public String quanLyTaiKhoan(Model model) {
 	    model.addAttribute("listVaiTro", roleService.getListRoles());

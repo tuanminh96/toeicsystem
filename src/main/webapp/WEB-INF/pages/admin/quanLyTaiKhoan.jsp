@@ -23,7 +23,7 @@
 			<label for="sel1"><strong>Lọc tài khoản:</strong> </label> <select
 				id="vaiTro" class="form-control">
 				<c:forEach var="vaiTro" items="${listVaiTro}">
-					<option value="${vaiTro.value}">${vaiTro}</option>
+					<option value="${vaiTro.code}">${vaiTro.role}</option>
 				</c:forEach>
 			</select>
 		</div>
@@ -87,8 +87,8 @@
 									<c:forEach var="vaiTro" items="${listVaiTro}">
 										<label class="radio-inline"> 
 										<input type="radio"
-											name="vaiTro" value="${vaiTro.value}" checked="checked">
-											${vaiTro}
+											name="vaiTro" value="${vaiTro.code}" checked="checked">
+											${vaiTro.role}
 										</label>
 									</c:forEach>
 								</div>

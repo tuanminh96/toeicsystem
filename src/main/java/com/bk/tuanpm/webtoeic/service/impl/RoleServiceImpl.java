@@ -27,4 +27,22 @@ public class RoleServiceImpl implements RoleService {
 		return roleRepository.findAll();
 	}
 
+	@Override
+	public List<Role> saveRoles(List<Role> roles) {
+		// TODO Auto-generated method stub
+		return roleRepository.saveAll(roles);
+	}
+
+	@Override
+	public Role saveRole(Role role) {
+		// TODO Auto-generated method stub
+		return roleRepository.save(role);
+	}
+
+	@Override
+	public Role getRoleCode(int code) {
+		// TODO Auto-generated method stub
+		return roleRepository.findByCode(code);
+	}
+
 }

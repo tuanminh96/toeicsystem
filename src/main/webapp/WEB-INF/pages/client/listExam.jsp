@@ -11,14 +11,31 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/paging.css">
-<script src="${pageContext.request.contextPath}/resources/js/jquery.js"></script>
 <script
-	src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/html5shiv.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/jquery-1.js"></script>
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Special version of Bootstrap that only affects content wrapped in .bootstrap-iso -->
 
+<!-- Inline CSS based on choices in "Settings" tab -->
+<style>
+.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p,
+	.bootstrap-iso form {
+	font-family: Arial, Helvetica, sans-serif;
+	color: black
+}
+
+.bootstrap-iso form button, .bootstrap-iso form button:hover {
+	color: white !important;
+}
+
+.asteriskField {
+	color: red;
+}
+</style>
+<style>
+.checked {
+	color: orange;
+}
+</style>
 <style type="text/css">
 .hidden {
 	display: none;
@@ -41,6 +58,21 @@
 	width: 250px;
 	margin-bottom: 25px;
 }
+
+<
+style>label {
+	margin-left: 20px;
+}
+
+#datepicker {
+	width: 180px;
+	margin: 0 20px 20px 20px;
+}
+
+#datepicker>span:hover {
+	cursor: pointer;
+}
+</style>
 </style>
 
 <script type="text/javascript">
@@ -71,6 +103,7 @@
 
 	});
 </script>
+
 </head>
 <body>
 
@@ -79,6 +112,20 @@
 		style="display: none;" />
 	<div class="container">
 		<!--PAGE TITLE-->
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+				<select class="mdb-select md-form colorful-select dropdown-primary">
+					<option value="1">--Lựa chọn độ khó --</option>
+					<option value="2">Dễ</option>
+					<option value="3">Trung bình</option>
+					<option value="4">Khó</option>
+				</select>
+			</div>
+			<input type="text" class="form-control" placeholder="Nhập tên để tìm kiếm">
+			<div class="input-group-append">
+				<button class="btn btn-success" type="submit">Search</button>
+			</div>
+		</div>
 		<div class="" style="text-align: center">
 			<div class="page-header">
 				<h4 style="font-weight: bold;">DANH SÁCH BÀI THI THỬ</h4>
@@ -86,35 +133,37 @@
 		</div>
 
 		<!-- /. PAGE TITLE-->
+		
 		<div class="row">
-			<form class="form-search"
-				style="margin: auto; width: 60%; margin-bottom: 5%;">
-				<select class="span2">
-					<option>-- Độ khó --</option>
-					<option>Dễ</option>
-					<option>Trung bình</option>
-					<option>Khó</option>
-				</select> <input type="text" class="input-large search-query"
-					placeholder="Nhập tên đề thi">
-				<button type="submit" class="btn btn-primary "
-					style="margin-left: 50px;">Search</button>
-			</form>
-			<div class="span9">
+
+			<div class="col-md-8">
 				<c:if test="${fn:length(listData) == 0 }">
 					<h3>Không tìm thấy dữ liệu</h3>
 				</c:if>
 
 				<c:forEach items="${listData}" var="list" varStatus="loop">
 
-					<div class="span9">
-						<div class="span3">
+					<div class="col-md-12">
+						<div class="col-md-4">
 							<img class="imageExam"
 								src="${pageContext.request.contextPath}/resources/file/exams/${list.baithithuid}/images/${list.anhbaithithu}" />
 						</div>
-						<div class="span1"></div>
-						<div class="span5">
-							<h4 class="content-heading" id="namebaithithu">
-								${list.tenbaithithu}</h4>
+						<div class="col-md-12">
+							<div class="" style="display: flex;">
+								<div class="col-md-6">
+									<h4 class="content-heading" id="namebaithithu">
+										${list.tenbaithithu}</h4>
+									<p>Lượt thi:</p>
+									<p>Ngày đăng:</p>
+								</div>
+								<div class="col-md-6">
+									<span class="fa fa-star checked"></span> <span
+										class="fa fa-star checked"></span> <span
+										class="fa fa-star checked"></span> <span class="fa fa-star"></span>
+									<span class="fa fa-star"></span>
+								</div>
+							</div>
+
 							<button class="btn btn-primary openModalExam"
 								value="${list.baithithuid}" id="openModalExam.${loop.index}">
 								Chi tiết</button>
@@ -176,15 +225,20 @@
 	<br>
 
 	<!-- Modal -->
-	<div class="modal fade" id="examModal" role="dialog">
-		<div class="modal-dialog">
-
-			<!-- Modal content -->
-
+	<!-- Modal -->
+	<!-- New modal -->
+	<!-- Modal -->
+	<div class="modal fade" id="examModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">HƯỚNG DẪN LÀM BÀI THI THỬ</h4>
+					<h5 class="modal-title" id="exampleModalLabel">HƯỚNG DẪN LÀM
+						BÀI THI THỬ</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
 				</div>
 				<div class="modal-body">
 					<input class="hidden" id="idExamModal">
@@ -198,27 +252,20 @@
 
 					<br>
 					<p>Bài thi được thực hiện sau khi xác nhận làm bài thi</p>
-
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary" id="btnLamBaiThi">Làm
+						bài</button>
 				</div>
 			</div>
-
-
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" id="btnLamBaiThi">Làm
-					bài thi</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-			</div>
-
 		</div>
 	</div>
 
-
-	<!-- Modal -->
-
 	<jsp:include page="include/footerHome.jsp"></jsp:include>
 
-
+	<!-- Include Date Range Picker -->
 </body>
 
 </html>

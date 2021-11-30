@@ -69,7 +69,9 @@ public class CauHoiBaiThiThu {
 	@JsonIgnore
 	private BaiThiThu baithithu;
 	
-	
+	@ManyToOne
+	@JoinColumn(name="id_part",nullable= false)
+	private PartToeic partToeic;
 	public CauHoiBaiThiThu() {
 		
 	}
@@ -187,7 +189,12 @@ public class CauHoiBaiThiThu {
 	public void setBaithithu(BaiThiThu baithithu) {
 		this.baithithu = baithithu;
 	}
-	
-	
 
+	public PartToeic getPartToeic() {
+		return partToeic;
+	}
+
+	public void setPartToeic(PartToeic partToeic) {
+		this.partToeic = partToeic;
+	}
 }

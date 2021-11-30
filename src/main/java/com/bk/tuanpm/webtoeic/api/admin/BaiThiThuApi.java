@@ -26,11 +26,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.bk.tuanpm.webtoeic.entities.BaiGrammar;
 import com.bk.tuanpm.webtoeic.entities.BaiThiThu;
 import com.bk.tuanpm.webtoeic.entities.CauHoiBaiThiThu;
+import com.bk.tuanpm.webtoeic.repository.PartRepository;
 import com.bk.tuanpm.webtoeic.service.BaiThiThuService;
 import com.bk.tuanpm.webtoeic.service.CauHoiBaiThiThuService;
+import com.bk.tuanpm.webtoeic.service.PartService;
 
 @RestController
 @RequestMapping("/api/admin/exam")
@@ -44,6 +45,12 @@ public class BaiThiThuApi {
 
 	@Autowired
 	public CauHoiBaiThiThuService cauhoibaithithuService;
+	
+	@Autowired
+	public PartService partService;
+	
+	@Autowired
+	public PartRepository partRepository;
 
 	@GetMapping("/loadExam")
 	public List<String> showAllExam() {
@@ -96,7 +103,6 @@ public class BaiThiThuApi {
 			if (!theDir3.exists()) {
 				theDir3.mkdirs();
 			}
-			System.out.println("Tuan");
 			Path pathExcel = Paths.get(rootDirectory + "/resources/file/exams/" + baithithu.getBaithithuid() + "/excel/"
 					+ file_excel.getOriginalFilename());
 			file_excel.transferTo(new File(pathExcel.toString()));
@@ -124,7 +130,7 @@ public class BaiThiThuApi {
 			// save data from file excel
 
 			BaiThiThuApi btt = new BaiThiThuApi();
-			List<CauHoiBaiThiThu> listCauHoiFull = btt.getListFromExcel(pathExcel.toString(), baithithu);
+			List<CauHoiBaiThiThu> listCauHoiFull = btt.getListFromExcel(pathExcel.toString(), baithithu, partService);
 
 			for (int i = 0; i < listCauHoiFull.size(); i++) {
 				cauhoibaithithuService.save(listCauHoiFull.get(i));
@@ -177,7 +183,7 @@ public class BaiThiThuApi {
 			baithithuService.save(baithithu);
 
 			BaiThiThuApi btt = new BaiThiThuApi();
-			List<CauHoiBaiThiThu> listCauHoiFull = btt.getListFromExcel(pathExcel.toString(), baithithu);
+			List<CauHoiBaiThiThu> listCauHoiFull = btt.getListFromExcel(pathExcel.toString(), baithithu, partService);
 
 			for (int i = 0; i < listCauHoiFull.size(); i++) {
 				cauhoibaithithuService.save(listCauHoiFull.get(i));
@@ -198,7 +204,7 @@ public class BaiThiThuApi {
 		return baiexam.getTenbaithithu();
 	}
 
-	public List<CauHoiBaiThiThu> getListFromExcel(String path_file_excel, BaiThiThu baithithu) {
+	public List<CauHoiBaiThiThu> getListFromExcel(String path_file_excel, BaiThiThu baithithu, PartService partService) {
 		List<CauHoiBaiThiThu> list = new ArrayList<>();
 
 		try {
@@ -245,6 +251,10 @@ public class BaiThiThuApi {
 					cauhoiexam.setOption4(String.valueOf(row.getCell(8).getNumericCellValue()));
 				if (row.getCell(9) != null)
 					cauhoiexam.setCorrectanswer(row.getCell(9).getStringCellValue().toString());
+				
+				if(row.getCell(10) !=null) {
+					cauhoiexam.setPartToeic(partService.getPartByName(row.getCell(10).getStringCellValue().toString()));
+				}
 				cauhoiexam.setBaithithu(baithithu);
 				list.add(cauhoiexam);
 

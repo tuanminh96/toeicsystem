@@ -168,7 +168,6 @@
 
 	<jsp:include page="template/footer.jsp"></jsp:include>
 	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-	<script src="<c:url value='/js/admin/quanLyBaiNghe.js'/>" ></script>
 	
 </body>
 </html>

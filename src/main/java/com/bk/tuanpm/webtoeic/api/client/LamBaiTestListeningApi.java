@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bk.tuanpm.webtoeic.entities.CauHoiBaiThiThu;
-import com.bk.tuanpm.webtoeic.entities.KetQuaBaiTest;
+import com.bk.tuanpm.webtoeic.entities.Question;
+import com.bk.tuanpm.webtoeic.entities.TestResult;
 import com.bk.tuanpm.webtoeic.entities.NguoiDung;
 import com.bk.tuanpm.webtoeic.service.BaiThiThuService;
-import com.bk.tuanpm.webtoeic.service.CauHoiBaiThiThuService;
+import com.bk.tuanpm.webtoeic.service.QuestionService;
 import com.bk.tuanpm.webtoeic.service.KetQuaBaiTestService;
 import com.bk.tuanpm.webtoeic.service.NguoiDungService;
 
@@ -33,7 +33,7 @@ public class LamBaiTestListeningApi {
 	KetQuaBaiTestService ketquabaitestService;
 	
 	@Autowired
-	CauHoiBaiThiThuService cauhoibaithithuService;
+	QuestionService cauhoibaithithuService;
 	@Autowired
 	BaiThiThuService baithithuService;
 	
@@ -54,7 +54,7 @@ public class LamBaiTestListeningApi {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		NguoiDung currentUser = nguoiDungService.findByEmail(auth.getName());
 		
-		List<CauHoiBaiThiThu> list = cauhoibaithithuService.getListCauHoi(baithithuService.getBaiThiThu(id).get(0));
+		List<Question> list = cauhoibaithithuService.getListCauHoi(baithithuService.getBaiThiThu(id).get(0));
 		
 		// save ketqua bai test
 //		Date time = new Date();

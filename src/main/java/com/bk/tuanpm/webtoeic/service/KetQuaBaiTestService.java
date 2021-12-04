@@ -1,7 +1,7 @@
 package com.bk.tuanpm.webtoeic.service;
 
-import com.bk.tuanpm.webtoeic.entities.KetQuaBaiTest;
+import com.bk.tuanpm.webtoeic.entities.TestResult;
 
 public interface KetQuaBaiTestService {
-	void save(KetQuaBaiTest ketquabaitest);
+	void save(TestResult ketquabaitest);
 }

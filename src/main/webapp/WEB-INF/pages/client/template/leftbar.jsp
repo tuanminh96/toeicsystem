@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+	pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,17 +7,18 @@
 <title>Insert title here</title>
 </head>
 <body>
-				<div class="col-md-3">
-				<div class="side-bar">
+	<div class="col-md-3">
+		<div class="side-bar">
+			<div class="list-group">
+				<a href="/webtoeic/listening" class="list-group-item list-group-item-action active">
+					DANH MỤC </a> 
+				<a href="#"
+					class="list-group-item list-group-item-action">TOP ĐỀ NHIỀU LƯỢT THI</a> 
+				<a href="#" class="list-group-item list-group-item-action">TOP ĐỀ ĐÁNH GIÁ CAO</a>
+				<a href="/webtoeic/reading" class="list-group-item list-group-item-action">THI LẠI CÁC ĐỀ ĐÃ THI</a> 
+			</div> 
 
-					<h3>DANH MỤC</h3>
-					<ul class="nav nav-list">
-						<li><a href="/webtoeic/listening">TOP ĐỀ NHIỀU LƯỢT THI</a></li>
-						<li><a href="/webtoeic/reading">TOP ĐỀ ĐÁNH GIÁ CAO</a></li>
-						<li><a href="/webtoeic/reading">THI LẠI CÁC ĐỀ ĐÃ THI</a></li>
-					</ul>
-
-				</div>
-			</div>
+		</div>
+	</div>
 </body>
 </html>

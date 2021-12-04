@@ -11,10 +11,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
+<link href="https://fonts.googleapis.com/css?family=Lato"
+	rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Montserrat"
+	rel="stylesheet" type="text/css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script
@@ -49,7 +52,7 @@ h3 {
 	$(document).ready(function() {
 
 		var down = false;
-
+		$('#box').css('display', 'none');
 		$('#bell').click(function(e) {
 
 			var color = $(this).text();
@@ -57,11 +60,13 @@ h3 {
 
 				$('#box').css('height', '0px');
 				$('#box').css('opacity', '0');
+				$('#box').css('display', 'none');
 				down = false;
 			} else {
 
 				$('#box').css('height', 'auto');
 				$('#box').css('opacity', '1');
+				$('#box').css('display', 'block');
 				down = true;
 
 			}
@@ -78,20 +83,19 @@ h3 {
 		<div class="container">
 			<div class="row">
 				<!--LOGO-->
-				<div class="col-md-6">
-					<a class="brand" href="/webtoeic"><img
+				<div class="col-md-4">
+					<a class="brand" href="/webtoeic"><img style="width: 160px;"
 						src="/webtoeic/resources/file/images/logotest.png" /></a>
 				</div>
 				<!-- /LOGO -->
 
 				<!-- MAIN NAVIGATION -->
-				<div class="col-md-6">
+				<div class="col-md-8" style="padding-left: 150px;">
 					<ul class="nav nav-pills">
 						<li class="nav-item"><a class="nav-link active"
 							href="/webtoeic">Trang chủ</a></li>
 						<c:if test="${pageContext.request.userPrincipal.name == null}">
-							<li class="nav-item"><a class="nav-link"
-								href="<%=request.getContextPath()%>/signin">Contact</a></li>
+							<li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
 							<li class="nav-item"><a class="nav-link"
 								href="<%=request.getContextPath()%>/signin">Đăng nhập</a></li>
 							<li class="nav-item"><a class="nav-link"
@@ -100,47 +104,55 @@ h3 {
 						<c:if test="${pageContext.request.userPrincipal.name != null}">
 							<li class="nav-item"><a class="nav-link"
 								href="<%=request.getContextPath()%>/listExam">Thi thử</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-						</c:if>
+							<li class="nav-item" style="background: gold;"><a
+								class="nav-link"
+								href="${pageContext.request.contextPath}/group_detail"
+								style="color: black;">Học nhóm</a></li>
+							<li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
 
-						<div class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
-							<li class="nav-item dropdown"><a
-								class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">${nguoiDung.hoTen}</a>
-								<div class="dropdown-menu">
-									<a class="dropdown-item"
-										href="<%=request.getContextPath()%>/profile">Tài khoản</a> <a
-										class="dropdown-item" href="#">Nâng cấp VIP</a> <a
-										class="dropdown-item"
-										href="<%=request.getContextPath()%>/signout">Thoát</a>
-								</div></li>
-							<div class="nav-item">
-								<a class="nav-link" href="#" rel="noopener"
-									aria-label="GitHub" id="bell"> <i class="fa fa-lg fa-bell"></i> <span
-									class="notification-badge badge badge-danger">1</span>
-								</a>
-								<div class="notifications" id="box">
-									<h2>
-										Notifications - <span>2</span>
-									</h2>
-									<div class="notifications-item">
-										<img src="https://i.imgur.com/uIgDDDd.jpg" alt="img">
-										<div class="text">
-											<h4>Samso aliao</h4>
-											<p>Samso Nagaro Like your home work</p>
+							<div class="navbar-nav flex-row  d-none d-md-flex"
+								style="margin-left: 20px;">
+								<li class="nav-item dropdown"><a
+									class="nav-link dropdown-toggle" data-toggle="dropdown"
+									href="#">${nguoiDung.hoTen}</a>
+									<div class="dropdown-menu">
+										<a class="dropdown-item"
+											href="<%=request.getContextPath()%>/profile">Tài khoản</a> <a
+											class="dropdown-item" href="#">Nâng cấp VIP</a> <a
+											class="dropdown-item"
+											href="<%=request.getContextPath()%>/signout">Thoát</a>
+									</div></li>
+								<div class="nav-item">
+									<a class="nav-link" href="#" rel="noopener" aria-label="GitHub"
+										id="bell"> <i class="fa fa-lg fa-bell"></i> <span
+										class="notification-badge badge badge-danger">1</span>
+									</a>
+									<div class="notifications" id="box">
+										<h2>
+											Notifications - <span>2</span>
+										</h2>
+										<div class="notifications-item">
+											<img src="https://i.imgur.com/uIgDDDd.jpg" alt="img">
+											<div class="text">
+												<h4>Samso aliao</h4>
+												<p>Samso Nagaro Like your home work</p>
+											</div>
 										</div>
-									</div>
-									<div class="notifications-item">
-										<img
-											src="https://img.icons8.com/flat_round/64/000000/vote-badge.png"
-											alt="img">
-										<div class="text">
-											<h4>John Silvester</h4>
-											<p>+20 vista badge earned</p>
+										<div class="notifications-item">
+											<img
+												src="https://img.icons8.com/flat_round/64/000000/vote-badge.png"
+												alt="img">
+											<div class="text">
+												<h4>John Silvester</h4>
+												<p>+20 vista badge earned</p>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
+						</c:if>
+
+
 					</ul>
 				</div>
 

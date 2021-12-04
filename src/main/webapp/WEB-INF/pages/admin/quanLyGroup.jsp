@@ -1,0 +1,113 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Quản lý Exam</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<script
+	src="${pageContext.request.contextPath}/resources/js/jquery-1.js"></script>
+
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/ace.min.css"
+	class="ace-main-stylesheet" id="main-ace-style" />
+</head>
+
+
+<body>
+	<jsp:include page="template/header.jsp"></jsp:include>
+	<jsp:include page="template/sidebar.jsp"></jsp:include>
+
+	<div class="col-md-9 animated bounce">
+		<h3 class="page-header">Quản lý các nhóm của
+			${loggedInUser.hoTen}</h3>
+
+		<button class="btn btn-success btnAddExam" data-toggle="modal"
+			data-target="#examModal">Thêm nhóm</button>
+		<h4 style="color: red" id="info-success"></h4>
+
+		<c:if test="${errorInfo != null }">
+			<h4 style="color: red" id="info-error">${error}</h4>
+			<h4>error: ${errorInfo}</h4>
+		</c:if>
+		<hr />
+		<table class="table table-hover nhanHieuTable" id="tableExam">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Tên nhóm</th>
+					<th>Ngày tạo</th>
+					<th>Số thành viên</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="center">1</td>
+					<td class="center"><a href="${pageContext.request.contextPath}/group_detail">Nhóm ôn luyện tháng 1</a></td>
+					<td class="center">20/11/2021</td>
+					<td class="center">13</td>
+					<td class="center"><a id="" class="red deleteBaiThiThu"><button
+								class="delete btn btn-danger">Xóa</button></a></td>
+				</tr>
+			</tbody>
+			<tbody>
+			</tbody>
+		</table>
+	</div>
+
+	<!-- Modal -->
+
+	<div class="modal fade" id="examModal" tabindex="-1" role="dialog"
+		aria-labelleby="myModalLable">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="titleModal">Thêm mới Exam</h4>
+				</div>
+
+				<div class="modal-body">
+					<input style="display: none" id="idExam">
+					<div class="row">
+						<span class="bg-danger" id="vocab_errors"></span>
+
+						<div class="form-group col-md-12">
+							<label>Tên nhóm:</label> <input id="nameBaiThiThu"
+								class="form-control">
+
+						</div>
+						<div class="form-group col-md-12">
+							<label for="comment">Mô tả nhóm:</label>
+							<textarea class="form-control" rows="5" id="comment"></textarea>
+
+						</div>
+					</div>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" id="btnAddNewExam" class="btn btn-primary">Thêm
+						nhóm</button>
+					<button type="button" style="display: none;" id="btnUpdateExam"
+						class="btn btn-primary">Cập nhật</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- End modal -->
+
+	<jsp:include page="template/footer.jsp"></jsp:include>
+
+</body>
+</html>

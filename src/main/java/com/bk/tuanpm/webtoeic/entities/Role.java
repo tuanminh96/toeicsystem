@@ -26,6 +26,7 @@ public class Role {
 	private int idRole;
 	private int code;
 	private String role;
+	private String description;
 	
 
     public int getIdRole() {
@@ -51,5 +52,12 @@ public class Role {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 }

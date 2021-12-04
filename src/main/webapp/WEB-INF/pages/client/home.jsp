@@ -16,15 +16,17 @@
 	rel="stylesheet">
 <script
 	src="${pageContext.request.contextPath}/resources/js/jquery-1.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/js/client/home.js"></script>
 
-
+<style type="text/css">
+.feature-box img, .imgdescription {
+	width: 100%;
+}
+</style>
 </head>
 <body>
 
@@ -59,8 +61,10 @@
 			value="${pageContext.request.userPrincipal.name}" /> <input
 			style="display: none;" id="baseUrl"
 			value="${pageContext.request.contextPath}">
-		<!--Carousel
-  ==================================================-->
+
+
+
+		<!-- Carousel -->
 		<!-- slide 1 là để cứng. 2 slide còn lại dùng for each. load từ database lên -->
 		<div id="myCarousel" class="carousel slide" data-ride="carousel">
 			<div class="carousel-inner">
@@ -68,7 +72,6 @@
 				<div class="carousel-item active">
 					<div class="container">
 						<div class="row">
-
 							<div class="col-md-6">
 								<div class="carousel-caption">
 									<h1>Giải đáp chi tiết các đề thi</h1>
@@ -150,11 +153,11 @@
 
 			</div>
 			<!-- Carousel nav -->
-			<a class="carousel-control-prev" href="#carouselExampleControls"
-				role="button" data-slide="prev"> <span
-				class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-				class="sr-only">Previous</span>
-			</a> <a class="carousel-control-next" href="#carouselExampleControls"
+			<a style="color: black;" class="carousel-control-prev"
+				href="#carouselExampleControls" role="button" data-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="sr-only">Previous</span>
+			</a style="color: black;"> <a class="carousel-control-next" href="#carouselExampleControls"
 				role="button" data-slide="next"> <span
 				class="carousel-control-next-icon" aria-hidden="true"></span> <span
 				class="sr-only">Next</span>
@@ -162,10 +165,6 @@
 			<!-- /.Carousel nav -->
 
 		</div>
-		<!-- /Carousel -->
-
-		<!-- Feature 
-  ==============================================-->
 
 
 		<div class="row feature-box">
@@ -178,8 +177,8 @@
 				<img
 					src="${pageContext.request.contextPath}/resources/file/images/feature-vocabulary1.jpg">
 
-				<h2>Học từ vựng, ngữ pháp</h2>
-				<p>Các bài hướng dẫn đơn giản, dễ hiểu.</p>
+				<h2>Học nhóm cùng những admin tận tâm</h2>
+				<p>Sẵn sàng giúp đỡ nếu hặp khó khăn.</p>
 				<a href="#" id="modal1" class="openModalFunction">Chi tiết
 					&rarr;</a>
 
@@ -188,8 +187,8 @@
 			<div class="col-md-4">
 				<img
 					src="${pageContext.request.contextPath}/resources/file/images/feature-listenandread.jpg">
-				<h2>Bài tập phần nghe, đọc</h2>
-				<p>Sử dụng các dạng bài tập thường xuyên xuất hiện.</p>
+				<h2>Nâng cấp tài khoản</h2>
+				<p>Giúp bạn có những trải nghiệm thú vị hơn.</p>
 				<a href="#" id="modal2" class="openModalFunction">Chi tiết
 					&rarr;</a>
 			</div>
@@ -204,45 +203,83 @@
 			</div>
 		</div>
 
-
+		<br></br>
 		<!-- /.Feature -->
+		<!-- Container (Contact Section) -->
+		<div id="contact" class="container">
+			<h1 class="text-center">Contact</h1>
+			<p class="text-center">
+				<em>Give us opinion about your experience!</em>
+			</p>
 
-		<div class="hr-divider"></div>
-
-		<!-- Row View -->
-
-
-		<div class="row">
-			<div class="col-md-8">
-				<img
-					src="${pageContext.request.contextPath}/resources/file/images/background3.png">
+			<div class="row">
+				<div class="col-md-4">
+					<p>
+						<span class="glyphicon glyphicon-map-marker"></span>Ha Noi, Viet Nam
+					</p>
+					<p>
+						<span class="glyphicon glyphicon-phone"></span>Phone: +00
+						1515151515
+					</p>
+					<p>
+						<span class="glyphicon glyphicon-envelope"></span>Email:
+						mail@mail.com
+					</p>
+				</div>
+				<div class="col-md-8">
+					<div class="row">
+						<div class="col-sm-6 form-group">
+							<input class="form-control" id="name" name="name"
+								placeholder="Name" type="text" required>
+						</div>
+						<div class="col-sm-6 form-group">
+							<input class="form-control" id="email" name="email"
+								placeholder="Email" type="email" required>
+						</div>
+					</div>
+					<textarea class="form-control" id="comments" name="comments"
+						placeholder="Comment" rows="5"></textarea>
+					<br>
+					<div class="row">
+						<div class="col-md-12 form-group">
+							<button class="btn pull-right" type="submit">Send</button>
+						</div>
+					</div>
+				</div>
 			</div>
+			<br>
+			<h3 class="text-center">From The Blog</h3>
+			<ul class="nav nav-tabs">
+				<li class="active"><a data-toggle="tab" href="#home">Mike</a></li>
+				<li><a data-toggle="tab" href="#menu1">Chandler</a></li>
+				<li><a data-toggle="tab" href="#menu2">Peter</a></li>
+			</ul>
 
-			<div class="col-md-4">
-				<!--   <img class="hidden-phone" src="Template/Frontend/img/icon4.png" alt="img not found"> -->
-				<h1 align="center">Tin cậy - uy tín</h1>
-				<p align="justify">Mỗi năm, có hàng nghìn lượt học viên đã tham
-					dự các khóa học tiếng Anh tại CFL và đạt kết quả như ý muốn. Chúng
-					tôi tự hào là một trong những trung tâm ngoại ngữ được yêu thích,
-					là địa chỉ tin cậy của các bạn SV Bách Khoa, Kinh tế, Xây dựng,
-					Ngân hàng... và nhiều người đi làm trên địa bàn Hà Nội.</p>
-
+			<div class="tab-content">
+				<div id="home" class="tab-pane fade in active">
+					<h2>Mike Ross, Manager</h2>
+					<p>Man, we've been on the road for some time now. Looking
+						forward to lorem ipsum.</p>
+				</div>
+				<div id="menu1" class="tab-pane fade">
+					<h2>Chandler Bing, Guitarist</h2>
+					<p>Always a pleasure people! Hope you enjoyed it as much as I
+						did. Could I BE.. any more pleased?</p>
+				</div>
+				<div id="menu2" class="tab-pane fade">
+					<h2>Peter Griffin, Bass player</h2>
+					<p>I mean, sometimes I enjoy the show, but other times I enjoy
+						other things.</p>
+				</div>
 			</div>
 		</div>
-
-
+		<div class="hr-divider"></div>
 	</div>
-
-
-	<!-- /.Row View -->
-
-
 
 	<!--Footer
 ==========================-->
 	<jsp:include page="include/footerHome.jsp"></jsp:include>
 	<!--/.Footer-->
-
 
 	<!-- Start Modal -->
 

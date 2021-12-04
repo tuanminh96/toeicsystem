@@ -7,7 +7,9 @@ function markColorReading(id){
 
 function correctAnswerReading(){
 	var correctArr =[];	
-	for (var i = 51; i < 101; i++) {
+	var totalquest = document.getElementById("totalquest").value;
+	var firstquest = document.getElementById("firstquest").value;
+	for (var i = firstquest; i < totalquest; i++) {
 		 var nameRadio = "correctanswer"+i;	 	
 		 var x = document.getElementById("submitForm").elements.namedItem(nameRadio).value;
 		 correctArr.push(x);}

@@ -25,13 +25,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.bk.tuanpm.webtoeic.entities.BaiThiThu;
-import com.bk.tuanpm.webtoeic.entities.CauHoiBaiThiThu;
-import com.bk.tuanpm.webtoeic.entities.KetQuaBaiTest;
+import com.bk.tuanpm.webtoeic.entities.Exam;
+import com.bk.tuanpm.webtoeic.entities.Question;
+import com.bk.tuanpm.webtoeic.entities.TestResult;
 import com.bk.tuanpm.webtoeic.entities.NguoiDung;
 import com.bk.tuanpm.webtoeic.entities.PartToeic;
 import com.bk.tuanpm.webtoeic.service.BaiThiThuService;
-import com.bk.tuanpm.webtoeic.service.CauHoiBaiThiThuService;
+import com.bk.tuanpm.webtoeic.service.QuestionService;
 import com.bk.tuanpm.webtoeic.service.KetQuaBaiTestService;
 import com.bk.tuanpm.webtoeic.service.NguoiDungService;
 import com.bk.tuanpm.webtoeic.service.PartService;
@@ -42,7 +42,7 @@ public class BaiFullTestController {
 	
 	
 	@Autowired
-	CauHoiBaiThiThuService cauhoibaithithuService;
+	QuestionService cauhoibaithithuService;
 	
 	@Autowired
 	KetQuaBaiTestService ketquabaitestService;
@@ -65,7 +65,7 @@ public class BaiFullTestController {
 		
 		try {
 		
-				Page<BaiThiThu> list = baithithuService.getBaiThiThu(page-1, 4);
+				Page<Exam> list = baithithuService.getBaiThiThu(page-1, 4);
 				
 				int totalPage = list.getTotalPages();
 				
@@ -115,11 +115,10 @@ public class BaiFullTestController {
 	public String DetailListening(Model model,@RequestParam("idExam") int id) {
 		
 		try {
-				List<CauHoiBaiThiThu> list = cauhoibaithithuService.getListCauHoi(baithithuService.getBaiThiThu(id).get(0));
+				List<Question> list = cauhoibaithithuService.getListCauHoi(baithithuService.getBaiThiThu(id).get(0));
 				List<PartToeic> partToeicListening = partService.getPartByType("Listening");
-				
 				//Get mapping Part toeic and questions
-				Map<String, List<CauHoiBaiThiThu>> newMapPartQuestion = cauhoibaithithuService.getMapPartQuestionListen(list);
+				Map<String, List<Question>> newMapPartQuestion = cauhoibaithithuService.getMapPartQuestionListen(list);
 				model.addAllAttributes(newMapPartQuestion);
 				model.addAttribute("listQuestion",list);
 				model.addAttribute("partListen",partToeicListening);
@@ -145,13 +144,11 @@ public class BaiFullTestController {
 		NguoiDung currentUser = nguoiDungService.findByEmail(auth.getName());
 		
 	 	Date time = new Date();
-		KetQuaBaiTest ketquabaitest = new KetQuaBaiTest();
+		TestResult ketquabaitest = new TestResult();
 		ketquabaitest.setNgaythi(time);
 		ketquabaitest.setBaithithu(baithithuService.getBaiThiThu(examId).get(0));
 		ketquabaitest.setCorrectlisten(correctListening);
 		ketquabaitest.setCorrectreading(correctReading);
-		ketquabaitest.setSocaudung(correctListening+correctReading);
-		ketquabaitest.setSocausai(100-correctListening-correctReading);
 		ketquabaitest.setNguoidung(currentUser);
 		
 		ketquabaitestService.save(ketquabaitest);

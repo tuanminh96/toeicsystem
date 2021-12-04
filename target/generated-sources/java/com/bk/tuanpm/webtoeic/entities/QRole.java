@@ -21,6 +21,8 @@ public class QRole extends EntityPathBase<Role> {
 
     public final NumberPath<Integer> code = createNumber("code", Integer.class);
 
+    public final StringPath description = createString("description");
+
     public final NumberPath<Integer> idRole = createNumber("idRole", Integer.class);
 
     public final StringPath role = createString("role");

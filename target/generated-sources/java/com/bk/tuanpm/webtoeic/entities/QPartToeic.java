@@ -27,6 +27,10 @@ public class QPartToeic extends EntityPathBase<PartToeic> {
 
     public final NumberPath<Integer> questionTotal = createNumber("questionTotal", Integer.class);
 
+    public final NumberPath<Integer> setQuestionTotal = createNumber("setQuestionTotal", Integer.class);
+
+    public final NumberPath<Integer> timeForTest = createNumber("timeForTest", Integer.class);
+
     public final StringPath type = createString("type");
 
     public QPartToeic(String variable) {

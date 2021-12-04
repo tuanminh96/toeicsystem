@@ -36,15 +36,11 @@ public class QNguoiDung extends EntityPathBase<NguoiDung> {
 
     public final BooleanPath isDelete = createBoolean("isDelete");
 
-    public final NumberPath<Integer> isVip = createNumber("isVip", Integer.class);
-
     public final DatePath<java.sql.Date> joinDate = createDate("joinDate", java.sql.Date.class);
 
     public final StringPath password = createString("password");
 
     public final QRole role;
-
-    public final StringPath school = createString("school");
 
     public final StringPath soDienThoai = createString("soDienThoai");
 

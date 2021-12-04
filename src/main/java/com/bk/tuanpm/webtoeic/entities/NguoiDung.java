@@ -7,7 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -29,16 +31,16 @@ public class NguoiDung {
 	private String hoTen;
 	private String soDienThoai;
 	private String diaChi;
-	private String school;
 	private int gender;
-	private int isVip;
 	private String description;
 	private Date joinDate;
 	private boolean isDelete;
+	
 	@Transient
 	private boolean loginOauth2;
 	
 	@ManyToOne
+	@JoinColumn(name="role_id")
 	private Role role;
 
 	public boolean isLoginOauth2() {
@@ -122,54 +124,37 @@ public class NguoiDung {
 		// TODO Auto-generated constructor stub
 	}
 
-	
-//	public String getSchool() {
-//		return school;
-//	}
-//
-//	public void setSchool(String school) {
-//		this.school = school;
-//	}
-//
-//	public int getGender() {
-//		return gender;
-//	}
-//
-//	public void setGender(int gender) {
-//		this.gender = gender;
-//	}
-//
-//	public int getIsVip() {
-//		return isVip;
-//	}
-//
-//	public void setIsVip(int isVip) {
-//		this.isVip = isVip;
-//	}
-//
-//	public String getDescription() {
-//		return description;
-//	}
-//
-//	public void setDescription(String description) {
-//		this.description = description;
-//	}
-//
-//	public Date getJoinDate() {
-//		return joinDate;
-//	}
-//
-//	public void setJoinDate(Date joinDate) {
-//		this.joinDate = joinDate;
-//	}
-//
-//	public boolean isDelete() {
-//		return isDelete;
-//	}
-//
-//	public void setDelete(boolean isDelete) {
-//		this.isDelete = isDelete;
-//	}
+	public int getGender() {
+		return gender;
+	}
+
+	public void setGender(int gender) {
+		this.gender = gender;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Date getJoinDate() {
+		return joinDate;
+	}
+
+	public void setJoinDate(Date joinDate) {
+		this.joinDate = joinDate;
+	}
+
+	public boolean isDelete() {
+		return isDelete;
+	}
+
+	public void setDelete(boolean isDelete) {
+		this.isDelete = isDelete;
+	}
 
 	@Override
 	public String toString() {

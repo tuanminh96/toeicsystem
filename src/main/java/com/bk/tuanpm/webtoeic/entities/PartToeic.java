@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 // tên các part trong toeic
 @Entity
@@ -18,6 +19,11 @@ public class PartToeic {
 	private String type;
 	private String description;
 	private int questionTotal;
+	private int setQuestionTotal;
+	private int timeForTest;
+	
+	@Transient
+	private int timeOfType;
 
 	public int getIdPart() {
 		return idPart;
@@ -59,4 +65,20 @@ public class PartToeic {
 		this.description = description;
 	}
 
+	public int getTimeOfType() {
+		return timeOfType;
+	}
+
+	public void setTimeOfType(int timeOfType) {
+		this.timeOfType = timeOfType;
+	}
+
+	public int getSetQuestionTotal() {
+		return setQuestionTotal;
+	}
+
+	public void setSetQuestionTotal(int setQuestionTotal) {
+		this.setQuestionTotal = setQuestionTotal;
+	}
+	
 }

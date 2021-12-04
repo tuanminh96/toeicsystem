@@ -3,8 +3,8 @@ package com.bk.tuanpm.webtoeic.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bk.tuanpm.webtoeic.entities.BaiThiThu;
-import com.bk.tuanpm.webtoeic.entities.KetQuaBaiTest;
+import com.bk.tuanpm.webtoeic.entities.Exam;
+import com.bk.tuanpm.webtoeic.entities.TestResult;
 import com.bk.tuanpm.webtoeic.entities.NguoiDung;
 import com.bk.tuanpm.webtoeic.repository.KetQuaBaiTestRepository;
 import com.bk.tuanpm.webtoeic.service.KetQuaBaiTestService;
@@ -15,7 +15,7 @@ public class KetQuaBaiTestImpl implements KetQuaBaiTestService{
 	KetQuaBaiTestRepository ketquabaitestRepo;
 	
 	@Override
-	public void save(KetQuaBaiTest ketquabaitest) {
+	public void save(TestResult ketquabaitest) {
 		ketquabaitestRepo.save(ketquabaitest);
 	}
 }

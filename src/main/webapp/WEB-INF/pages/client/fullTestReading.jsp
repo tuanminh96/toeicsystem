@@ -67,8 +67,6 @@
 }
 
 #btnSubmitReading {
-	margin-bottom: 15px;
-	margin-left: 15px;
 }
 
 #btnResultReading {
@@ -95,13 +93,15 @@
 
 		<br>
 		<div style="display: block;">
-			<p>
-				<a href="/webtoeic" id="backhome" style="display: inline;">&larr;
-					Home</a> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-				&nbsp <span>Bài test Reading</span> <input class="hidden"
-					id="soCauDungListening" value="${socauListeningCorrect}">
-
+			<p class="col-md-2">
+				<a class="btn btn-info btn-lg" href="/webtoeic" id="backhome"
+					style="display: inline;"> <span
+					class="glyphicon glyphicon-home"></span>
+				</a> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <input
+					class="hidden" id="soCauDungListening"
+					value="${socauListeningCorrect}">
 			</p>
+			<p style="font-size: x-large; text-align: center;" class="col-md-10">Reading</p>
 		</div>
 	</div>
 	<!--/End Header-->
@@ -114,32 +114,49 @@
 
 						<div class="fix-scrolling">
 							<br>
-							<div>
+							<div style="position: absolute; left: 1300px; top: 80px;">
 								<span id="timeReading">75:00</span>
 							</div>
 							<hr width="60%">
 
-							<c:forEach begin="51" end="100" varStatus="loop">
-								<div class="numberCircle web-font" id="answer${loop.index}">${loop.index}</div>
-							</c:forEach>
-							<br> <br> <input type="button" class="btn btn-primary"
+							<div class="panel panel-info">
+								<div class="panel-heading">Danh sách câu hỏi</div>
+								<div class="panel-body">
+									<c:forEach items="${part5}" var="quest">
+										<div class="numberCircle part5 parttoeic"
+											style="display: none;" id="answer${quest.number}">${quest.number}</div>
+									</c:forEach>
+									<c:set var="part5count" value="${part5.size()}"></c:set>
+									<c:forEach items="${part6}" var="quest">
+										<div class="numberCircle part6 parttoeic"
+											style="display: none;" id="answer${quest.number}">${quest.number}</div>
+									</c:forEach>
+									<c:set var="part6count" value="${part6.size()}"></c:set>
+									<c:forEach items="${part7}" var="quest">
+										<div class="numberCircle part7 parttoeic"
+											style="display: none;" id="answer${quest.number}">${quest.number}</div>
+									</c:forEach>
+									<c:set var="part7count" value="${part7.size()}"></c:set>
+									<input type="hidden" value="${part5.get(0).number}"
+										id="firstquest"> <input type="hidden"
+										value="${part5count+part6count+part7count}" id="totalquest">
+								</div>
+							</div>
+
+							<br> <br>
+							<!-- 							<input type="button" class="btn btn-primary"
 								id="btnResultReading" value="Chấm điểm"
-								onclick="clickResutlReading()" /> <input type="button"
-								class="btn btn-danger" id="btnSubmitReading" value="Nộp bài"
-								onclick="javascript:clickSubmitReading()" /> <br> <span
-								class="note" id="noteReading">Click 'Nộp bài' để xem kết
-								quả <br> &nbsp (Listening + Reading)
-							</span>
+								onclick="clickResutlReading()" /> -->
+							<input data-toggle="modal" data-target="#flipFlop" style="position: absolute; top: 600px;" type="button"
+								class="btn btn-danger" id="btnSubmitReading" value="Nộp bài"/> 
+								<br> 
+								<span class="note" id="noteReading">Click 'Nộp bài' để xem kết quả <br> &nbsp (Listening + Reading)</span>
 							<hr width="60%">
 						</div>
-
-
 					</div>
-
 					<div class="col-md-3 ">
 						<!-- Placeholder - keep empty -->
 					</div>
-
 					<!--Nội dung bài test -->
 					<div id="main" class="col-md-8 web-font">
 
@@ -149,7 +166,7 @@
 							</c:forEach>
 						</ul>
 						<c:forEach items="${partReading}" var="part">
-							<p class="part${part.idPart} parttoeic">
+							<p class="part${part.idPart} parttoeic" style="display: none;">
 								<b>${part.partName}: ${part.description}</b>
 							</p>
 						</c:forEach>
@@ -234,29 +251,47 @@
 								name="correctanswer${list.number}" value="${list.correctanswer}" />
 						</c:forEach>
 						<hr>
-						<p>Kết thúc bài Reading</p>
+						<p>End Reading</p>
+						<!-- The modal -->
+						<div class="modal fade" id="flipFlop" tabindex="-1" role="dialog"
+							aria-labelledby="modalLabel" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+										<h4 class="modal-title" id="modalLabel">Xác nhận</h4>
+									</div>
+									<div class="modal-body">Bạn có muốn kết thúc đề thi này ?</div>
+									<div class="modal-footer">
+										<button onclick="javascript:clickSubmitReading()" type="button" class="btn btn-danger" id=""
+											data-dismiss="modal">Yes</button>
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">Close</button>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</form>
 		</div>
-		<!--Footer
-==========================-->
-		<script type="text/javascript">
-		$(document).ready(function() {
-			$('#tabparts a').click(function(e) {
-				e.preventDefault();
-				$(this).tab('show');
-				$('.parttoeic').hide();
-				var a = '.part' + $(this).attr('partid');
-				console.log(a);
-				$(a).show();
-
-			});
-			$('.part5').show();
-		});
-		</script>
 		<!--/.Footer-->
 	</div>
+	<script type="text/javascript">
+		$('#resutlTest').bind("DOMSubtreeModified", function() {
+			var star = '.star', selected = '.selected';
 
+			$(star).on('click', function() {
+				$(selected).each(function() {
+					$(this).removeClass('selected');
+				});
+				$(this).addClass('selected');
+			});
+
+		});
+	</script>
 </body>
 </html>

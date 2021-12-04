@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.bk.tuanpm.webtoeic.entities.BaiThiThu;
+import com.bk.tuanpm.webtoeic.entities.Exam;
 @Repository
-public interface BaiThiThuRespository extends JpaRepository<BaiThiThu,Integer>{
-	List<BaiThiThu> findByBaithithuid(int id);
+public interface BaiThiThuRespository extends JpaRepository<Exam,Integer>{
+	List<Exam> findByBaithithuid(int id);
 
 }

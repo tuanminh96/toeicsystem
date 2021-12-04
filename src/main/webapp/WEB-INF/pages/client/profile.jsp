@@ -12,14 +12,16 @@
 	<jsp:include page="template/header.jsp"></jsp:include>
 	<div class="container">
 		<h3 class="page-header">Thông tin cá nhân</h3>
-		<ul class="nav nav-tabs" id="tabs">
-			<li class="active"><a href="#information">Cập nhật thông tin</a></li>
-			<li><a href="#changePass">Đổi mật khẩu</a></li>
-			<li><a href="#history">Lịch sử dự thi</a></li>
+		<ul class="nav nav-tabs" role="tablist">
+			<li class="nav-item"><a class="nav-link active" href="#information"
+				role="tab" data-toggle="tab">Cập nhật</a></li>
+			<li class="nav-item"><a class="nav-link" href="#changePass" role="tab"
+				data-toggle="tab">Đổi mật khẩu</a></li>
+			<li class="nav-item"><a class="nav-link" href="#history"
+				role="tab" data-toggle="tab">Lịch sử dự thi</a></li>
 		</ul>
-
 		<div>
-			<div class="tab-content" style="height: 300px;">
+			<div class="tab-content" style="height: 370px;">
 				<div class="tab-pane active" id="information">
 					<form class="form-profile" action="/webtoeic/profile/update"
 						method="post">

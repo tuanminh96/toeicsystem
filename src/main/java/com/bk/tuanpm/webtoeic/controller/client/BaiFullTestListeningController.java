@@ -21,11 +21,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.bk.tuanpm.webtoeic.entities.CauHoiBaiThiThu;
-import com.bk.tuanpm.webtoeic.entities.KetQuaBaiTest;
+import com.bk.tuanpm.webtoeic.entities.Question;
+import com.bk.tuanpm.webtoeic.entities.TestResult;
 import com.bk.tuanpm.webtoeic.entities.NguoiDung;
 import com.bk.tuanpm.webtoeic.service.BaiThiThuService;
-import com.bk.tuanpm.webtoeic.service.CauHoiBaiThiThuService;
+import com.bk.tuanpm.webtoeic.service.QuestionService;
 import com.bk.tuanpm.webtoeic.service.KetQuaBaiTestService;
 import com.bk.tuanpm.webtoeic.service.NguoiDungService;
 
@@ -36,7 +36,7 @@ public class BaiFullTestListeningController {
 	BaiThiThuService baithithuServie;
 	
 	@Autowired
-	CauHoiBaiThiThuService cauhoibaithithuService;
+	QuestionService cauhoibaithithuService;
 	
 	@Autowired
 	KetQuaBaiTestService ketquabaitestService;
@@ -55,19 +55,20 @@ public class BaiFullTestListeningController {
 	
 	
 	
-	@RequestMapping(value="/showResultListening/{examId}/{socaudung}",method=RequestMethod.POST)
+	@RequestMapping(value="/showResultListening/{examId}/{socaudung}/{tongsocau}",method=RequestMethod.POST)
 	public String showResult(Model model,@RequestBody String[] jsonAnswerUser,
 							@PathVariable("examId") int examId,
-							@PathVariable("socaudung") String socaudung) {
+							@PathVariable("socaudung") String socaudung,
+							@PathVariable("tongsocau") int tongsocau) {
 	
-	List<CauHoiBaiThiThu> list = cauhoibaithithuService.getListCauHoi(baithithuServie.getBaiThiThu(examId).get(0));
+	List<Question> list = cauhoibaithithuService.getListCauHoi(baithithuServie.getBaiThiThu(examId).get(0));
 	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	NguoiDung currentUser = nguoiDungService.findByEmail(auth.getName());
 	
-	 for (int i = 0;i<50;i++) {
-		 list.get(i).setDapAnUser(jsonAnswerUser[i]);
-		
-     }
+//	 for (int i = 0;i<tongsocau;i++) {
+//		 list.get(i).setDapAnUser(jsonAnswerUser[i]);
+//		
+//     }
 	 
 	// save so cau dung vao db
 //	 	Date time = new Date();

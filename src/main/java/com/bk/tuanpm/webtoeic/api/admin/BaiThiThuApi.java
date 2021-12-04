@@ -26,11 +26,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.bk.tuanpm.webtoeic.entities.BaiThiThu;
-import com.bk.tuanpm.webtoeic.entities.CauHoiBaiThiThu;
+import com.bk.tuanpm.webtoeic.entities.Exam;
+import com.bk.tuanpm.webtoeic.entities.Question;
 import com.bk.tuanpm.webtoeic.repository.PartRepository;
 import com.bk.tuanpm.webtoeic.service.BaiThiThuService;
-import com.bk.tuanpm.webtoeic.service.CauHoiBaiThiThuService;
+import com.bk.tuanpm.webtoeic.service.QuestionService;
 import com.bk.tuanpm.webtoeic.service.PartService;
 
 @RestController
@@ -44,7 +44,7 @@ public class BaiThiThuApi {
 	public BaiThiThuService baithithuService;
 
 	@Autowired
-	public CauHoiBaiThiThuService cauhoibaithithuService;
+	public QuestionService cauhoibaithithuService;
 	
 	@Autowired
 	public PartService partService;
@@ -55,7 +55,7 @@ public class BaiThiThuApi {
 	@GetMapping("/loadExam")
 	public List<String> showAllExam() {
 
-		List<BaiThiThu> list = baithithuService.getAllBaiThiThu();
+		List<Exam> list = baithithuService.getAllBaiThiThu();
 
 		List<String> response = new ArrayList<String>();
 
@@ -85,7 +85,7 @@ public class BaiThiThuApi {
 		List<String> response = new ArrayList<String>();
 		String rootDirectory = request.getSession().getServletContext().getRealPath("/");
 
-		BaiThiThu baithithu = new BaiThiThu();
+		Exam baithithu = new Exam();
 		baithithuService.save(baithithu);
 
 		// System.out.println("id="+baithithu.getBaithithuid());
@@ -130,7 +130,7 @@ public class BaiThiThuApi {
 			// save data from file excel
 
 			BaiThiThuApi btt = new BaiThiThuApi();
-			List<CauHoiBaiThiThu> listCauHoiFull = btt.getListFromExcel(pathExcel.toString(), baithithu, partService);
+			List<Question> listCauHoiFull = btt.getListFromExcel(pathExcel.toString(), baithithu, partService);
 
 			for (int i = 0; i < listCauHoiFull.size(); i++) {
 				cauhoibaithithuService.save(listCauHoiFull.get(i));
@@ -155,7 +155,7 @@ public class BaiThiThuApi {
 
 		List<String> response = new ArrayList<String>();
 		String rootDirectory = request.getSession().getServletContext().getRealPath("/");
-		BaiThiThu baithithu = baithithuService.getBaiThiThu(id).get(0);
+		Exam baithithu = baithithuService.getBaiThiThu(id).get(0);
 		try {
 			// save file upload to local folder
 			Path pathExcel = Paths.get(rootDirectory + "/resources/file/excel/" + "exam." + baithithu.getBaithithuid()
@@ -183,7 +183,7 @@ public class BaiThiThuApi {
 			baithithuService.save(baithithu);
 
 			BaiThiThuApi btt = new BaiThiThuApi();
-			List<CauHoiBaiThiThu> listCauHoiFull = btt.getListFromExcel(pathExcel.toString(), baithithu, partService);
+			List<Question> listCauHoiFull = btt.getListFromExcel(pathExcel.toString(), baithithu, partService);
 
 			for (int i = 0; i < listCauHoiFull.size(); i++) {
 				cauhoibaithithuService.save(listCauHoiFull.get(i));
@@ -200,19 +200,19 @@ public class BaiThiThuApi {
 	// get info Exam ->edit Exam
 	@RequestMapping(value = "/infoExam/{idBaiThiThu}")
 	public String infoGrammarById(@PathVariable("idBaiThiThu") int id) {
-		BaiThiThu baiexam = baithithuService.getBaiThiThu(id).get(0);
+		Exam baiexam = baithithuService.getBaiThiThu(id).get(0);
 		return baiexam.getTenbaithithu();
 	}
 
-	public List<CauHoiBaiThiThu> getListFromExcel(String path_file_excel, BaiThiThu baithithu, PartService partService) {
-		List<CauHoiBaiThiThu> list = new ArrayList<>();
+	public List<Question> getListFromExcel(String path_file_excel, Exam baithithu, PartService partService) {
+		List<Question> list = new ArrayList<>();
 
 		try {
 			FileInputStream excelFile = new FileInputStream(new File(path_file_excel));
 			XSSFWorkbook workbook = new XSSFWorkbook(excelFile);
 			XSSFSheet worksheet = workbook.getSheetAt(0);
 			for (int i = 1; i < worksheet.getPhysicalNumberOfRows(); i++) {
-				CauHoiBaiThiThu cauhoiexam = new CauHoiBaiThiThu();
+				Question cauhoiexam = new Question();
 
 				XSSFRow row = worksheet.getRow(i);
 
@@ -224,7 +224,6 @@ public class BaiThiThuApi {
 
 				if (row.getCell(2) != null)
 					cauhoiexam.setAudiomp3(row.getCell(2).getStringCellValue().toString());
-
 				if (row.getCell(3) != null)
 					cauhoiexam.setParagraph(row.getCell(3).getStringCellValue().toString());
 				if (row.getCell(4) != null)

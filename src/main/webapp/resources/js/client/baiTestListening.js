@@ -8,7 +8,8 @@ function markColor(id){
 
 function correctAnswer(){
 	var correctArr =[];	
-	for (var i = 1; i < 51; i++) {
+	var totalquest = document.getElementById("totalquest").value;
+	for (var i = 1; i < totalquest; i++) {
 		 var nameRadio = "correctanswer"+i;	 
 		 if(document.getElementById("submitForm").elements.namedItem(nameRadio) !=null) {
 			 var x = document.getElementById("submitForm").elements.namedItem(nameRadio).value;
@@ -81,7 +82,6 @@ $(document).ready(function(){
 //			});
 //
 //	});
-	
 	
 	$('#btnSubmit').click(function(){
 		startReadingClock ()
@@ -164,8 +164,8 @@ $(document).ready(function(){
 		
 		
 		var examId = $("#id_bai_exam").val();
-		
-		var url="http://localhost:8080/webtoeic/showResultListening/"+examId+"/"+countCorrect;
+		var totalquest = document.getElementById("totalquest").value;
+		var url="http://localhost:8080/webtoeic/showResultListening/"+examId+"/"+countCorrect+"/"+totalquest;
 		if(window.XMLHttpRequest){
 			xhttp = new XMLHttpRequest();
 		}

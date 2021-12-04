@@ -11,10 +11,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/paging.css">
+
+<!-- Special version of Bootstrap that only affects content wrapped in .bootstrap-iso -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<!-- Special version of Bootstrap that only affects content wrapped in .bootstrap-iso -->
-
 <!-- Inline CSS based on choices in "Settings" tab -->
 <style>
 .bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p,
@@ -112,20 +112,7 @@ style>label {
 		style="display: none;" />
 	<div class="container">
 		<!--PAGE TITLE-->
-		<div class="input-group mb-3">
-			<div class="input-group-prepend">
-				<select class="mdb-select md-form colorful-select dropdown-primary">
-					<option value="1">--Lựa chọn độ khó --</option>
-					<option value="2">Dễ</option>
-					<option value="3">Trung bình</option>
-					<option value="4">Khó</option>
-				</select>
-			</div>
-			<input type="text" class="form-control" placeholder="Nhập tên để tìm kiếm">
-			<div class="input-group-append">
-				<button class="btn btn-success" type="submit">Search</button>
-			</div>
-		</div>
+
 		<div class="" style="text-align: center">
 			<div class="page-header">
 				<h4 style="font-weight: bold;">DANH SÁCH BÀI THI THỬ</h4>
@@ -133,57 +120,78 @@ style>label {
 		</div>
 
 		<!-- /. PAGE TITLE-->
-		
 		<div class="row">
+			<div class="col-md-9">
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<select
+							class="mdb-select md-form colorful-select dropdown-primary">
+							<option value="1">--Lựa chọn độ khó --</option>
+							<option value="2">Dễ</option>
+							<option value="3">Trung bình</option>
+							<option value="4">Khó</option>
+						</select>
+					</div>
+					<input type="text" class="form-control"
+						placeholder="Nhập tên để tìm kiếm">
+					<div class="input-group-append">
+						<button class="btn btn-success" type="submit">Search</button>
+					</div>
+				</div>
+				<div class="">
+					<c:if test="${fn:length(listData) == 0 }">
+						<h3>Không tìm thấy dữ liệu</h3>
+					</c:if>
 
-			<div class="col-md-8">
-				<c:if test="${fn:length(listData) == 0 }">
-					<h3>Không tìm thấy dữ liệu</h3>
-				</c:if>
-
-				<c:forEach items="${listData}" var="list" varStatus="loop">
-
-					<div class="col-md-12">
-						<div class="col-md-4">
-							<img class="imageExam"
-								src="${pageContext.request.contextPath}/resources/file/exams/${list.baithithuid}/images/${list.anhbaithithu}" />
-						</div>
-						<div class="col-md-12">
-							<div class="" style="display: flex;">
-								<div class="col-md-6">
-									<h4 class="content-heading" id="namebaithithu">
-										${list.tenbaithithu}</h4>
-									<p>Lượt thi:</p>
-									<p>Ngày đăng:</p>
+					<c:forEach items="${listData}" var="list" varStatus="loop">
+						<div class="col-md-12 post">
+							<div class="row">
+								<div class="col-md-12">
+									<h3>
+										<strong><a id="namebaithithu"
+											href="http://www.jquery2dotnet.com/2013/12/cool-share-button-effects-styles.html"
+											class="post-title">${list.tenbaithithu}</a></strong>
+									</h3>
 								</div>
-								<div class="col-md-6">
-									<span class="fa fa-star checked"></span> <span
+							</div>
+							<div class="row">
+								<div class="col-md-12 post-header-line">
+									<i class="fa fa-user" aria-hidden="true"></i> by <a href="#">tuanpm22</a> |
+									<i class="fa fa-calendar" aria-hidden="true"></i> Sept 16th, 2012 | <i class="fa fa-eye" aria-hidden="true"></i> 1230  | <span
+										class="glyphicon glyphicon-tags"> </span>Level :<span
+										class="label label-info">Dễ</a>
+								</div>
+							</div>
+							<div class="row post-content">
+								<div class="col-md-3">
+									<a href="#"> <img style="width: 100%;" class="imageExam"
+										src="${pageContext.request.contextPath}/resources/file/exams/${list.baithithuid}/images/${list.anhbaithithu}" />
+									</a>
+								</div>
+								<div class="col-md-9" style="padding: 25px;">
+									<p>Đề thi thử của Hội đồng TOEIC năm 2020</p>
+									<div>
+										<span
+										class="fa fa-star checked"></span> <span
 										class="fa fa-star checked"></span> <span
 										class="fa fa-star checked"></span> <span class="fa fa-star"></span>
 									<span class="fa fa-star"></span>
+									</div>
+									<p>
+										<button class="btn btn-primary openModalExam"
+											value="${list.baithithuid}" id="openModalExam.${loop.index}">
+											Chi tiết</button>
+									</p>
 								</div>
 							</div>
-
-							<button class="btn btn-primary openModalExam"
-								value="${list.baithithuid}" id="openModalExam.${loop.index}">
-								Chi tiết</button>
 						</div>
-
-
-					</div>
-
-				</c:forEach>
-
-				<br>
+					</c:forEach>
+					<br>
+				</div>
 			</div>
-
 			<jsp:include page="template/leftbar.jsp"></jsp:include>
 		</div>
 	</div>
-
-
-
-
 	<!--Pagination-->
 	<c:if test="${listData.size() != 0}">
 

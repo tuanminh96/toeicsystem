@@ -46,6 +46,10 @@ public class AdminController {
 	public String quanLyExam(Model model) {
 		return "admin/quanLyExam";
 	}
+	@GetMapping({"/group"})
+	public String quanLyGroup(Model model) {
+		return "admin/quanLyGroup";
+	}
 	@GetMapping("/tai-khoan")
 	public String quanLyTaiKhoan(Model model) {
 	    model.addAttribute("listVaiTro", roleService.getListRoles());

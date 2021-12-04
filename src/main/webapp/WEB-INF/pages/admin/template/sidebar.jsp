@@ -23,6 +23,10 @@
             <a href='<c:url value="/admin/exam"/>'>
               <span class="glyphicon glyphicon-tasks">&nbsp;</span>Quản lý Đề thi</a>
           </li>
+          <li class="side-bar">
+            <a href='<c:url value="/admin/group"/>'>
+              <span class="glyphicon glyphicon-tasks">&nbsp;</span>Quản lý Nhóm học</a>
+          </li>
           <li class="side-bar main-menu">
             <a href="<c:url value='/admin/tai-khoan' />">
               <span class="glyphicon glyphicon-th-list">&nbsp;</span>Quản lý Tài khoản</a>
@@ -32,12 +36,6 @@
             <a href="<c:url value='/admin/thong-ke' />">
               <span class="glyphicon glyphicon-signal">&nbsp;</span>Thống kê</a>
           </li> --%>
-          
-          <li class="side-bar">
-            <a href="<c:url value='/admin/profile' />">
-              <span class="glyphicon glyphicon-user">&nbsp;</span>Thông tin cá nhân</a>
-          </li>
-
         </ul>
       </div>
     </div>

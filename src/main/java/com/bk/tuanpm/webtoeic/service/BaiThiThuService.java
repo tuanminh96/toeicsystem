@@ -4,15 +4,15 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 
-import com.bk.tuanpm.webtoeic.entities.BaiThiThu;
+import com.bk.tuanpm.webtoeic.entities.Exam;
 
 public interface BaiThiThuService {
-	void save(BaiThiThu baithithu);
-	List<BaiThiThu> getBaiThiThu(int id);
+	void save(Exam baithithu);
+	List<Exam> getBaiThiThu(int id);
 	
-	Page<BaiThiThu> getBaiThiThu(int page, int limit);
+	Page<Exam> getBaiThiThu(int page, int limit);
 	
-	List<BaiThiThu> getAllBaiThiThu();
+	List<Exam> getAllBaiThiThu();
 	void delete(int id);
 	
 }

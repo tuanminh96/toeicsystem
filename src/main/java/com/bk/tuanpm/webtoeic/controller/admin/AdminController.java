@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.bk.tuanpm.webtoeic.entities.NguoiDung;
+import com.bk.tuanpm.webtoeic.entities.Account;
 import com.bk.tuanpm.webtoeic.entities.Role;
 import com.bk.tuanpm.webtoeic.service.NguoiDungService;
 import com.bk.tuanpm.webtoeic.service.RoleService;
@@ -32,7 +32,7 @@ public class AdminController {
 	RoleService roleService;
 	
 	@ModelAttribute("loggedInUser")
-	public NguoiDung loggedInUser() {
+	public Account loggedInUser() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		return nguoiDungService.findByEmail(auth.getName());
 	}
@@ -63,8 +63,8 @@ public class AdminController {
 	}
 
 	@PostMapping("/profile/update")
-	public String updateNguoiDung(@ModelAttribute NguoiDung nd, HttpServletRequest request) {
-		NguoiDung currentUser = getSessionUser(request);
+	public String updateNguoiDung(@ModelAttribute Account nd, HttpServletRequest request) {
+		Account currentUser = getSessionUser(request);
 		currentUser.setDiaChi(nd.getDiaChi());
 		currentUser.setHoTen(nd.getHoTen());
 		currentUser.setSoDienThoai(nd.getSoDienThoai());
@@ -72,8 +72,8 @@ public class AdminController {
 		return "redirect:/admin/profile";
 	}
 	
-	public NguoiDung getSessionUser(HttpServletRequest request) {
-		return (NguoiDung) request.getSession().getAttribute("loggedInUser");
+	public Account getSessionUser(HttpServletRequest request) {
+		return (Account) request.getSession().getAttribute("loggedInUser");
 		
 	}
 

@@ -6,7 +6,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import com.bk.tuanpm.webtoeic.entities.NguoiDung;
+import com.bk.tuanpm.webtoeic.entities.Account;
 import com.bk.tuanpm.webtoeic.entities.PartToeic;
 import com.bk.tuanpm.webtoeic.entities.Role;
 import com.bk.tuanpm.webtoeic.repository.NguoiDungRepository;
@@ -32,7 +32,7 @@ public class DataSeeder implements ApplicationListener<ContextRefreshedEvent> {
 	public void onApplicationEvent(ContextRefreshedEvent arg0) {
 		// Admin account
 		if (userRepository.findByEmail("admin@gmail.com") == null) {
-			NguoiDung admin = new NguoiDung();
+			Account admin = new Account();
 			admin.setEmail("admin@gmail.com");
 			admin.setPassword(passwordEncoder.encode("123456"));
 			admin.setHoTen("Tuấn Minh");
@@ -43,7 +43,7 @@ public class DataSeeder implements ApplicationListener<ContextRefreshedEvent> {
 
 		// Member account
 		if (userRepository.findByEmail("member@gmail.com") == null) {
-			NguoiDung member = new NguoiDung();
+			Account member = new Account();
 			member.setHoTen("Phan Minh Tuan");
 			member.setSoDienThoai("123456789");
 			member.setEmail("member@gmail.com");

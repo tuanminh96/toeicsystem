@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.bk.tuanpm.webtoeic.entities.NguoiDung;
+import com.bk.tuanpm.webtoeic.entities.Account;
 import com.bk.tuanpm.webtoeic.service.NguoiDungService;
 import com.bk.tuanpm.webtoeic.service.SlideBannerService;
 
@@ -37,9 +37,9 @@ public class ClientController {
 	private NguoiDungService nguoiDungService;
 
 	@ModelAttribute("loggedInUser")
-	public NguoiDung loggedInUser() {
+	public Account loggedInUser() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		NguoiDung nguoiDung = new NguoiDung();
+		Account nguoiDung = new Account();
 		if (auth.getClass().isAssignableFrom(OAuth2AuthenticationToken.class)) {
 			String principal = auth.getPrincipal().toString();
 			String[] part = principal.split(",");
@@ -52,8 +52,8 @@ public class ClientController {
 		}
 	}
 
-	public NguoiDung getSessionUser(HttpServletRequest request) {
-		NguoiDung nguoiDung = (NguoiDung) request.getSession().getAttribute("loggedInUser");
+	public Account getSessionUser(HttpServletRequest request) {
+		Account nguoiDung = (Account) request.getSession().getAttribute("loggedInUser");
 		return nguoiDung;
 	}
 
@@ -75,8 +75,8 @@ public class ClientController {
 	}
 
 	@PostMapping("/profile/update")
-	public String updateNguoiDung(@ModelAttribute NguoiDung nd, HttpServletRequest request) {
-		NguoiDung currentUser = getSessionUser(request);
+	public String updateNguoiDung(@ModelAttribute Account nd, HttpServletRequest request) {
+		Account currentUser = getSessionUser(request);
 		currentUser.setDiaChi(nd.getDiaChi());
 		currentUser.setHoTen(nd.getHoTen());
 		currentUser.setSoDienThoai(nd.getSoDienThoai());

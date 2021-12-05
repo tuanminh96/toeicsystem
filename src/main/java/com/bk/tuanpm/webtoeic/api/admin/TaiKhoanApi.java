@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bk.tuanpm.webtoeic.dto.ResponseObject;
 import com.bk.tuanpm.webtoeic.dto.TaiKhoanDto;
-import com.bk.tuanpm.webtoeic.entities.NguoiDung;
+import com.bk.tuanpm.webtoeic.entities.Account;
 import com.bk.tuanpm.webtoeic.entities.Role;
 import com.bk.tuanpm.webtoeic.service.NguoiDungService;
 import com.bk.tuanpm.webtoeic.service.RoleService;
@@ -45,7 +45,7 @@ public class TaiKhoanApi {
 	private RoleService roleService;
 	
 	@GetMapping("/all")
-	public Page<NguoiDung> getNguoiDungByVaiTro(@RequestParam("vaiTro") int vaiTroValue, @RequestParam(defaultValue = "1") int page) {
+	public Page<Account> getNguoiDungByVaiTro(@RequestParam("vaiTro") int vaiTroValue, @RequestParam(defaultValue = "1") int page) {
 		return nguoiDungService.findByVaiTro(page, roleService.getRole(vaiTroValue));
 	}
 
@@ -64,7 +64,7 @@ public class TaiKhoanApi {
 			setErrorsForResponseObject(result, ro);
 		} else {
 			ro.setStatus("success");
-			NguoiDung nd = new NguoiDung();
+			Account nd = new Account();
 			nd.setHoTen(dto.getHoTen());
 			nd.setDiaChi(dto.getDiaChi());
 			nd.setEmail(dto.getEmail());

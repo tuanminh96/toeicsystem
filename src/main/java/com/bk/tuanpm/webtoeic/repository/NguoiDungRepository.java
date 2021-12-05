@@ -8,15 +8,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.bk.tuanpm.webtoeic.entities.NguoiDung;
+import com.bk.tuanpm.webtoeic.entities.Account;
 import com.bk.tuanpm.webtoeic.entities.Role;
 
 @Repository
-public interface NguoiDungRepository extends JpaRepository<NguoiDung, Long> {
+public interface NguoiDungRepository extends JpaRepository<Account, Long> {
 
-	NguoiDung findByEmail(String email);
+	Account findByEmail(String email);
 	
-	Page<NguoiDung> findByRole(Role vaiTro, Pageable of);
+	Page<Account> findByRole(Role vaiTro, Pageable of);
 
-	List<NguoiDung> findByRole(Role vaiTro);	
+	List<Account> findByRole(Role vaiTro);	
 }

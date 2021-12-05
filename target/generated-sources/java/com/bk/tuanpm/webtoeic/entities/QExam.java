@@ -40,7 +40,7 @@ public class QExam extends EntityPathBase<Exam> {
 
     public final DatePath<java.sql.Date> updateDate = createDate("updateDate", java.sql.Date.class);
 
-    public final QNguoiDung userAdd;
+    public final QAdmin userAdd;
 
     public QExam(String variable) {
         this(Exam.class, forVariable(variable), INITS);
@@ -60,7 +60,7 @@ public class QExam extends EntityPathBase<Exam> {
 
     public QExam(Class<? extends Exam> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.userAdd = inits.isInitialized("userAdd") ? new QNguoiDung(forProperty("userAdd"), inits.get("userAdd")) : null;
+        this.userAdd = inits.isInitialized("userAdd") ? new QAdmin(forProperty("userAdd"), inits.get("userAdd")) : null;
     }
 
 }

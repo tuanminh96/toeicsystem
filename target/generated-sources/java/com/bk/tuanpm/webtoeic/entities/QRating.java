@@ -28,7 +28,7 @@ public class QRating extends EntityPathBase<Rating> {
 
     public final NumberPath<Integer> idRating = createNumber("idRating", Integer.class);
 
-    public final QNguoiDung nguoiDung;
+    public final QUser nguoiDung;
 
     public final StringPath review = createString("review");
 
@@ -53,7 +53,7 @@ public class QRating extends EntityPathBase<Rating> {
     public QRating(Class<? extends Rating> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.exam = inits.isInitialized("exam") ? new QExam(forProperty("exam"), inits.get("exam")) : null;
-        this.nguoiDung = inits.isInitialized("nguoiDung") ? new QNguoiDung(forProperty("nguoiDung"), inits.get("nguoiDung")) : null;
+        this.nguoiDung = inits.isInitialized("nguoiDung") ? new QUser(forProperty("nguoiDung"), inits.get("nguoiDung")) : null;
     }
 
 }

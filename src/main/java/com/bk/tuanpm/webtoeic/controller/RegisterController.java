@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.bk.tuanpm.webtoeic.entities.NguoiDung;
+import com.bk.tuanpm.webtoeic.entities.Account;
 import com.bk.tuanpm.webtoeic.entities.Role;
 import com.bk.tuanpm.webtoeic.service.NguoiDungService;
 import com.bk.tuanpm.webtoeic.service.RoleService;
@@ -33,12 +33,12 @@ public class RegisterController {
 	private RoleService roleService;
 	@GetMapping("/register")
 	public String registerPage(Model model) {
-		model.addAttribute("newUser", new NguoiDung());
+		model.addAttribute("newUser", new Account());
 		return "register";
 	}
 
 	@PostMapping("/register")
-	public String registerProcess(@ModelAttribute("newUser") @Valid NguoiDung nguoiDung, BindingResult bindingResult,
+	public String registerProcess(@ModelAttribute("newUser") @Valid Account nguoiDung, BindingResult bindingResult,
 			Model model) {
 
 		nguoiDungValidator.validate(nguoiDung, bindingResult);

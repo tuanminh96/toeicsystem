@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.bk.tuanpm.webtoeic.entities.Exam;
 import com.bk.tuanpm.webtoeic.entities.TestResult;
-import com.bk.tuanpm.webtoeic.entities.NguoiDung;
+import com.bk.tuanpm.webtoeic.entities.Account;
 import com.bk.tuanpm.webtoeic.repository.KetQuaBaiTestRepository;
 import com.bk.tuanpm.webtoeic.service.KetQuaBaiTestService;
 

@@ -35,18 +35,7 @@ public class Exam {
 	private Date updateDate;
 	
 	@OneToOne
-	private NguoiDung userAdd;
-
-	public Exam() {
-		
-	}
-
-	public Exam(Integer baithithuid, String tenbaithithu, String anhbaithithu) {
-		super();
-		this.baithithuid = baithithuid;
-		this.tenbaithithu = tenbaithithu;
-		this.anhbaithithu = anhbaithithu;
-	}
+	private Admin userAdd;
 
 	public Integer getBaithithuid() {
 		return baithithuid;
@@ -120,11 +109,11 @@ public class Exam {
 		this.updateDate = updateDate;
 	}
 
-	public NguoiDung getUserAdd() {
+	public Admin getUserAdd() {
 		return userAdd;
 	}
 
-	public void setUserAdd(NguoiDung userAdd) {
+	public void setUserAdd(Admin userAdd) {
 		this.userAdd = userAdd;
 	}
 	

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bk.tuanpm.webtoeic.dto.PasswordDTO;
 import com.bk.tuanpm.webtoeic.dto.ResponseObject;
-import com.bk.tuanpm.webtoeic.entities.NguoiDung;
+import com.bk.tuanpm.webtoeic.entities.Account;
 import com.bk.tuanpm.webtoeic.service.NguoiDungService;
 
 @RestController
@@ -32,14 +32,14 @@ public class ProfileApi {
 	private BCryptPasswordEncoder passwordEncoder;
 
 	@GetMapping("/{id}")
-	public NguoiDung getNguoiDungById(@PathVariable long id) {
-		NguoiDung nd = nguoiDungService.findById(id);
+	public Account getNguoiDungById(@PathVariable long id) {
+		Account nd = nguoiDungService.findById(id);
 		return nd;
 	}
 
 	@PostMapping("/doiMatKhau")
 	public ResponseObject changePass(@RequestBody @Valid PasswordDTO dto, BindingResult result, HttpServletRequest request) {
-		NguoiDung currentUser = getSessionUser(request);
+		Account currentUser = getSessionUser(request);
 		ResponseObject ro = new ResponseObject();
 		if (!passwordEncoder.matches(dto.getOldPassword(), currentUser.getPassword())) {
 			result.rejectValue("oldPassword", "error.oldPassword", "Mật khẩu cũ không đúng");
@@ -63,7 +63,7 @@ public class ProfileApi {
 		return ro;
 	}
 
-	public NguoiDung getSessionUser(HttpServletRequest request) {
-		return (NguoiDung) request.getSession().getAttribute("loggedInUser");
+	public Account getSessionUser(HttpServletRequest request) {
+		return (Account) request.getSession().getAttribute("loggedInUser");
 	}
 }

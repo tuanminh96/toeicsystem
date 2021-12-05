@@ -22,7 +22,7 @@ public class Rating {
 	private Date dateReview;
 	
 	@ManyToOne
-	private NguoiDung nguoiDung;
+	private User nguoiDung;
 	
 	@ManyToOne
 	private Exam exam;
@@ -59,11 +59,11 @@ public class Rating {
 		this.dateReview = dateReview;
 	}
 
-	public NguoiDung getNguoiDung() {
+	public User getNguoiDung() {
 		return nguoiDung;
 	}
 
-	public void setNguoiDung(NguoiDung nguoiDung) {
+	public void setNguoiDung(User nguoiDung) {
 		this.nguoiDung = nguoiDung;
 	}
 

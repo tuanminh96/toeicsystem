@@ -8,7 +8,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import com.bk.tuanpm.webtoeic.entities.NguoiDung;
+import com.bk.tuanpm.webtoeic.entities.Account;
 import com.bk.tuanpm.webtoeic.service.NguoiDungService;
 
 @Component
@@ -19,13 +19,13 @@ public class NguoiDungValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> clazz) {
-		return NguoiDung.class.equals(clazz);
+		return Account.class.equals(clazz);
 	}
 
 	@Override
 	public void validate(Object target, Errors errors) {
 
-		NguoiDung user = (NguoiDung) target;
+		Account user = (Account) target;
 
 		ValidationUtils.rejectIfEmpty(errors, "email", "error.hoTen", "Họ tên không được bỏ trống");
 		ValidationUtils.rejectIfEmpty(errors, "soDienThoai", "error.soDienThoai", "Số điện thoại không được bỏ trống");

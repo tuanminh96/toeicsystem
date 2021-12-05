@@ -24,9 +24,9 @@ public class QExplainDetail extends EntityPathBase<ExplainDetail> {
 
     public final StringPath explain = createString("explain");
 
-    public final NumberPath<Integer> idExplain = createNumber("idExplain", Integer.class);
+    public final QAdmin idAdmin;
 
-    public final StringPath idStaff = createString("idStaff");
+    public final NumberPath<Integer> idExplain = createNumber("idExplain", Integer.class);
 
     public final QQuestion question;
 
@@ -50,6 +50,7 @@ public class QExplainDetail extends EntityPathBase<ExplainDetail> {
 
     public QExplainDetail(Class<? extends ExplainDetail> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
+        this.idAdmin = inits.isInitialized("idAdmin") ? new QAdmin(forProperty("idAdmin"), inits.get("idAdmin")) : null;
         this.question = inits.isInitialized("question") ? new QQuestion(forProperty("question"), inits.get("question")) : null;
     }
 

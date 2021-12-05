@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bk.tuanpm.webtoeic.entities.Question;
 import com.bk.tuanpm.webtoeic.entities.TestResult;
-import com.bk.tuanpm.webtoeic.entities.NguoiDung;
+import com.bk.tuanpm.webtoeic.entities.Account;
 import com.bk.tuanpm.webtoeic.service.BaiThiThuService;
 import com.bk.tuanpm.webtoeic.service.QuestionService;
 import com.bk.tuanpm.webtoeic.service.KetQuaBaiTestService;
@@ -48,8 +48,8 @@ public class BaiFullTestListeningController {
 	private NguoiDungService nguoiDungService;
 	
 	@ModelAttribute("loggedInUser")
-	public NguoiDung getSessionUser(HttpServletRequest request) {
-		return (NguoiDung) request.getSession().getAttribute("loggedInUser");
+	public Account getSessionUser(HttpServletRequest request) {
+		return (Account) request.getSession().getAttribute("loggedInUser");
 	}
 	
 	
@@ -63,7 +63,7 @@ public class BaiFullTestListeningController {
 	
 	List<Question> list = cauhoibaithithuService.getListCauHoi(baithithuServie.getBaiThiThu(examId).get(0));
 	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	NguoiDung currentUser = nguoiDungService.findByEmail(auth.getName());
+	Account currentUser = nguoiDungService.findByEmail(auth.getName());
 	
 //	 for (int i = 0;i<tongsocau;i++) {
 //		 list.get(i).setDapAnUser(jsonAnswerUser[i]);

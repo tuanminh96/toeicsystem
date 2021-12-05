@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bk.tuanpm.webtoeic.entities.Question;
 import com.bk.tuanpm.webtoeic.entities.TestResult;
-import com.bk.tuanpm.webtoeic.entities.NguoiDung;
+import com.bk.tuanpm.webtoeic.entities.Account;
 import com.bk.tuanpm.webtoeic.service.BaiThiThuService;
 import com.bk.tuanpm.webtoeic.service.QuestionService;
 import com.bk.tuanpm.webtoeic.service.KetQuaBaiTestService;
@@ -41,8 +41,8 @@ public class LamBaiTestListeningApi {
 	private NguoiDungService nguoiDungService;
 	
 	@ModelAttribute("loggedInUser")
-	public NguoiDung getSessionUser(HttpServletRequest request) {
-		return (NguoiDung) request.getSession().getAttribute("loggedInUser");
+	public Account getSessionUser(HttpServletRequest request) {
+		return (Account) request.getSession().getAttribute("loggedInUser");
 	}
 	
 	
@@ -52,7 +52,7 @@ public class LamBaiTestListeningApi {
 								@PathVariable("baithithuId") int id,
 								@PathVariable("socaudung") String socaudung) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		NguoiDung currentUser = nguoiDungService.findByEmail(auth.getName());
+		Account currentUser = nguoiDungService.findByEmail(auth.getName());
 		
 		List<Question> list = cauhoibaithithuService.getListCauHoi(baithithuService.getBaiThiThu(id).get(0));
 		

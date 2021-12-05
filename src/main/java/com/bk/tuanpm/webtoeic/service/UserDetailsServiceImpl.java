@@ -13,7 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.bk.tuanpm.webtoeic.entities.NguoiDung;
+import com.bk.tuanpm.webtoeic.entities.Account;
 import com.bk.tuanpm.webtoeic.entities.Role;
 import com.bk.tuanpm.webtoeic.repository.NguoiDungRepository;
 
@@ -27,7 +27,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		NguoiDung nguoiDung = repo.findByEmail(username);
+		Account nguoiDung = repo.findByEmail(username);
 		if (nguoiDung == null) {
 			throw new UsernameNotFoundException("User with email " + username + " was not be found");
 		}

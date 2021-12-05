@@ -8,7 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.bk.tuanpm.webtoeic.entities.NguoiDung;
+import com.bk.tuanpm.webtoeic.entities.Account;
 import com.bk.tuanpm.webtoeic.entities.Role;
 import com.bk.tuanpm.webtoeic.repository.NguoiDungRepository;
 
@@ -22,34 +22,34 @@ public class NguoiDungService {
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	public NguoiDung findByEmail(String email) {
+	public Account findByEmail(String email) {
 		return nguoiDungRepo.findByEmail(email);
 	}
 
-	public NguoiDung findByConfirmationToken(String confirmationToken) {
+	public Account findByConfirmationToken(String confirmationToken) {
 		return null;
 	}
 
-	public NguoiDung saveUser(NguoiDung nd) {
+	public Account saveUser(Account nd) {
 		nd.setPassword(bCryptPasswordEncoder.encode(nd.getPassword()));
 		return nguoiDungRepo.save(nd);
 	}
 
-	public NguoiDung findById(long id) {
-		NguoiDung nd = nguoiDungRepo.findById(id).get();
+	public Account findById(long id) {
+		Account nd = nguoiDungRepo.findById(id).get();
 		return nd;
 	}
 
-	public NguoiDung updateUser(NguoiDung nd) {
+	public Account updateUser(Account nd) {
 		return nguoiDungRepo.save(nd);
 	}
 
-	public void changePass(NguoiDung nd, String newPass) {
+	public void changePass(Account nd, String newPass) {
 		nd.setPassword(bCryptPasswordEncoder.encode(newPass));
 		nguoiDungRepo.save(nd);
 	}
 
-	public Page<NguoiDung> findByVaiTro(int page, Role vaiTro) {
+	public Page<Account> findByVaiTro(int page, Role vaiTro) {
 		return nguoiDungRepo.findByRole(vaiTro, PageRequest.of(page - 1, 6));
 	}
 

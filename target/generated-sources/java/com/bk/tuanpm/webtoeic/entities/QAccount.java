@@ -11,18 +11,16 @@ import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
- * QNguoiDung is a Querydsl query type for NguoiDung
+ * QAccount is a Querydsl query type for Account
  */
 @Generated("com.querydsl.codegen.EntitySerializer")
-public class QNguoiDung extends EntityPathBase<NguoiDung> {
+public class QAccount extends EntityPathBase<Account> {
 
-    private static final long serialVersionUID = 267129350L;
+    private static final long serialVersionUID = 541645267L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
-    public static final QNguoiDung nguoiDung = new QNguoiDung("nguoiDung");
-
-    public final StringPath description = createString("description");
+    public static final QAccount account = new QAccount("account");
 
     public final StringPath diaChi = createString("diaChi");
 
@@ -36,31 +34,29 @@ public class QNguoiDung extends EntityPathBase<NguoiDung> {
 
     public final BooleanPath isDelete = createBoolean("isDelete");
 
-    public final DatePath<java.sql.Date> joinDate = createDate("joinDate", java.sql.Date.class);
-
     public final StringPath password = createString("password");
 
     public final QRole role;
 
     public final StringPath soDienThoai = createString("soDienThoai");
 
-    public QNguoiDung(String variable) {
-        this(NguoiDung.class, forVariable(variable), INITS);
+    public QAccount(String variable) {
+        this(Account.class, forVariable(variable), INITS);
     }
 
-    public QNguoiDung(Path<? extends NguoiDung> path) {
+    public QAccount(Path<? extends Account> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
-    public QNguoiDung(PathMetadata metadata) {
+    public QAccount(PathMetadata metadata) {
         this(metadata, PathInits.getFor(metadata, INITS));
     }
 
-    public QNguoiDung(PathMetadata metadata, PathInits inits) {
-        this(NguoiDung.class, metadata, inits);
+    public QAccount(PathMetadata metadata, PathInits inits) {
+        this(Account.class, metadata, inits);
     }
 
-    public QNguoiDung(Class<? extends NguoiDung> type, PathMetadata metadata, PathInits inits) {
+    public QAccount(Class<? extends Account> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.role = inits.isInitialized("role") ? new QRole(forProperty("role")) : null;
     }

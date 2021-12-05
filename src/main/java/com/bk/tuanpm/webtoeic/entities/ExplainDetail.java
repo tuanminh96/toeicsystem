@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -18,7 +19,9 @@ public class ExplainDetail {
 	@Column(name = "id_explain", nullable = false)
 	private Integer idExplain;
 	private String explain;
-	private String idStaff;
+	
+	@ManyToOne
+	private Admin idAdmin;
 	private Date updateDate;
 	
 	@OneToOne
@@ -40,12 +43,12 @@ public class ExplainDetail {
 		this.explain = explain;
 	}
 
-	public String getIdStaff() {
-		return idStaff;
+	public Admin getIdStaff() {
+		return idAdmin;
 	}
 
-	public void setIdStaff(String idStaff) {
-		this.idStaff = idStaff;
+	public void setIdStaff(Admin idStaff) {
+		this.idAdmin = idStaff;
 	}
 
 	public Date getUpdateDate() {

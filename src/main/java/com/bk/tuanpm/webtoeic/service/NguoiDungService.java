@@ -9,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.bk.tuanpm.webtoeic.entities.Account;
+import com.bk.tuanpm.webtoeic.entities.Admin;
 import com.bk.tuanpm.webtoeic.entities.Role;
 import com.bk.tuanpm.webtoeic.repository.NguoiDungRepository;
 
@@ -25,7 +26,9 @@ public class NguoiDungService {
 	public Account findByEmail(String email) {
 		return nguoiDungRepo.findByEmail(email);
 	}
-
+	public Admin findAdminByEmail(String email) {
+		return nguoiDungRepo.findAdminByEmail(email);
+	}
 	public Account findByConfirmationToken(String confirmationToken) {
 		return null;
 	}

@@ -32,6 +32,8 @@ public class QGroup extends EntityPathBase<Group> {
 
     public final StringPath image = createString("image");
 
+    public final NumberPath<Integer> maxMem = createNumber("maxMem", Integer.class);
+
     public final StringPath name = createString("name");
 
     public final StringPath updateBy = createString("updateBy");

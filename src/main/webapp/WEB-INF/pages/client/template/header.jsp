@@ -106,7 +106,7 @@ h3 {
 								href="<%=request.getContextPath()%>/listExam">Thi thử</a></li>
 							<li class="nav-item" style="background: gold;"><a
 								class="nav-link"
-								href="${pageContext.request.contextPath}/group_detail"
+								href="${pageContext.request.contextPath}/list_group"
 								style="color: black;">Học nhóm</a></li>
 							<li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
 

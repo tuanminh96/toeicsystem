@@ -27,6 +27,7 @@ public class Group {
 	private String image;
 	private String description;
 	private Date createDate;
+	private int maxMem;
 
 	@ManyToOne
 	@JoinColumn(name = "id_admin")
@@ -110,6 +111,14 @@ public class Group {
 
 	public void setUsers(List<User> users) {
 		this.users = users;
+	}
+
+	public int getMaxMem() {
+		return maxMem;
+	}
+
+	public void setMaxMem(int maxMem) {
+		this.maxMem = maxMem;
 	}
 
 	@Override

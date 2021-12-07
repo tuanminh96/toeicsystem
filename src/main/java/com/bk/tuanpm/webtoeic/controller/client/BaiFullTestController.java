@@ -35,128 +35,113 @@ import com.bk.tuanpm.webtoeic.service.QuestionService;
 import com.bk.tuanpm.webtoeic.service.KetQuaBaiTestService;
 import com.bk.tuanpm.webtoeic.service.NguoiDungService;
 import com.bk.tuanpm.webtoeic.service.PartService;
+
 @Controller
 public class BaiFullTestController {
 	@Autowired
 	BaiThiThuService baithithuService;
-	
-	
+
 	@Autowired
 	QuestionService cauhoibaithithuService;
-	
+
 	@Autowired
 	KetQuaBaiTestService ketquabaitestService;
-	
+
 	@Autowired
 	PartService partService;
-	
+
 	@Autowired
 	private NguoiDungService nguoiDungService;
-	
+
 	@ModelAttribute("loggedInUser")
 	public Account getSessionUser(HttpServletRequest request) {
 		return (Account) request.getSession().getAttribute("loggedInUser");
 	}
-	
+
 	@GetMapping("/listExam")
 	public String getListExam(@RequestParam(defaultValue = "1") int page, Model model) {
-	
-		// default value lấy từ kết quả đầu tiên
-		
-		try {
-		
-				Page<Exam> list = baithithuService.getBaiThiThu(page-1, 4);
-				
-				int totalPage = list.getTotalPages();
-				
-				List<Integer> pagelist = new ArrayList<Integer>();
-				
-				//Lap ra danh sach cac trang
-				if(page==1 || page ==2 )
-				{
-					for(int i = 2; i <=3 && i<=totalPage; i++)
-					{
-						pagelist.add(i);
-					}
-				}else if(page == totalPage)
-				{
-					for(int i = totalPage; i >= totalPage - 2 && i> 1; i--)
-					{
-						pagelist.add(i);
-					}
-					Collections.sort(pagelist);
-				}else
-				{
-					for(int i = page; i <= page + 1 && i<= totalPage; i++)
-					{
-						pagelist.add(i);
-					}
-					for(int i = page-1; i >= page - 1 && i> 1; i--)
-					{
-						pagelist.add(i);
-					}
-					Collections.sort(pagelist);
-				}
-				model.addAttribute("pageList",pagelist);
-				model.addAttribute("totalPage",totalPage);
-				model.addAttribute("listData",list.getContent());
-				model.addAttribute("currentPage",page);
 
-		
-		return "client/listExam";
-		
-		}catch(Exception e) {
-			System.out.println("error:"+e);
-			return "client/error";
-		}
-	}
-	
-	@GetMapping("/doExam")
-	public String DetailListening(Model model,@RequestParam("idExam") int id) {
-		
+		// default value lấy từ kết quả đầu tiên
+
 		try {
-				List<Question> list = cauhoibaithithuService.getListCauHoi(baithithuService.getBaiThiThu(id).get(0));
-				List<PartToeic> partToeicListening = partService.getPartByType("Listening");
-				//Get mapping Part toeic and questions
-				Map<String, List<Question>> newMapPartQuestion = cauhoibaithithuService.getMapPartQuestionListen(list);
-				model.addAllAttributes(newMapPartQuestion);
-				model.addAttribute("listQuestion",list);
-				model.addAttribute("partListen",partToeicListening);
-				return "client/fullTestListen";
-				
-		}catch(Exception e) {
-			System.out.println("error:"+e);
+
+			Page<Exam> list = baithithuService.getBaiThiThu(page - 1, 4);
+
+			int totalPage = list.getTotalPages();
+
+			List<Integer> pagelist = new ArrayList<Integer>();
+
+			// Lap ra danh sach cac trang
+			if (page == 1 || page == 2) {
+				for (int i = 2; i <= 3 && i <= totalPage; i++) {
+					pagelist.add(i);
+				}
+			} else if (page == totalPage) {
+				for (int i = totalPage; i >= totalPage - 2 && i > 1; i--) {
+					pagelist.add(i);
+				}
+				Collections.sort(pagelist);
+			} else {
+				for (int i = page; i <= page + 1 && i <= totalPage; i++) {
+					pagelist.add(i);
+				}
+				for (int i = page - 1; i >= page - 1 && i > 1; i--) {
+					pagelist.add(i);
+				}
+				Collections.sort(pagelist);
+			}
+			model.addAttribute("pageList", pagelist);
+			model.addAttribute("totalPage", totalPage);
+			model.addAttribute("listData", list.getContent());
+			model.addAttribute("currentPage", page);
+
+			return "client/listExam";
+
+		} catch (Exception e) {
+			System.out.println("error:" + e);
 			return "client/error";
 		}
-		
-		
-		
 	}
-	
-	
-	
-	@RequestMapping(value="/saveResultUser/{examId}/{correctListening}/{correctReading}",method=RequestMethod.POST)
-	public String showResultUser(Model model,@PathVariable("correctListening") int correctListening,
-											@PathVariable("correctReading") int correctReading,
-											@PathVariable("examId") int examId) {
-		
+
+	@GetMapping("/doExam")
+	public String DetailListening(Model model, @RequestParam("idExam") int id) {
+
+		try {
+			List<Question> list = cauhoibaithithuService.getListCauHoi(baithithuService.getBaiThiThu(id).get(0));
+			List<PartToeic> partToeicListening = partService.getPartByType("Listening");
+			// Get mapping Part toeic and questions
+			Map<String, List<Question>> newMapPartQuestion = cauhoibaithithuService.getMapPartQuestionListen(list);
+			model.addAllAttributes(newMapPartQuestion);
+			model.addAttribute("listQuestion", list);
+			model.addAttribute("partListen", partToeicListening);
+			return "client/fullTestListen";
+
+		} catch (Exception e) {
+			System.out.println("error:" + e);
+			return "client/error";
+		}
+	}
+
+	@RequestMapping(value = "/saveResultUser/{examId}/{correctListening}/{correctReading}", method = RequestMethod.POST)
+	public String showResultUser(Model model, @PathVariable("correctListening") int correctListening,
+			@PathVariable("correctReading") int correctReading, @PathVariable("examId") int examId) {
+
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Account currentUser = nguoiDungService.findByEmail(auth.getName());
-		
-	 	Date time = new Date();
+
+		Date time = new Date();
 		TestResult ketquabaitest = new TestResult();
 		ketquabaitest.setNgaythi(time);
 		ketquabaitest.setBaithithu(baithithuService.getBaiThiThu(examId).get(0));
 		ketquabaitest.setCorrectlisten(correctListening);
 		ketquabaitest.setCorrectreading(correctReading);
 		ketquabaitest.setNguoidung(currentUser);
-		
+
 		ketquabaitestService.save(ketquabaitest);
-		model.addAttribute("correctListening",correctListening);
-		model.addAttribute("correctReading",correctReading);
-		model.addAttribute("total",correctReading+ correctListening);
-		
-		
+		model.addAttribute("correctListening", correctListening);
+		model.addAttribute("correctReading", correctReading);
+		model.addAttribute("total", correctReading + correctListening);
+
 		return "client/resultTestUser";
 	}
 }

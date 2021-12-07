@@ -7,17 +7,25 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.bk.tuanpm.webtoeic.entities.Account;
+import com.bk.tuanpm.webtoeic.entities.Admin;
 import com.bk.tuanpm.webtoeic.entities.PartToeic;
 import com.bk.tuanpm.webtoeic.entities.Role;
+import com.bk.tuanpm.webtoeic.entities.User;
+import com.bk.tuanpm.webtoeic.repository.AdminRepository;
 import com.bk.tuanpm.webtoeic.repository.NguoiDungRepository;
 import com.bk.tuanpm.webtoeic.repository.PartRepository;
+import com.bk.tuanpm.webtoeic.repository.UserRepository;
 import com.bk.tuanpm.webtoeic.service.RoleService;
 
 @Component
 public class DataSeeder implements ApplicationListener<ContextRefreshedEvent> {
 
 	@Autowired
-	private NguoiDungRepository userRepository;
+	private NguoiDungRepository accountRepository;
+	@Autowired
+	private AdminRepository adminRepository;
+	@Autowired
+	private UserRepository userRepository;
 
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
@@ -31,25 +39,25 @@ public class DataSeeder implements ApplicationListener<ContextRefreshedEvent> {
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent arg0) {
 		// Admin account
-		if (userRepository.findByEmail("admin@gmail.com") == null) {
-			Account admin = new Account();
+		if (accountRepository.findByEmail("admin@gmail.com") == null) {
+			Admin admin = new Admin();
 			admin.setEmail("admin@gmail.com");
 			admin.setPassword(passwordEncoder.encode("123456"));
 			admin.setHoTen("Tuấn Minh");
 			admin.setSoDienThoai("123456789");
 			admin.setRole(roleService.getRole(1));
-			userRepository.save(admin);
+			accountRepository.save(admin);
 		}
 
 		// Member account
-		if (userRepository.findByEmail("member@gmail.com") == null) {
-			Account member = new Account();
+		if (accountRepository.findByEmail("member@gmail.com") == null) {
+			User member = new User();
 			member.setHoTen("Phan Minh Tuan");
 			member.setSoDienThoai("123456789");
 			member.setEmail("member@gmail.com");
 			member.setPassword(passwordEncoder.encode("123456"));
 			member.setRole(roleService.getRole(2));
-			userRepository.save(member);
+			accountRepository.save(member);
 		}
 		//Add role
 		if (roleService.getRoleCode(1) == null) {

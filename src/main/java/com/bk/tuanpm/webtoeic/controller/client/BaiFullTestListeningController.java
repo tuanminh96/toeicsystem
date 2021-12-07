@@ -31,46 +31,41 @@ import com.bk.tuanpm.webtoeic.service.NguoiDungService;
 
 @Controller
 public class BaiFullTestListeningController {
-	
+
 	@Autowired
 	BaiThiThuService baithithuServie;
-	
+
 	@Autowired
 	QuestionService cauhoibaithithuService;
-	
+
 	@Autowired
 	KetQuaBaiTestService ketquabaitestService;
-	
+
 	@Autowired
 	BaiThiThuService baithithuService;
-	
+
 	@Autowired
 	private NguoiDungService nguoiDungService;
-	
+
 	@ModelAttribute("loggedInUser")
 	public Account getSessionUser(HttpServletRequest request) {
 		return (Account) request.getSession().getAttribute("loggedInUser");
 	}
-	
-	
-	
-	
-	@RequestMapping(value="/showResultListening/{examId}/{socaudung}/{tongsocau}",method=RequestMethod.POST)
-	public String showResult(Model model,@RequestBody String[] jsonAnswerUser,
-							@PathVariable("examId") int examId,
-							@PathVariable("socaudung") String socaudung,
-							@PathVariable("tongsocau") int tongsocau) {
-	
-	List<Question> list = cauhoibaithithuService.getListCauHoi(baithithuServie.getBaiThiThu(examId).get(0));
-	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	Account currentUser = nguoiDungService.findByEmail(auth.getName());
-	
+
+	@RequestMapping(value = "/showResultListening/{examId}/{socaudung}/{tongsocau}", method = RequestMethod.POST)
+	public String showResult(Model model, @RequestBody String[] jsonAnswerUser, @PathVariable("examId") int examId,
+			@PathVariable("socaudung") String socaudung, @PathVariable("tongsocau") int tongsocau) {
+
+		List<Question> list = cauhoibaithithuService.getListCauHoi(baithithuServie.getBaiThiThu(examId).get(0));
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Account currentUser = nguoiDungService.findByEmail(auth.getName());
+
 //	 for (int i = 0;i<tongsocau;i++) {
 //		 list.get(i).setDapAnUser(jsonAnswerUser[i]);
 //		
 //     }
-	 
-	// save so cau dung vao db
+
+		// save so cau dung vao db
 //	 	Date time = new Date();
 //		KetQuaBaiTest ketquabaitest = new KetQuaBaiTest();
 //		ketquabaitest.setNgaythi(time);
@@ -79,19 +74,13 @@ public class BaiFullTestListeningController {
 //		ketquabaitest.setNguoidung(currentUser);
 //		
 //		ketquabaitestService.save(ketquabaitest);
-	 
-	 //
-	 
-	 model.addAttribute("socaudung",socaudung);
-	 model.addAttribute("listQuestion",list);
-		
+
+		//
+
+		model.addAttribute("socaudung", socaudung);
+		model.addAttribute("listQuestion", list);
+
 		return "client/listeningResult";
 	}
-	
-	
-	
-
-	
-	
 
 }

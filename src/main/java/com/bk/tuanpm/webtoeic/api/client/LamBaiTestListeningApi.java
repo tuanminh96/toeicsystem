@@ -64,15 +64,8 @@ public class LamBaiTestListeningApi {
 //		ketquabaitest.setCorrectlisten(socaudung);
 //		ketquabaitest.setNguoidung(currentUser);
 //		
-//		ketquabaitestService.save(ketquabaitest);
-		
-		
-	
-		 
+//		ketquabaitestService.save(ketquabaitest);	 
 		 List<String> response = new ArrayList<String>();
-		 
 		 return response;
 	}
-	
-	
 }

@@ -36,6 +36,8 @@ public class QGroup extends EntityPathBase<Group> {
 
     public final StringPath name = createString("name");
 
+    public final NumberPath<Integer> totalMem = createNumber("totalMem", Integer.class);
+
     public final StringPath updateBy = createString("updateBy");
 
     public final DateTimePath<java.util.Date> updateDate = createDateTime("updateDate", java.util.Date.class);

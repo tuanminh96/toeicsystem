@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.bk.tuanpm.webtoeic.entities.Account;
 import com.bk.tuanpm.webtoeic.entities.Role;
+import com.bk.tuanpm.webtoeic.entities.User;
 import com.bk.tuanpm.webtoeic.service.NguoiDungService;
 import com.bk.tuanpm.webtoeic.service.RoleService;
 import com.bk.tuanpm.webtoeic.service.SecurityService;
@@ -38,7 +39,7 @@ public class RegisterController {
 	}
 
 	@PostMapping("/register")
-	public String registerProcess(@ModelAttribute("newUser") @Valid Account nguoiDung, BindingResult bindingResult,
+	public String registerProcess(@ModelAttribute("newUser") @Valid User nguoiDung, BindingResult bindingResult,
 			Model model) {
 
 		nguoiDungValidator.validate(nguoiDung, bindingResult);

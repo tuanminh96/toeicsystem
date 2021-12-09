@@ -12,7 +12,10 @@
 <script
 	src="${pageContext.request.contextPath}/resources/js/jquery-1.js"></script>
 <script src="<c:url value='/js/admin/quanlyGroup.js'/>"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"
+	integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg=="
+	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/ace.min.css"
@@ -20,8 +23,8 @@
 </head>
 <style>
 .error {
-  color: #F00;
-  background-color: #FFF;
+	color: #F00;
+	background-color: #FFF;
 }
 </style>
 <body>
@@ -33,7 +36,7 @@
 			${loggedInUser.hoTen}</h3>
 
 		<button class="btn btn-success btnAddExam" data-toggle="modal"
-			data-target="#examModal">Thêm nhóm</button>
+			data-target="#addGrModal">Thêm nhóm</button>
 		<h4 style="color: red" id="info-success"></h4>
 
 		<c:if test="${errorInfo != null }">
@@ -51,17 +54,8 @@
 					<th></th>
 				</tr>
 			</thead>
-			<tbody>
-				<tr>
-					<td class="center">1</td>
-					<td class="center"><a
-						href="${pageContext.request.contextPath}/group_detail">Nhóm ôn
-							luyện tháng 1</a></td>
-					<td class="center">20/11/2021</td>
-					<td class="center">13</td>
-					<td class="center"><a id="" class="red deleteBaiThiThu"><button
-								class="delete btn btn-danger">Xóa</button></a></td>
-				</tr>
+			<tbody id="appendGroup">
+				<jsp:include page="listGroupAdmin.jsp"></jsp:include>
 			</tbody>
 			<tbody>
 			</tbody>
@@ -70,7 +64,7 @@
 
 	<!-- Modal -->
 
-	<div class="modal fade" id="examModal" tabindex="-1" role="dialog"
+	<div class="modal fade" id="addGrModal" tabindex="-1" role="dialog"
 		aria-labelleby="myModalLable">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
@@ -82,45 +76,44 @@
 					<h4 class="modal-title" id="titleModal">Thêm mới Nhóm học</h4>
 				</div>
 				<form role="form" id="formAddGroup">
-				<div class="modal-body" >
-					<input style="display: none" id="idExam">
-					<div class="row">
-						<span class="bg-danger" id="vocab_errors"></span>
+					<div class="modal-body">
+						<input style="display: none" id="idExam">
+						<div class="row">
+							<span class="bg-danger" id="vocab_errors"></span>
 
-						<div class="form-group col-md-12">
-							<label>Tên nhóm:</label> 
-							<input id="nameGroup" name="nameGroup"
-								class="form-control" placeholder="Nhập tên nhóm bạn muốn tạo">
-						</div>
-						<div class="form-group col-md-9">
-							<label>Ảnh nhóm:</label> <input id="image" name=""
-								class="form-control">
-						</div>
-						<div class="form-group col-md-3">
-							<label>Số thành viên tối đa:</label> <input id="maxmem" name="maxmem"
-								class="form-control">
-						</div>
-						<div class="form-group col-md-12">
-							<label for="comment">Mô tả nhóm:</label>
-							<textarea class="form-control" rows="5" id="describe" name="describe"></textarea>
+							<div class="form-group col-md-12">
+								<label>Tên nhóm:</label> <input id="nameGroup" name="nameGroup"
+									class="form-control" placeholder="Nhập tên nhóm bạn muốn tạo">
+							</div>
+							<div class="form-group col-md-9">
+								<label>Ảnh nhóm:</label> <input id="image" name=""
+									class="form-control">
+							</div>
+							<div class="form-group col-md-3">
+								<label>Số thành viên tối đa:</label> <input id="maxmem"
+									name="maxmem" class="form-control">
+							</div>
+							<div class="form-group col-md-12">
+								<label for="comment">Mô tả nhóm:</label>
+								<textarea class="form-control" rows="5" id="describe"
+									name="describe"></textarea>
+							</div>
 						</div>
 					</div>
-				</div>
-				<input type="hidden" id="appContext" value="${pageContext.request.contextPath}">
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="submit" id="btnAddNewGrou" class="btn btn-primary">Thêm
-						nhóm</button>
-					<button type="button" style="display: none;" id="btnUpdateExam"
-						class="btn btn-primary">Cập nhật</button>
+					<input type="hidden" id="appContext"
+						value="${pageContext.request.contextPath}">
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="submit" id="btnAddNewGrou" class="btn btn-primary">Thêm
+							nhóm</button>
+						<button type="button" style="display: none;" id="btnUpdateExam"
+							class="btn btn-primary">Cập nhật</button>
 
-				</div>
+					</div>
 				</form>
 			</div>
 		</div>
 	</div>
-
-
 	<!-- End modal -->
 
 	<jsp:include page="template/footer.jsp"></jsp:include>

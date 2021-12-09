@@ -24,6 +24,8 @@ public class QRemark extends EntityPathBase<Remark> {
 
     public final QAdmin adminRemark;
 
+    public final StringPath dateRange = createString("dateRange");
+
     public final NumberPath<Integer> idRemark = createNumber("idRemark", Integer.class);
 
     public final StringPath remark = createString("remark");
@@ -31,6 +33,8 @@ public class QRemark extends EntityPathBase<Remark> {
     public final DateTimePath<java.util.Date> timeRemark = createDateTime("timeRemark", java.util.Date.class);
 
     public final QUser user;
+
+    public final StringPath weekNum = createString("weekNum");
 
     public QRemark(String variable) {
         this(Remark.class, forVariable(variable), INITS);

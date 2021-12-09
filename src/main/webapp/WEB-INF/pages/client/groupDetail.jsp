@@ -53,7 +53,7 @@ body {
 										src="https://cla.hust.edu.vn/xmedia/2014/05/ky-nang-lam-phan-nghe-trong-bai-thi-toeic.png"
 										alt="profile" class="img-lg rounded-circle mb-3">
 									<div class="mb-3">
-										<h3>Nhóm ôn luyện tháng 1</h3>
+										<h3>${group.name}</h3>
 										<div class="d-flex align-items-center justify-content-center">
 											<div class="br-wrapper br-theme-css-stars">
 												<select id="profile-rating" name="rating" autocomplete="off"
@@ -75,30 +75,26 @@ body {
 											</div>
 										</div>
 									</div>
-									<p class="w-75 mx-auto mb-3">Nhóm lập ra bao gồm các bạn
-										người dùng đăng ký tài khoản trong tháng 1, với mục đích trao
-										đổi kiến thức, hỏi đáp</p>
+									<p class="w-75 mx-auto mb-3">${group.description}</p>
 								</div>
 
 
 								<div class="py-4">
 									<p class="clearfix">
-										<span class="float-left"> Admin </span> <span
-											class="float-right text-muted"> tuanminh </span>
+										<span class="float-left"> Chủ nhóm</span> <span
+											class="float-right text-muted"> ${group.createAdmin.username} </span>
+									</p>
+									<p class="clearfix">
+										<span class="float-left"> Email </span> <span
+											class="float-right text-muted"> ${group.createAdmin.email} </span>
 									</p>
 									<p class="clearfix">
 										<span class="float-left"> Ngày tạo </span> <span
-											class="float-right text-muted"> 14/03/1996 </span>
+											class="float-right text-muted"> ${group.createDate} </span>
 									</p>
 									<p class="clearfix">
 										<span class="float-left"> Số thành viên </span> <span
-											class="float-right text-muted"> 12 </span>
-									</p>
-
-									<p class="clearfix">
-										<span class="float-left"> Twitter </span> <span
-											class="float-right text-muted"> <a href="#">@davidgrey</a>
-										</span>
+											class="float-right text-muted"> ${group.totalMem} </span>
 									</p>
 								</div>
 								<div class="card">

@@ -57,9 +57,6 @@
 				</label> <input id="submit" type="submit" value="ĐĂNG NHẬP">
 				<section class="section">
 					<div class="container">
-						<a class="btn btn-primary" style="margin-top: 10px;"
-							href="/webtoeic/oauth2/authorization/facebook"> <i class="fa fa-facebook-square"></i> Đăng nhập với Facebook
-						</a>
 					</div>
 				</section>
 				<p class="message" style="font-size: 18; padding-top: 10px">

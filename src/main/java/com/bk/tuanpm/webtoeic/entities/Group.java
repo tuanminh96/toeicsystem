@@ -27,6 +27,7 @@ public class Group {
 	private String image;
 	private String description;
 	private Date createDate;
+	private int totalMem;
 	private int maxMem;
 
 	@ManyToOne
@@ -120,6 +121,15 @@ public class Group {
 	public void setMaxMem(int maxMem) {
 		this.maxMem = maxMem;
 	}
+	
+
+	public int getTotalMem() {
+		return totalMem;
+	}
+
+	public void setTotalMem(int totalMem) {
+		this.totalMem = totalMem;
+	}
 
 	@Override
 	public int hashCode() {
@@ -151,4 +161,12 @@ public class Group {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Group [idGroup=" + idGroup + ", name=" + name + ", description=" + description + ", createDate="
+				+ createDate + ", maxMem=" + maxMem + "]";
+	}
+	
+	
 }

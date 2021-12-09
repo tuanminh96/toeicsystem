@@ -1,5 +1,7 @@
 package com.bk.tuanpm.webtoeic.controller.admin;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.bk.tuanpm.webtoeic.entities.Account;
+import com.bk.tuanpm.webtoeic.entities.Admin;
+import com.bk.tuanpm.webtoeic.entities.Group;
 import com.bk.tuanpm.webtoeic.entities.Role;
+import com.bk.tuanpm.webtoeic.service.GroupService;
 import com.bk.tuanpm.webtoeic.service.NguoiDungService;
 import com.bk.tuanpm.webtoeic.service.RoleService;
 
@@ -30,6 +35,9 @@ public class AdminController {
 	
 	@Autowired
 	RoleService roleService;
+	
+	@Autowired
+	GroupService groupService;
 	
 	@ModelAttribute("loggedInUser")
 	public Account loggedInUser() {
@@ -48,6 +56,10 @@ public class AdminController {
 	}
 	@GetMapping({"/group"})
 	public String quanLyGroup(Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Admin currentUser = nguoiDungService.findAdminByEmail(auth.getName());
+		List<Group> groups = groupService.getGroupOfAdmin(currentUser);
+		model.addAttribute("groups", groups);
 		return "admin/quanLyGroup";
 	}
 	@GetMapping("/tai-khoan")

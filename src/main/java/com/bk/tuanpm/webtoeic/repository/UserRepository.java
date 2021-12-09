@@ -7,5 +7,5 @@ import com.bk.tuanpm.webtoeic.entities.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
-
+	public User findById(int id);
 }

@@ -18,6 +18,8 @@ public class Remark {
 	
 	private String remark;
 	private Date timeRemark;
+	private String weekNum;
+	private String dateRange;
 	
 	@ManyToOne
 	private Admin adminRemark;
@@ -63,6 +65,22 @@ public class Remark {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	public String getWeekNum() {
+		return weekNum;
+	}
+
+	public void setWeekNum(String weekNum) {
+		this.weekNum = weekNum;
+	}
+
+	public String getDateRange() {
+		return dateRange;
+	}
+
+	public void setDateRange(String dateRange) {
+		this.dateRange = dateRange;
 	}
 
 	@Override

@@ -28,9 +28,9 @@ public class Account {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private int id;
 	private String email;
-
+	private String username;
 	@JsonIgnore
 	private String password;
 
@@ -114,11 +114,11 @@ public class Account {
 		this.role = role;
 	}
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -145,6 +145,14 @@ public class Account {
 
 	public void setDelete(boolean isDelete) {
 		this.isDelete = isDelete;
+	}
+	
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	@Override

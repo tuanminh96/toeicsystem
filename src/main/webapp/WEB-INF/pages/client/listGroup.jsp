@@ -8,118 +8,126 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Tài khoản</title>
 <style type="text/css">
-body{
-    background-color: #f5f7fa;
-    margin-top:20px;
+body {
+	background-color: #f5f7fa;
+	margin-top: 20px;
 }
+
 .card {
-    margin-bottom: 24px;
-    -webkit-box-shadow: 0 2px 4px rgb(126 142 177 / 10%);
-    box-shadow: 0 2px 4px rgb(126 142 177 / 10%);
+	margin-bottom: 24px;
+	-webkit-box-shadow: 0 2px 4px rgb(126 142 177/ 10%);
+	box-shadow: 0 2px 4px rgb(126 142 177/ 10%);
 }
+
 .card {
-    position: relative;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border: 0 solid #eaedf1;
-    border-radius: .25rem;
+	position: relative;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	min-width: 0;
+	word-wrap: break-word;
+	background-color: #fff;
+	background-clip: border-box;
+	border: 0 solid #eaedf1;
+	border-radius: .25rem;
 }
 
 .activity-wid {
-    margin-left: 16px;
+	margin-left: 16px;
 }
+
 .mb-0 {
-    margin-bottom: 0!important;
+	margin-bottom: 0 !important;
 }
+
 .list-unstyled {
-    padding-left: 0;
-    list-style: none;
+	padding-left: 0;
+	list-style: none;
 }
 
 .activity-wid .activity-list {
-    position: relative;
-    padding: 0 0 33px 30px;
+	position: relative;
+	padding: 0 0 33px 30px;
 }
 
 .activity-border:before {
-    content: "";
-    position: absolute;
-    height: 38px;
-    border-left: 3px dashed #eaedf1;
-    top: 40px;
-    left: 0;
+	content: "";
+	position: absolute;
+	height: 38px;
+	border-left: 3px dashed #eaedf1;
+	top: 40px;
+	left: 0;
 }
 
 .activity-wid .activity-list .activity-icon {
-    position: absolute;
-    left: -20px;
-    top: 0;
-    z-index: 2;
+	position: absolute;
+	left: -20px;
+	top: 0;
+	z-index: 2;
 }
+
 .avatar-sm {
-    height: 2.5rem;
-    width: 2.5rem;
+	height: 2.5rem;
+	width: 2.5rem;
 }
 
 .media {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: start;
-    -ms-flex-align: start;
-    align-items: flex-start;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: start;
+	-ms-flex-align: start;
+	align-items: flex-start;
 }
 
 .me-3 {
-    margin-right: 1rem!important;
+	margin-right: 1rem !important;
 }
 
 .font-size-15 {
-    font-size: 15px!important;
+	font-size: 15px !important;
 }
 
 .font-size-14 {
-    font-size: 14px!important;
+	font-size: 14px !important;
 }
+
 .text-muted {
-    color: #74788d!important;
+	color: #74788d !important;
 }
 
 .text-end {
-    text-align: right!important;
+	text-align: right !important;
 }
 
 .font-size-13 {
-    font-size: 13px!important;
+	font-size: 13px !important;
 }
 
 .avatar-title {
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    height: 100%;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    width: 100%;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	height: 100%;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	width: 100%;
 }
+
 .bg-soft-primary {
-    background-color: rgba(82,92,229,.25)!important;
+	background-color: rgba(82, 92, 229, .25) !important;
 }
+
 .bg-soft-success {
-    background-color: rgba(35,197,143,.25)!important;
+	background-color: rgba(35, 197, 143, .25) !important;
 }
 </style>
 </head>
@@ -136,16 +144,21 @@ body{
 				<div class="">
 					<div class="card">
 						<div class="card-body">
-							<h4 class="header-title mb-4">Nhóm của user: ${nguoiDung.hoTen}</h4>
+							<h4 class="header-title mb-4">Nhóm của user:
+								${nguoiDung.hoTen}</h4>
 							<ul class="list-unstyled activity-wid mb-0">
 								<li class="activity-list activity-border">
 									<div class="activity-icon avatar-sm">
-										<img src="https://bootdey.com/img/Content/avatar/avatar1.png"
-											class="avatar-sm rounded-circle" alt="">
+										<img style="width: 70%;"
+											src="https://cla.hust.edu.vn/xmedia/2014/05/ky-nang-lam-phan-nghe-trong-bai-thi-toeic.png"
+											alt="profile" class="img-lg rounded-circle mb-3">
 									</div>
 									<div class="media">
 										<div class="me-3">
-											<h5 class="font-size-15 mb-1"><a href="${pageContext.request.contextPath}/group_detail">Nhóm ôn luyện tháng 2 - 1</a></h5>
+											<h5 class="font-size-15 mb-1">
+												<a href="${pageContext.request.contextPath}/group_detail/1">Nhóm
+													ôn luyện tháng 2 - 1</a>
+											</h5>
 											<p class="text-muted font-size-14 mb-0">12 thành viên</p>
 										</div>
 

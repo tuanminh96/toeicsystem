@@ -43,7 +43,7 @@ public class QUser extends EntityPathBase<User> {
     public final StringPath hoTen;
 
     //inherited
-    public final NumberPath<Long> id;
+    public final NumberPath<Integer> id;
 
     //inherited
     public final BooleanPath isDelete;
@@ -58,6 +58,9 @@ public class QUser extends EntityPathBase<User> {
 
     //inherited
     public final StringPath soDienThoai;
+
+    //inherited
+    public final StringPath username;
 
     public QUser(String variable) {
         this(User.class, forVariable(variable), INITS);
@@ -87,6 +90,7 @@ public class QUser extends EntityPathBase<User> {
         this.password = _super.password;
         this.role = _super.role;
         this.soDienThoai = _super.soDienThoai;
+        this.username = _super.username;
     }
 
 }

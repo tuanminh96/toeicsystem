@@ -30,7 +30,7 @@ public class QAccount extends EntityPathBase<Account> {
 
     public final StringPath hoTen = createString("hoTen");
 
-    public final NumberPath<Long> id = createNumber("id", Long.class);
+    public final NumberPath<Integer> id = createNumber("id", Integer.class);
 
     public final BooleanPath isDelete = createBoolean("isDelete");
 
@@ -39,6 +39,8 @@ public class QAccount extends EntityPathBase<Account> {
     public final QRole role;
 
     public final StringPath soDienThoai = createString("soDienThoai");
+
+    public final StringPath username = createString("username");
 
     public QAccount(String variable) {
         this(Account.class, forVariable(variable), INITS);

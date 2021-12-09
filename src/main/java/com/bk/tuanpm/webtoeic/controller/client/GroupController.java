@@ -5,6 +5,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -17,8 +18,10 @@ public class GroupController {
 	@Autowired
 	GroupService groupService;
 
-	@GetMapping("/group_detail")
-	public String getGroup(Model model) {
+	@GetMapping("/group_detail/{idGroup}")
+	public String getGroup(Model model, @PathVariable Integer idGroup) {
+		Group group = groupService.getGroupById(idGroup);
+		model.addAttribute("group", group);
 		return "client/groupDetail";
 	}
 

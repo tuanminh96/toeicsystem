@@ -38,28 +38,7 @@ public class DataSeeder implements ApplicationListener<ContextRefreshedEvent> {
 
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent arg0) {
-		// Admin account
-		if (accountRepository.findByEmail("admin@gmail.com") == null) {
-			Admin admin = new Admin();
-			admin.setEmail("admin@gmail.com");
-			admin.setPassword(passwordEncoder.encode("123456"));
-			admin.setHoTen("Tuấn Minh");
-			admin.setSoDienThoai("123456789");
-			admin.setRole(roleService.getRole(1));
-			accountRepository.save(admin);
-		}
-
-		// Member account
-		if (accountRepository.findByEmail("member@gmail.com") == null) {
-			User member = new User();
-			member.setHoTen("Phan Minh Tuan");
-			member.setSoDienThoai("123456789");
-			member.setEmail("member@gmail.com");
-			member.setPassword(passwordEncoder.encode("123456"));
-			member.setRole(roleService.getRole(2));
-			accountRepository.save(member);
-		}
-		//Add role
+		
 		if (roleService.getRoleCode(1) == null) {
 			Role role = new Role();
 			role.setCode(1);
@@ -84,6 +63,32 @@ public class DataSeeder implements ApplicationListener<ContextRefreshedEvent> {
 			role.setRole("ROLE_CONTENT");
 			roleService.saveRole(role);
 		}
+		
+		// Admin account
+		if (accountRepository.findByEmail("admin@gmail.com") == null) {
+			Admin admin = new Admin();
+			admin.setEmail("admin@gmail.com");
+			admin.setUsername("tuanminh96");
+			admin.setPassword(passwordEncoder.encode("12345689"));
+			admin.setHoTen("Tuấn Minh");
+			admin.setSoDienThoai("123456789");
+			admin.setRole(roleService.getRole(1));
+			accountRepository.save(admin);
+		}
+
+		// Member account
+		if (accountRepository.findByEmail("member@gmail.com") == null) {
+			User member = new User();
+			member.setHoTen("Phan Minh Tuan");
+			member.setUsername("tuanminh2k");
+			member.setSoDienThoai("123456789");
+			member.setEmail("member@gmail.com");
+			member.setPassword(passwordEncoder.encode("12345689"));
+			member.setRole(roleService.getRole(2));
+			accountRepository.save(member);
+		}
+		//Add role
+		
 		
 		
 		if(partRepository.findByPartName("Part I") == null) {

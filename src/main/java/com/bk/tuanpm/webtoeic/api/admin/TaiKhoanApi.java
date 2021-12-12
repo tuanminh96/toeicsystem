@@ -28,15 +28,15 @@ import com.bk.tuanpm.webtoeic.dto.ResponseObject;
 import com.bk.tuanpm.webtoeic.dto.TaiKhoanDto;
 import com.bk.tuanpm.webtoeic.entities.Account;
 import com.bk.tuanpm.webtoeic.entities.Role;
-import com.bk.tuanpm.webtoeic.service.NguoiDungService;
 import com.bk.tuanpm.webtoeic.service.RoleService;
+import com.bk.tuanpm.webtoeic.service.impl.UserAdminServiceImpl;
 
 @RestController
 @RequestMapping("/api/admin/tai-khoan")
 public class TaiKhoanApi {
 
 	@Autowired
-	private NguoiDungService nguoiDungService;
+	private UserAdminServiceImpl nguoiDungService;
 
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -88,4 +88,5 @@ public class TaiKhoanApi {
 		List<String> keys = new ArrayList<String>(errors.keySet());
 		errors = null;
 	}
+	
 }

@@ -12,7 +12,7 @@ import com.bk.tuanpm.webtoeic.entities.PartToeic;
 import com.bk.tuanpm.webtoeic.entities.Role;
 import com.bk.tuanpm.webtoeic.entities.User;
 import com.bk.tuanpm.webtoeic.repository.AdminRepository;
-import com.bk.tuanpm.webtoeic.repository.NguoiDungRepository;
+import com.bk.tuanpm.webtoeic.repository.AccountRepository;
 import com.bk.tuanpm.webtoeic.repository.PartRepository;
 import com.bk.tuanpm.webtoeic.repository.UserRepository;
 import com.bk.tuanpm.webtoeic.service.RoleService;
@@ -21,7 +21,7 @@ import com.bk.tuanpm.webtoeic.service.RoleService;
 public class DataSeeder implements ApplicationListener<ContextRefreshedEvent> {
 
 	@Autowired
-	private NguoiDungRepository accountRepository;
+	private AccountRepository accountRepository;
 	@Autowired
 	private AdminRepository adminRepository;
 	@Autowired

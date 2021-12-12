@@ -1,4 +1,6 @@
-package com.bk.tuanpm.webtoeic.service;
+package com.bk.tuanpm.webtoeic.service.impl;
+
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -11,15 +13,23 @@ import org.springframework.stereotype.Service;
 import com.bk.tuanpm.webtoeic.entities.Account;
 import com.bk.tuanpm.webtoeic.entities.Admin;
 import com.bk.tuanpm.webtoeic.entities.Role;
-import com.bk.tuanpm.webtoeic.repository.NguoiDungRepository;
+import com.bk.tuanpm.webtoeic.entities.User;
+import com.bk.tuanpm.webtoeic.repository.AccountRepository;
+import com.bk.tuanpm.webtoeic.repository.RoleRepository;
+import com.bk.tuanpm.webtoeic.repository.UserRepository;
 
 @Service
 @Transactional
-public class NguoiDungService {
+public class UserAdminServiceImpl {
+	
+	@Autowired
+	private UserRepository userRepository;
 
 	@Autowired
-	private NguoiDungRepository nguoiDungRepo;
+	private AccountRepository nguoiDungRepo;
 	
+	@Autowired
+	private RoleRepository roleRepository;
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -58,5 +68,11 @@ public class NguoiDungService {
 
 	public void deleteById(long id) {
 		nguoiDungRepo.deleteById(id);
+	}
+	
+	public List<User> getListVipNotAdded() {
+		Role role = roleRepository.findByCode(Role.ROLE_MEMBER_VIP);
+		List<User> list = userRepository.findByRoleAndGroupsIsNull(role);
+		return list;
 	}
 }

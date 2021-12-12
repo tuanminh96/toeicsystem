@@ -26,8 +26,8 @@ import com.bk.tuanpm.webtoeic.entities.TestResult;
 import com.bk.tuanpm.webtoeic.entities.Account;
 import com.bk.tuanpm.webtoeic.service.BaiThiThuService;
 import com.bk.tuanpm.webtoeic.service.QuestionService;
+import com.bk.tuanpm.webtoeic.service.impl.UserAdminServiceImpl;
 import com.bk.tuanpm.webtoeic.service.KetQuaBaiTestService;
-import com.bk.tuanpm.webtoeic.service.NguoiDungService;
 
 @Controller
 public class BaiFullTestListeningController {
@@ -45,7 +45,7 @@ public class BaiFullTestListeningController {
 	BaiThiThuService baithithuService;
 
 	@Autowired
-	private NguoiDungService nguoiDungService;
+	private UserAdminServiceImpl nguoiDungService;
 
 	@ModelAttribute("loggedInUser")
 	public Account getSessionUser(HttpServletRequest request) {

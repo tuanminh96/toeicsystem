@@ -21,7 +21,7 @@ import com.bk.tuanpm.webtoeic.entities.Group;
 import com.bk.tuanpm.webtoeic.entities.User;
 import com.bk.tuanpm.webtoeic.repository.AdminRepository;
 import com.bk.tuanpm.webtoeic.service.GroupService;
-import com.bk.tuanpm.webtoeic.service.NguoiDungService;
+import com.bk.tuanpm.webtoeic.service.impl.UserAdminServiceImpl;
 
 @Controller
 @RequestMapping("/admin")
@@ -30,7 +30,7 @@ public class GroupAdminController {
 	@Autowired
 	GroupService groupService;
 	@Autowired
-	NguoiDungService nguoiDungService;
+	UserAdminServiceImpl nguoiDungService;
 	@Autowired
 	AdminRepository adminRepository;
 

@@ -1,4 +1,4 @@
-package com.bk.tuanpm.webtoeic.service;
+package com.bk.tuanpm.webtoeic.service.impl;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,13 +15,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.bk.tuanpm.webtoeic.entities.Account;
 import com.bk.tuanpm.webtoeic.entities.Role;
-import com.bk.tuanpm.webtoeic.repository.NguoiDungRepository;
+import com.bk.tuanpm.webtoeic.repository.AccountRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired
-	private NguoiDungRepository repo;
+	private AccountRepository repo;
 
 	@Override
 	@Transactional(readOnly = true)

@@ -51,10 +51,12 @@ $(document).ready(function() {
 		var idGroup = $("#idGroup").val();
 		var appContext = $("#appContext").val();
 		$.ajax({
-			url: appContext+"/admin/group_detail/listMember/"+idGroup+""
+			url: appContext+"/admin/group_detail/listMember/"+idGroup+"",
 			success : function(response) {
 				$("#appendContent").html(response);
 			}
 		});
-	})
+	});
+	
+
 });

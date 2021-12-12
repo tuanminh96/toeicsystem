@@ -51,7 +51,8 @@ public class GroupServiceImpl implements GroupService{
 	@Override
 	public List<MemberDTO> getListMember(Integer idGroup) {
 		// TODO Auto-generated method stub
-		List<User> members = groupRepository.findUsersByIdGroup(idGroup);
+		Group group = groupRepository.findByIdGroup(idGroup);
+		List<User> members = group.getUsers();
 		List<MemberDTO> listMem = new ArrayList<>();
 		MemberDTO memberDTO = new MemberDTO();
 		for (User user : members) {

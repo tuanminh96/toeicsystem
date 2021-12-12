@@ -20,14 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bk.tuanpm.webtoeic.dto.PasswordDTO;
 import com.bk.tuanpm.webtoeic.dto.ResponseObject;
 import com.bk.tuanpm.webtoeic.entities.Account;
-import com.bk.tuanpm.webtoeic.service.NguoiDungService;
+import com.bk.tuanpm.webtoeic.service.impl.UserAdminServiceImpl;
 
 @RestController
 @RequestMapping("/api/admin/profile")
 public class ProfileApi {
 
 	@Autowired
-	private NguoiDungService nguoiDungService;
+	private UserAdminServiceImpl nguoiDungService;
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 

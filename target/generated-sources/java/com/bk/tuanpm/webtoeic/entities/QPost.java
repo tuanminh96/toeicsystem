@@ -26,6 +26,8 @@ public class QPost extends EntityPathBase<Post> {
 
     public final DateTimePath<java.util.Date> datePost = createDateTime("datePost", java.util.Date.class);
 
+    public final QGroup group;
+
     public final NumberPath<Integer> idPost = createNumber("idPost", Integer.class);
 
     public final StringPath title = createString("title");
@@ -54,6 +56,7 @@ public class QPost extends EntityPathBase<Post> {
 
     public QPost(Class<? extends Post> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
+        this.group = inits.isInitialized("group") ? new QGroup(forProperty("group"), inits.get("group")) : null;
         this.user = inits.isInitialized("user") ? new QAccount(forProperty("user"), inits.get("user")) : null;
     }
 

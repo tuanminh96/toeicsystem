@@ -13,16 +13,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.bk.tuanpm.webtoeic.entities.Account;
 import com.bk.tuanpm.webtoeic.entities.Role;
 import com.bk.tuanpm.webtoeic.entities.User;
-import com.bk.tuanpm.webtoeic.service.NguoiDungService;
 import com.bk.tuanpm.webtoeic.service.RoleService;
 import com.bk.tuanpm.webtoeic.service.SecurityService;
+import com.bk.tuanpm.webtoeic.service.impl.UserAdminServiceImpl;
 import com.bk.tuanpm.webtoeic.validator.NguoiDungValidator;
 
 @Controller
 public class RegisterController {
 
 	@Autowired
-	private NguoiDungService nguoiDungService;
+	private UserAdminServiceImpl nguoiDungService;
 
 	@Autowired
 	private SecurityService securityService;

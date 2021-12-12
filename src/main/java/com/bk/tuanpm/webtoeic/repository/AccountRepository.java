@@ -14,7 +14,7 @@ import com.bk.tuanpm.webtoeic.entities.Role;
 import com.bk.tuanpm.webtoeic.entities.User;
 
 @Repository
-public interface NguoiDungRepository extends JpaRepository<Account, Long> {
+public interface AccountRepository extends JpaRepository<Account, Long> {
 
 	Account findByEmail(String email);
 	
@@ -23,5 +23,7 @@ public interface NguoiDungRepository extends JpaRepository<Account, Long> {
 	List<Account> findByRole(Role vaiTro);
 
 	Admin findAdminByEmail(String email);	
+	
+	public User findById(int id);
 	
 }

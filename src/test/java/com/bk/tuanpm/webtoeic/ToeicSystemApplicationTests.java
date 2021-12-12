@@ -13,7 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.bk.tuanpm.webtoeic.repository.NguoiDungRepository;
+import com.bk.tuanpm.webtoeic.repository.AccountRepository;
 import com.bk.tuanpm.webtoeic.util.ExcelUtil;
 
 @RunWith(SpringRunner.class)
@@ -21,7 +21,7 @@ import com.bk.tuanpm.webtoeic.util.ExcelUtil;
 public class ToeicSystemApplicationTests {
 
 	@Autowired
-	NguoiDungRepository nguoIDungRepo;
+	AccountRepository nguoIDungRepo;
 	
 
 	@Autowired

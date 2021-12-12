@@ -9,13 +9,13 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.bk.tuanpm.webtoeic.entities.Account;
-import com.bk.tuanpm.webtoeic.service.NguoiDungService;
+import com.bk.tuanpm.webtoeic.service.impl.UserAdminServiceImpl;
 
 @Component
 public class NguoiDungValidator implements Validator {
 
 	@Autowired
-	private NguoiDungService nguoiDungService;
+	private UserAdminServiceImpl nguoiDungService;
 
 	@Override
 	public boolean supports(Class<?> clazz) {

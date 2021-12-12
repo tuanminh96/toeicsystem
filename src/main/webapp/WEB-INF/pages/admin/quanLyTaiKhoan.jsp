@@ -124,6 +124,8 @@
 
 	<jsp:include page="template/footer.jsp"></jsp:include>
 	<script
+	src="${pageContext.request.contextPath}/resources/js/jquery-1.js"></script>
+	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/jquery.serializeJSON/2.9.0/jquery.serializejson.js"></script>
 	<script src="<c:url value='/js/admin/taiKhoanAjax.js'/>"></script>
 </body>

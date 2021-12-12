@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.bk.tuanpm.webtoeic.entities.Account;
-import com.bk.tuanpm.webtoeic.service.NguoiDungService;
+import com.bk.tuanpm.webtoeic.service.impl.UserAdminServiceImpl;
 
 @ControllerAdvice
 public class DefaultController {
 
 	@Autowired
-	private NguoiDungService nguoiDungService;
+	private UserAdminServiceImpl nguoiDungService;
 
 	@ModelAttribute
 	public void load(Model model, @AuthenticationPrincipal Object user) {

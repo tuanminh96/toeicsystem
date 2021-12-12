@@ -26,6 +26,9 @@ public class Post {
 	@ManyToOne
 	private Account user;
 	
+	@ManyToOne
+	private Group group;
+	
 	private Date updateDate;
 	private String updateBy;
 	public Integer getIdPost() {
@@ -69,6 +72,13 @@ public class Post {
 	}
 	public void setUpdateBy(String updateBy) {
 		this.updateBy = updateBy;
+	}
+	
+	public Group getGroup() {
+		return group;
+	}
+	public void setGroup(Group group) {
+		this.group = group;
 	}
 	@Override
 	public int hashCode() {

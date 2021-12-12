@@ -24,8 +24,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.bk.tuanpm.webtoeic.entities.Account;
-import com.bk.tuanpm.webtoeic.service.NguoiDungService;
 import com.bk.tuanpm.webtoeic.service.SlideBannerService;
+import com.bk.tuanpm.webtoeic.service.impl.UserAdminServiceImpl;
 
 @Controller
 @SessionAttributes("loggedInUser")
@@ -34,7 +34,7 @@ public class ClientController {
 	private SlideBannerService slideBannerService;
 
 	@Autowired
-	private NguoiDungService nguoiDungService;
+	private UserAdminServiceImpl nguoiDungService;
 
 	@ModelAttribute("loggedInUser")
 	public Account loggedInUser() {

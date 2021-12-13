@@ -9,5 +9,5 @@ import com.bk.tuanpm.webtoeic.entities.User;
 
 @Repository
 public interface GroupMemberRepository extends JpaRepository<GroupMember, Integer> {
-	public GroupMember findByGroupAndUser(Group idGroup, User idUser);
+	public GroupMember findByGroupAndUser(int idGroup, int idUser);
 }

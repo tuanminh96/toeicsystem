@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,9 +35,9 @@ public class Group {
 	@JoinColumn(name = "id_admin")
 	private Admin createAdmin;
 
-	@ManyToMany(cascade = { CascadeType.ALL })
-	@JoinTable(name = "group_member", joinColumns = { @JoinColumn(name = "id_user") }, inverseJoinColumns = {
-			@JoinColumn(name = "id_group") })
+	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	@JoinTable(name = "group_member", joinColumns = { @JoinColumn(name = "id_group") }, inverseJoinColumns = {
+			@JoinColumn(name = "id_user") })
 	List<User> users;
 	private Date updateDate;
 	private String updateBy;

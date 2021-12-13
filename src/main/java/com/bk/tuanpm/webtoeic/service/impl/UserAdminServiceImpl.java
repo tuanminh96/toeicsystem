@@ -75,4 +75,12 @@ public class UserAdminServiceImpl {
 		List<User> list = userRepository.findByRoleAndGroupsIsNull(role);
 		return list;
 	}
+	
+	public List<User> getListUsers(List<Integer> idUsers) {
+		return userRepository.findAllById(idUsers);
+	}
+	
+	public User getUserById(int id) {
+		return userRepository.findById(id);
+	}
 }

@@ -156,10 +156,10 @@ style>label {
 							</div>
 							<div class="row">
 								<div class="col-md-12 post-header-line">
-									<i class="fa fa-user" aria-hidden="true"></i> by <a href="#">tuanpm22</a> |
-									<i class="fa fa-calendar" aria-hidden="true"></i> Sept 16th, 2012 | <i class="fa fa-eye" aria-hidden="true"></i> 1230  | <span
+									<i class="fa fa-user" aria-hidden="true"></i> by <a href="#">${list.userAdd.username}</a> |
+									<i class="fa fa-calendar" aria-hidden="true"></i> ${list.dateAdd} | <i class="fa fa-eye" aria-hidden="true"></i> ${list.countTest }  | <span
 										class="glyphicon glyphicon-tags"> </span>Level :<span
-										class="label label-info">Dễ</a>
+										class="label label-info">${list.level}</a>
 								</div>
 							</div>
 							<div class="row post-content">
@@ -170,12 +170,13 @@ style>label {
 								</div>
 								<div class="col-md-9" style="padding: 25px;">
 									<p>Đề thi thử của Hội đồng TOEIC năm 2020</p>
-									<div>
-										<span
-										class="fa fa-star checked"></span> <span
-										class="fa fa-star checked"></span> <span
-										class="fa fa-star checked"></span> <span class="fa fa-star"></span>
-									<span class="fa fa-star"></span>
+									<div id="rating${list.baithithuid}" count="${list.countRate}">
+									<c:forEach var = "i" begin = "1" end = "${list.countRate}">
+										<span class="fa fa-star checked"></span> 
+									</c:forEach>
+									<c:forEach var = "i" begin = "1" end = "${5- list.countRate}">
+										<span class="fa fa-star"></span> 
+									</c:forEach>
 									</div>
 									<p>
 										<button class="btn btn-primary openModalExam"
@@ -222,18 +223,6 @@ style>label {
 		</div>
 	</c:if>
 
-
-
-	<!--/.End Pagination-->
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-
-	<!-- Modal -->
-	<!-- Modal -->
 	<!-- New modal -->
 	<!-- Modal -->
 	<div class="modal fade" id="examModal" tabindex="-1" role="dialog"

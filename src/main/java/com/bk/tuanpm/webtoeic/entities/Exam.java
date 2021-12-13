@@ -1,18 +1,29 @@
 package com.bk.tuanpm.webtoeic.entities;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "exam")
-public class Exam {
+public class Exam implements Serializable {
+	@Transient
+	public static final String EASY = "1";
+	@Transient
+	public static final String MEDIUM = "2";
+	@Transient
+	public static final String HARD = "3";
+	 
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_exam", nullable = false)
@@ -29,12 +40,15 @@ public class Exam {
 	private Date dateAdd;
 	
 	private int countTest;
+	
+	@Column(nullable = true, columnDefinition = "float default 0")
+	private float countRate;
 	private String description;
 	private String level;
 	private String updateBy;
 	private Date updateDate;
 	
-	@OneToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Admin userAdd;
 
 	public Integer getBaithithuid() {
@@ -116,6 +130,52 @@ public class Exam {
 	public void setUserAdd(Admin userAdd) {
 		this.userAdd = userAdd;
 	}
+
+	public float getCountRate() {
+		return countRate;
+	}
+
+	public void setCountRate(float countRate) {
+		this.countRate = countRate;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((baithithuid == null) ? 0 : baithithuid.hashCode());
+		result = prime * result + ((dateAdd == null) ? 0 : dateAdd.hashCode());
+		result = prime * result + ((userAdd == null) ? 0 : userAdd.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Exam other = (Exam) obj;
+		if (baithithuid == null) {
+			if (other.baithithuid != null)
+				return false;
+		} else if (!baithithuid.equals(other.baithithuid))
+			return false;
+		if (dateAdd == null) {
+			if (other.dateAdd != null)
+				return false;
+		} else if (!dateAdd.equals(other.dateAdd))
+			return false;
+		if (userAdd == null) {
+			if (other.userAdd != null)
+				return false;
+		} else if (!userAdd.equals(other.userAdd))
+			return false;
+		return true;
+	}
+	
 	
 	
 //	@Override

@@ -14,5 +14,7 @@ public interface BaiThiThuService {
 	
 	List<Exam> getAllBaiThiThu();
 	void delete(int id);
+	List<Exam> getTopRatingExam();
+	List<Exam> getTopViewExam();
 	
 }

@@ -9,10 +9,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bk.tuanpm.webtoeic.dto.MemberDTO;
 import com.bk.tuanpm.webtoeic.entities.Account;
@@ -33,6 +35,9 @@ public class GroupAdminController {
 	UserAdminServiceImpl nguoiDungService;
 	@Autowired
 	AdminRepository adminRepository;
+	
+	@Autowired
+	UserAdminServiceImpl userAdminServiceImpl;
 
 	@PostMapping(value = "/addGroup", produces = MediaType.APPLICATION_JSON_VALUE)
 	public String addGroup(Model model, @RequestBody Group group) {
@@ -58,6 +63,28 @@ public class GroupAdminController {
 	public String getListMemberGroup(Model model, @PathVariable Integer idGroup) {
 		List<MemberDTO> members = groupService.getListMember(idGroup);
 		model.addAttribute("members", members);
+		return "admin/listMember";
+	}
+	
+	@PostMapping("/addUserGroup")
+	public String addUsersToGroup(Model model, 
+			@RequestParam("listUser[]") List<Integer> listIdUsers, 
+			@RequestParam("idGroup") int idGroup) {
+		List<User> users =  userAdminServiceImpl.getListUsers(listIdUsers);
+		Group groupToAdd = groupService.getGroupById(idGroup);
+		groupToAdd.setUsers(users);
+		groupService.saveGroup(groupToAdd);
+		return "admin/listMember";
+	}
+	
+	@PostMapping("/deleteUserGroup")
+	public String deleteFromGroup(Model model, 
+			@RequestParam("idUser") int idUser, 
+			@RequestParam("idGroup") int idGroup) {
+		User user =  userAdminServiceImpl.getUserById(idUser);
+		Group groupToDel = groupService.getGroupById(idGroup);
+		groupToDel.getUsers().remove(user);
+		groupService.saveGroup(groupToDel);
 		return "admin/listMember";
 	}
 

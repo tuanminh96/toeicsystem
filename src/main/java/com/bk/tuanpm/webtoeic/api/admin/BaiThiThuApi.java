@@ -16,6 +16,8 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,11 +28,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.bk.tuanpm.webtoeic.entities.Admin;
 import com.bk.tuanpm.webtoeic.entities.Exam;
 import com.bk.tuanpm.webtoeic.entities.Question;
 import com.bk.tuanpm.webtoeic.repository.PartRepository;
 import com.bk.tuanpm.webtoeic.service.BaiThiThuService;
 import com.bk.tuanpm.webtoeic.service.QuestionService;
+import com.bk.tuanpm.webtoeic.service.impl.UserAdminServiceImpl;
 import com.bk.tuanpm.webtoeic.service.PartService;
 
 @RestController
@@ -51,6 +55,9 @@ public class BaiThiThuApi {
 	
 	@Autowired
 	public PartRepository partRepository;
+	
+	@Autowired
+	UserAdminServiceImpl nguoiDungService;
 
 	@GetMapping("/loadExam")
 	public List<String> showAllExam() {
@@ -125,13 +132,16 @@ public class BaiThiThuApi {
 
 			baithithu.setTenbaithithu(name);
 			baithithu.setAnhbaithithu(file_image.getOriginalFilename());
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			Admin currentUser = nguoiDungService.findAdminByEmail(auth.getName());
+			baithithu.setUserAdd(currentUser);
 			baithithuService.save(baithithu);
 
 			// save data from file excel
 
 			BaiThiThuApi btt = new BaiThiThuApi();
 			List<Question> listCauHoiFull = btt.getListFromExcel(pathExcel.toString(), baithithu, partService);
-
+			
 			for (int i = 0; i < listCauHoiFull.size(); i++) {
 				cauhoibaithithuService.save(listCauHoiFull.get(i));
 			}

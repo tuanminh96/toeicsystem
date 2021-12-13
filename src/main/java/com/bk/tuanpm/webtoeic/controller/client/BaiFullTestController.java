@@ -2,6 +2,7 @@ package com.bk.tuanpm.webtoeic.controller.client;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -90,9 +91,13 @@ public class BaiFullTestController {
 				}
 				Collections.sort(pagelist);
 			}
+			//sort exam by date by stream java 8
+			List<Exam> sortedList = list.getContent().stream()
+					.sorted(Comparator.comparing((Exam::getDateAdd)).reversed())
+					.collect(Collectors.toList());
 			model.addAttribute("pageList", pagelist);
 			model.addAttribute("totalPage", totalPage);
-			model.addAttribute("listData", list.getContent());
+			model.addAttribute("listData", sortedList);
 			model.addAttribute("currentPage", page);
 
 			return "client/listExam";
@@ -143,5 +148,21 @@ public class BaiFullTestController {
 		model.addAttribute("total", correctReading + correctListening);
 
 		return "client/resultTestUser";
+	}
+	
+	@GetMapping("/getTopRating") 
+	public String getTopRatingExam(Model model) {
+		List<Exam> exams = baithithuService.getTopRatingExam();
+		model.addAttribute("listData", exams);
+		
+		return "client/listTopRatingExam";
+	}
+	
+	@GetMapping("/getTopView") 
+	public String getTopViewExam(Model model) {
+		List<Exam> exams = baithithuService.getTopViewExam();
+		model.addAttribute("listData", exams);
+		
+		return "client/listTopViewExam";
 	}
 }

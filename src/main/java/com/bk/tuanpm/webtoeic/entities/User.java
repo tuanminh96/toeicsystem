@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,12 +19,9 @@ public class User extends Account {
 	private Date addDate;
 	private String school;
 	private String company;
-	@ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-        name = "group_member", 
-        joinColumns = { @JoinColumn (name = "id_group") }, 
-        inverseJoinColumns = { @JoinColumn(name = "id_user") }
-    )
+	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	@JoinTable(name = "group_member", joinColumns = { @JoinColumn(name = "id_user") }, inverseJoinColumns = {
+			@JoinColumn(name = "id_group") })
 	List<Group> groups;
 
 	public Date getAddDate() {

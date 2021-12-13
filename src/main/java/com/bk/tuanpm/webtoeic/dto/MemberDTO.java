@@ -34,5 +34,4 @@ public class MemberDTO {
 		this.dateAdd = dateAdd;
 	}
 	
-	
 }

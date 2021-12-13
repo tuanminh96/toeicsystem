@@ -30,6 +30,7 @@ public class GroupServiceImpl implements GroupService{
 		group.setCreateDate(new Date());
 		return groupRepository.save(group);
 	}
+	
 
 	@Override
 	public List<Group> saveGroups(List<Group> groups) {
@@ -45,7 +46,7 @@ public class GroupServiceImpl implements GroupService{
 	@Override
 	public Group getGroupById(Integer id) {
 		// TODO Auto-generated method stub
-		return groupRepository.findByIdGroup(id);
+		return groupRepository.getOne(id);
 	}
 	
 	@Override
@@ -58,6 +59,7 @@ public class GroupServiceImpl implements GroupService{
 		for (User user : members) {
 			memberDTO.setMemId(user.getId());
 			memberDTO.setMemName(user.getUsername());
+			memberDTO.setFullName(user.getHoTen());
 			memberDTO.setDateAdd(groupMemberService.getGroupMember(idGroup, user.getId()).getAddDate());
 			listMem.add(memberDTO);
 		}

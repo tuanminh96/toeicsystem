@@ -488,5 +488,8 @@
 			</tr>
 		</tfoot>
 	</table>
+	<script type="text/javascript">
+	
+	</script>
 </body>
 </html>

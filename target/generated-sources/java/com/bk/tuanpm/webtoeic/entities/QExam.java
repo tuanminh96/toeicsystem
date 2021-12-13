@@ -26,6 +26,8 @@ public class QExam extends EntityPathBase<Exam> {
 
     public final NumberPath<Integer> baithithuid = createNumber("baithithuid", Integer.class);
 
+    public final NumberPath<Float> countRate = createNumber("countRate", Float.class);
+
     public final NumberPath<Integer> countTest = createNumber("countTest", Integer.class);
 
     public final DatePath<java.sql.Date> dateAdd = createDate("dateAdd", java.sql.Date.class);

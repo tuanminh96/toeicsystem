@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	$('#historyExam').DataTable();
 	$('#tabs a').click(function(e) {
 		e.preventDefault();
 		$(this).tab('show');
@@ -11,6 +12,7 @@ $(document).ready(function() {
 	});
 
 	function ajaxPostChangePass() {
+		alert(3);
 		// PREPATEE DATA
 		var data = $('.formDoiMatKhau').serializeFormJSON();
 		// do post

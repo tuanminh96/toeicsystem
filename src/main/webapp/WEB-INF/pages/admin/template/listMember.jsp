@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h3>Danh sánh thành viên nhóm</h3>
+	<h2>Danh sánh thành viên nhóm</h2>
 	<button class="btn btn-success btnAdd" data-toggle="modal"
 		data-target="#addMemModal" id="#addMemModal">Thêm thành viên</button>
 

@@ -12,6 +12,8 @@ import com.bk.tuanpm.webtoeic.entities.User;
 public interface UserRepository extends JpaRepository<User, Integer> {
 	public User findById(int id);
 	
+	public User findByEmail(String email);
+	
 	public List<User> findByRoleAndGroupsIsNull(Role role);
 	
 	public List<User> findByIdIn(List<Integer> ids);

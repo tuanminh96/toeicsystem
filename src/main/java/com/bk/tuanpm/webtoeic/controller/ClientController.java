@@ -1,5 +1,6 @@
 package com.bk.tuanpm.webtoeic.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
@@ -7,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.bk.tuanpm.webtoeic.dto.ExamHistoryDTO;
+import com.bk.tuanpm.webtoeic.service.ClientAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -35,6 +38,9 @@ public class ClientController {
 
 	@Autowired
 	private UserAdminServiceImpl nguoiDungService;
+
+	@Autowired
+	private ClientAccountService clientAccountService;
 
 	@ModelAttribute("loggedInUser")
 	public Account loggedInUser() {
@@ -70,7 +76,10 @@ public class ClientController {
 
 	@GetMapping(value = "/profile")
 	public String profilePage(Model model, HttpServletRequest request, @AuthenticationPrincipal OAuth2User oauth2User) {
-		model.addAttribute("user", getSessionUser(request));
+		Account account = getSessionUser(request);
+		model.addAttribute("user", account);
+		List<ExamHistoryDTO> listExamHistoryDTO = clientAccountService.findAllExamHistory(account.getId());
+		model.addAttribute("listExamHistoryDTO", listExamHistoryDTO);
 		return "client/profile";
 	}
 

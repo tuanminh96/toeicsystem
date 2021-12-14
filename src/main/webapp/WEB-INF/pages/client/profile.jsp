@@ -85,31 +85,25 @@
                 <table id="historyExam" class="table table-striped table-bordered taiKhoanVIP" style="width: 100%">
                     <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Username</th>
-                        <th>Name</th>
-                        <th>Gender</th>
-                        <th>School</th>
-                        <th>Address</th>
+                        <th>STT</th>
+                        <th>Title Exam</th>
+                        <th>Date Test</th>
+                        <th>Total Time Test</th>
+                        <th>Score Reading</th>
+                        <th>Score Listen</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Tiger Nixon</td>
-                        <td>System Architect</td>
-                        <td>Edinburgh</td>
-                        <td>61</td>
-                        <td>2011/04/25</td>
-                        <td>$320,800</td>
-                    </tr>
-                    <tr>
-                        <td>Garrett Winters</td>
-                        <td>Accountant</td>
-                        <td>Tokyo</td>
-                        <td>63</td>
-                        <td>2011/07/25</td>
-                        <td>$170,750</td>
-                    </tr>
+                    <c:forEach items="${listExamHistoryDTO}" var="examHistoryDTO" varStatus="index">
+                        <tr>
+                            <td>${index.count}</td>
+                            <td>${examHistoryDTO.title}</td>
+                            <td>${examHistoryDTO.dateTest}</td>
+                            <td>${examHistoryDTO.totalTimeTest} phút</td>
+                            <td>${examHistoryDTO.scoreReading}/60</td>
+                            <td>${examHistoryDTO.scoreListen}/40</td>
+                        </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
             </div>

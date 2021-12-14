@@ -5,5 +5,5 @@ import com.bk.tuanpm.webtoeic.dto.ExamHistoryDTO;
 import java.util.List;
 
 public interface ClientAccountService {
-    public List<ExamHistoryDTO> findAllExamHistory(String userId);
+    public List<ExamHistoryDTO> findAllExamHistory(int userId);
 }

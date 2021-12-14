@@ -57,6 +57,15 @@ $(document).ready(function() {
 			}
 		});
 	});
-	
-
+	$("#memberResult").on('click', function(e) {
+		e.preventDefault();
+		var idGroup = $("#idGroup").val();
+		var appContext = $("#appContext").val();
+		$.ajax({
+			url: appContext+"/admin/group_detail/listMemberResult/"+idGroup+"",
+			success : function(response) {
+				$("#appendContent").html(response);
+			}
+		});
+	});
 });

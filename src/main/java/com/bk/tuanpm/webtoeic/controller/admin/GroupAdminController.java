@@ -66,6 +66,13 @@ public class GroupAdminController {
 		return "admin/listMember";
 	}
 	
+	@GetMapping("/group_detail/listMemberResult/{idGroup}")
+	public String getListMemberResult(Model model, @PathVariable Integer idGroup) {
+		List<MemberDTO> members = groupService.getListMember(idGroup);
+		model.addAttribute("members", members);
+		return "admin/listMemberResult";
+	}
+	
 	@PostMapping("/addUserGroup")
 	public String addUsersToGroup(Model model, 
 			@RequestParam("listUser[]") List<Integer> listIdUsers, 

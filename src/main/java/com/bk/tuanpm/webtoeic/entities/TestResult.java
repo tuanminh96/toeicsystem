@@ -53,7 +53,7 @@ public class TestResult {
 	@JoinColumn(name = "nguoidungid", nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JsonIgnore
-	private Account nguoidung;
+	private User nguoidung;
 
 	@ManyToOne
 	@JoinColumn(name = "baithithuid", nullable = false)
@@ -66,7 +66,7 @@ public class TestResult {
 	}
 
 	public TestResult(Integer ketquaid, int socaudung, int socausai, Date ngaythi, int correctreading,
-			int correctlisten, Account nguoidung, Exam baithithu) {
+			int correctlisten, User nguoidung, Exam baithithu) {
 		super();
 		this.ketquaid = ketquaid;
 		this.ngaythi = ngaythi;
@@ -104,7 +104,7 @@ public class TestResult {
 		return nguoidung;
 	}
 
-	public void setNguoidung(Account nguoidung) {
+	public void setNguoidung(User nguoidung) {
 		this.nguoidung = nguoidung;
 	}
 

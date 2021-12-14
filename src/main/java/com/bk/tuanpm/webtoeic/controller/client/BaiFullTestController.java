@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.bk.tuanpm.webtoeic.entities.Exam;
 import com.bk.tuanpm.webtoeic.entities.Question;
 import com.bk.tuanpm.webtoeic.entities.TestResult;
+import com.bk.tuanpm.webtoeic.entities.User;
 import com.bk.tuanpm.webtoeic.entities.Account;
 import com.bk.tuanpm.webtoeic.entities.PartToeic;
 import com.bk.tuanpm.webtoeic.service.BaiThiThuService;
@@ -132,7 +133,7 @@ public class BaiFullTestController {
 			@PathVariable("correctReading") int correctReading, @PathVariable("examId") int examId) {
 
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		Account currentUser = nguoiDungService.findByEmail(auth.getName());
+		User currentUser = nguoiDungService.findUserByEmail(auth.getName());
 
 		Date time = new Date();
 		TestResult ketquabaitest = new TestResult();

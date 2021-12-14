@@ -12,9 +12,9 @@
 			<div class="list-group">
 				<a href="/webtoeic/listening" class="list-group-item list-group-item-action active">
 					DANH MỤC </a> 
-				<a href="#"
-					class="list-group-item list-group-item-action">TOP ĐỀ NHIỀU LƯỢT THI</a> 
-				<a href="#" class="list-group-item list-group-item-action">TOP ĐỀ ĐÁNH GIÁ CAO</a>
+				<a href=""
+					class="list-group-item list-group-item-action" id="viewTopView">TOP ĐỀ NHIỀU LƯỢT THI</a> 
+				<a href="" class="list-group-item list-group-item-action" id="viewTopRating">TOP ĐỀ ĐÁNH GIÁ CAO</a>
 				<a href="/webtoeic/reading" class="list-group-item list-group-item-action">THI LẠI CÁC ĐỀ ĐÃ THI</a> 
 			</div> 
 

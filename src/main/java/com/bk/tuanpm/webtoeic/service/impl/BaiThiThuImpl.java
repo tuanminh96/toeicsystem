@@ -46,11 +46,11 @@ public class BaiThiThuImpl implements BaiThiThuService {
 
 	@Override
 	public List<Exam> getTopRatingExam() {
-		return baithithuRepo.findTop10ByOrderByCountRate();
+		return baithithuRepo.findTop10ByOrderByCountRateDesc();
 	};
 
 	@Override
 	public List<Exam> getTopViewExam() {
-		return baithithuRepo.findTop10ByOrderByCountTest();
+		return baithithuRepo.findTop10ByOrderByCountTestDesc();
 	};
 }

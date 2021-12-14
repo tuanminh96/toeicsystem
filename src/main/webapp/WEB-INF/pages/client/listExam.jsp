@@ -138,7 +138,7 @@ style>label {
 						<button class="btn btn-success" type="submit">Search</button>
 					</div>
 				</div>
-				<div class="">
+				<div class="divToChange">
 					<c:if test="${fn:length(listData) == 0 }">
 						<h3>Không tìm thấy dữ liệu</h3>
 					</c:if>
@@ -262,7 +262,24 @@ style>label {
 
 	<jsp:include page="include/footerHome.jsp"></jsp:include>
 
-	<!-- Include Date Range Picker -->
+	<script type="text/javascript">
+	$("#viewTopRating").on('click', function (e) {
+		e.preventDefault();
+        var appContext = $("#baseUrl").val();
+            $.ajax({
+                type: "GET",
+                url: appContext + "/getTopRating",
+                success: function (result) {
+                    $(".divToChange").html(result);
+                    $(".paging").hide();
+                },
+                error: function (e) {
+                    alert("Error: ", e);
+                    console.log("Error", e);
+                }
+            });
+    });
+	</script>
 </body>
 
 </html>

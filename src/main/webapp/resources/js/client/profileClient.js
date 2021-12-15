@@ -1,4 +1,14 @@
 $(document).ready(function() {
+	$('#historyExam').DataTable({
+		lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+		searching: true, // Mặc định là true, set false để tắt chức năng search
+		ordering:  true, // Mặc định là true, set false để tắt chức năng sắp xếp theo collumn
+		paging: true, // Mặc định là true, set false để tắt chức năng phân trang
+		// scrollX: 400, // Nội dụng của table sẽ hiện thị với with 400px, Nếu quá thì sẽ có thanh scroll
+		// scrollY: 300, // Nội dụng của table sẽ hiện thị với hieght 400px, Nếu quá thì sẽ có thanh scroll
+		processing: true,
+		info: false, // Tắt thông tin về table VD: Showing 1 to 14 of 14 entries
+	});
 	$('#tabs a').click(function(e) {
 		e.preventDefault();
 		$(this).tab('show');
@@ -11,6 +21,7 @@ $(document).ready(function() {
 	});
 
 	function ajaxPostChangePass() {
+		alert(3);
 		// PREPATEE DATA
 		var data = $('.formDoiMatKhau').serializeFormJSON();
 		// do post

@@ -19,8 +19,8 @@ public interface BaiThiThuRespository extends JpaRepository<Exam,Integer>
 	@Query("SELECT e FROM Exam e ORDER BY e.dateAdd DESC")
 	Page<Exam> findAll(Pageable pageRequest);
 	
-	List<Exam> findTop10ByOrderByCountRate();
+	List<Exam> findTop10ByOrderByCountRateDesc();
 	
-	List<Exam> findTop10ByOrderByCountTest();
+	List<Exam> findTop10ByOrderByCountTestDesc();
 
 }

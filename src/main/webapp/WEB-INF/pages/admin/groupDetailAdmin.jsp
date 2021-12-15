@@ -16,14 +16,16 @@
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css"> 
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script
+	src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"
 	integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg=="
@@ -389,10 +391,10 @@ a.dropdown-menu-header {
 			<a href="${pageContext.request.contextPath}/admin/group">Back</a>
 		</div>
 		<div class="col-md-10">
-			<div class="card container">
+			<div class="card">
 				<div class="card-body">
 					<div class="row">
-						<div class="col-lg-4">
+						<div class="col-lg-3">
 							<div class="border-bottom text-center pb-4">
 								<img style="width: 70%;"
 									src="https://cla.hust.edu.vn/xmedia/2014/05/ky-nang-lam-phan-nghe-trong-bai-thi-toeic.png"
@@ -463,19 +465,22 @@ a.dropdown-menu-header {
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-8">
+						<div class="col-lg-9">
 							<div class="share border bg-white">
-								<div class="d-flex flex-row inputs p-2 py-4">
-									<input type="text" class="border-0 form-control share-input"
-										placeholder="Share your thoughts">
+								<div class=" flex-row inputs">
+									<input type="text" class=" form-control share-input"
+										placeholder="Nhập tiêu đề cho bài viết"> 
+									<div class="form-group purple-border">
+										<label style="font-size: 12px;margin-left: 10px; color: cadetblue;" for="exampleFormControlTextarea4" > Nội
+											dung</label>
+										<textarea class="form-control"
+											id="exampleFormControlTextarea4" rows="3"></textarea>
+									</div>
 								</div>
 								<div class="d-flex flex-row justify-content-between border-top">
 									<div class="d-flex flex-row publish-options">
 										<div class="align-items-center border-right p-2 share">
 											<i class="fa fa-camera text-black-50"></i><span class="ml-1">Photo</span>
-										</div>
-										<div class="align-items-center border-right p-2 share">
-											<i class="fa fa-file text-black-50"></i><span class="ml-1">Files</span>
 										</div>
 									</div>
 									<div class="publish-button"
@@ -493,11 +498,15 @@ a.dropdown-menu-header {
 											<i class="mdi mdi-newspaper"></i> Feed
 									</a></li>
 									<li class="nav-item"><a class="nav-link" href="#"> <i
-											class="mdi mdi-calendar"></i> Bài giao
+											class="mdi mdi-book-open"></i> Bài giao
 									</a></li>
 									<li class="nav-item"><a class="nav-link" href="#"
-										id="memberlist"> <i class="mdi mdi-calendar"></i> Thành
-											viên
+										id="memberlist"> <i class="mdi mdi-account-multiple"></i>
+											Thành viên
+									</a></li>
+									<li class="nav-item"><a class="nav-link" href="#"
+										id="memberResult"> <i class="mdi mdi-cloud-check"></i> Kết
+											quả học tập
 									</a></li>
 								</ul>
 							</div>

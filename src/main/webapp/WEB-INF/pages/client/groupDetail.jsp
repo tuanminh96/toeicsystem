@@ -113,15 +113,14 @@ body {
 								<div class="share border bg-white">
 									<div class="d-flex flex-row inputs p-2 py-4">
 										<input type="text" class="border-0 form-control share-input"
-											placeholder="Share your thoughts">
+											placeholder="Nhập tiêu đề cho bài viết">
+										<input type="text" class="border-0 form-control share-input"
+											placeholder="Nhập nội dung bài viết">
 									</div>
 									<div class="d-flex flex-row justify-content-between border-top">
 										<div class="d-flex flex-row publish-options">
 											<div class="align-items-center border-right p-2 share">
 												<i class="fa fa-camera text-black-50"></i><span class="ml-1">Photo</span>
-											</div>
-											<div class="align-items-center border-right p-2 share">
-												<i class="fa fa-file text-black-50"></i><span class="ml-1">Files</span>
 											</div>
 										</div>
 										<div class="publish-button"

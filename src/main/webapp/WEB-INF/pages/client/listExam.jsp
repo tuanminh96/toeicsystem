@@ -15,98 +15,90 @@
 <!-- Special version of Bootstrap that only affects content wrapped in .bootstrap-iso -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <!-- Inline CSS based on choices in "Settings" tab -->
-<style>
-.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p,
-	.bootstrap-iso form {
-	font-family: Arial, Helvetica, sans-serif;
-	color: black
-}
+    <style>
+        .bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p,
+        .bootstrap-iso form {
+            font-family: Arial, Helvetica, sans-serif;
+            color: black
+        }
 
-.bootstrap-iso form button, .bootstrap-iso form button:hover {
-	color: white !important;
-}
+        .bootstrap-iso form button, .bootstrap-iso form button:hover {
+            color: white !important;
+        }
 
-.asteriskField {
-	color: red;
-}
-</style>
-<style>
-.checked {
-	color: orange;
-}
-</style>
-<style type="text/css">
-.hidden {
-	display: none;
-}
+        .asteriskField {
+            color: red;
+        }
+    </style>
+    <style>
+        .checked {
+            color: orange;
+        }
+    </style>
+    <style type="text/css">
+        .hidden {
+            display: none;
+        }
 
-.error-message {
-	color: red;
-}
+        .error-message {
+            color: red;
+        }
 
-.anchor {
-	display: block;
-	height: 115px; /*same height as header*/
-	margin-top: -115px; /*same height as header*/
-	visibility: hidden;
-}
+        .anchor {
+            display: block;
+            height: 115px; /*same height as header*/
+            margin-top: -115px; /*same height as header*/
+            visibility: hidden;
+        }
 
-.imageExam {
-	float: left;
-	height: 150px;
-	width: 250px;
-	margin-bottom: 25px;
-}
+        .imageExam {
+            float: left;
+            height: 150px;
+            width: 250px;
+            margin-bottom: 25px;
+        }
 
-<
-style>label {
-	margin-left: 20px;
-}
 
-#datepicker {
-	width: 180px;
-	margin: 0 20px 20px 20px;
-}
+        #datepicker {
+            width: 180px;
+            margin: 0 20px 20px 20px;
+        }
 
-#datepicker>span:hover {
-	cursor: pointer;
-}
-</style>
-</style>
+        #datepicker > span:hover {
+            cursor: pointer;
+        }
+
+        /* Handle config CSS*/
+        .mainListExam {
+            margin: 75px;
+        }
+    </style>
 
 <script type="text/javascript">
-	$(document).ready(function() {
+        $(document).ready(function () {
+            var buttons = document.getElementsByClassName('openModalExam');
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].addEventListener("click", clickHandler);
+            }
 
-		var buttons = document.getElementsByClassName('openModalExam');
+            function clickHandler(event) {
+                var buttonId = event.target.id;
+                var idExam = document.getElementById(buttonId).value;
+                $('#examModal').modal('show');
+                $('#examModal #idExamModal').val(idExam);
+            }
 
-		for (var i = 0; i < buttons.length; i++) {
-			buttons[i].addEventListener("click", clickHandler);
-
-		}
-
-		function clickHandler(event) {
-			var buttonId = event.target.id;
-			var idExam = document.getElementById(buttonId).value;
-
-			$('#examModal').modal('show');
-			$('#examModal #idExamModal').val(idExam);
-
-		}
-
-		$('#btnLamBaiThi').click(function() {
-			var baseUrl = $('#baseUrl').val();
-			var examId = $('#idExamModal').val();
-			window.location.href = baseUrl + "/doExam?idExam=" + examId;
-
-		});
-
-	});
-</script>
-
+            $('#btnLamBaiThi').click(function () {
+                var baseUrl = $('#baseUrl').val();
+                var examId = $('#idExamModal').val();
+                window.location.href = baseUrl + "/doExam?idExam=" + examId;
+            });
+        });
+    </script>
 </head>
 <body>
-
 	<jsp:include page="template/header.jsp"></jsp:include>
 	<input id="baseUrl" value="${pageContext.request.contextPath}"
 		style="display: none;" />
@@ -152,15 +144,17 @@ style>label {
 											href="http://www.jquery2dotnet.com/2013/12/cool-share-button-effects-styles.html"
 											class="post-title">${list.tenbaithithu}</a></strong>
 									</h3>
-									<label style="padding-top: 25px;" class="col-md-2"><i style="color: green;" class="fas fa-check-circle"></i> Đã thi</label>
+									<label style="padding-top: 25px;" class="col-md-2"><i
+										style="color: green;" class="fas fa-check-circle"></i> Đã thi</label>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-md-12 post-header-line">
-									<i class="fa fa-user" aria-hidden="true"></i> by <a href="#">${list.userAdd.username}</a> |
-									<i class="fa fa-calendar" aria-hidden="true"></i> ${list.dateAdd} | <i class="fa fa-eye" aria-hidden="true"></i> ${list.countTest }  | <span
-										class="glyphicon glyphicon-tags"> </span>Level :<span
-										class="label label-info">${list.level}</a>
+									<i class="fa fa-user" aria-hidden="true"></i> by <a href="#">${list.userAdd.username}</a>
+									| <i class="fa fa-calendar" aria-hidden="true"></i>
+									${list.dateAdd} | <i class="fa fa-eye" aria-hidden="true"></i>
+									${list.countTest } | <span class="glyphicon glyphicon-tags">
+									</span>Level :<span class="label label-info">${list.level}</a>
 								</div>
 							</div>
 							<div class="row post-content">
@@ -171,14 +165,16 @@ style>label {
 								</div>
 								<div class="col-md-9" style="padding: 25px;">
 									<p>${list.description}</p>
-									<div style="margin-bottom: 10px;" id="rating${list.baithithuid}" count="${list.countRate}">
-									<c:forEach var = "i" begin = "1" end = "${list.countRate}">
-										<span class="fa fa-star checked"></span> 
-									</c:forEach>
-									<c:forEach var = "i" begin = "1" end = "${5- list.countRate}">
-										<span class="fa fa-star "></span> 
-									</c:forEach>
-										<span style="font-family: cursive;margin-left: 10px;color: brown;">4.57/5</span>
+									<div style="margin-bottom: 10px;"
+										id="rating${list.baithithuid}" count="${list.countRate}">
+										<c:forEach var="i" begin="1" end="${list.countRate}">
+											<span class="fa fa-star checked"></span>
+										</c:forEach>
+										<c:forEach var="i" begin="1" end="${5- list.countRate}">
+											<span class="fa fa-star "></span>
+										</c:forEach>
+										<span
+											style="font-family: cursive; margin-left: 10px; color: brown;">4.57/5</span>
 									</div>
 									<p>
 										<button class="btn btn-primary openModalExam"
@@ -233,7 +229,8 @@ style>label {
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">HƯỚNG DẪN LÀM BÀI THI THỬ</h5>
+					<h5 class="modal-title" id="exampleModalLabel">HƯỚNG DẪN LÀM
+						BÀI THI THỬ</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -261,27 +258,27 @@ style>label {
 			</div>
 		</div>
 	</div>
-
-	<jsp:include page="include/footerHome.jsp"></jsp:include>
-
+	
+	<%--<jsp:include page="include/footerHome.jsp"></jsp:include>--%>
+	<jsp:include page="template/footer.jsp"></jsp:include>
 	<script type="text/javascript">
 	$("#viewTopRating").on('click', function (e) {
 		e.preventDefault();
         var appContext = $("#baseUrl").val();
-            $.ajax({
-                type: "GET",
-                url: appContext + "/getTopRating",
-                success: function (result) {
-                    $(".divToChange").html(result);
-                    $(".paging").hide();
-                },
-                error: function (e) {
-                    alert("Error: ", e);
-                    console.log("Error", e);
-                }
-            });
+        $.ajax({
+            type: "GET",
+            url: appContext + "/getTopRating",
+            success: function (result) {
+                $(".divToChange").html(result);
+                $(".paging").hide();
+            },
+            error: function (e) {
+                alert("Error: ", e);
+                console.log("Error", e);
+            }
+        });
     });
-	</script>
+</script>
 </body>
 
 </html>

@@ -1,4 +1,3 @@
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -17,22 +16,40 @@
 	rel="stylesheet" type="text/css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+	integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
+	crossorigin="anonymous">
+<link
+	href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css"
+	rel="stylesheet" type="text/css">
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" href="<c:url value='/css/style.css'  />" />
 
-
 <style>
+#header-row {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 60px;
+	margin-bottom: 15px;
+	z-index: 999;
+}
+
 span.notification-badge {
 	position: relative;
 	top: -10px;
 	right: 10px;
-	border: $white 1px solid;
+	border: white 1px solid;
 }
 
 .radio-inline {
@@ -50,29 +67,22 @@ h3 {
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
-
 		var down = false;
 		$('#box').css('display', 'none');
 		$('#bell').click(function(e) {
-
 			var color = $(this).text();
 			if (down) {
-
 				$('#box').css('height', '0px');
 				$('#box').css('opacity', '0');
 				$('#box').css('display', 'none');
 				down = false;
 			} else {
-
 				$('#box').css('height', 'auto');
 				$('#box').css('opacity', '1');
 				$('#box').css('display', 'block');
 				down = true;
-
 			}
-
 		});
-
 	});
 </script>
 </head>
@@ -84,7 +94,7 @@ h3 {
 			<div class="row">
 				<!--LOGO-->
 				<div class="col-md-4">
-					<a class="brand" href="/webtoeic"><img style="width: 160px;"
+					<a class="brand" href="/webtoeic"><img style="height: 40px;"
 						src="/webtoeic/resources/file/images/logotest.png" /></a>
 				</div>
 				<!-- /LOGO -->
@@ -117,13 +127,15 @@ h3 {
 									href="#">${nguoiDung.hoTen}</a>
 									<div class="dropdown-menu">
 										<a class="dropdown-item"
-											href="<%=request.getContextPath()%>/profile">Tài khoản</a> 
-										<a class="dropdown-item" href="<%=request.getContextPath()%>/payment">Nâng cấp VIP</a> 
-										<a class="dropdown-item" href="<%=request.getContextPath()%>/listnoti/1">Thông báo</a> 
+											href="<%=request.getContextPath()%>/profile">Tài khoản</a> <a
+											class="dropdown-item"
+											href="<%=request.getContextPath()%>/payment">Nâng cấp VIP</a>
+										<a class="dropdown-item"
+											href="<%=request.getContextPath()%>/listnoti/1">Thông báo</a>
 										<a class="dropdown-item"
 											href="<%=request.getContextPath()%>/signout">Thoát</a>
 									</div></li>
-								<div class="nav-item">
+								<div class="nav-item" style="padding: 0 10px">
 									<a class="nav-link" href="#" rel="noopener" aria-label="GitHub"
 										id="bell"> <i class="fa fa-lg fa-bell"></i> <span
 										class="notification-badge badge badge-danger">1</span>
@@ -152,11 +164,8 @@ h3 {
 								</div>
 							</div>
 						</c:if>
-
-
 					</ul>
 				</div>
-
 				<!-- MAIN NAVIGATION -->
 			</div>
 		</div>

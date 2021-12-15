@@ -129,11 +129,15 @@ body {
 .bg-soft-success {
 	background-color: rgba(35, 197, 143, .25) !important;
 }
+/* Handle config CSS*/
+.mainListGroup{
+	margin: 75px;
+}
 </style>
 </head>
 <body>
 	<jsp:include page="template/header.jsp"></jsp:include>
-	<div class="container">
+	<div class="container mainListGroup">
 		<div class="row">
 			<div class="col-md-3"></div>
 			<div class="col-md-9">

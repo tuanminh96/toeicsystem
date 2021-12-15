@@ -13,4 +13,8 @@ import java.util.List;
 public interface ClientAccountRepository extends JpaRepository<TestResult, Integer> {
     @Query(value = "SELECT e.title, tr.date_test, tr.total_time_test, tr.score_reading, tr.score_listen FROM dbo.test_result tr INNER JOIN dbo.exam e ON tr.baithithuid = e.id_exam WHERE tr.nguoidungid = ?1", nativeQuery = true)
     public List<Object[]> findAllExamHistory(int userId);
+
+    // Lay ra tong so bai exam da thi.
+    @Query(value = "SELECT COUNT(DISTINCT tr.baithithuid) FROM dbo.test_result tr WHERE tr.nguoidungid = ?1", nativeQuery = true)
+    public Object getTotalExam(int userId);
 }

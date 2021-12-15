@@ -77,9 +77,17 @@ public class ClientController {
 	@GetMapping(value = "/profile")
 	public String profilePage(Model model, HttpServletRequest request, @AuthenticationPrincipal OAuth2User oauth2User) {
 		Account account = getSessionUser(request);
+		int idAccount = account.getId();
 		model.addAttribute("user", account);
-		List<ExamHistoryDTO> listExamHistoryDTO = clientAccountService.findAllExamHistory(account.getId());
+
+		// Lay ra list cac bai thi accout da thi.
+		List<ExamHistoryDTO> listExamHistoryDTO = clientAccountService.findAllExamHistory(idAccount);
 		model.addAttribute("listExamHistoryDTO", listExamHistoryDTO);
+
+		// Lay ra tong so bai thi(exam) account da thi.
+		int totalExam = clientAccountService.getTotalExam(idAccount);
+		model.addAttribute("totalExam", totalExam);
+
 		return "client/profile";
 	}
 

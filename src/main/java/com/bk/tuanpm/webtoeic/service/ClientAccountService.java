@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ClientAccountService {
     public List<ExamHistoryDTO> findAllExamHistory(int userId);
+
+    public int getTotalExam(int userId);
 }

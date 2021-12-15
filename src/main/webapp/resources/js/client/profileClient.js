@@ -1,5 +1,8 @@
 $(document).ready(function() {
 	$('#historyExam').DataTable({
+		language: {
+			emptyTable: "Bạn chưa thi bài thi nào."
+		},
 		lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
 		searching: true, // Mặc định là true, set false để tắt chức năng search
 		ordering:  true, // Mặc định là true, set false để tắt chức năng sắp xếp theo collumn

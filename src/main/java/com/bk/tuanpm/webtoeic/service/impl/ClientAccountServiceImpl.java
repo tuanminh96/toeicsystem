@@ -31,4 +31,10 @@ public class ClientAccountServiceImpl implements ClientAccountService {
         }
         return listExamHistoryDTO;
     }
+
+    @Override
+    public int getTotalExam(int userId) {
+        Object totalExam = clientAccountRepository.getTotalExam(userId);
+        return (int) totalExam;
+    }
 }

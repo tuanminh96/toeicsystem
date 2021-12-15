@@ -8,8 +8,9 @@
 
     <style>
         .mainProfileClient {
-            height: 650px;
+            height: 700px;
         }
+
         .footerProfileClient {
             height: 60px;
         }
@@ -94,6 +95,18 @@
                 </form>
             </div>
             <div class="tab-pane" id="history" style="padding-top: 20px">
+
+                <c:choose>
+                    <c:when test="${listExamHistoryDTO != null}">
+                        <div style="padding-bottom: 20px">
+                            Bạn đã thi tổng cộng ${listExamHistoryDTO.size()} lần và ${totalExam} bài thi.
+                        </div>
+                    </c:when>
+                    <%--                        <c:otherwise>--%>
+                    <%--                            Bạn đã thi tổng cộng 0 lần.--%>
+                    <%--                        </c:otherwise>--%>
+                </c:choose>
+
                 <table id="historyExam" class="table table-striped table-bordered taiKhoanVIP" style="width: 100%">
                     <thead>
                     <tr>

@@ -8,14 +8,10 @@
 
     <style>
         .mainProfileClient {
-            height: 700px;
-        }
-
-        .footerProfileClient {
-            height: 60px;
+            margin-top: 75px;
+            margin-bottom: 75px;
         }
     </style>
-
 </head>
 <body>
 <jsp:include page="template/header.jsp"></jsp:include>
@@ -30,7 +26,7 @@
         </li>
     </ul>
     <div>
-        <div class="tab-content" style="height: 370px;">
+        <div class="tab-content">
             <div class="tab-pane active" id="information">
                 <form class="form-profile" action="/webtoeic/profile/update" method="post">
                     <div class="form-group">
@@ -95,7 +91,6 @@
                 </form>
             </div>
             <div class="tab-pane" id="history" style="padding-top: 20px">
-
                 <c:choose>
                     <c:when test="${listExamHistoryDTO != null}">
                         <div style="padding-bottom: 20px">
@@ -135,9 +130,7 @@
         </div>
     </div>
 </div>
-<div class="footerProfileClient">
-    <jsp:include page="template/footer.jsp"></jsp:include>
-</div>
+<jsp:include page="template/footer.jsp"></jsp:include>
 <script src="<c:url value='/js/client/profileClient.js'/>"></script>
 </body>
 </html>

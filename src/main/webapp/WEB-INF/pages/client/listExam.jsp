@@ -102,7 +102,7 @@
 	<jsp:include page="template/header.jsp"></jsp:include>
 	<input id="baseUrl" value="${pageContext.request.contextPath}"
 		style="display: none;" />
-	<div class="container">
+	<div class="container mainListExam">
 		<!--PAGE TITLE-->
 
 		<div class="" style="text-align: center">
@@ -154,7 +154,7 @@
 									| <i class="fa fa-calendar" aria-hidden="true"></i>
 									${list.dateAdd} | <i class="fa fa-eye" aria-hidden="true"></i>
 									${list.countTest } | <span class="glyphicon glyphicon-tags">
-									</span>Level :<span class="label label-info">${list.level}</a>
+									</span>Level :<span class="label label-info">${list.level}</span>
 								</div>
 							</div>
 							<div class="row post-content">
@@ -191,36 +191,38 @@
 			</div>
 			<jsp:include page="template/leftbar.jsp"></jsp:include>
 		</div>
-	</div>
-	<!--Pagination-->
-	<c:if test="${listData.size() != 0}">
+		<div class="row">
+			<!--Pagination-->
+			<c:if test="${listData.size() != 0}">
 
-		<div class="paging">
-			<c:if test="${currentPage != 1}">
-				<a href="/webtoeic/listExam?page=${currentPage-1}">Back</a>
-			</c:if>
-			<c:if test="${currentPage == 1}">
-				<a class="current">1</a>
-			</c:if>
+				<div class="paging">
+					<c:if test="${currentPage != 1}">
+						<a href="/webtoeic/listExam?page=${currentPage-1}">Back</a>
+					</c:if>
+					<c:if test="${currentPage == 1}">
+						<a class="current">1</a>
+					</c:if>
 
-			<c:if test="${currentPage != 1}">
-				<a href="/webtoeic/listExam?page=1">1</a>
-			</c:if>
+					<c:if test="${currentPage != 1}">
+						<a href="/webtoeic/listExam?page=1">1</a>
+					</c:if>
 
-			<c:forEach var="pag" items="${pageList}" varStatus="loop">
-				<c:if test="${currentPage == pag}">
-					<a class="current">${pag}</a>
-				</c:if>
-				<c:if test="${currentPage != pag}">
-					<a href="/webtoeic/listExam?page=${pag}">${pag}</a>
-				</c:if>
-			</c:forEach>
+					<c:forEach var="pag" items="${pageList}" varStatus="loop">
+						<c:if test="${currentPage == pag}">
+							<a class="current">${pag}</a>
+						</c:if>
+						<c:if test="${currentPage != pag}">
+							<a href="/webtoeic/listExam?page=${pag}">${pag}</a>
+						</c:if>
+					</c:forEach>
 
-			<c:if test="${currentPage != totalPage}">
-				<a href="/webtoeic/listExam?page=${currentPage+1} " class="pageNext">Next</a>
+					<c:if test="${currentPage != totalPage}">
+						<a href="/webtoeic/listExam?page=${currentPage+1} " class="pageNext">Next</a>
+					</c:if>
+				</div>
 			</c:if>
 		</div>
-	</c:if>
+	</div>
 
 	<!-- New modal -->
 	<!-- Modal -->

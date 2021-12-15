@@ -27,7 +27,7 @@
 				<th>ID</th>
 				<th>Tên đăng nhập</th>
 				<th>Tên thành viên</th>
-				<th>Giới tính</th>
+				<th></th>
 				<th></th>
 			</tr>
 		</thead>
@@ -38,7 +38,8 @@
 					<td class="center"><a
 						href="${pageContext.request.contextPath}/admin/">${member.memName}</a></td>
 					<td class="center">${member.fullName}</td>
-					<td class="center">${member.dateAdd}</td>
+					<button type="button" class="btn btn-info">Info</button>
+					<button type="button" class="btn btn-warning">Warning</button>
 				</tr>
 			</c:forEach>
 		</tbody>

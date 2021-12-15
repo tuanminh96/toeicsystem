@@ -138,20 +138,21 @@ style>label {
 						<button class="btn btn-success" type="submit">Search</button>
 					</div>
 				</div>
-				<div class="divToChange">
+				<div class="divToChange" style="padding: 0px 20px;">
 					<c:if test="${fn:length(listData) == 0 }">
 						<h3>Không tìm thấy dữ liệu</h3>
 					</c:if>
 
 					<c:forEach items="${listData}" var="list" varStatus="loop">
 						<div class="col-md-12 post">
-							<div class="row">
-								<div class="col-md-12">
-									<h3>
+							<div class="">
+								<div class="row">
+									<h3 class="col-md-10">
 										<strong><a id="namebaithithu"
 											href="http://www.jquery2dotnet.com/2013/12/cool-share-button-effects-styles.html"
 											class="post-title">${list.tenbaithithu}</a></strong>
 									</h3>
+									<label style="padding-top: 25px;" class="col-md-2"><i style="color: green;" class="fas fa-check-circle"></i> Đã thi</label>
 								</div>
 							</div>
 							<div class="row">
@@ -169,14 +170,15 @@ style>label {
 									</a>
 								</div>
 								<div class="col-md-9" style="padding: 25px;">
-									<p>Đề thi thử của Hội đồng TOEIC năm 2020</p>
-									<div id="rating${list.baithithuid}" count="${list.countRate}">
+									<p>${list.description}</p>
+									<div style="margin-bottom: 10px;" id="rating${list.baithithuid}" count="${list.countRate}">
 									<c:forEach var = "i" begin = "1" end = "${list.countRate}">
 										<span class="fa fa-star checked"></span> 
 									</c:forEach>
 									<c:forEach var = "i" begin = "1" end = "${5- list.countRate}">
-										<span class="fa fa-star"></span> 
+										<span class="fa fa-star "></span> 
 									</c:forEach>
+										<span style="font-family: cursive;margin-left: 10px;color: brown;">4.57/5</span>
 									</div>
 									<p>
 										<button class="btn btn-primary openModalExam"
@@ -186,6 +188,7 @@ style>label {
 								</div>
 							</div>
 						</div>
+						<br>
 					</c:forEach>
 					<br>
 				</div>
@@ -230,8 +233,7 @@ style>label {
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">HƯỚNG DẪN LÀM
-						BÀI THI THỬ</h5>
+					<h5 class="modal-title" id="exampleModalLabel">HƯỚNG DẪN LÀM BÀI THI THỬ</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>

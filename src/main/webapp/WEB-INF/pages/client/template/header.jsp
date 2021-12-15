@@ -117,9 +117,10 @@ h3 {
 									href="#">${nguoiDung.hoTen}</a>
 									<div class="dropdown-menu">
 										<a class="dropdown-item"
-											href="<%=request.getContextPath()%>/profile">Tài khoản</a> <a
-											class="dropdown-item" href="#">Nâng cấp VIP</a> <a
-											class="dropdown-item"
+											href="<%=request.getContextPath()%>/profile">Tài khoản</a> 
+										<a class="dropdown-item" href="<%=request.getContextPath()%>/payment">Nâng cấp VIP</a> 
+										<a class="dropdown-item" href="<%=request.getContextPath()%>/listnoti/1">Thông báo</a> 
+										<a class="dropdown-item"
 											href="<%=request.getContextPath()%>/signout">Thoát</a>
 									</div></li>
 								<div class="nav-item">

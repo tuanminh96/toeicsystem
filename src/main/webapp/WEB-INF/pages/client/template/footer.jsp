@@ -10,6 +10,7 @@
         background: #f5f5f5;
         color: #ccc;
         border-top: 1px solid #eee;
+        z-index: 999;
     }
 
     .iconImg {

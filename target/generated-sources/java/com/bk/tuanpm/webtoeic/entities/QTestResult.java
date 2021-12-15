@@ -32,7 +32,7 @@ public class QTestResult extends EntityPathBase<TestResult> {
 
     public final DateTimePath<java.util.Date> ngaythi = createDateTime("ngaythi", java.util.Date.class);
 
-    public final QAccount nguoidung;
+    public final QUser nguoidung;
 
     public final NumberPath<Integer> rightPart1 = createNumber("rightPart1", Integer.class);
 
@@ -73,7 +73,7 @@ public class QTestResult extends EntityPathBase<TestResult> {
     public QTestResult(Class<? extends TestResult> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.baithithu = inits.isInitialized("baithithu") ? new QExam(forProperty("baithithu"), inits.get("baithithu")) : null;
-        this.nguoidung = inits.isInitialized("nguoidung") ? new QAccount(forProperty("nguoidung"), inits.get("nguoidung")) : null;
+        this.nguoidung = inits.isInitialized("nguoidung") ? new QUser(forProperty("nguoidung"), inits.get("nguoidung")) : null;
     }
 
 }

@@ -161,8 +161,15 @@
 					<div id="main" class="col-md-8 web-font">
 
 						<ul class="nav nav-tabs" id="tabparts">
-							<c:forEach items="${partReading}" var="part">
-								<li><a partid="${part.idPart}" href="#${part.idPart}">${part.partName}</a></li>
+							<c:forEach items="${partReading}" var="part" varStatus="index">
+								<c:choose>
+									<c:when test="${index.count=='1'}">
+										<li class="active"><a partid="${part.idPart}" href="#${part.idPart}">${part.partName}</a></li>
+									</c:when>
+									<c:otherwise>
+										<li><a partid="${part.idPart}" href="#${part.idPart}">${part.partName}</a></li>
+									</c:otherwise>
+								</c:choose>
 							</c:forEach>
 						</ul>
 						<c:forEach items="${partReading}" var="part">

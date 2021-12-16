@@ -158,8 +158,8 @@
 
     <div class="row feature-box">
         <div class="span12 cnt-title">
-            <h1>Cung cấp các giao diện học và thi thân thiện.</h1>
-            <span>--- Học thử, Làm bài tập, Thi thử ---</span>
+            <h1>Cung cấp các giao diện thi thử thân thiện.</h1>
+            <span>--- Thi thử, Xem giải đáp, Học nhóm ---</span>
         </div>
 
         <div class="col-md-4">

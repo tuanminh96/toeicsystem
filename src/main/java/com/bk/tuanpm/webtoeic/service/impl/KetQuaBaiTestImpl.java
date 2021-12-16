@@ -1,6 +1,9 @@
 package com.bk.tuanpm.webtoeic.service.impl;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,5 +28,26 @@ public class KetQuaBaiTestImpl implements KetQuaBaiTestService{
 	@Override
 	public List<TestResult> getResultMember(User user) {
 		return ketquabaitestRepo.findByNguoidung(user);
+	}
+	
+	@Override
+	public List<Integer> getExamOfUsers(User user) {
+		
+		return ketquabaitestRepo.getExamsTested(user.getId());
+	}
+	
+	@Override
+	public List<Integer> getListExamNotAllowedTest(User user) {
+		List<TestResult> listResult = ketquabaitestRepo.findByNguoidung(user);
+		List<Integer> listNotAllow = new ArrayList<Integer>();
+		for (TestResult tr  : listResult) {
+			Date dateTest = tr.getNgaythi();
+			long current = (new Date()).getTime();
+			if(dateTest.getTime()+24*60*60*1000 > current) {
+				listNotAllow.add(tr.getBaithithu().getBaithithuid());
+			}
+		}
+		List<Integer> deduped = listNotAllow.stream().distinct().collect(Collectors.toList());
+		return deduped;
 	}
 }

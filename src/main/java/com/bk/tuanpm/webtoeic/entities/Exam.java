@@ -23,31 +23,30 @@ public class Exam implements Serializable {
 	public static final String MEDIUM = "2";
 	@Transient
 	public static final String HARD = "3";
-	 
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_exam", nullable = false)
 	private Integer baithithuid;
-	
-	
+
 	@Column(name = "title")
 	private String tenbaithithu;
-	
+
 	@Column(name = "thumbnail")
 	private String anhbaithithu;
-	
+
 	@Column
 	private Date dateAdd;
-	
+
 	private int countTest;
-	
+
 	@Column(nullable = true, columnDefinition = "float default 0")
 	private float countRate;
 	private String description;
 	private String level;
 	private String updateBy;
 	private Date updateDate;
-	
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Admin userAdd;
 
@@ -175,13 +174,11 @@ public class Exam implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
-//	@Override
-//	public String toString() {
-//		return "{"+"\"baithithuid\":"+"\""+BaiThiThu.class.get+"\""
-//				+ ","+"\"nguoidung\":" + "\""+nguoidung.getHoTen() +"\""+"}";
-//	}
-	
+
+	@Override
+	public String toString() {
+		return "Exam [baithithuid=" + baithithuid + ", tenbaithithu=" + tenbaithithu + ", anhbaithithu=" + anhbaithithu
+				+ ", dateAdd=" + dateAdd + "]";
+	}
+
 }

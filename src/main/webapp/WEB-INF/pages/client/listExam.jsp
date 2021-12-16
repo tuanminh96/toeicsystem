@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -144,8 +145,13 @@
 											href="http://www.jquery2dotnet.com/2013/12/cool-share-button-effects-styles.html"
 											class="post-title">${list.tenbaithithu}</a></strong>
 									</h3>
-									<label style="padding-top: 25px;" class="col-md-2"><i
+
+									<c:forEach items="${examsTested}" var="idExamTested">
+										<c:if test="${list.baithithuid == idExamTested}">
+										<label style="padding-top: 25px;" class="col-md-2"><i
 										style="color: green;" class="fas fa-check-circle"></i> Đã thi</label>
+										</c:if>
+									</c:forEach>
 								</div>
 							</div>
 							<div class="row">
@@ -177,9 +183,24 @@
 											style="font-family: cursive; margin-left: 10px; color: brown;">4.57/5</span>
 									</div>
 									<p>
-										<button class="btn btn-primary openModalExam"
+									<c:set var = "isNotAllow" scope = "session" value = "0"/>
+									<c:forEach items="${listNotAllow}" var="idNot">
+										<c:if test="${list.baithithuid == idNot}">
+											<c:set var = "isNotAllow" scope = "session" value = "1"/>
+										</c:if>
+
+									</c:forEach>
+									<c:choose>
+    									<c:when test="${isNotAllow == 1}">
+    										<button class="btn btn-primary" data-toggle="modal" data-target="#notAllowedModel">
+											Chi tiết</button>
+    									</c:when>    
+    									<c:otherwise>
+    										<button class="btn btn-primary openModalExam"
 											value="${list.baithithuid}" id="openModalExam.${loop.index}">
 											Chi tiết</button>
+    									</c:otherwise>
+									</c:choose>
 									</p>
 								</div>
 							</div>
@@ -260,7 +281,27 @@
 			</div>
 		</div>
 	</div>
-	
+	<div class="modal fade" id="notAllowedModel" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Xin lỗi</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p>Bạn vừa thi xong, xin hãy đợi sau 24h để thi lại nhé</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	<%--<jsp:include page="include/footerHome.jsp"></jsp:include>--%>
 	<jsp:include page="template/footer.jsp"></jsp:include>
 	<script type="text/javascript">

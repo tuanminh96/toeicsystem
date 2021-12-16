@@ -101,10 +101,20 @@ public class BaiFullTestController {
 			model.addAttribute("listData", sortedList);
 			model.addAttribute("currentPage", page);
 
+			//get list exam tested by user
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			User currentUser = nguoiDungService.findUserByEmail(auth.getName());
+			
+			List<Integer> exams = ketquabaitestService.getExamOfUsers(currentUser);
+			model.addAttribute("examsTested", exams);
+			List<Integer> notAllowedTest = ketquabaitestService.getListExamNotAllowedTest(currentUser);
+			model.addAttribute("listNotAllow", notAllowedTest);
+			
+			System.out.println(notAllowedTest.size());
 			return "client/listExam";
 
 		} catch (Exception e) {
-			System.out.println("error:" + e);
+			e.printStackTrace();
 			return "client/error";
 		}
 	}
@@ -120,6 +130,8 @@ public class BaiFullTestController {
 			model.addAllAttributes(newMapPartQuestion);
 			model.addAttribute("listQuestion", list);
 			model.addAttribute("partListen", partToeicListening);
+		
+			
 			return "client/fullTestListen";
 
 		} catch (Exception e) {

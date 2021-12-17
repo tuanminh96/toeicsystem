@@ -21,7 +21,7 @@ public class ExplainDetail {
 	private String explain;
 	
 	@ManyToOne
-	private Admin idAdmin;
+	private TutorialAdmin idAdmin;
 	private Date updateDate;
 	
 	@OneToOne
@@ -43,11 +43,11 @@ public class ExplainDetail {
 		this.explain = explain;
 	}
 
-	public Admin getIdStaff() {
+	public TutorialAdmin getIdStaff() {
 		return idAdmin;
 	}
 
-	public void setIdStaff(Admin idStaff) {
+	public void setIdStaff(TutorialAdmin idStaff) {
 		this.idAdmin = idStaff;
 	}
 

@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Admin extends Account {
+public class TutorialAdmin extends Account {
 
 	private Date joinDate;
 
@@ -29,6 +29,5 @@ public class Admin extends Account {
 				+ ", getClass()=" + getClass() + "]";
 	}
 	
-	
-	
+
 }

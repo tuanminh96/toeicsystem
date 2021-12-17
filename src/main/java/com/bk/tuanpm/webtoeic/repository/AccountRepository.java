@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.bk.tuanpm.webtoeic.entities.Account;
-import com.bk.tuanpm.webtoeic.entities.Admin;
+import com.bk.tuanpm.webtoeic.entities.TutorialAdmin;
 import com.bk.tuanpm.webtoeic.entities.Role;
 import com.bk.tuanpm.webtoeic.entities.User;
 
@@ -22,7 +22,7 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
 
 	List<Account> findByRole(Role vaiTro);
 
-	Admin findAdminByEmail(String email);	
+	TutorialAdmin findAdminByEmail(String email);	
 	
 	public User findById(int id);
 	

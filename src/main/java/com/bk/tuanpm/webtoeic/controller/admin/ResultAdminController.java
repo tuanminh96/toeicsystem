@@ -18,11 +18,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bk.tuanpm.webtoeic.dto.MemberDTO;
 import com.bk.tuanpm.webtoeic.entities.Account;
-import com.bk.tuanpm.webtoeic.entities.Admin;
+import com.bk.tuanpm.webtoeic.entities.TutorialAdmin;
 import com.bk.tuanpm.webtoeic.entities.Group;
 import com.bk.tuanpm.webtoeic.entities.TestResult;
 import com.bk.tuanpm.webtoeic.entities.User;
-import com.bk.tuanpm.webtoeic.repository.AdminRepository;
+import com.bk.tuanpm.webtoeic.repository.TutorialAdminRepository;
 import com.bk.tuanpm.webtoeic.service.GroupService;
 import com.bk.tuanpm.webtoeic.service.impl.KetQuaBaiTestImpl;
 import com.bk.tuanpm.webtoeic.service.impl.UserAdminServiceImpl;
@@ -36,7 +36,7 @@ public class ResultAdminController {
 	@Autowired
 	UserAdminServiceImpl nguoiDungService;
 	@Autowired
-	AdminRepository adminRepository;
+	TutorialAdminRepository adminRepository;
 	
 	@Autowired
 	UserAdminServiceImpl userAdminServiceImpl;

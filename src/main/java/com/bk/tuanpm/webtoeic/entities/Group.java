@@ -33,7 +33,7 @@ public class Group {
 
 	@ManyToOne
 	@JoinColumn(name = "id_admin")
-	private Admin createAdmin;
+	private TutorialAdmin createAdmin;
 
 	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	@JoinTable(name = "group_member", joinColumns = { @JoinColumn(name = "id_group") }, inverseJoinColumns = {
@@ -99,11 +99,11 @@ public class Group {
 		this.updateBy = updateBy;
 	}
 
-	public Admin getCreateAdmin() {
+	public TutorialAdmin getCreateAdmin() {
 		return createAdmin;
 	}
 
-	public void setCreateAdmin(Admin createAdmin) {
+	public void setCreateAdmin(TutorialAdmin createAdmin) {
 		this.createAdmin = createAdmin;
 	}
 

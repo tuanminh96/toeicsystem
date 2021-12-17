@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bk.tuanpm.webtoeic.entities.Admin;
+import com.bk.tuanpm.webtoeic.entities.TutorialAdmin;
 import com.bk.tuanpm.webtoeic.entities.Group;
 import com.bk.tuanpm.webtoeic.entities.GroupMember;
 import com.bk.tuanpm.webtoeic.entities.User;

@@ -11,10 +11,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.bk.tuanpm.webtoeic.entities.Account;
-import com.bk.tuanpm.webtoeic.entities.Admin;
+import com.bk.tuanpm.webtoeic.entities.ContentAdmin;
+import com.bk.tuanpm.webtoeic.entities.TutorialAdmin;
 import com.bk.tuanpm.webtoeic.entities.Role;
 import com.bk.tuanpm.webtoeic.entities.User;
 import com.bk.tuanpm.webtoeic.repository.AccountRepository;
+import com.bk.tuanpm.webtoeic.repository.ContentAdminRepository;
 import com.bk.tuanpm.webtoeic.repository.RoleRepository;
 import com.bk.tuanpm.webtoeic.repository.UserRepository;
 
@@ -32,12 +34,19 @@ public class UserAdminServiceImpl {
 	private RoleRepository roleRepository;
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	@Autowired
+	private ContentAdminRepository contentAdminRepository;
 
 	public Account findByEmail(String email) {
 		return nguoiDungRepo.findByEmail(email);
 	}
-	public Admin findAdminByEmail(String email) {
+	public TutorialAdmin findAdminByEmail(String email) {
 		return nguoiDungRepo.findAdminByEmail(email);
+	}
+	
+	public ContentAdmin findContentByEmail(String email) {
+		return contentAdminRepository.findByEmail(email);
 	}
 	public Account findByConfirmationToken(String confirmationToken) {
 		return null;

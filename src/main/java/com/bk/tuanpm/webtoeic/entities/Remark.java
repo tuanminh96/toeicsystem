@@ -22,7 +22,7 @@ public class Remark {
 	private String dateRange;
 	
 	@ManyToOne
-	private Admin adminRemark;
+	private TutorialAdmin adminRemark;
 	
 	@ManyToOne
 	private User user;
@@ -51,11 +51,11 @@ public class Remark {
 		this.timeRemark = timeRemark;
 	}
 
-	public Admin getAdminRemark() {
+	public TutorialAdmin getAdminRemark() {
 		return adminRemark;
 	}
 
-	public void setAdminRemark(Admin adminRemark) {
+	public void setAdminRemark(TutorialAdmin adminRemark) {
 		this.adminRemark = adminRemark;
 	}
 

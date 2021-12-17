@@ -11,15 +11,15 @@ import javax.persistence.Transient;
 @Table(name="role")
 public class Role {
 	@Transient
-	public static final int ROLE_ADMIN = 1;
+	public static final int ROLE_TUTORIAL = 1;
 	@Transient
 	public static final int ROLE_MEMBER = 2;
 	@Transient
 	public static final int ROLE_MEMBER_VIP = 3;
 	@Transient
-	public static final int ROLE_TUTORIAL = 4;
+	public static final int ROLE_CONTENT = 4;
 	@Transient
-	public static final int ROLE_CONTENT = 5;
+	public static final int ROLE_MANAGER = 5;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

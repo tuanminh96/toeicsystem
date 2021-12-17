@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.bk.tuanpm.webtoeic.entities.Account;
-import com.bk.tuanpm.webtoeic.entities.Admin;
+import com.bk.tuanpm.webtoeic.entities.TutorialAdmin;
 import com.bk.tuanpm.webtoeic.entities.Group;
 import com.bk.tuanpm.webtoeic.entities.Role;
 import com.bk.tuanpm.webtoeic.service.GroupService;
@@ -58,7 +58,7 @@ public class AdminController {
 	@GetMapping({"/group"})
 	public String quanLyGroup(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		Admin currentUser = nguoiDungService.findAdminByEmail(auth.getName());
+		TutorialAdmin currentUser = nguoiDungService.findAdminByEmail(auth.getName());
 		List<Group> groups = groupService.getGroupOfAdmin(currentUser);
 		model.addAttribute("groups", groups);
 		return "admin/quanLyGroup";

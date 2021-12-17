@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bk.tuanpm.webtoeic.dto.MemberDTO;
-import com.bk.tuanpm.webtoeic.entities.Admin;
+import com.bk.tuanpm.webtoeic.entities.TutorialAdmin;
 import com.bk.tuanpm.webtoeic.entities.Group;
 import com.bk.tuanpm.webtoeic.entities.User;
 import com.bk.tuanpm.webtoeic.repository.GroupRepository;
@@ -38,7 +38,7 @@ public class GroupServiceImpl implements GroupService{
 		return groupRepository.saveAll(groups);
 	}
 	@Override
-	public List<Group> getGroupOfAdmin(Admin admin) {
+	public List<Group> getGroupOfAdmin(TutorialAdmin admin) {
 		// TODO Auto-generated method stub
 		return groupRepository.findByCreateAdmin(admin);
 	}

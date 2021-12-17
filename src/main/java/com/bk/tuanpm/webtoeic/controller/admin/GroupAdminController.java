@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bk.tuanpm.webtoeic.dto.MemberDTO;
 import com.bk.tuanpm.webtoeic.entities.Account;
-import com.bk.tuanpm.webtoeic.entities.Admin;
+import com.bk.tuanpm.webtoeic.entities.TutorialAdmin;
 import com.bk.tuanpm.webtoeic.entities.Group;
 import com.bk.tuanpm.webtoeic.entities.User;
-import com.bk.tuanpm.webtoeic.repository.AdminRepository;
+import com.bk.tuanpm.webtoeic.repository.TutorialAdminRepository;
 import com.bk.tuanpm.webtoeic.service.GroupService;
 import com.bk.tuanpm.webtoeic.service.impl.UserAdminServiceImpl;
 
@@ -34,7 +34,7 @@ public class GroupAdminController {
 	@Autowired
 	UserAdminServiceImpl nguoiDungService;
 	@Autowired
-	AdminRepository adminRepository;
+	TutorialAdminRepository adminRepository;
 	
 	@Autowired
 	UserAdminServiceImpl userAdminServiceImpl;
@@ -42,7 +42,7 @@ public class GroupAdminController {
 	@PostMapping(value = "/addGroup", produces = MediaType.APPLICATION_JSON_VALUE)
 	public String addGroup(Model model, @RequestBody Group group) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		Admin currentUser = nguoiDungService.findAdminByEmail(auth.getName());
+		TutorialAdmin currentUser = nguoiDungService.findAdminByEmail(auth.getName());
 		System.out.println(currentUser);
 		group.setCreateAdmin(currentUser);
 		groupService.saveGroup(group);

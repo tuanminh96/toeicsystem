@@ -28,7 +28,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.bk.tuanpm.webtoeic.entities.Admin;
+import com.bk.tuanpm.webtoeic.entities.TutorialAdmin;
+import com.bk.tuanpm.webtoeic.entities.ContentAdmin;
 import com.bk.tuanpm.webtoeic.entities.Exam;
 import com.bk.tuanpm.webtoeic.entities.Question;
 import com.bk.tuanpm.webtoeic.repository.PartRepository;
@@ -133,7 +134,7 @@ public class BaiThiThuApi {
 			baithithu.setTenbaithithu(name);
 			baithithu.setAnhbaithithu(file_image.getOriginalFilename());
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-			Admin currentUser = nguoiDungService.findAdminByEmail(auth.getName());
+			ContentAdmin currentUser = nguoiDungService.findContentByEmail(auth.getName());
 			baithithu.setUserAdd(currentUser);
 			baithithuService.save(baithithu);
 

@@ -48,7 +48,7 @@ public class Exam implements Serializable {
 	private Date updateDate;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	private Admin userAdd;
+	private ContentAdmin userAdd;
 
 	public Integer getBaithithuid() {
 		return baithithuid;
@@ -122,11 +122,11 @@ public class Exam implements Serializable {
 		this.updateDate = updateDate;
 	}
 
-	public Admin getUserAdd() {
+	public ContentAdmin getUserAdd() {
 		return userAdd;
 	}
 
-	public void setUserAdd(Admin userAdd) {
+	public void setUserAdd(ContentAdmin userAdd) {
 		this.userAdd = userAdd;
 	}
 

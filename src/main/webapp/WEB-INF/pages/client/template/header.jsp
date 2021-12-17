@@ -112,7 +112,7 @@ h3 {
 								href="<%=request.getContextPath()%>/register">Đăng ký</a></li>
 						</c:if>
 						<c:if test="${pageContext.request.userPrincipal.name != null}">
-							<c:if test="${pageContext.request.isUserInRole('MEMBER')}" >
+							<c:if test="${pageContext.request.isUserInRole('MEMBER') || pageContext.request.isUserInRole('MEMBER_VIP')}" >
 								<li class="nav-item"><a class="nav-link"
 														href="<%=request.getContextPath()%>/listExam">Thi thử</a></li>
 								<li class="nav-item" style="background: gold;"><a
@@ -128,11 +128,12 @@ h3 {
 									class="nav-link dropdown-toggle" data-toggle="dropdown"
 									href="#">${nguoiDung.hoTen}</a>
 									<div class="dropdown-menu">
-										<c:if test="${pageContext.request.isUserInRole('MEMBER')}" >
+										<c:if test="${pageContext.request.isUserInRole('MEMBER') || pageContext.request.isUserInRole('MEMBER_VIP')}" >
 										<a class="dropdown-item"
-											href="<%=request.getContextPath()%>/profile">Tài khoản</a> <a
-											class="dropdown-item"
-											href="<%=request.getContextPath()%>/payment">Nâng cấp VIP</a>
+											href="<%=request.getContextPath()%>/profile">Tài khoản</a>
+											<c:if test="${pageContext.request.isUserInRole('MEMBER')}">
+												<a class="dropdown-item" href="<%=request.getContextPath()%>/payment">Nâng cấp VIP</a>
+											</c:if>
 										<a class="dropdown-item"
 											href="<%=request.getContextPath()%>/listnoti/1">Thông báo</a>
 										</c:if>

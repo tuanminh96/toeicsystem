@@ -3,6 +3,9 @@ package com.bk.tuanpm.webtoeic.service.impl;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.google.gson.Gson;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -19,6 +22,7 @@ import com.bk.tuanpm.webtoeic.repository.AccountRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
+	private static final Logger log = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
 
 	@Autowired
 	private AccountRepository repo;
@@ -28,6 +32,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
 		Account nguoiDung = repo.findByEmail(username);
+		log.info("Login user: " + new Gson().toJson(nguoiDung));
+
 		if (nguoiDung == null) {
 			throw new UsernameNotFoundException("User with email " + username + " was not be found");
 		}

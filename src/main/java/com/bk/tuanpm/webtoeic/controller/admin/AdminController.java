@@ -54,6 +54,7 @@ public class AdminController {
 	public String quanLyExam(Model model) {
 		return "admin/quanLyExam";
 	}
+
 	@GetMapping({"/group"})
 	public String quanLyGroup(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();

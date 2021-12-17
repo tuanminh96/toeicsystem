@@ -41,7 +41,7 @@ body {
 </style>
 <body>
 	<jsp:include page="template/header.jsp"></jsp:include>
-	<div class="container">
+	<div class="container mainListExam">
 		<div class="row">
 			<div class="col-12">
 				<div class="card">

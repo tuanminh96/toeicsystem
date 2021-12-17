@@ -64,6 +64,10 @@ input[type=radio] {
 h3 {
 	margin: 0;
 }
+/* Handle config CSS*/
+.mainListExam {
+margin: 75px;
+}
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {

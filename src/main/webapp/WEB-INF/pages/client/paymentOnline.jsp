@@ -39,7 +39,7 @@ input[type="radio"] {
 }
 </style>
 	<jsp:include page="template/header.jsp"></jsp:include>
-	<div class="container">
+	<div class="container mainListExam">
 		<div class="container py-5">
 			<!-- For demo purpose -->
 			<div class="row mb-4">

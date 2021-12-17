@@ -109,8 +109,7 @@ public class BaiFullTestController {
 			model.addAttribute("examsTested", exams);
 			List<Integer> notAllowedTest = ketquabaitestService.getListExamNotAllowedTest(currentUser);
 			model.addAttribute("listNotAllow", notAllowedTest);
-			
-			System.out.println(notAllowedTest.size());
+
 			return "client/listExam";
 
 		} catch (Exception e) {

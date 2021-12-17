@@ -64,7 +64,12 @@ public class DataSeeder implements ApplicationListener<ContextRefreshedEvent> {
 			roleService.saveRole(role);
 		}
 		//Add role
-		
+		if (roleService.getRoleCode(5) == null) {
+			Role role = new Role();
+			role.setCode(5);
+			role.setRole("ROLE_MANAGER");
+			roleService.saveRole(role);
+		}
 		
 		
 		if(partRepository.findByPartName("Part I") == null) {

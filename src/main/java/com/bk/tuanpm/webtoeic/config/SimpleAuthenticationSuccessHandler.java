@@ -26,7 +26,7 @@ public class SimpleAuthenticationSuccessHandler implements AuthenticationSuccess
 		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 		authorities.forEach(authority -> {
 			// nếu quyền có vai trò user, chuyển đến trang "/" nếu login thành công
-			if (authority.getAuthority().equals("ROLE_MEMBER")) {
+			if (authority.getAuthority().equals("ROLE_MEMBER") || authority.getAuthority().equals("ROLE_MEMBER_VIP")) {
 				try {
 					redirectStrategy.sendRedirect(request, response, "/");
 				} catch (Exception e) {
@@ -36,6 +36,20 @@ public class SimpleAuthenticationSuccessHandler implements AuthenticationSuccess
 			} else if (authority.getAuthority().contains("ROLE_ADMIN")) {
 				try {
 					redirectStrategy.sendRedirect(request, response, "/admin");
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else if (authority.getAuthority().contains("ROLE_CONTENT")) {
+				try {
+					redirectStrategy.sendRedirect(request, response, "/content");
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else if (authority.getAuthority().contains("ROLE_MANAGER")) {
+				try {
+					redirectStrategy.sendRedirect(request, response, "/manager");
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

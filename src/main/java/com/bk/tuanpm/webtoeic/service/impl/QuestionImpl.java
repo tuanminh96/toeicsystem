@@ -28,8 +28,8 @@ public class QuestionImpl implements QuestionService{
 	}
 
 	@Override
-	public List<ExamQuestionDTO> getListExamQuestionDTO(int examId) {
-		List<Object[]> listObject = questionRespository.getListExamQuestionDTO(examId);
+	public List<ExamQuestionDTO> getListExamQuestionDTO(int examId, String tpye) {
+		List<Object[]> listObject = questionRespository.getListExamQuestionDTO(examId, tpye);
 		List<ExamQuestionDTO> listExamQuestionDTO = new ArrayList<>();
 		for (Object[] obj : listObject) {
 			ExamQuestionDTO examQuestionDTO = new ExamQuestionDTO();
@@ -44,8 +44,8 @@ public class QuestionImpl implements QuestionService{
 			examQuestionDTO.setPartName(String.valueOf(obj[8]));
 			examQuestionDTO.setType(String.valueOf(obj[9]));
 			examQuestionDTO.setIdQuestion((int) obj[10]);
-			examQuestionDTO.setAudiomp3(String.valueOf(obj[11]));
-			examQuestionDTO.setCorrectanswer(String.valueOf(obj[12]));
+			examQuestionDTO.setAudioMp3(String.valueOf(obj[11]));
+			examQuestionDTO.setCorrectAnswer(String.valueOf(obj[12]));
 			examQuestionDTO.setqImage(String.valueOf(obj[13]));
 			examQuestionDTO.setNumber((int) obj[14]);
 			examQuestionDTO.setOption1(String.valueOf(obj[15]));
@@ -54,6 +54,40 @@ public class QuestionImpl implements QuestionService{
 			examQuestionDTO.setOption4(String.valueOf(obj[18]));
 			examQuestionDTO.setqParagraph(String.valueOf(obj[19]));
 			examQuestionDTO.setQuestion(String.valueOf(obj[20]));
+			listExamQuestionDTO.add(examQuestionDTO);
+		}
+		return listExamQuestionDTO;
+	}
+
+	@Override
+	public List<ExamQuestionDTO> getAllListExamQuestionDTO(int examId) {
+		List<Object[]> listObject = questionRespository.getAllListExamQuestionDTO(examId);
+		List<ExamQuestionDTO> listExamQuestionDTO = new ArrayList<>();
+		for (Object[] obj : listObject) {
+			ExamQuestionDTO examQuestionDTO = new ExamQuestionDTO();
+			examQuestionDTO.setIdExam((int) obj[0]);
+			examQuestionDTO.setTitle(String.valueOf(obj[1]));
+			examQuestionDTO.setIdSet((int) obj[2]);
+			examQuestionDTO.setAudio(String.valueOf(obj[3]));
+			examQuestionDTO.setContent(String.valueOf(obj[4]));
+			examQuestionDTO.setsImage(String.valueOf(obj[5]));
+			examQuestionDTO.setsParagraph(String.valueOf(obj[6]));
+			examQuestionDTO.setIdPart((int) obj[7]);
+			examQuestionDTO.setPartName(String.valueOf(obj[8]));
+			examQuestionDTO.setType(String.valueOf(obj[9]));
+			examQuestionDTO.setIdQuestion((int) obj[10]);
+			examQuestionDTO.setAudioMp3(String.valueOf(obj[11]));
+			examQuestionDTO.setCorrectAnswer(String.valueOf(obj[12]));
+			examQuestionDTO.setqImage(String.valueOf(obj[13]));
+			examQuestionDTO.setNumber((int) obj[14]);
+			examQuestionDTO.setOption1(String.valueOf(obj[15]));
+			examQuestionDTO.setOption2(String.valueOf(obj[16]));
+			examQuestionDTO.setOption3(String.valueOf(obj[17]));
+			examQuestionDTO.setOption4(String.valueOf(obj[18]));
+			examQuestionDTO.setqParagraph(String.valueOf(obj[19]));
+			examQuestionDTO.setQuestion(String.valueOf(obj[20]));
+			examQuestionDTO.setIdExplainDetail((int) obj[21]);
+			examQuestionDTO.setExplain(String.valueOf(obj[22]));
 			listExamQuestionDTO.add(examQuestionDTO);
 		}
 		return listExamQuestionDTO;

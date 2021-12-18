@@ -25,26 +25,26 @@
                     <hr width="60%">
                     <div class="panel panel-info">
                         <div class="panel-heading">Danh sách câu hỏi</div>
-                        <div class="panel-body">
-                            <c:forEach items="${part5}" var="quest">
-                                <div class="numberCircle part5 parttoeic"
-                                     style="display: none;" id="answer${quest.number}">${quest.number}</div>
-                            </c:forEach>
-                            <c:set var="part5count" value="${part5.size()}"></c:set>
-                            <c:forEach items="${part6}" var="quest">
-                                <div class="numberCircle part6 parttoeic"
-                                     style="display: none;" id="answer${quest.number}">${quest.number}</div>
-                            </c:forEach>
-                            <c:set var="part6count" value="${part6.size()}"></c:set>
-                            <c:forEach items="${part7}" var="quest">
-                                <div class="numberCircle part7 parttoeic"
-                                     style="display: none;" id="answer${quest.number}">${quest.number}</div>
-                            </c:forEach>
-                            <c:set var="part7count" value="${part7.size()}"></c:set>
-                            <input type="hidden" value="${part5.get(0).number}"
-                                   id="firstquest"> <input type="hidden"
-                                                           value="${part5count+part6count+part7count}" id="totalquest">
-                        </div>
+                        <%--                        <div class="panel-body">--%>
+                        <%--                            <c:forEach items="${part5}" var="quest">--%>
+                        <%--                                <div class="numberCircle part5 parttoeic"--%>
+                        <%--                                     style="display: none;" id="answer${quest.number}">${quest.number}</div>--%>
+                        <%--                            </c:forEach>--%>
+                        <%--                            <c:set var="part5count" value="${part5.size()}"></c:set>--%>
+                        <%--                            <c:forEach items="${part6}" var="quest">--%>
+                        <%--                                <div class="numberCircle part6 parttoeic"--%>
+                        <%--                                     style="display: none;" id="answer${quest.number}">${quest.number}</div>--%>
+                        <%--                            </c:forEach>--%>
+                        <%--                            <c:set var="part6count" value="${part6.size()}"></c:set>--%>
+                        <%--                            <c:forEach items="${part7}" var="quest">--%>
+                        <%--                                <div class="numberCircle part7 parttoeic"--%>
+                        <%--                                     style="display: none;" id="answer${quest.number}">${quest.number}</div>--%>
+                        <%--                            </c:forEach>--%>
+                        <%--                            <c:set var="part7count" value="${part7.size()}"></c:set>--%>
+                        <%--                            <input type="hidden" value="${part5.get(0).number}"--%>
+                        <%--                                   id="firstquest"> <input type="hidden"--%>
+                        <%--                                                           value="${part5count+part6count+part7count}" id="totalquest">--%>
+                        <%--                        </div>--%>
                     </div>
 
                     <br> <br>
@@ -74,37 +74,38 @@
                         </button>
                     </div>
                 </nav>
-                <c:forEach items="${partReading}" var="part">
-                    <p class="part${part.idPart} parttoeic" style="display: none;">
-                        <b>${part.partName}: ${part.description}</b>
-                    </p>
-                </c:forEach>
+                <%--                <c:forEach items="${listQuestionPart5}" var="part5" varStatus="index">--%>
+                <%--                    <p class="part${part.idPart} parttoeic" style="display: none;">--%>
+                <%--                        <b>${part.partName}: ${part.description}</b>--%>
+                <%--                    </p>--%>
+                <%--                </c:forEach>--%>
 
                 <!-- Tab panes -->
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-part5" role="tabpanel"
                          aria-labelledby="nav-part5-tab">
-                        <c:forEach items="${part5}" var="list">
+                        <c:forEach items="${listQuestionPart5}" var="part5" varStatus="index">
                             <div>
                                 <p>
-                                    <b>Question ${list.number}:</b>
+                                    <b id="question${index.count + 19}"
+                                       questionId="${part5.idQuestion}">Question ${index.count+19}:</b>
                                 </p>
                                 <pre class="paragraph">${list.question}</pre>
 
                                 <input class="part5" type="radio"
-                                       name="question${list.number}" id="question.${list.number}"
+                                       name="question${index.count+19}" id="question${index.count+19}"
                                        value="A" onclick="markColorReading(this.id)"/> A.
                                     ${list.option1} <br> <input class="part5" type="radio"
-                                                                name="question${list.number}"
-                                                                id="question.${list.number}"
+                                                                name="question${index.count+19}"
+                                                                id="question${index.count+19}"
                                                                 value="B" onclick="markColorReading(this.id)"/> B.
                                     ${list.option2} <br> <input class="part5" type="radio"
-                                                                name="question${list.number}"
-                                                                id="question.${list.number}"
+                                                                name="question${index.count+19}"
+                                                                id="question${index.count+19}"
                                                                 value="C" onclick="markColorReading(this.id)"/> C.
                                     ${list.option3} <br> <input class="part5" type="radio"
-                                                                name="question${list.number}"
-                                                                id="question.${list.number}"
+                                                                name="question${index.count+19}"
+                                                                id="question${index.count+19}"
                                                                 value="D" onclick="markColorReading(this.id)"/> D.
                                     ${list.option4} <br>
                             </div>
@@ -112,49 +113,51 @@
                         </c:forEach>
                     </div>
                     <div class="tab-pane fade" id="nav-part6" role="tabpanel" aria-labelledby="nav-part6-tab">
-                        <c:forEach items="${part6}" var="list">
-                            <c:if test="${not empty list.paragraph }">
-                                <pre class="paragraph">${list.paragraph}</pre>
+                        <c:forEach items="${listQuestionPart6}" var="part6" varStatus="index">
+                            <c:if test="${not empty part6.sParagraph }">
+                                <pre class="paragraph">${part6.sParagraph}</pre>
                             </c:if>
 
                             <p>
-                                <b>Question ${list.number}:</b>
+                                <b id="question${index.count+25}"
+                                   questionId="${part6.idQuestion}">Question ${index.count+25}:</b>
                             </p>
-                            <input type="radio" name="question${list.number}"
-                                   id="question.${list.number}"
-                                   onclick="markColorReading(this.id)" value="A"/> A. ${list.option1} <br>
-                            <input type="radio" name="question${list.number}"
-                                   id="question.${list.number}"
-                                   onclick="markColorReading(this.id)" value="B"/> B. ${list.option2} <br>
-                            <input type="radio" name="question${list.number}"
-                                   id="question.${list.number}"
-                                   onclick="markColorReading(this.id)" value="C"/> C. ${list.option3} <br>
-                            <input type="radio" name="question${list.number}"
-                                   id="question.${list.number}"
-                                   onclick="markColorReading(this.id)" value="D"/> D. ${list.option4} <br>
+                            <input type="radio" name="question${index.count+25}"
+                                   id="question${index.count+25}"
+                                   onclick="markColorReading(this.id)" value="A"/> A. ${part6.option1} <br>
+                            <input type="radio" name="question${index.count+25}"
+                                   id="question${index.count+25}"
+                                   onclick="markColorReading(this.id)" value="B"/> B. ${part6.option2} <br>
+                            <input type="radio" name="question${index.count+25}"
+                                   id="question${index.count+25}"
+                                   onclick="markColorReading(this.id)" value="C"/> C. ${part6.option3} <br>
+                            <input type="radio" name="question${index.count+25}"
+                                   id="question${index.count+25}"
+                                   onclick="markColorReading(this.id)" value="D"/> D. ${part6.option4} <br>
                             <br>
                         </c:forEach>
                     </div>
                     <div class="tab-pane fade" id="nav-part7" role="tabpanel" aria-labelledby="nav-part7-tab">
-                        <c:forEach items="${part7}" var="list">
-                            <c:if test="${not empty list.paragraph}">
-                                <pre class="paragraph">${list.paragraph}</pre>
+                        <c:forEach items="${listQuestionPart7}" var="part7" varStatus="index">
+                            <c:if test="${not empty part7.sParagraph}">
+                                <pre class="paragraph">${part7.sParagraph}</pre>
                             </c:if>
                             <p>
-                                <b>Question ${list.number}:</b> ${list.question}
+                                <b id="question${index.count+31}"
+                                   questionId="${part7.idQuestion}">Question ${index.count+31}:</b>
                             </p>
-                            <input type="radio" name="question${list.number}"
-                                   id="question.${list.number}"
-                                   onclick="markColorReading(this.id)" value="A"/> A. ${list.option1} <br>
-                            <input type="radio" name="question${list.number}"
-                                   id="question.${list.number}"
-                                   onclick="markColorReading(this.id)" value="B"/> B. ${list.option2} <br>
-                            <input type="radio" name="question${list.number}"
-                                   id="question.${list.number}"
-                                   onclick="markColorReading(this.id)" value="C"/> C. ${list.option3} <br>
-                            <input type="radio" name="question${list.number}"
-                                   id="question.${list.number}"
-                                   onclick="markColorReading(this.id)" value="D"/> D. ${list.option4} <br>
+                            <input type="radio" name="question${index.count+31}"
+                                   id="question${index.count+31}"
+                                   onclick="markColorReading(this.id)" value="A"/> A. ${part7.option1} <br>
+                            <input type="radio" name="question${index.count+31}"
+                                   id="question${index.count+31}"
+                                   onclick="markColorReading(this.id)" value="B"/> B. ${part7.option2} <br>
+                            <input type="radio" name="question${index.count+31}"
+                                   id="question${index.count+31}"
+                                   onclick="markColorReading(this.id)" value="C"/> C. ${part7.option3} <br>
+                            <input type="radio" name="question${index.count+31}"
+                                   id="question${index.count+31}"
+                                   onclick="markColorReading(this.id)" value="D"/> D. ${part7.option4} <br>
                             <br>
                         </c:forEach>
                     </div>

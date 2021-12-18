@@ -18,6 +18,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <script src="${pageContext.request.contextPath}/resources/js/client/doExam.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/client/resultTestUser.js"></script>
 
     <style>
         #backhome {

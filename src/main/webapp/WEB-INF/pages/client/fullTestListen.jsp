@@ -117,7 +117,7 @@
                             <c:if test="${not empty part1.sImage}">
                                 <div class="questionPart1">
                                     <p>
-                                        <b>Question ${index.count}:</b>
+                                        <b id="question${index.count}" questionId="${part1.idQuestion}">Question ${index.count}:</b>
                                     </p>
                                     <img src="${pageContext.request.contextPath}/resources/file/exams/${part1.idExam}/images/${part1.sImage}.jpg"
                                          alt="image not found"
@@ -141,81 +141,81 @@
                         </c:forEach>
                     </div>
                     <div class="tab-pane fade" id="nav-part2" role="tabpanel" aria-labelledby="nav-part2-tab">
-                        <c:forEach items="${part2}" var="list">
+                        <c:forEach items="${listQuestionPart2}" var="part2" varStatus="index">
                             <div class="questionPart2">
                                 <p>
-                                    <b>Question ${list.number}:</b>
+                                    <b id="question${index.count + 2}" questionId="${part2.idQuestion}">Question ${index.count + 2}:</b>
                                 </p>
                                 <audio controls>
                                     <source
-                                            src="${pageContext.request.contextPath}/resources/file/exams/${list.getBaithithu().getBaithithuid()}/audio/${list.audiomp3}.mp3"
+                                            src="${pageContext.request.contextPath}/resources/file/exams/${part2.idExam}/audio/${part2.audio}.mp3"
                                             type="audio/wav">
                                 </audio>
                                 <br>
-                                <input type="radio" name="question${list.number}"
-                                       id="question.${list.number}" onclick="markColor(this.id)"
+                                <input type="radio" name="question${index.count + 2}"
+                                       id="question${index.count + 2}" onclick="markColor(this.id)"
                                        value="A"/> A <br>
-                                <input type="radio" name="question${list.number}"
-                                       id="question.${list.number}" onclick="markColor(this.id)"
+                                <input type="radio" name="question${index.count + 2}"
+                                       id="question${index.count + 2}" onclick="markColor(this.id)"
                                        value="B"/> B <br>
-                                <input type="radio" name="question${list.number}"
-                                       id="question.${list.number}" onclick="markColor(this.id)"
+                                <input type="radio" name="question${index.count + 2}"
+                                       id="question${index.count + 2}" onclick="markColor(this.id)"
                                        value="C"/> C <br>
                                 <br>
                             </div>
                         </c:forEach>
                     </div>
                     <div class="tab-pane fade" id="nav-part3" role="tabpanel" aria-labelledby="nav-part2-tab">
-                        <c:forEach items="${part3}" var="list">
+                        <c:forEach items="${listQuestionPart3}" var="part3" varStatus="index">
                             <p>
-                                <b>Question ${list.number}:</b>
+                                <b id="question${index.count + 7}" questionId="${part3.idQuestion}">Question ${index.count + 7}:</b>
                             </p>
                             <audio controls>
                                 <source
-                                        src="${pageContext.request.contextPath}/resources/file/audio/exam/${list.audiomp3}.mp3"
+                                        src="${pageContext.request.contextPath}/resources/file/exams/${part3.idExam}/audio/${part3.audio}.mp3"
                                         type="audio/wav">
                             </audio>
 
                             <br>
-                            <input type="radio" name="question${list.number}"
-                                   id="question.${list.number}" onclick="markColor(this.id)"
-                                   value="A"/> A.${list.option1} <br>
-                            <input type="radio" name="question${list.number}"
-                                   id="question.${list.number}" onclick="markColor(this.id)"
-                                   value="B"/> B.${list.option2}  <br>
-                            <input type="radio" name="question${list.number}"
-                                   id="question.${list.number}" onclick="markColor(this.id)"
-                                   value="C"/> C.${list.option3}  <br>
-                            <input type="radio" name="question${list.number}"
-                                   id="question.${list.number}" onclick="markColor(this.id)"
-                                   value="D"/> D.${list.option4}  <br>
+                            <input type="radio" name="question${index.count + 7}"
+                                   id="question${index.count + 7}" onclick="markColor(this.id)"
+                                   value="A"/> A.${part3.option1} <br>
+                            <input type="radio" name="question${index.count + 7}"
+                                   id="question${index.count + 7}" onclick="markColor(this.id)"
+                                   value="B"/> B.${part3.option2}  <br>
+                            <input type="radio" name="question${index.count + 7}"
+                                   id="question${index.count + 7}" onclick="markColor(this.id)"
+                                   value="C"/> C.${part3.option3}  <br>
+                            <input type="radio" name="question${index.count + 7}"
+                                   id="question${index.count + 7}" onclick="markColor(this.id)"
+                                   value="D"/> D.${part3.option4}  <br>
                             <br>
                         </c:forEach>
                     </div>
                     <div class="tab-pane fade" id="nav-part4" role="tabpanel" aria-labelledby="nav-part2-tab">
-                        <c:forEach items="${part4}" var="list">
+                        <c:forEach items="${listQuestionPart4}" var="part4" varStatus="index">
                             <p>
-                                <b>Question ${list.number}:</b>
+                                <b id="question${index.count + 13}" questionId="${part4.idQuestion}">Question ${index.count + 13}:</b>
                             </p>
                             <audio controls>
                                 <source
-                                        src="${pageContext.request.contextPath}/resources/file/audio/exam/${list.audiomp3}.mp3"
+                                        src="${pageContext.request.contextPath}/resources/file/exams/${part4.idExam}/audio/${part4.audio}.mp3"
                                         type="audio/wav">
                             </audio>
 
                             <br>
-                            <input type="radio" name="question${list.number}"
-                                   id="question.${list.number}" onclick="markColor(this.id)"
-                                   value="A"/> A.${list.option1} <br>
-                            <input type="radio" name="question${list.number}"
-                                   id="question.${list.number}" onclick="markColor(this.id)"
-                                   value="B"/> B.${list.option2}  <br>
-                            <input type="radio" name="question${list.number}"
-                                   id="question.${list.number}" onclick="markColor(this.id)"
-                                   value="C"/> C.${list.option3}  <br>
-                            <input type="radio" name="question${list.number}"
-                                   id="question.${list.number}" onclick="markColor(this.id)"
-                                   value="D"/> D.${list.option4}  <br>
+                            <input type="radio" name="question${index.count + 13}"
+                                   id="question${index.count + 13}" onclick="markColor(this.id)"
+                                   value="A"/> A.${part4.option1} <br>
+                            <input type="radio" name="question${index.count + 13}"
+                                   id="question${index.count + 13}" onclick="markColor(this.id)"
+                                   value="B"/> B.${part4.option2}  <br>
+                            <input type="radio" name="question${index.count + 13}"
+                                   id="question${index.count + 13}" onclick="markColor(this.id)"
+                                   value="C"/> C.${part4.option3}  <br>
+                            <input type="radio" name="question${index.count + 13}"
+                                   id="question${index.count + 13}" onclick="markColor(this.id)"
+                                   value="D"/> D.${part4.option4}  <br>
                             <br>
                         </c:forEach>
                     </div>

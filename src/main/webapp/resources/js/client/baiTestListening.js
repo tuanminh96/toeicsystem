@@ -2,13 +2,13 @@ function markColor(id) {
     //tách lấy id của câu hỏi
     var fields = id.split('.');
     var answerId = fields[1];
-    document.getElementById("answer" + answerId).style.backgroundColor = "rgb(167,162,162)";
+    // document.getElementById("answer" + answerId).style.backgroundColor = "rgb(167,162,162)";
 
 }
 
 function correctAnswer() {
     var correctArr = [];
-    var totalquest = document.getElementById("totalquest").value;
+    var totalquest = 19;
     for (var i = 1; i < totalquest; i++) {
         var nameRadio = "correctanswer" + i;
         if (document.getElementById("submitForm").elements.namedItem(nameRadio) != null) {
@@ -20,22 +20,19 @@ function correctAnswer() {
     return correctArr;
 }
 
-function answerUser() {
-    //var form = document.getElementById("submitForm");
-    // array index start = 0
-    var answerArr = [];
+function answerListen() {
+    let answerArr = {};
+    for (let i = 1; i <= 19; i++) {
+        const questionId = $("#question" + i).attr("questionId");
 
-    for (var i = 1; i < 51; i++) {
-        var nameRadio = "question" + i;
-        var result = document.getElementById("submitForm").elements.namedItem(nameRadio);
-
-        if (result == null) answerArr.push("");
+        const nameRadio = "question" + i;
+        let result = document.getElementById("submitForm").elements.namedItem(nameRadio);
+        if (result == null)
+            answerArr[questionId] = "";
         else {
-
-            var x = document.getElementById("submitForm").elements.namedItem(nameRadio).value;
-            answerArr.push(x);
+            const value = document.getElementById("submitForm").elements.namedItem(nameRadio).value;
+            answerArr[questionId] = value;
         }
-
     }
 
     return answerArr;
@@ -43,27 +40,27 @@ function answerUser() {
 
 $(document).ready(function () {
     const baseUrl = $('#baseUrl').val();
-    var answerArr = answerUser();
-    var correctArr = correctAnswer();
+    const examId = $("#examId").val();
+    // var correctArr = correctAnswer();
     // var countCorrect = 0;
     // for (var i = 0; i < 50; i++) {
     //     if (answerArr[i] == correctArr[i] && answerArr[i] != ' ') countCorrect++;
     // }
-    var jsonAnswerListen = JSON.stringify(answerArr);
-    var examId = $("#examId").val();
+
 
     $('#doReading').click(function () {
+        const answerArr = answerListen();
+        const jsonAnswerListen = JSON.stringify(answerArr);
         $.ajax({
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            dataType: "json",
             data: jsonAnswerListen,
             type: 'POST',
             url: baseUrl + "/reading/" + examId,
             success: function (html) {
-                alert('Success');
+                console.log("Suceess.");
                 $('#mainContent').html(html);
             },
             error: function (html) {
@@ -71,49 +68,7 @@ $(document).ready(function () {
                 $('#mainContent').html(html.responseText);
             }
         });
-
-        // $.get({
-        //     // headers: {
-        //     //     'Accept': 'application/json',
-        //     //     'Content-Type': 'application/json'
-        //     // },
-        //     // dataType: "json",
-        //     // data: jsonAnswerUser,
-        //     // type: 'GET',
-        //     url: baseUrl+ "/reading/" + examId + "/" + countCorrect,
-        //     success: function (html) {
-        //         alert('Success');
-        //         $('#mainContent').html(html);
-        //         // window.location.href = "http://localhost:8080/webtoeic/reading?idExam=" + examId;
-        //     },
-        //     error: function (e) {
-        //         alert("error");
-        //         console.log("ERROR: ", e);
-        //     }
-        // });
     });
-
-    $('#doReading1').click(function () {
-        // startReadingClock()
-
-        var url = baseUrl + "/reading/" + examId + "/" + countCorrect;
-        if (window.XMLHttpRequest) {
-            xhttp = new XMLHttpRequest();
-        } else {
-            xhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xhttp.open("POST", url, true);
-        xhttp.onreadystatechange = function () {
-            if (xhttp.readyState == 4) {
-                const data = xhttp.responseText;
-                alert("OK");
-                document.getElementById("mainContent").innerHTML = data;
-            }
-        }
-        xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        xhttp.send(jsonAnswerUser);
-    });
-
 
     $('#btnResult').click(function () {
 

@@ -1,32 +1,36 @@
 package com.bk.tuanpm.webtoeic.dto;
 
 public class ExamQuestionDTO {
-    private int idExam;
+    private Integer idExam;
     private String title;
-    private int idSet;
+    private Integer idSet;
     private String audio;
     private String content;
     private String sImage;
     private String sParagraph;
-    private int idPart;
+    private Integer idPart;
     private String partName;
     private String type;
-    private int idQuestion;
-    private String audiomp3;
-    private String correctanswer;
+    private Integer idQuestion;
+    private String audioMp3;
+    private String correctAnswer;
     private String qImage;
-    private int number;
+    private Integer number;
     private String option1;
     private String option2;
     private String option3;
     private String option4;
     private String qParagraph;
     private String question;
+    private Integer idExplainDetail;
+    private String explain;
+    private String userAnswer;
+
 
     public ExamQuestionDTO() {
     }
 
-    public ExamQuestionDTO(int idExam, String title, int idSet, String audio, String content, String sImage, String sParagraph, int idPart, String partName, String type, int idQuestion, String audiomp3, String correctanswer, String qImage, int number, String option1, String option2, String option3, String option4, String qParagraph, String question) {
+    public ExamQuestionDTO(Integer idExam, String title, Integer idSet, String audio, String content, String sImage, String sParagraph, Integer idPart, String partName, String type, Integer idQuestion, String audioMp3, String correctAnswer, String qImage, Integer number, String option1, String option2, String option3, String option4, String qParagraph, String question, Integer idExplainDetail, String explain, String userAnswer) {
         this.idExam = idExam;
         this.title = title;
         this.idSet = idSet;
@@ -38,8 +42,8 @@ public class ExamQuestionDTO {
         this.partName = partName;
         this.type = type;
         this.idQuestion = idQuestion;
-        this.audiomp3 = audiomp3;
-        this.correctanswer = correctanswer;
+        this.audioMp3 = audioMp3;
+        this.correctAnswer = correctAnswer;
         this.qImage = qImage;
         this.number = number;
         this.option1 = option1;
@@ -48,13 +52,16 @@ public class ExamQuestionDTO {
         this.option4 = option4;
         this.qParagraph = qParagraph;
         this.question = question;
+        this.idExplainDetail = idExplainDetail;
+        this.explain = explain;
+        this.userAnswer = userAnswer;
     }
 
-    public int getIdExam() {
+    public Integer getIdExam() {
         return idExam;
     }
 
-    public void setIdExam(int idExam) {
+    public void setIdExam(Integer idExam) {
         this.idExam = idExam;
     }
 
@@ -66,11 +73,11 @@ public class ExamQuestionDTO {
         this.title = title;
     }
 
-    public int getIdSet() {
+    public Integer getIdSet() {
         return idSet;
     }
 
-    public void setIdSet(int idSet) {
+    public void setIdSet(Integer idSet) {
         this.idSet = idSet;
     }
 
@@ -106,11 +113,11 @@ public class ExamQuestionDTO {
         this.sParagraph = sParagraph;
     }
 
-    public int getIdPart() {
+    public Integer getIdPart() {
         return idPart;
     }
 
-    public void setIdPart(int idPart) {
+    public void setIdPart(Integer idPart) {
         this.idPart = idPart;
     }
 
@@ -130,28 +137,28 @@ public class ExamQuestionDTO {
         this.type = type;
     }
 
-    public int getIdQuestion() {
+    public Integer getIdQuestion() {
         return idQuestion;
     }
 
-    public void setIdQuestion(int idQuestion) {
+    public void setIdQuestion(Integer idQuestion) {
         this.idQuestion = idQuestion;
     }
 
-    public String getAudiomp3() {
-        return audiomp3;
+    public String getAudioMp3() {
+        return audioMp3;
     }
 
-    public void setAudiomp3(String audiomp3) {
-        this.audiomp3 = audiomp3;
+    public void setAudioMp3(String audioMp3) {
+        this.audioMp3 = audioMp3;
     }
 
-    public String getCorrectanswer() {
-        return correctanswer;
+    public String getCorrectAnswer() {
+        return correctAnswer;
     }
 
-    public void setCorrectanswer(String correctanswer) {
-        this.correctanswer = correctanswer;
+    public void setCorrectAnswer(String correctAnswer) {
+        this.correctAnswer = correctAnswer;
     }
 
     public String getqImage() {
@@ -162,11 +169,11 @@ public class ExamQuestionDTO {
         this.qImage = qImage;
     }
 
-    public int getNumber() {
+    public Integer getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(Integer number) {
         this.number = number;
     }
 
@@ -218,6 +225,30 @@ public class ExamQuestionDTO {
         this.question = question;
     }
 
+    public Integer getIdExplainDetail() {
+        return idExplainDetail;
+    }
+
+    public void setIdExplainDetail(Integer idExplainDetail) {
+        this.idExplainDetail = idExplainDetail;
+    }
+
+    public String getExplain() {
+        return explain;
+    }
+
+    public void setExplain(String explain) {
+        this.explain = explain;
+    }
+
+    public String getUserAnswer() {
+        return userAnswer;
+    }
+
+    public void setUserAnswer(String userAnswer) {
+        this.userAnswer = userAnswer;
+    }
+
     @Override
     public String toString() {
         return "ExamQuestionDTO{" +
@@ -229,11 +260,11 @@ public class ExamQuestionDTO {
                 ", sImage='" + sImage + '\'' +
                 ", sParagraph='" + sParagraph + '\'' +
                 ", idPart=" + idPart +
-                ", part_name='" + partName + '\'' +
+                ", partName='" + partName + '\'' +
                 ", type='" + type + '\'' +
                 ", idQuestion=" + idQuestion +
-                ", audiomp3='" + audiomp3 + '\'' +
-                ", correctanswer='" + correctanswer + '\'' +
+                ", audioMp3='" + audioMp3 + '\'' +
+                ", correctAnswer='" + correctAnswer + '\'' +
                 ", qImage='" + qImage + '\'' +
                 ", number=" + number +
                 ", option1='" + option1 + '\'' +
@@ -242,6 +273,9 @@ public class ExamQuestionDTO {
                 ", option4='" + option4 + '\'' +
                 ", qParagraph='" + qParagraph + '\'' +
                 ", question='" + question + '\'' +
+                ", idExplainDetail=" + idExplainDetail +
+                ", explain='" + explain + '\'' +
+                ", userAnswer='" + userAnswer + '\'' +
                 '}';
     }
 }

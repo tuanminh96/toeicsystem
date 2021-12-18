@@ -76,36 +76,47 @@ function startReadingClock() {
     startTimerReading(fortyFiveMinutes, '75:00');
 };
 
+function answerRead() {
+    let answerArr = {};
+    for (let i = 20; i <= 37; i++) {
+        const questionId = $("#question" + i).attr("questionId");
+        const nameRadio = "question" + i;
+        console.log(questionId + "" +nameRadio);
+        let result = document.getElementById("submitForm").elements.namedItem(nameRadio);
+        if (result == null)
+            answerArr[questionId] = "";
+        else {
+            const value = document.getElementById("submitForm").elements.namedItem(nameRadio).value;
+            answerArr[questionId] = value;
+        }
+    }
+
+    return answerArr;
+}
 
 // ket qua test( Listening + Reading)
 $(document).ready(function () {
     const baseUrl = $('#baseUrl').val();
-    var examId = $("#examId").val();
-    var correctListening = $("#correctanswer").val();
-    var answerArr = answerUserReading();
-    var correctArr = correctAnswerReading();
-    // var correctReading = 0;
-    // for (var i = 0; i < 50; i++) {
-    //     if (answerArr[i] == correctArr[i] && answerArr[i] != ' ') correctReading++;
-    // }
-    var jsonAnswerRead = JSON.stringify(answerArr);
+    const examId = $("#examId").val();
 
     $('#btnSubmitReading').click(function () {
+        const answerArr = answerRead();
+        console.log(answerArr);
+        const jsonAnswerRead = JSON.stringify(answerArr);
         $.ajax({
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            dataType: "json",
+            // dataType: "json",
             data: jsonAnswerRead,
             type: 'POST',
             url: baseUrl + "/saveResultTest/" + examId,
             success: function (html) {
-                alert('Success');
                 $('#mainContent').html(html);
             },
             error: function (html) {
-                console.log(html);
+                alert('Error');
                 $('#mainContent').html(html.responseText);
             }
         });

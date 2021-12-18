@@ -9,15 +9,17 @@ import com.bk.tuanpm.webtoeic.entities.Question;
 import com.bk.tuanpm.webtoeic.entities.PartToeic;
 
 public interface QuestionService {
-	 void  save(Question cauhoibaithithu);
+    void save(Question cauhoibaithithu);
 
-	 List<ExamQuestionDTO> getListExamQuestionDTO(int examId);
+    List<ExamQuestionDTO> getListExamQuestionDTO(int examId, String tpye);
 
-	 List<Question> getListCauHoi(Exam baithithu);
-	 
-	 Map<String, List<Question>> getMapPartQuestionListen(List<Question> list);
-	 
-	 Map<String, List<Question>> getMapPartQuestionReading(List<Question> list);
-	 
-	 public List<Question> getListCauHoiByPart(List<PartToeic> part);
+    List<ExamQuestionDTO> getAllListExamQuestionDTO(int examId);
+
+    List<Question> getListCauHoi(Exam baithithu);
+
+    Map<String, List<Question>> getMapPartQuestionListen(List<Question> list);
+
+    Map<String, List<Question>> getMapPartQuestionReading(List<Question> list);
+
+    public List<Question> getListCauHoiByPart(List<PartToeic> part);
 }

@@ -100,8 +100,7 @@ public class BaiFullTestController {
     public String DetailListening(Model model, @PathVariable("examId") int examId) {
         try {
             // Get All Question of question, part, set_question, exam
-            List<ExamQuestionDTO> listExamQuestionDTO = questionService.getListExamQuestionDTO(examId);
-            model.addAttribute("listExamQuestionDTO", listExamQuestionDTO);
+            List<ExamQuestionDTO> listExamQuestionDTO = questionService.getListExamQuestionDTO(examId, "Listening");
             for (int i = 1; i <= 4; i++) {
                 int idPart = i;
                 List<ExamQuestionDTO> listQuestionPart = listExamQuestionDTO.stream().filter(item -> item.getIdPart() == idPart).collect(Collectors.toList());
@@ -124,38 +123,50 @@ public class BaiFullTestController {
     }
 
     @RequestMapping(value = "/saveResultTest/{examId}", method = RequestMethod.POST)
-    public String showResultUser(Model model, HttpSession session, @RequestBody String[] jsonAnswerRead, @PathVariable("examId") int examId) {
+    public String showResultUser(Model model, HttpSession session, @PathVariable("examId") int examId,
+                                 @RequestBody HashMap<String, String> mapAnswerRead) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = nguoiDungService.findUserByEmail(auth.getName());
 
-        // Get list answer from session.
-        session.setAttribute("listAnswerRead", jsonAnswerRead);
-        String[] jsonAnswerListen = (String[]) session.getAttribute("listAnswerListen");
+        // Set map answerRead from session.
+        session.setAttribute("mapAnswerRead", mapAnswerRead);
+        // Get map answerListen from session
+        HashMap<String, String> mapAnswerListen = (HashMap<String, String>) session.getAttribute("mapAnswerListen");
 
         List<Question> listQuestion = questionService.getListCauHoi(baithithuService.getBaiThiThu(examId).get(0));
 
-        int correctAnswerListen = 0;
-        for (int i = 0; i < jsonAnswerListen.length; i++) {
-            int questionNumber = i + 1;
-            String corectAnswer = listQuestion.stream().filter(item -> item.getNumber().equals(questionNumber)).findFirst().get().getCorrectanswer();
-            if (corectAnswer.equals(jsonAnswerListen[i])) {
-                correctAnswerListen++;
+        int totalCorrectAnswerListen = 0;
+        for(Map.Entry<String, String> entry : mapAnswerListen.entrySet()) {
+            String quesId = entry.getKey();
+            String userAnser = entry.getValue();
+            String corectAnswer = listQuestion.stream().filter(item -> item.getCauhoibaithithuid().toString().equals(quesId)).findFirst().orElseGet(() -> new Question()).getCorrectanswer();
+            if (userAnser.equals(corectAnswer)) {
+                totalCorrectAnswerListen++;
             }
         }
 
+        int totalCorrectAnswerRead = 0;
+        for(Map.Entry<String, String> entry : mapAnswerRead.entrySet()) {
+            String quesId = entry.getKey();
+            String userAnser = entry.getValue();
+            String corectAnswer = listQuestion.stream().filter(item -> item.getCauhoibaithithuid().toString().equals(quesId)).findFirst().orElseGet(() -> new Question()).getCorrectanswer();
+            if (userAnser.equals(corectAnswer)) {
+                totalCorrectAnswerRead++;
+            }
+        }
 
         Date time = new Date();
         TestResult ketquabaitest = new TestResult();
         ketquabaitest.setNgaythi(time);
         ketquabaitest.setBaithithu(baithithuService.getBaiThiThu(examId).get(0));
-//        ketquabaitest.setCorrectlisten(correctListening);
-//        ketquabaitest.setCorrectreading(correctReading);
+        ketquabaitest.setCorrectlisten(totalCorrectAnswerListen);
+        ketquabaitest.setCorrectreading(totalCorrectAnswerRead);
         ketquabaitest.setNguoidung(currentUser);
 
         ketquabaitestService.save(ketquabaitest);
-//        model.addAttribute("correctListening", correctListening);
-//        model.addAttribute("correctReading", correctReading);
-//        model.addAttribute("total", correctReading + correctListening);
+        model.addAttribute("correctListening", totalCorrectAnswerListen);
+        model.addAttribute("correctReading", totalCorrectAnswerRead);
+        model.addAttribute("total", totalCorrectAnswerRead + totalCorrectAnswerListen);
 
         return "client/resultTestUser";
     }

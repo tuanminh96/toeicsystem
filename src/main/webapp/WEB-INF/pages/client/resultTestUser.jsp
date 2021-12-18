@@ -51,7 +51,7 @@
     href="<%=request.getContextPath()%>/listExam">Làm các bài test khác</a> --%>
 <br>
 <br>
-<a id="seeDetailedAnswer" style="text-decoration: none;">Xem giải đáp chi tiết</a>
+<p id="seeDetailedAnswer" style="text-decoration: none; cursor: pointer">Xem giải đáp chi tiết</p>
 <br>
 <br>
 <a style="text-decoration: none;" href="#">Xem top người dùng đạt

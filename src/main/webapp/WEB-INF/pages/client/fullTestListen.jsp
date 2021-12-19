@@ -13,19 +13,35 @@
 
     <script src="${pageContext.request.contextPath}/resources/js/client/baiTestListening.js"></script>
     <style type="text/css">
-        .questionPart1 {
-            border: 1px solid red;
-            height: 400px;
+        .question {
+            height: 40px;
+            line-height: 40px;
+            margin: 0 0 10px 0;
         }
 
-        .questionPart2 {
-            border: 1px solid red;
+        .questionPart1 {
             height: 400px;
+            padding: 15px 0;
+            margin-top: 30px;
+        }
+
+        .questionPart2a {
+            padding: 15px 0;
+            margin-top: 30px;
+        }
+
+        .questionPart2b {
+            padding: 15px 0;
+            margin-top: 30px;
+            display: inline-block;
         }
 
         .questionPart3 {
-            border: 1px solid red;
-            height: 400px;
+            padding-left: 60px;
+        }
+
+        .questionPart3a {
+            margin: 30px 0 10px 0;
         }
 
         .questionPart4 {
@@ -116,107 +132,142 @@
                         <c:forEach items="${listQuestionPart1}" var="part1" varStatus="index">
                             <c:if test="${not empty part1.sImage}">
                                 <div class="questionPart1">
-                                    <p>
-                                        <b id="question${index.count}" questionId="${part1.idQuestion}">Question ${index.count}:</b>
-                                    </p>
-                                    <img src="${pageContext.request.contextPath}/resources/file/exams/${part1.idExam}/images/${part1.sImage}.jpg"
-                                         alt="image not found"
-                                         style="height: 300px; width: 400px; float: left; margin-right: 10px"/>
-                                    <audio controls>
-                                        <source src="${pageContext.request.contextPath}/resources/file/exams/${part1.idExam}/audio/${part1.audio}.mp3"
-                                                type="audio/wav">
-                                    </audio>
-                                    <br> <input class="part1" type="radio" name="question${index.count}"
-                                                id="question${index.count}" value="A" onclick="markColor(this.id)"/> A
-                                    <br> <input class="part1" type="radio" name="question${index.count}"
-                                                id="question${index.count}" value="B" onclick="markColor(this.id)"/> B
-                                    <br> <input class="part1" type="radio" name="question${index.count}"
-                                                id="question${index.count}" value="C" onclick="markColor(this.id)"/> C
-                                    <br> <input class="part1" type="radio" name="question${index.count}"
-                                                id="question${index.count}" value="D" onclick="markColor(this.id)"/> D
-                                    <br>
+                                    <div class="row question">
+                                        <b id="question${index.count}"
+                                           questionId="${part1.idQuestion}">Question ${index.count}:</b>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <img src="${pageContext.request.contextPath}/resources/file/exams/${part1.idExam}/images/${part1.sImage}.jpg"
+                                                 alt="Image not found"
+                                                 style="height: 300px; width: 400px; float: left; margin-right: 10px"/>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <audio controls style="width: 100%">
+                                                <source src="${pageContext.request.contextPath}/resources/file/exams/${part1.idExam}/audio/${part1.audio}.mp3"
+                                                        type="audio/wav">
+                                            </audio>
+                                            <br>
+                                            <br> <input class="part1" type="radio" name="question${index.count}"
+                                                        id="question${index.count}" value="A"
+                                                        onclick="markColor(this.id)"/> A
+                                            <br> <input class="part1" type="radio" name="question${index.count}"
+                                                        id="question${index.count}" value="B"
+                                                        onclick="markColor(this.id)"/> B
+                                            <br> <input class="part1" type="radio" name="question${index.count}"
+                                                        id="question${index.count}" value="C"
+                                                        onclick="markColor(this.id)"/> C
+                                            <br> <input class="part1" type="radio" name="question${index.count}"
+                                                        id="question${index.count}" value="D"
+                                                        onclick="markColor(this.id)"/> D
+                                            <br>
+                                        </div>
+                                    </div>
                                 </div>
-                                <br>
                             </c:if>
                         </c:forEach>
                     </div>
                     <div class="tab-pane fade" id="nav-part2" role="tabpanel" aria-labelledby="nav-part2-tab">
                         <c:forEach items="${listQuestionPart2}" var="part2" varStatus="index">
-                            <div class="questionPart2">
-                                <p>
-                                    <b id="question${index.count + 2}" questionId="${part2.idQuestion}">Question ${index.count + 2}:</b>
-                                </p>
-                                <audio controls>
-                                    <source
-                                            src="${pageContext.request.contextPath}/resources/file/exams/${part2.idExam}/audio/${part2.audio}.mp3"
-                                            type="audio/wav">
-                                </audio>
-                                <br>
-                                <input type="radio" name="question${index.count + 2}"
-                                       id="question${index.count + 2}" onclick="markColor(this.id)"
-                                       value="A"/> A <br>
-                                <input type="radio" name="question${index.count + 2}"
-                                       id="question${index.count + 2}" onclick="markColor(this.id)"
-                                       value="B"/> B <br>
-                                <input type="radio" name="question${index.count + 2}"
-                                       id="question${index.count + 2}" onclick="markColor(this.id)"
-                                       value="C"/> C <br>
-                                <br>
+                            <c:if test="${index.count == 1}">
+                                <div class="row questionPart2a">
+                                    <audio controls style="width: 100%">
+                                        <source src="${pageContext.request.contextPath}/resources/file/exams/${part2.idExam}/audio/${part2.audio}.mp3"
+                                                type="audio/wav">
+                                    </audio>
+                                </div>
+                            </c:if>
+                            <div class="questionPart2b col-md-4">
+                                <div class="row" style="padding-bottom: 10px">
+                                    <b id="question${index.count + 2}"
+                                       questionId="${part2.idQuestion}">Question ${index.count + 2}:</b>
+                                </div>
+                                <div>
+                                    <input type="radio" name="question${index.count + 2}"
+                                           id="question${index.count + 2}" onclick="markColor(this.id)"
+                                           value="A"/> A <br>
+                                    <input type="radio" name="question${index.count + 2}"
+                                           id="question${index.count + 2}" onclick="markColor(this.id)"
+                                           value="B"/> B <br>
+                                    <input type="radio" name="question${index.count + 2}"
+                                           id="question${index.count + 2}" onclick="markColor(this.id)"
+                                           value="C"/> C
+                                </div>
                             </div>
                         </c:forEach>
                     </div>
-                    <div class="tab-pane fade" id="nav-part3" role="tabpanel" aria-labelledby="nav-part2-tab">
+                    <div class="tab-pane fade" id="nav-part3" role="tabpanel" aria-labelledby="nav-part3-tab">
                         <c:forEach items="${listQuestionPart3}" var="part3" varStatus="index">
-                            <p>
-                                <b id="question${index.count + 7}" questionId="${part3.idQuestion}">Question ${index.count + 7}:</b>
-                            </p>
-                            <audio controls>
-                                <source
-                                        src="${pageContext.request.contextPath}/resources/file/exams/${part3.idExam}/audio/${part3.audio}.mp3"
-                                        type="audio/wav">
-                            </audio>
-
-                            <br>
-                            <input type="radio" name="question${index.count + 7}"
-                                   id="question${index.count + 7}" onclick="markColor(this.id)"
-                                   value="A"/> A.${part3.option1} <br>
-                            <input type="radio" name="question${index.count + 7}"
-                                   id="question${index.count + 7}" onclick="markColor(this.id)"
-                                   value="B"/> B.${part3.option2}  <br>
-                            <input type="radio" name="question${index.count + 7}"
-                                   id="question${index.count + 7}" onclick="markColor(this.id)"
-                                   value="C"/> C.${part3.option3}  <br>
-                            <input type="radio" name="question${index.count + 7}"
-                                   id="question${index.count + 7}" onclick="markColor(this.id)"
-                                   value="D"/> D.${part3.option4}  <br>
-                            <br>
+                            <c:if test="${index.count == 1 || index.count == 4}">
+                                <div class="row questionPart2a">
+                                    <c:if test="${index.count == 4}">
+                                        <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+                                    </c:if>
+                                    <p><b>Question ${index.count + 7} ~ ${index.count + 9} refer to following
+                                        conversation:</b></p>
+                                    <audio controls>
+                                        <source src="${pageContext.request.contextPath}/resources/file/exams/${part3.idExam}/audio/${part3.audio}.mp3"
+                                                type="audio/wav">
+                                    </audio>
+                                </div>
+                            </c:if>
+                            <div class="questionPart3">
+                                <div class="questionPart3a">
+                                    <b id="question${index.count + 7}"
+                                       questionId="${part3.idQuestion}">Question ${index.count + 7}:</b>${part3.question}
+                                </div>
+                                <div>
+                                    <input type="radio" name="question${index.count + 7}"
+                                           id="question${index.count + 7}" onclick="markColor(this.id)"
+                                           value="A"/> A.${part3.option1} <br>
+                                    <input type="radio" name="question${index.count + 7}"
+                                           id="question${index.count + 7}" onclick="markColor(this.id)"
+                                           value="B"/> B.${part3.option2} <br>
+                                    <input type="radio" name="question${index.count + 7}"
+                                           id="question${index.count + 7}" onclick="markColor(this.id)"
+                                           value="C"/> C.${part3.option3} <br>
+                                    <input type="radio" name="question${index.count + 7}"
+                                           id="question${index.count + 7}" onclick="markColor(this.id)"
+                                           value="D"/> D.${part3.option4} <br>
+                                </div>
+                            </div>
                         </c:forEach>
                     </div>
-                    <div class="tab-pane fade" id="nav-part4" role="tabpanel" aria-labelledby="nav-part2-tab">
+                    <div class="tab-pane fade" id="nav-part4" role="tabpanel" aria-labelledby="nav-part4-tab">
                         <c:forEach items="${listQuestionPart4}" var="part4" varStatus="index">
-                            <p>
-                                <b id="question${index.count + 13}" questionId="${part4.idQuestion}">Question ${index.count + 13}:</b>
-                            </p>
-                            <audio controls>
-                                <source
-                                        src="${pageContext.request.contextPath}/resources/file/exams/${part4.idExam}/audio/${part4.audio}.mp3"
-                                        type="audio/wav">
-                            </audio>
-
-                            <br>
-                            <input type="radio" name="question${index.count + 13}"
-                                   id="question${index.count + 13}" onclick="markColor(this.id)"
-                                   value="A"/> A.${part4.option1} <br>
-                            <input type="radio" name="question${index.count + 13}"
-                                   id="question${index.count + 13}" onclick="markColor(this.id)"
-                                   value="B"/> B.${part4.option2}  <br>
-                            <input type="radio" name="question${index.count + 13}"
-                                   id="question${index.count + 13}" onclick="markColor(this.id)"
-                                   value="C"/> C.${part4.option3}  <br>
-                            <input type="radio" name="question${index.count + 13}"
-                                   id="question${index.count + 13}" onclick="markColor(this.id)"
-                                   value="D"/> D.${part4.option4}  <br>
-                            <br>
+                            <c:if test="${index.count == 1 || index.count == 4}">
+                                <div class="row questionPart2a">
+                                    <c:if test="${index.count == 4}">
+                                        <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+                                    </c:if>
+                                    <p><b>Question ${index.count + 13} ~ ${index.count + 15} refer to following
+                                        conversation:</b></p>
+                                    <audio controls>
+                                        <source src="${pageContext.request.contextPath}/resources/file/exams/${part4.idExam}/audio/${part4.audio}.mp3"
+                                                type="audio/wav">
+                                    </audio>
+                                </div>
+                            </c:if>
+                            <div class="questionPart3">
+                                <div class="questionPart3a">
+                                    <b id="question${index.count + 13}"
+                                       questionId="${part4.idQuestion}">Question ${index.count + 13}:</b>${part4.question}
+                                </div>
+                                <div>
+                                    <input type="radio" name="question${index.count + 13}"
+                                           id="question${index.count + 13}" onclick="markColor(this.id)"
+                                           value="A"/> A.${part4.option1} <br>
+                                    <input type="radio" name="question${index.count + 13}"
+                                           id="question${index.count + 13}" onclick="markColor(this.id)"
+                                           value="B"/> B.${part4.option2} <br>
+                                    <input type="radio" name="question${index.count + 13}"
+                                           id="question${index.count + 13}" onclick="markColor(this.id)"
+                                           value="C"/> C.${part4.option3} <br>
+                                    <input type="radio" name="question${index.count + 13}"
+                                           id="question${index.count + 13}" onclick="markColor(this.id)"
+                                           value="D"/> D.${part4.option4} <br>
+                                </div>
+                            </div>
                         </c:forEach>
                     </div>
                 </div>

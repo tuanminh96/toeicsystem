@@ -26,11 +26,13 @@
             height: 40px;
             margin: 10px 0 10px 25px;
         }
-        .titleDoExam{
+
+        .titleDoExam {
             font-size: 30px;
             line-height: 60px;
             text-align: center;;
         }
+
         #time {
             font-size: 25px;
             margin-left: 100px;
@@ -52,6 +54,14 @@
 
         #mainContent {
             margin-top: 75px;
+            margin-bottom: 75px;
+        }
+
+        #footerExam {
+            height: 40px;
+            line-height: 40px;
+            background: gainsboro;
+            text-align: center;
         }
     </style>
 </head>
@@ -83,7 +93,9 @@
 <!--==========================/End Main Content==========================-->
 
 <!--==========================Start Footer==========================-->
-
+<div id="footerExam">
+    Footer
+</div>
 <!--==========================/End Footer==========================-->
 
 </body>

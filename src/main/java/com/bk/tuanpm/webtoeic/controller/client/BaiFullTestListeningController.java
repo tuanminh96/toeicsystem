@@ -85,7 +85,7 @@ public class BaiFullTestListeningController {
             model.addAttribute("listQuestionPart" + idPart, listQuestionPart);
         }
 
-        return "client/listeningResult";
+        return "client/examResult";
     }
 
 }

@@ -68,7 +68,7 @@
 
 <body>
 <input id="baseUrl" value="${pageContext.request.contextPath}" style="display: none;"/>
-<input id="examId" value="6" style="display: none;"/>
+<input id="examId" value="6"/>
 <!--==========================Start Header==========================-->
 <div class="headerDoExam row">
     <div class="col-md-3">
@@ -80,7 +80,7 @@
         Bài thi thử toeic
     </div>
     <div class="col-md-3">
-        <span id="time">45:00</span>
+
     </div>
 </div>
 <!--==========================/End Header==========================-->

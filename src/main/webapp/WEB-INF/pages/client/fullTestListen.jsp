@@ -11,7 +11,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
     <script src="http://code.jquery.com/jquery.js"></script>
 
+<%--    <script src="${pageContext.request.contextPath}/resources/js/client/baiTestReading.js"></script>--%>
     <script src="${pageContext.request.contextPath}/resources/js/client/baiTestListening.js"></script>
+
     <style type="text/css">
         .question {
             height: 40px;
@@ -57,7 +59,7 @@
             <div id="navigation" class="col-md-3">
                 <div class="fix-scrolling">
                     <br>
-
+                    Time: <span id="time">20:00</span>
                     <hr width="60%">
                     <div class="panel panel-info">
                         <div class="panel-heading">Danh sách câu hỏi</div>
@@ -150,16 +152,16 @@
                                             <br>
                                             <br> <input class="part1" type="radio" name="question${index.count}"
                                                         id="question${index.count}" value="A"
-                                                        onclick="markColor(this.id)"/> A
+                                                        onclick="markColorListening(this.id)"/> A
                                             <br> <input class="part1" type="radio" name="question${index.count}"
                                                         id="question${index.count}" value="B"
-                                                        onclick="markColor(this.id)"/> B
+                                                        onclick="markColorListening(this.id)"/> B
                                             <br> <input class="part1" type="radio" name="question${index.count}"
                                                         id="question${index.count}" value="C"
-                                                        onclick="markColor(this.id)"/> C
+                                                        onclick="markColorListening(this.id)"/> C
                                             <br> <input class="part1" type="radio" name="question${index.count}"
                                                         id="question${index.count}" value="D"
-                                                        onclick="markColor(this.id)"/> D
+                                                        onclick="markColorListening(this.id)"/> D
                                             <br>
                                         </div>
                                     </div>
@@ -184,13 +186,13 @@
                                 </div>
                                 <div>
                                     <input type="radio" name="question${index.count + 2}"
-                                           id="question${index.count + 2}" onclick="markColor(this.id)"
+                                           id="question${index.count + 2}" onclick="markColorListening(this.id)"
                                            value="A"/> A <br>
                                     <input type="radio" name="question${index.count + 2}"
-                                           id="question${index.count + 2}" onclick="markColor(this.id)"
+                                           id="question${index.count + 2}" onclick="markColorListening(this.id)"
                                            value="B"/> B <br>
                                     <input type="radio" name="question${index.count + 2}"
-                                           id="question${index.count + 2}" onclick="markColor(this.id)"
+                                           id="question${index.count + 2}" onclick="markColorListening(this.id)"
                                            value="C"/> C
                                 </div>
                             </div>
@@ -218,16 +220,16 @@
                                 </div>
                                 <div>
                                     <input type="radio" name="question${index.count + 7}"
-                                           id="question${index.count + 7}" onclick="markColor(this.id)"
+                                           id="question${index.count + 7}" onclick="markColorListening(this.id)"
                                            value="A"/> A.${part3.option1} <br>
                                     <input type="radio" name="question${index.count + 7}"
-                                           id="question${index.count + 7}" onclick="markColor(this.id)"
+                                           id="question${index.count + 7}" onclick="markColorListening(this.id)"
                                            value="B"/> B.${part3.option2} <br>
                                     <input type="radio" name="question${index.count + 7}"
-                                           id="question${index.count + 7}" onclick="markColor(this.id)"
+                                           id="question${index.count + 7}" onclick="markColorListening(this.id)"
                                            value="C"/> C.${part3.option3} <br>
                                     <input type="radio" name="question${index.count + 7}"
-                                           id="question${index.count + 7}" onclick="markColor(this.id)"
+                                           id="question${index.count + 7}" onclick="markColorListening(this.id)"
                                            value="D"/> D.${part3.option4} <br>
                                 </div>
                             </div>
@@ -255,16 +257,16 @@
                                 </div>
                                 <div>
                                     <input type="radio" name="question${index.count + 13}"
-                                           id="question${index.count + 13}" onclick="markColor(this.id)"
+                                           id="question${index.count + 13}" onclick="markColorListening(this.id)"
                                            value="A"/> A.${part4.option1} <br>
                                     <input type="radio" name="question${index.count + 13}"
-                                           id="question${index.count + 13}" onclick="markColor(this.id)"
+                                           id="question${index.count + 13}" onclick="markColorListening(this.id)"
                                            value="B"/> B.${part4.option2} <br>
                                     <input type="radio" name="question${index.count + 13}"
-                                           id="question${index.count + 13}" onclick="markColor(this.id)"
+                                           id="question${index.count + 13}" onclick="markColorListening(this.id)"
                                            value="C"/> C.${part4.option3} <br>
                                     <input type="radio" name="question${index.count + 13}"
-                                           id="question${index.count + 13}" onclick="markColor(this.id)"
+                                           id="question${index.count + 13}" onclick="markColorListening(this.id)"
                                            value="D"/> D.${part4.option4} <br>
                                 </div>
                             </div>

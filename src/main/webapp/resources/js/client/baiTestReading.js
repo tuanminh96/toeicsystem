@@ -1,3 +1,66 @@
+$(document).ready(function () {
+    const baseUrl = $('#baseUrl').val();
+    const examId = $("#examId").val();
+    let interval;
+    let timeDoReadExam = 0;
+
+    // Start time do Reading
+    onLoadReadTimer();
+
+    // Ket qua test( Listening + Reading)
+    $('#btnSubmitReading').click(function () {
+        const answerArr = answerRead();
+
+        var dataExamDTO = {
+            'jsonAnswerUser': answerArr,
+            'timeDoExam': timeDoReadExam
+        };
+
+        $.ajax({
+            headers: {
+                'Accept': 'application/json', 'Content-Type': 'application/json'
+            }, // dataType: "json",
+            data: JSON.stringify(dataExamDTO),
+            type: 'POST',
+            url: baseUrl + "/saveResultTest/" + examId,
+            success: function (html) {
+                clearInterval(interval);
+                $('#mainContent').html(html);
+            }, error: function (html) {
+                alert('Error');
+                $('#mainContent').html(html.responseText);
+            }
+        });
+    });
+
+    function onLoadReadTimer() {
+        const totalTimeReadExam = 60 * 20;
+        let display = document.querySelector('#time');
+        startTimer(totalTimeReadExam, display);
+    }
+
+    function startTimer(duration, display) {
+        let timer = duration, minutes, seconds;
+        interval = setInterval(function () {
+            minutes = parseInt(timer / 60, 10)
+            seconds = parseInt(timer % 60, 10);
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.textContent = minutes + ":" + seconds;
+
+            timeDoReadExam = timer;
+            if (--timer < 0) {
+                clearInterval(interval);
+
+                //do someth after countdown
+                alert("Reading time-out. Hệ thống sẽ tự động nộp bài!");
+                $("#btnSubmitReading").click();
+            }
+        }, 1000);
+    }
+});
+
 function markColorReading(id) {
     //tách lấy id của câu hỏi
     var fields = id.split('.');
@@ -5,87 +68,13 @@ function markColorReading(id) {
     document.getElementById("answer" + answerId).style.backgroundColor = "rgb(167,162,162)";
 }
 
-function correctAnswerReading() {
-    var correctArr = [];
-    var totalquest = document.getElementById("totalquest").value;
-    var firstquest = document.getElementById("firstquest").value;
-    for (var i = firstquest; i < totalquest; i++) {
-        var nameRadio = "correctanswer" + i;
-        var x = document.getElementById("submitForm").elements.namedItem(nameRadio).value;
-        correctArr.push(x);
-    }
-
-    return correctArr;
-}
-
-function answerUserReading() {
-
-    //var form = document.getElementById("submitForm");
-    // array index start = 0
-    var answerArr = [];
-
-    for (var i = 51; i < 101; i++) {
-        var nameRadio = "question" + i;
-        var result = document.getElementById("submitForm").elements.namedItem(nameRadio);
-
-        if (result == null) answerArr.push("");
-        else {
-
-            var x = document.getElementById("submitForm").elements.namedItem(nameRadio).value;
-            answerArr.push(x);
-        }
-
-    }
-
-    return answerArr;
-}
-
-
-var timecheckReading;
-
-function startTimerReading(duration, display) {
-
-    var timer = duration, minutes, seconds;
-
-    timecheckReading = setInterval(function () {
-
-        minutes = parseInt(timer / 60, 10)
-        seconds = parseInt(timer % 60, 10);
-
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
-
-        document.getElementById("timeReading").textContent = minutes + ":" + seconds;
-        if (--timer < 0) {
-            clearInterval(timecheckReading);
-            alert("Đã hết thời gian làm bài test");
-            clickSubmitReading();
-        }
-    }, 1000);
-
-
-}
-
-function startReadingClock() {
-    //change time here
-    //var fortyFiveMinutes = 0.2 * 30;
-    var fortyFiveMinutes = 60 * 75;
-    // display = document.querySelectorAll('#timeReading');
-    // var check = document.getElementById("timeReading").value();
-    //console.log("check:"+check);
-    startTimerReading(fortyFiveMinutes, '75:00');
-};
-
 function answerRead() {
     let answerArr = {};
     for (let i = 20; i <= 37; i++) {
         const questionId = $("#question" + i).attr("questionId");
         const nameRadio = "question" + i;
-        console.log(questionId + "" +nameRadio);
         let result = document.getElementById("submitForm").elements.namedItem(nameRadio);
-        if (result == null)
-            answerArr[questionId] = "";
-        else {
+        if (result == null) answerArr[questionId] = ""; else {
             const value = document.getElementById("submitForm").elements.namedItem(nameRadio).value;
             answerArr[questionId] = value;
         }
@@ -93,187 +82,3 @@ function answerRead() {
 
     return answerArr;
 }
-
-// ket qua test( Listening + Reading)
-$(document).ready(function () {
-    const baseUrl = $('#baseUrl').val();
-    const examId = $("#examId").val();
-
-    $('#btnSubmitReading').click(function () {
-        const answerArr = answerRead();
-        console.log(answerArr);
-        const jsonAnswerRead = JSON.stringify(answerArr);
-        $.ajax({
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            // dataType: "json",
-            data: jsonAnswerRead,
-            type: 'POST',
-            url: baseUrl + "/saveResultTest/" + examId,
-            success: function (html) {
-                $('#mainContent').html(html);
-            },
-            error: function (html) {
-                alert('Error');
-                $('#mainContent').html(html.responseText);
-            }
-        });
-    });
-});
-
-function clickSubmitReading() {
-
-
-    var url = "http://localhost:8080/webtoeic/saveResultUser/" + examId + "/" + correctListening + "/" + correctReading;
-    if (window.XMLHttpRequest) {
-        xhttp = new XMLHttpRequest();
-    } else {
-        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
-    }
-
-    xhttp.open("POST", url, true);
-
-    xhttp.onreadystatechange = function () {
-        if (xhttp.readyState == 4) {
-
-            var data = xhttp.responseText;
-            document.getElementById("main").innerHTML = data;
-        }
-    }
-
-
-    xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-
-    xhttp.send();
-
-    clearInterval(timecheckReading);
-    document.getElementById("btnSubmitReading").style.display = 'none';
-    document.getElementById("btnResultReading").style.display = 'none';
-    document.getElementById("noteReading").style.display = 'none';
-
-
-}
-
-
-//cham diem bai test
-function clickResutlReading() {
-    //stop countdown
-    clearInterval(timecheckReading);
-
-    document.getElementById("btnResultReading").style.display = 'none';
-
-    document.getElementById("noteReading").style.display = 'block';
-
-    document.getElementById("btnSubmitReading").style.margin = "0px 0px 0px 100px";
-
-    var answerArr = answerUserReading();
-
-    var correctArr = correctAnswerReading();
-
-    var countCorrect = 0;
-
-    for (var i = 0; i < 50; i++) {
-        if (answerArr[i] == correctArr[i] && answerArr[i] != ' ') countCorrect++;
-
-    }
-
-    var jsonAnswerUser = JSON.stringify(answerArr);
-
-
-    var examId = document.getElementById('examId').value;
-    //var examId = $("#examId").val();
-
-    var url = "http://localhost:8080/webtoeic/showResultReading/" + examId + "/" + countCorrect;
-    if (window.XMLHttpRequest) {
-        xhttp = new XMLHttpRequest();
-    } else {
-        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
-    }
-
-    xhttp.open("POST", url, true);
-
-    xhttp.onreadystatechange = function () {
-        if (xhttp.readyState == 4) {
-
-            var data = xhttp.responseText;
-            document.getElementById("main").innerHTML = data;
-        }
-    }
-
-
-    xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-
-    xhttp.send(jsonAnswerUser);
-
-
-}
-
-
-//
-//$(document).ready(function(){
-//
-//	
-//	
-//	$('#btndoAgain').click(function(){ 
-//		location.reload();
-//	});
-//	
-//	$('#btnResultReading').click(function(){
-//		
-//		//clear clock,stop countdown
-//	    clearInterval(timecheck);
-//		//tranfer information
-//	    
-//	    //remove btn XemdapAn, show btn lamlai
-//	    $('#btnResultReading').hide();
-//	    $('#btndoAgain').show();
-//		
-//		var answerArr = answerUser();
-//		var jsonAnswerUser = JSON.stringify(answerArr);
-//		
-//		var examId = $("#examId").val();
-//		
-//		var url="http://localhost:8080/webtoeic/showResultReading/"+examId;
-//		if(window.XMLHttpRequest){
-//			xhttp = new XMLHttpRequest();
-//		}
-//		else{
-//			xhttp = new ActiveXObject("Microsoft.XMLHTTP");
-//		}
-//		
-//		xhttp.open("POST",url,true);
-//		
-//			xhttp.onreadystatechange = function(){
-//			if(xhttp.readyState == 4){
-//				
-//				var data = xhttp.responseText;
-//				document.getElementById("main").innerHTML = data;
-//			}
-//		}
-//		
-//		
-//		xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-//
-//		xhttp.send(jsonAnswerUser);
-//	});
-//	
-//	
-//});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

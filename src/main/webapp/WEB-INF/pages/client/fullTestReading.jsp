@@ -33,7 +33,7 @@
             <div id="navigation" class="col-md-3">
                 <div class="fix-scrolling">
                     <br>
-
+                    Time: <span id="time">20:00</span>
                     <hr width="60%">
                     <div class="panel panel-info">
                         <div class="panel-heading">Danh sách câu hỏi</div>

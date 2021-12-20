@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.bk.tuanpm.webtoeic.dto.ExamQuestionDTO;
+import com.bk.tuanpm.webtoeic.request.DataExamDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
@@ -124,19 +125,23 @@ public class BaiFullTestController {
 
     @RequestMapping(value = "/saveResultTest/{examId}", method = RequestMethod.POST)
     public String showResultUser(Model model, HttpSession session, @PathVariable("examId") int examId,
-                                 @RequestBody HashMap<String, String> mapAnswerRead) {
+                                 @RequestBody DataExamDTO dataExamDTO) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = nguoiDungService.findUserByEmail(auth.getName());
 
-        // Set map answerRead from session.
+        HashMap<String, String> mapAnswerRead = dataExamDTO.getJsonAnswerUser();
+        String timeDoReadExam = dataExamDTO.getTimeDoExam();
+
+        // Set to session.
         session.setAttribute("mapAnswerRead", mapAnswerRead);
+        session.setAttribute("timeDoReadExam", timeDoReadExam);
         // Get map answerListen from session
         HashMap<String, String> mapAnswerListen = (HashMap<String, String>) session.getAttribute("mapAnswerListen");
 
         List<Question> listQuestion = questionService.getListCauHoi(baithithuService.getBaiThiThu(examId).get(0));
 
         int totalCorrectAnswerListen = 0;
-        for(Map.Entry<String, String> entry : mapAnswerListen.entrySet()) {
+        for (Map.Entry<String, String> entry : mapAnswerListen.entrySet()) {
             String quesId = entry.getKey();
             String userAnser = entry.getValue();
             String corectAnswer = listQuestion.stream().filter(item -> item.getCauhoibaithithuid().toString().equals(quesId)).findFirst().orElseGet(() -> new Question()).getCorrectanswer();
@@ -146,7 +151,7 @@ public class BaiFullTestController {
         }
 
         int totalCorrectAnswerRead = 0;
-        for(Map.Entry<String, String> entry : mapAnswerRead.entrySet()) {
+        for (Map.Entry<String, String> entry : mapAnswerRead.entrySet()) {
             String quesId = entry.getKey();
             String userAnser = entry.getValue();
             String corectAnswer = listQuestion.stream().filter(item -> item.getCauhoibaithithuid().toString().equals(quesId)).findFirst().orElseGet(() -> new Question()).getCorrectanswer();

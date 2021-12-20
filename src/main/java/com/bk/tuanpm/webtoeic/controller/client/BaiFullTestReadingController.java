@@ -2,11 +2,10 @@ package com.bk.tuanpm.webtoeic.controller.client;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.bk.tuanpm.webtoeic.dto.ExamQuestionDTO;
-import net.minidev.json.JSONObject;
+import com.bk.tuanpm.webtoeic.request.DataExamDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,8 +32,12 @@ public class BaiFullTestReadingController {
 
     @RequestMapping(value = "/reading/{examId}", method = RequestMethod.POST)
     public String DetailReading(Model model, HttpSession session, @PathVariable("examId") int examId,
-                                @RequestBody HashMap<String, String> mapAnswerListen) {
+                                @RequestBody DataExamDTO dataExamDTO) {
+        HashMap<String, String> mapAnswerListen = dataExamDTO.getJsonAnswerUser();
+        String timeDoListenExam = dataExamDTO.getTimeDoExam();
+
         session.setAttribute("mapAnswerListen", mapAnswerListen);
+        session.setAttribute("timeDoListenExam", timeDoListenExam);
 
         // Get All Question of question, part, set_question, exam
         List<ExamQuestionDTO> listExamQuestionDTO = questionService.getListExamQuestionDTO(examId, "Reading");
@@ -43,15 +46,6 @@ public class BaiFullTestReadingController {
             List<ExamQuestionDTO> listQuestionPart = listExamQuestionDTO.stream().filter(item -> item.getIdPart() == idPart).collect(Collectors.toList());
             model.addAttribute("listQuestionPart" + idPart, listQuestionPart);
         }
-
-//        List<Question> list = questionService.getListCauHoi(baithithuService.getBaiThiThu(examId).get(0));
-//        List<PartToeic> partReading = partService.getPartByType("Reading");
-//        Map<String, List<Question>> map = questionService.getMapPartQuestionReading(list);
-//
-//        model.addAllAttributes(map);
-//        model.addAttribute("listQuestion", list);
-//        model.addAttribute("socauListeningCorrect", 1);
-//        model.addAttribute("partReading", partReading);
 
         return "client/fullTestReading";
     }

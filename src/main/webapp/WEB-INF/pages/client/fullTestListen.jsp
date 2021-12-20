@@ -11,10 +11,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
     <script src="http://code.jquery.com/jquery.js"></script>
 
-<%--    <script src="${pageContext.request.contextPath}/resources/js/client/baiTestReading.js"></script>--%>
+    <%--    <script src="${pageContext.request.contextPath}/resources/js/client/baiTestReading.js"></script>--%>
     <script src="${pageContext.request.contextPath}/resources/js/client/baiTestListening.js"></script>
 
     <style type="text/css">
+        .content-left {
+            width: 30%;
+            position: fixed;
+        }
+
+        .content-right {
+            width: 67%;
+            margin-left: 30%;
+        }
+
         .question {
             height: 40px;
             line-height: 40px;
@@ -50,59 +60,57 @@
             border: 1px solid red;
             height: 400px;
         }
+
+        .numberCircle {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            font-size: 15px;
+            line-height: 25px;
+            text-align: center;
+            border: 2px solid #666;
+            margin: 5px 5px 5px 15px;
+        }
+
+        #time {
+            font-size: 25px;
+            margin-left: 100px;
+            color: green;
+            float: right;
+        }
+
+        .timeDoExam {
+            height: 60px;
+            line-height: 60px;
+        }
     </style>
 </head>
 <body>
 <div id="content" class="container-fluid fill">
     <form id="submitForm" name="submitForm">
         <div class="row">
-            <div id="navigation" class="col-md-3">
+            <div id="navigation" class="content-left">
                 <div class="fix-scrolling">
-                    <br>
-                    Time: <span id="time">20:00</span>
-                    <hr width="60%">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">Danh sách câu hỏi</div>
-                        <%--                        <div class="panel-body">--%>
-                        <%--                            <c:forEach items="${part1}" var="quest">--%>
-                        <%--                                <div class="numberCircle part1 parttoeic"--%>
-                        <%--                                     style="display: none;" id="answer${quest.number}">${quest.number}</div>--%>
-                        <%--                            </c:forEach>--%>
-                        <%--                            <c:set var="part1count" value="${part1.size()}"></c:set>--%>
-                        <%--                            <c:forEach items="${part2}" var="quest">--%>
-                        <%--                                <div class="numberCircle part2 parttoeic"--%>
-                        <%--                                     style="display: none;" id="answer${quest.number}">${quest.number}</div>--%>
-                        <%--                            </c:forEach>--%>
-                        <%--                            <c:set var="part2count" value="${part2.size()}"></c:set>--%>
-                        <%--                            <c:forEach items="${part3}" var="quest">--%>
-                        <%--                                <div class="numberCircle part3 parttoeic"--%>
-                        <%--                                     style="display: none;" id="answer${quest.number}">${quest.number}</div>--%>
-                        <%--                            </c:forEach>--%>
-                        <%--                            <c:set var="part3count" value="${part3.size()}"></c:set>--%>
-                        <%--                            <c:forEach items="${part4}" var="quest">--%>
-                        <%--                                <div class="numberCircle part4 parttoeic"--%>
-                        <%--                                     style="display: none;" id="answer${quest.number}">${quest.number}</div>--%>
-                        <%--                            </c:forEach>--%>
-                        <%--                            <c:set var="part4count" value="${part4.size()}"></c:set>--%>
-                        <%--                            <input type="hidden"--%>
-                        <%--                                   value="${part1count+part2count+part3count+part4count}"--%>
-                        <%--                                   id="totalquest">--%>
-                        <%--                        </div>--%>
+                    <div class="timeDoExam" style="width: 80%">
+                        Time <i class="fas fa-clock"> : </i><span id="time">20:00</span>
                     </div>
-
-                    <br> <br>
-                    <!-- 	<input type="button" id="btndoAgain" class="btn btn-warning" value="Làm lại"> -->
-                    <!-- 							<input type="button" class="btn btn-primary" id="btnResult"
-                        value="Chấm điểm" />  -->
-                    <input id="doReading" style="position: absolute; top: 600px;"
-                           type="button"
+                    <hr width="80%">
+                    <div class="panel panel-info">
+                        <div class="panel-heading" style="margin-bottom: 20px">Danh sách câu hỏi</div>
+                        <div class="panel-body" style="width: 80%">
+                            <c:forEach var="i" begin="1" end="19">
+                                <div class="numberCircle" id="answer${i}">${i}</div>
+                            </c:forEach>
+                        </div>
+                    </div>
+                    <hr width="80%">
+                    <input id="doReading" style="position: fixed;bottom: 80px;left: 5%;" type="button"
                            class="btn btn-danger" value="Làm bài đọc"/>
-                    <br>
-                    <hr width="60%">
                 </div>
             </div>
             <!--Nội dung bài test -->
-            <div class="col-md-9 main">
+            <div class="content-right">
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <button class="nav-link active" id="nav-part1-tab" data-bs-toggle="tab"
@@ -151,16 +159,16 @@
                                             </audio>
                                             <br>
                                             <br> <input class="part1" type="radio" name="question${index.count}"
-                                                        id="question${index.count}" value="A"
+                                                        id="question.${index.count}" value="A"
                                                         onclick="markColorListening(this.id)"/> A
                                             <br> <input class="part1" type="radio" name="question${index.count}"
-                                                        id="question${index.count}" value="B"
+                                                        id="question.${index.count}" value="B"
                                                         onclick="markColorListening(this.id)"/> B
                                             <br> <input class="part1" type="radio" name="question${index.count}"
-                                                        id="question${index.count}" value="C"
+                                                        id="question.${index.count}" value="C"
                                                         onclick="markColorListening(this.id)"/> C
                                             <br> <input class="part1" type="radio" name="question${index.count}"
-                                                        id="question${index.count}" value="D"
+                                                        id="question.${index.count}" value="D"
                                                         onclick="markColorListening(this.id)"/> D
                                             <br>
                                         </div>
@@ -186,13 +194,13 @@
                                 </div>
                                 <div>
                                     <input type="radio" name="question${index.count + 2}"
-                                           id="question${index.count + 2}" onclick="markColorListening(this.id)"
+                                           id="question.${index.count + 2}" onclick="markColorListening(this.id)"
                                            value="A"/> A <br>
                                     <input type="radio" name="question${index.count + 2}"
-                                           id="question${index.count + 2}" onclick="markColorListening(this.id)"
+                                           id="question.${index.count + 2}" onclick="markColorListening(this.id)"
                                            value="B"/> B <br>
                                     <input type="radio" name="question${index.count + 2}"
-                                           id="question${index.count + 2}" onclick="markColorListening(this.id)"
+                                           id="question.${index.count + 2}" onclick="markColorListening(this.id)"
                                            value="C"/> C
                                 </div>
                             </div>
@@ -220,16 +228,16 @@
                                 </div>
                                 <div>
                                     <input type="radio" name="question${index.count + 7}"
-                                           id="question${index.count + 7}" onclick="markColorListening(this.id)"
+                                           id="question.${index.count + 7}" onclick="markColorListening(this.id)"
                                            value="A"/> A.${part3.option1} <br>
                                     <input type="radio" name="question${index.count + 7}"
-                                           id="question${index.count + 7}" onclick="markColorListening(this.id)"
+                                           id="question.${index.count + 7}" onclick="markColorListening(this.id)"
                                            value="B"/> B.${part3.option2} <br>
                                     <input type="radio" name="question${index.count + 7}"
-                                           id="question${index.count + 7}" onclick="markColorListening(this.id)"
+                                           id="question.${index.count + 7}" onclick="markColorListening(this.id)"
                                            value="C"/> C.${part3.option3} <br>
                                     <input type="radio" name="question${index.count + 7}"
-                                           id="question${index.count + 7}" onclick="markColorListening(this.id)"
+                                           id="question.${index.count + 7}" onclick="markColorListening(this.id)"
                                            value="D"/> D.${part3.option4} <br>
                                 </div>
                             </div>
@@ -257,16 +265,16 @@
                                 </div>
                                 <div>
                                     <input type="radio" name="question${index.count + 13}"
-                                           id="question${index.count + 13}" onclick="markColorListening(this.id)"
+                                           id="question.${index.count + 13}" onclick="markColorListening(this.id)"
                                            value="A"/> A.${part4.option1} <br>
                                     <input type="radio" name="question${index.count + 13}"
-                                           id="question${index.count + 13}" onclick="markColorListening(this.id)"
+                                           id="question.${index.count + 13}" onclick="markColorListening(this.id)"
                                            value="B"/> B.${part4.option2} <br>
                                     <input type="radio" name="question${index.count + 13}"
-                                           id="question${index.count + 13}" onclick="markColorListening(this.id)"
+                                           id="question.${index.count + 13}" onclick="markColorListening(this.id)"
                                            value="C"/> C.${part4.option3} <br>
                                     <input type="radio" name="question${index.count + 13}"
-                                           id="question${index.count + 13}" onclick="markColorListening(this.id)"
+                                           id="question.${index.count + 13}" onclick="markColorListening(this.id)"
                                            value="D"/> D.${part4.option4} <br>
                                 </div>
                             </div>

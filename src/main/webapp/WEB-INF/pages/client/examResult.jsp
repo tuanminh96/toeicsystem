@@ -13,6 +13,16 @@
 
     <script src="${pageContext.request.contextPath}/resources/js/client/baiTestListening.js"></script>
     <style type="text/css">
+        .content-left {
+            width: 30%;
+            position: fixed;
+        }
+
+        .content-right {
+            width: 67%;
+            margin-left: 30%;
+        }
+
         .question {
             height: 40px;
             line-height: 40px;
@@ -63,23 +73,69 @@
         .examExplain {
             padding-top: 20px;
         }
+
+        .numberCircle {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            font-size: 15px;
+            line-height: 25px;
+            text-align: center;
+            border: 2px solid #666;
+            margin: 5px 5px 5px 15px;
+        }
+
+        #time {
+            font-size: 25px;
+            margin-left: 100px;
+            color: green;
+            float: right;
+        }
+
+        .timeDoExam {
+            height: 60px;
+            line-height: 60px;
+        }
     </style>
 </head>
 <body>
 <div id="content" class="container-fluid fill">
     <form id="submitForm" name="submitForm">
         <div class="row">
-            <div id="navigation" class="col-md-3">
+            <div id="navigation" class="content-left">
                 <div class="fix-scrolling">
-                    <br>
-                    <hr width="60%">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">Danh sách câu hỏi</div>
+                    <div class="timeDoExam" style="width: 80%">
+                        Tổng thời gian làm bài: </i><span id="time">${timeDoListenExam} + ${timeDoReadExam}</span>
                     </div>
+                    <hr width="80%">
+                    <div class="panel panel-info">
+                        <div class="panel-heading" style="margin-bottom: 20px">Danh sách câu hỏi</div>
+                        <div class="panel-body" style="width: 80%">
+                            <c:forEach items="${fullListExamQuestionDTO}" var="data" varStatus="index">
+                                <c:choose>
+                                    <c:when test="${data.userAnswer == data.correctAnswer}">
+                                        <div class="numberCircle" id="answer${index.count}"
+                                             style="background-color: #20c997">${index.count}</div>
+                                    </c:when>
+                                    <c:when test="${data.userAnswer != ''}">
+                                        <div class="numberCircle" id="answer${index.count}"
+                                             style="background-color: #fd7e14">${index.count}</div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="numberCircle" id="answer${index.count}">${index.count}</div>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+                        </div>
+                    </div>
+                    <hr width="80%">
+                    <input id="#" style="position: fixed;bottom: 80px;left: 5%;" type="button"
+                           class="btn btn-danger" value="Làm lại bài thi"/>
                 </div>
             </div>
             <!--Nội dung bài test -->
-            <div class="col-md-9 main">
+            <div class="content-right">
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <button class="nav-link active" id="nav-part1-tab" data-bs-toggle="tab"
@@ -625,7 +681,7 @@
                                         <c:if test="${index.count == 4}">
                                             <hr style="height:2px;border-width:0;color:gray;background-color:gray">
                                         </c:if>
-                                        <p><b>Question ${index.count + 25} ~ ${index.count + 27} refer to following
+                                        <p><b>Question ${index.count + 31} ~ ${index.count + 33} refer to following
                                             conversation:</b></p>
                                         <p style="border: 2px dashed #949494;">${part7.sParagraph}</p>
                                     </div>

@@ -62,6 +62,7 @@ public class BaiFullTestListeningController {
 
         // Get All Question of question, part, set_question, exam
         List<ExamQuestionDTO> listExamQuestionDTO = questionService.getAllListExamQuestionDTO(examId);
+        model.addAttribute("fullListExamQuestionDTO", listExamQuestionDTO);
 
         // Set them userAnswerListen vao listDTO
         for (Map.Entry<String, String> entry : mapAnswerListen.entrySet()) {

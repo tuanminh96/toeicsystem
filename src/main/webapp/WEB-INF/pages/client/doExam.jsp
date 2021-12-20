@@ -33,14 +33,6 @@
             text-align: center;;
         }
 
-        #time {
-            font-size: 25px;
-            margin-left: 100px;
-            color: green;
-            line-height: 60px;
-            text-align: center;
-        }
-
         .headerDoExam {
             position: fixed;
             left: 0;
@@ -62,6 +54,9 @@
             line-height: 40px;
             background: gainsboro;
             text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
         }
     </style>
 </head>

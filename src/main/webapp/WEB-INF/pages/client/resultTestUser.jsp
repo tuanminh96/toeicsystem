@@ -42,9 +42,9 @@
 <input id="baseUrl" value="${pageContext.request.contextPath}" style="display: none;"/>
 <h3 style="text-decoration: underline;">Kết quả bài test:</h3>
 <br>
-<h4 id="totalCorrect" totalCorrect="${total}">Tổng số câu đúng: ${total}/100</h4>
-<h4>Số câu đúng phần Listening: ${correctListening}/50</h4>
-<h4>Số câu đúng phần Reading: ${correctReading}/50</h4>
+<h4 id="totalCorrect" totalCorrect="${total}">Tổng số câu đúng: ${total}/37</h4>
+<h4>Số câu đúng phần Listening: ${correctListening}/19 (Time ${timeDoListenExam})</h4>
+<h4>Số câu đúng phần Reading: ${correctReading}/18 (Time ${timeDoReadExam})</h4>
 
 <br>
 <%-- 	<a style="text-decoration: none;"

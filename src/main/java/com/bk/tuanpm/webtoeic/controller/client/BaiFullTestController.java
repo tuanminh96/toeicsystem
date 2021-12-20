@@ -108,15 +108,7 @@ public class BaiFullTestController {
                 model.addAttribute("listQuestionPart" + idPart, listQuestionPart);
             }
 
-//            List<Question> list = questionService.getListCauHoi(baithithuService.getBaiThiThu(examId).get(0));
-//            List<PartToeic> partToeicListening = partService.getPartByType("Listening");
-//            // Get mapping Part toeic and questions
-//            Map<String, List<Question>> newMapPartQuestion = questionService.getMapPartQuestionListen(list);
-//            model.addAllAttributes(newMapPartQuestion);
-//            model.addAttribute("listQuestion", list);
-//            model.addAttribute("partListen", partToeicListening);
             return "client/doExam";
-
         } catch (Exception e) {
             System.out.println("error:" + e);
             return "client/error";

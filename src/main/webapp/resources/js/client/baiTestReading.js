@@ -2,7 +2,8 @@ $(document).ready(function () {
     const baseUrl = $('#baseUrl').val();
     const examId = $("#examId").val();
     let interval;
-    let timeDoReadExam = 0;
+    const totalTimeReadExam = 60 * 20;
+    let timeDoReadExam = 60 * 20;
 
     // Start time do Reading
     onLoadReadTimer();
@@ -13,7 +14,7 @@ $(document).ready(function () {
 
         var dataExamDTO = {
             'jsonAnswerUser': answerArr,
-            'timeDoExam': timeDoReadExam
+            'timeDoExam': convertTimeToView(totalTimeReadExam - timeDoReadExam)
         };
 
         $.ajax({
@@ -34,7 +35,6 @@ $(document).ready(function () {
     });
 
     function onLoadReadTimer() {
-        const totalTimeReadExam = 60 * 20;
         let display = document.querySelector('#time');
         startTimer(totalTimeReadExam, display);
     }
@@ -63,9 +63,9 @@ $(document).ready(function () {
 
 function markColorReading(id) {
     //tách lấy id của câu hỏi
-    var fields = id.split('.');
-    var answerId = fields[1];
-    document.getElementById("answer" + answerId).style.backgroundColor = "rgb(167,162,162)";
+    const fields = id.split('.');
+    const answerId = fields[1];
+    $("#answer" + answerId).css('background-color', 'rgb(167,162,162)');
 }
 
 function answerRead() {
@@ -81,4 +81,13 @@ function answerRead() {
     }
 
     return answerArr;
+}
+
+function convertTimeToView(timer) {
+    let minutes = parseInt(timer / 60, 10)
+    let seconds = parseInt(timer % 60, 10);
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+    return minutes + ":" + seconds;
 }

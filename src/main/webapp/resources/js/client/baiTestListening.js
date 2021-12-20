@@ -1,14 +1,15 @@
 $(document).ready(function () {
     const baseUrl = $('#baseUrl').val();
     const examId = $("#examId").val();
+    const totalTimeListemExam = 60 * 20;
     let timeCheckListening;
-    let timeDoListenExam;
+    let timeDoListenExam = 60 * 20;
 
     $('#doReading').click(function () {
         const answerArr = answerListen();
         const dataExamDTO = {
             'jsonAnswerUser': answerArr,
-            'timeDoExam': timeDoListenExam
+            'timeDoExam': convertTimeToView(totalTimeListemExam - timeDoListenExam)
         };
 
         $.ajax({
@@ -52,20 +53,17 @@ $(document).ready(function () {
     }
 
     window.onload = function () {
-        //change time here
-        var thirtyMinutes = 60 * 20;
         display = document.querySelector('#time');
-        startTimer(thirtyMinutes, display);
+        startTimer(totalTimeListemExam, display);
     };
 });
 
 // Mark color danh sach cau hoi.
 function markColorListening(id) {
     //tách lấy id của câu hỏi
-    var fields = id.split('.');
-    var answerId = fields[1];
-    // document.getElementById("answer" + answerId).style.backgroundColor = "rgb(167,162,162)";
-
+    const fields = id.split('.');
+    const answerId = fields[1];
+    $("#answer" + answerId).css('background-color', 'rgb(167,162,162)');
 }
 
 // Tra ve HashMap<Id, AnswerUser>
@@ -82,4 +80,13 @@ function answerListen() {
     }
 
     return answerArr;
+}
+
+function convertTimeToView(timer) {
+    let minutes = parseInt(timer / 60, 10)
+    let seconds = parseInt(timer % 60, 10);
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+    return minutes + ":" + seconds;
 }

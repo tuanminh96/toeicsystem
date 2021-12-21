@@ -49,5 +49,5 @@ public class User extends Account {
 	public void setGroups(List<Group> groups) {
 		this.groups = groups;
 	}
-
+	
 }

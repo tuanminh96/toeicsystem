@@ -16,6 +16,11 @@ public interface KetQuaBaiTestRepository extends JpaRepository<TestResult,Intege
 	
 	public List<TestResult> findByNguoidung(User user);
 	
+	@Query("SELECT tr "
+			+ "FROM TestResult tr JOIN tr.baithithu e WHERE tr.nguoidung.id = :idUser"
+			+ " and tr.ngaythi BETWEEN :dateFrom AND :dateTo")
+	public List<TestResult> getAllResultBetween(int idUser, Date dateFrom, Date dateTo);
+	
 	@Query("SELECT e "
 			+ "FROM TestResult tr JOIN tr.baithithu e WHERE tr.nguoidung.id = :idUser")
 	public List<Exam> getListExamOfUser(int idUser);

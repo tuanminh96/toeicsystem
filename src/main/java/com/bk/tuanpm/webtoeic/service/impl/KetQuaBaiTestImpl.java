@@ -31,6 +31,11 @@ public class KetQuaBaiTestImpl implements KetQuaBaiTestService{
 	}
 	
 	@Override
+	public List<TestResult> getResultMemberDateRange(int idUser, Date dateFrom, Date dateTo) {
+		return ketquabaitestRepo.getAllResultBetween(idUser, dateFrom, dateTo);
+	}
+	
+	@Override
 	public List<Integer> getExamOfUsers(User user) {
 		
 		return ketquabaitestRepo.getExamsTested(user.getId());

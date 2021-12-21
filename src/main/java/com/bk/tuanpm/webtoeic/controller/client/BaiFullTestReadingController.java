@@ -1,17 +1,16 @@
 package com.bk.tuanpm.webtoeic.controller.client;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
 
+import com.bk.tuanpm.webtoeic.dto.ExamQuestionDTO;
+import com.bk.tuanpm.webtoeic.request.DataExamDTO;
+import com.bk.tuanpm.webtoeic.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import com.bk.tuanpm.webtoeic.entities.Question;
 import com.bk.tuanpm.webtoeic.entities.PartToeic;
@@ -19,46 +18,53 @@ import com.bk.tuanpm.webtoeic.service.BaiThiThuService;
 import com.bk.tuanpm.webtoeic.service.QuestionService;
 import com.bk.tuanpm.webtoeic.service.PartService;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class BaiFullTestReadingController {
-	@Autowired
-	BaiThiThuService baithithuServie;
+    @Autowired
+    BaiThiThuService baithithuService;
 
-	@Autowired
-	QuestionService cauhoibaithithuService;
+    @Autowired
+    QuestionService questionService;
 
-	@Autowired
-	PartService partService;
+    @Autowired
+    PartService partService;
 
-	@RequestMapping(value = "/reading/{examId}/{socaudung}", method = RequestMethod.POST)
-	public String DetailReading(Model model, @RequestBody String[] jsonAnswerUser, @PathVariable("examId") int id,
-			@PathVariable("socaudung") String socaudung) {
+    @RequestMapping(value = "/reading/{examId}", method = RequestMethod.POST)
+    public String DetailReading(Model model, HttpSession session, @PathVariable("examId") int examId,
+                                @RequestBody DataExamDTO dataExamDTO) {
+        HashMap<String, String> mapAnswerListen = dataExamDTO.getJsonAnswerUser();
+        String timeDoListenExam = dataExamDTO.getTimeDoExam();
 
-		List<Question> list = cauhoibaithithuService.getListCauHoi(baithithuServie.getBaiThiThu(id).get(0));
-		List<PartToeic> partReading = partService.getPartByType("Reading");
-		Map<String, List<Question>> map = cauhoibaithithuService.getMapPartQuestionReading(list);
+        session.setAttribute("mapAnswerListen", mapAnswerListen);
+        session.setAttribute("timeDoListenExam", CommonUtil.convertTimeNumberToTimeView(Integer.parseInt(timeDoListenExam)));
+        session.setAttribute("timeDoListenExamNum", timeDoListenExam);
 
-		model.addAllAttributes(map);
-		model.addAttribute("listQuestion", list);
-		model.addAttribute("socauListeningCorrect", socaudung);
-		model.addAttribute("partReading", partReading);
+        // Get All Question of question, part, set_question, exam
+        List<ExamQuestionDTO> listExamQuestionDTO = questionService.getListExamQuestionDTO(examId, "Reading");
+        for (int i = 5; i <= 7; i++) {
+            int idPart = i;
+            List<ExamQuestionDTO> listQuestionPart = listExamQuestionDTO.stream().filter(item -> item.getIdPart() == idPart).collect(Collectors.toList());
+            model.addAttribute("listQuestionPart" + idPart, listQuestionPart);
+        }
 
-		return "client/fullTestReading";
-	}
+        return "client/fullTestReading";
+    }
 
-	@RequestMapping(value = "/showResultReading/{examId}/{socaudung}", method = RequestMethod.POST)
-	public String showResult(Model model, @RequestBody String[] jsonAnswerUser, @PathVariable("examId") int examId,
-			@PathVariable("socaudung") int socaudung) {
+    @RequestMapping(value = "/showResultReading/{examId}/{socaudung}", method = RequestMethod.POST)
+    public String showResult(Model model, @RequestBody String[] jsonAnswerUser, @PathVariable("examId") int examId,
+                             @PathVariable("socaudung") int socaudung) {
 
-		List<Question> list = cauhoibaithithuService.getListCauHoi(baithithuServie.getBaiThiThu(examId).get(0));
-		List<PartToeic> readParts = partService.getPartByType("Reading");
-		List<Question> listRead = cauhoibaithithuService.getListCauHoiByPart(readParts);
+        List<Question> list = questionService.getListCauHoi(baithithuService.getBaiThiThu(examId).get(0));
+        List<PartToeic> readParts = partService.getPartByType("Reading");
+        List<Question> listRead = questionService.getListCauHoiByPart(readParts);
 
-		model.addAttribute("listQuestion", list);
-		model.addAttribute("socaudung", socaudung);
-		model.addAttribute("socauListeningCorrect", socaudung);
+        model.addAttribute("listQuestion", list);
+        model.addAttribute("socaudung", socaudung);
+        model.addAttribute("socauListeningCorrect", socaudung);
 
-		return "client/readingResult";
-	}
+        return "client/readingResult";
+    }
 
 }

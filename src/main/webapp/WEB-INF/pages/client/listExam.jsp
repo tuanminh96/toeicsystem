@@ -94,7 +94,7 @@
             $('#btnLamBaiThi').click(function () {
                 var baseUrl = $('#baseUrl').val();
                 var examId = $('#idExamModal').val();
-                window.location.href = baseUrl + "/doExam?idExam=" + examId;
+                window.location.href = baseUrl + "/doExam/" + examId;
             });
         });
     </script>

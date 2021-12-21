@@ -106,7 +106,7 @@
                     </div>
                     <hr width="80%">
                     <input id="doReading" style="position: fixed;bottom: 80px;left: 5%;" type="button"
-                           class="btn btn-danger" value="Làm bài đọc"/>
+                           class="btn btn-danger" value="Làm bài đọc" data-toggle="modal" data-target="#modalReading"/>
                 </div>
             </div>
             <!--Nội dung bài test -->
@@ -281,16 +281,11 @@
                         </c:forEach>
                     </div>
                 </div>
-                <%--                <c:forEach items="${listQuestion}" var="list2">--%>
-                <%--                    <input class="hidden" id=" answer"--%>
-                <%--                           name="correctanswer${list2.number}"--%>
-                <%--                           value="${list2.correctanswer}"/>--%>
-                <%--                </c:forEach>--%>
                 <hr>
                 <p>End Part</p>
 
                 <!-- The modal -->
-                <div class="modal fade" id="flipFlop" tabindex="-1" role="dialog"
+                <div class="modal fade" id="modalReading" tabindex="-1" role="dialog"
                      aria-labelledby="modalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -316,41 +311,3 @@
     </form>
 </div>
 </body>
-<%--<script type="text/javascript">--%>
-<%--    $(document).ready(function () {--%>
-<%--        $('#tabs a').click(function (e) {--%>
-<%--            e.preventDefault();--%>
-<%--            $(this).tab('show');--%>
-<%--            $('.parttoeic').hide();--%>
-<%--            var a = '.part' + $(this).attr('partid');--%>
-<%--            $(a).show();--%>
-<%--        });--%>
-<%--        $('.part1').show();--%>
-<%--    });--%>
-<%--</script>--%>
-
-<%--<script type="text/javascript">--%>
-<%--    $('#testReading').bind("DOMSubtreeModified", function () {--%>
-<%--        $('#tabparts a').click(function (e) {--%>
-<%--            e.preventDefault();--%>
-<%--            $(this).tab('show');--%>
-<%--            $('.parttoeic').hide();--%>
-<%--            var a = '.part' + $(this).attr('partid');--%>
-<%--            $(a).show();--%>
-
-<%--        });--%>
-<%--        $('.part5').show();--%>
-<%--        if ($('.part6').is(":visible") || $('.part7').is(":visible")) {--%>
-<%--            $('.part5').hide();--%>
-<%--        }--%>
-
-<%--        var star = '.star', selected = '.selected';--%>
-
-<%--        $(star).on('click', function () {--%>
-<%--            $(selected).each(function () {--%>
-<%--                $(this).removeClass('selected');--%>
-<%--            });--%>
-<%--            $(this).addClass('selected');--%>
-<%--        });--%>
-<%--    });--%>
-<%--</script>--%>

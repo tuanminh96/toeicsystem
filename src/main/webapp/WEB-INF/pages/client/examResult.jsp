@@ -108,6 +108,11 @@
         #noteNotDoExam {
             display: none;
         }
+
+        #doNewExam{
+            height: 40px;
+            width: 190px;
+        }
     </style>
     <script>
         $(function() {
@@ -172,8 +177,8 @@
                         <div id="noteNotDoExam">Do not exam</div>
                     </div>
 
-                    <input id="#" style="position: fixed;bottom: 80px;left: 5%;" type="button"
-                           class="btn btn-danger" value="Làm lại bài thi"/>
+                    <a id="doNewExam" href="${pageContext.request.contextPath}/listExam" style="position: fixed;bottom: 80px;left: 5%;" type="button"
+                       class="btn btn-danger">Làm bài thi thử khác</a>
                 </div>
             </div>
             <!--Nội dung bài test -->

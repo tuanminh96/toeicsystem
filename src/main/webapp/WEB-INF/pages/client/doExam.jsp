@@ -63,7 +63,7 @@
 
 <body>
 <input id="baseUrl" value="${pageContext.request.contextPath}" style="display: none;"/>
-<input id="examId" value="6"/>
+<input id="examId" value="${examId}"/>
 <!--==========================Start Header==========================-->
 <div class="headerDoExam row">
     <div class="col-md-3">

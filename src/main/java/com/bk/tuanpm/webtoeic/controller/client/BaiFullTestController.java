@@ -112,6 +112,8 @@ public class BaiFullTestController {
     @GetMapping("/doExam/{examId}")
     public String DetailListening(Model model, @PathVariable("examId") int examId) {
         try {
+            model.addAttribute("examId", examId);
+
             // Get All Question of question, part, set_question, exam
             List<ExamQuestionDTO> listExamQuestionDTO = questionService.getListExamQuestionDTO(examId, "Listening");
             for (int i = 1; i <= 4; i++) {
@@ -140,6 +142,10 @@ public class BaiFullTestController {
         session.setAttribute("mapAnswerRead", mapAnswerRead);
         session.setAttribute("timeDoReadExamNum", timeDoReadExam);
         session.setAttribute("timeDoReadExam", CommonUtil.convertTimeNumberToTimeView(Integer.parseInt(timeDoReadExam)));
+        String timeDoListenExamNum = (String) session.getAttribute("timeDoListenExamNum");
+        String timeDoReadExamNum = (String) session.getAttribute("timeDoReadExamNum");
+        int totalTimeDoExam = Integer.parseInt(timeDoListenExamNum) + Integer.parseInt(timeDoReadExamNum);
+
         // Get map answerListen from session
         HashMap<String, String> mapAnswerListen = (HashMap<String, String>) session.getAttribute("mapAnswerListen");
 
@@ -172,8 +178,9 @@ public class BaiFullTestController {
         ketquabaitest.setCorrectlisten(totalCorrectAnswerListen);
         ketquabaitest.setCorrectreading(totalCorrectAnswerRead);
         ketquabaitest.setNguoidung(currentUser);
-
+        ketquabaitest.setTotalTimeTest(totalTimeDoExam);
         ketquabaitestService.save(ketquabaitest);
+
         model.addAttribute("correctListening", totalCorrectAnswerListen);
         model.addAttribute("correctReading", totalCorrectAnswerRead);
         model.addAttribute("total", totalCorrectAnswerRead + totalCorrectAnswerListen);

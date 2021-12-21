@@ -71,45 +71,68 @@ input[type="radio"] {
 							<div id="net-banking" class="tab-pane active pt-3">
 								<div class="form-group ">
 									<label for="Select Your Bank">
-										<h6>Select your Bank</h6>
-									</label> <select class="form-control" id="ccmonth">
-										<option value="" selected disabled>--Please select
-											your Bank--</option>
-										<option>Bank 1</option>
-										<option>Bank 2</option>
-										<option>Bank 3</option>
-										<option>Bank 4</option>
-										<option>Bank 5</option>
-										<option>Bank 6</option>
-										<option>Bank 7</option>
-										<option>Bank 8</option>
-										<option>Bank 9</option>
-										<option>Bank 10</option>
+										<h6>Ngân hàng</h6>
+									</label> <select class="form-control" id="bankselect">
+										<option value="" selected disabled>--Chọn ngân hàng thanh toán--</option>
+										<option value="TPBANK">TPBank</option>
+										<option value="VIETCOMBANK">VietcomBank</option>
+										<option value="PVCOMBANK">PVCOMBANK-Ngân hàng TMCP Đại Chúng Việt Nam	</option>
+										<option value="SAIGONBANK">SAIGONBANK-Ngân hàng thương mại cổ phần Sài Gòn Công Thương	</option>
+										<option value="VPBANK">VPBANK-Ngân hàng Việt Nam Thịnh vượng (VPBank)	</option>
+										<option value="SEABANK">SEABANK-Ngân Hàng TMCP Đông Nam Á	</option>
+										<option value="VIETINBANK">VIETINBANK-Ngân hàng Công thương (Vietinbank)	</option>
 									</select>
+									<label for="Select Your Bank">Số tiền: <span style="color: red;">500.000</span> VNĐ</label>
+									
+									<label for="">Thông tin thanh toán: <input type="text" id="payment-desc" value="Nâng cấp tài khoản lên VIP"></label>
 								</div>
 								<div class="form-group">
 									<p>
-										<button type="button" class="btn btn-primary ">
-											<i class="fas fa-mobile-alt mr-2"></i> Proceed Payment
+										<button type="button" class="btn btn-primary " id="process-payment">
+											<i class="fas fa-mobile-alt mr-2"></i> Thanh toán
 										</button>
 									</p>
 								</div>
-								<p class="text-muted">Note: After clicking on the button,
-									you will be directed to a secure gateway for payment. After
-									completing the payment process, you will be redirected back to
-									the website to view details of your order.</p>
+								<p class="text-muted">Hướng dẫn: Chọn tài khoản ngân hàng liên kết với ví VNPay.</p>
 							</div>
 							<!-- End -->
-							<!-- End -->
+							<!-- payment parameter -->
+							<%-- <input type="hidden" value="${vnp_TmnCode}" id="vnp_TmnCode">
+							<input type="hidden" value="${vnp_HashSecret}" id="vnp_HashSecret">
+							<input type="hidden" value="${vnp_Url}" id="vnp_Url"> --%>
+							<input type="hidden" value="500000" id="amount">
+							<input type="hidden" id="appContext"
+						value="${pageContext.request.contextPath}">
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<script type="text/javascript">
-		$(function() {
-			$('[data-toggle="tooltip"]').tooltip()
-			})
+		$(document).ready(function() {
+			$("#process-payment").on("click", function() {
+				var amount = $("#amount").val();
+				var bank = $("#bankselect").val();
+				var appContext = $("#appContext").val();
+				var payment = {
+						vnp_Amount: amount,
+						vnp_BankCode: bank,
+						vnp_OrderInfo: $("#payment-desc").val(),
+						vnp_ReturnUrl: appContext
+				};
+				$.ajax({
+					url : appContext+"/processPayment",
+					type : 'POST',
+					data : JSON.stringify(payment),
+					contentType: "application/json",
+					success : function(response) {
+						
+					},error: function () {
+						alert("Có lỗi xảy ra vui lòng thử lại");
+		    		}
+				});
+			});
+		});
 		</script>
 		<script src="<c:url value='/js/client/profileClient.js'/>"></script>
 </body>

@@ -51,20 +51,4 @@ public class BaiFullTestReadingController {
 
         return "client/fullTestReading";
     }
-
-    @RequestMapping(value = "/showResultReading/{examId}/{socaudung}", method = RequestMethod.POST)
-    public String showResult(Model model, @RequestBody String[] jsonAnswerUser, @PathVariable("examId") int examId,
-                             @PathVariable("socaudung") int socaudung) {
-
-        List<Question> list = questionService.getListCauHoi(baithithuService.getBaiThiThu(examId).get(0));
-        List<PartToeic> readParts = partService.getPartByType("Reading");
-        List<Question> listRead = questionService.getListCauHoiByPart(readParts);
-
-        model.addAttribute("listQuestion", list);
-        model.addAttribute("socaudung", socaudung);
-        model.addAttribute("socauListeningCorrect", socaudung);
-
-        return "client/readingResult";
-    }
-
 }

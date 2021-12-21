@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import com.bk.tuanpm.webtoeic.dto.ExamQuestionDTO;
 import com.bk.tuanpm.webtoeic.request.DataExamDTO;
+import com.bk.tuanpm.webtoeic.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,7 +38,8 @@ public class BaiFullTestReadingController {
         String timeDoListenExam = dataExamDTO.getTimeDoExam();
 
         session.setAttribute("mapAnswerListen", mapAnswerListen);
-        session.setAttribute("timeDoListenExam", timeDoListenExam);
+        session.setAttribute("timeDoListenExam", CommonUtil.convertTimeNumberToTimeView(Integer.parseInt(timeDoListenExam)));
+        session.setAttribute("timeDoListenExamNum", timeDoListenExam);
 
         // Get All Question of question, part, set_question, exam
         List<ExamQuestionDTO> listExamQuestionDTO = questionService.getListExamQuestionDTO(examId, "Reading");

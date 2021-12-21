@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
     <script src="http://code.jquery.com/jquery.js"></script>
 
-    <script src="${pageContext.request.contextPath}/resources/js/client/baiTestListening.js"></script>
     <style type="text/css">
         .content-left {
             width: 30%;
@@ -87,8 +86,6 @@
         }
 
         #time {
-            font-size: 25px;
-            margin-left: 100px;
             color: green;
             float: right;
         }
@@ -97,7 +94,45 @@
             height: 60px;
             line-height: 60px;
         }
+
+        #noteCorrectExam {
+            color: greenyellow;
+            display: none;
+        }
+
+        #noteWrongExam {
+            color: red;
+            display: none;
+        }
+
+        #noteNotDoExam {
+            display: none;
+        }
     </style>
+    <script>
+        $(function() {
+            $('.correctAnswer').hover(function() {
+                $('#noteCorrectExam').css('display', 'inline');
+            }, function() {
+                // on mouseout, reset the background colour
+                $('#noteCorrectExam').css('display', 'none');
+            });
+
+            $('.wrongAnswer').hover(function() {
+                $('#noteWrongExam').css('display', 'inline');
+            }, function() {
+                // on mouseout, reset the background colour
+                $('#noteWrongExam').css('display', 'none');
+            });
+
+            $('.notDoExam').hover(function() {
+                $('#noteNotDoExam').css('display', 'inline');
+            }, function() {
+                // on mouseout, reset the background colour
+                $('#noteNotDoExam').css('display', 'none');
+            });
+        });
+    </script>
 </head>
 <body>
 <div id="content" class="container-fluid fill">
@@ -106,7 +141,7 @@
             <div id="navigation" class="content-left">
                 <div class="fix-scrolling">
                     <div class="timeDoExam" style="width: 80%">
-                        Tổng thời gian làm bài: </i><span id="time">${timeDoListenExam} + ${timeDoReadExam}</span>
+                        Tổng thời gian làm bài: </i><span id="time">${totalTimeDoExam}</span>
                     </div>
                     <hr width="80%">
                     <div class="panel panel-info">
@@ -115,21 +150,28 @@
                             <c:forEach items="${fullListExamQuestionDTO}" var="data" varStatus="index">
                                 <c:choose>
                                     <c:when test="${data.userAnswer == data.correctAnswer}">
-                                        <div class="numberCircle" id="answer${index.count}"
-                                             style="background-color: #20c997">${index.count}</div>
+                                        <div class="numberCircle correctAnswer" id="answer${index.count}"
+                                             style="background-color: greenyellow">${index.count}</div>
                                     </c:when>
                                     <c:when test="${data.userAnswer != ''}">
-                                        <div class="numberCircle" id="answer${index.count}"
-                                             style="background-color: #fd7e14">${index.count}</div>
+                                        <div class="numberCircle wrongAnswer" id="answer${index.count}"
+                                             style="background-color: red">${index.count}</div>
                                     </c:when>
                                     <c:otherwise>
-                                        <div class="numberCircle" id="answer${index.count}">${index.count}</div>
+                                        <div class="numberCircle notDoExam"
+                                             id="answer${index.count}">${index.count}</div>
                                     </c:otherwise>
                                 </c:choose>
                             </c:forEach>
                         </div>
                     </div>
                     <hr width="80%">
+                    <div class="noteExam">
+                        <div id="noteCorrectExam">Correct</div>
+                        <div id="noteWrongExam">Wrong</div>
+                        <div id="noteNotDoExam">Do not exam</div>
+                    </div>
+
                     <input id="#" style="position: fixed;bottom: 80px;left: 5%;" type="button"
                            class="btn btn-danger" value="Làm lại bài thi"/>
                 </div>

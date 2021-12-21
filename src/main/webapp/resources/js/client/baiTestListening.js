@@ -9,7 +9,7 @@ $(document).ready(function () {
         const answerArr = answerListen();
         const dataExamDTO = {
             'jsonAnswerUser': answerArr,
-            'timeDoExam': convertTimeToView(totalTimeListemExam - timeDoListenExam)
+            'timeDoExam': totalTimeListemExam - timeDoListenExam
         };
 
         $.ajax({

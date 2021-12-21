@@ -14,7 +14,7 @@ $(document).ready(function () {
 
         var dataExamDTO = {
             'jsonAnswerUser': answerArr,
-            'timeDoExam': convertTimeToView(totalTimeReadExam - timeDoReadExam)
+            'timeDoExam': totalTimeReadExam - timeDoReadExam
         };
 
         $.ajax({

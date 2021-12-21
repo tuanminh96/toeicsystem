@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.bk.tuanpm.webtoeic.dto.ExamQuestionDTO;
+import com.bk.tuanpm.webtoeic.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -59,6 +60,11 @@ public class BaiFullTestListeningController {
 
         HashMap<String, String> mapAnswerListen = (HashMap<String, String>) session.getAttribute("mapAnswerListen");
         HashMap<String, String> mapAnswerRead = (HashMap<String, String>) session.getAttribute("mapAnswerRead");
+
+        String timeDoListenExamNum = (String) session.getAttribute("timeDoListenExamNum");
+        String timeDoReadExamNum = (String) session.getAttribute("timeDoReadExamNum");
+        String totalTimeDoExam = CommonUtil.convertTimeNumberToTimeView(Integer.parseInt(timeDoListenExamNum) + Integer.parseInt(timeDoReadExamNum));
+        session.setAttribute("totalTimeDoExam", totalTimeDoExam);
 
         // Get All Question of question, part, set_question, exam
         List<ExamQuestionDTO> listExamQuestionDTO = questionService.getAllListExamQuestionDTO(examId);

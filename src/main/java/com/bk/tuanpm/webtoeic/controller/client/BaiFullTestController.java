@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import com.bk.tuanpm.webtoeic.dto.ExamQuestionDTO;
 import com.bk.tuanpm.webtoeic.request.DataExamDTO;
+import com.bk.tuanpm.webtoeic.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
@@ -126,7 +127,8 @@ public class BaiFullTestController {
 
         // Set to session.
         session.setAttribute("mapAnswerRead", mapAnswerRead);
-        session.setAttribute("timeDoReadExam", timeDoReadExam);
+        session.setAttribute("timeDoReadExamNum", timeDoReadExam);
+        session.setAttribute("timeDoReadExam", CommonUtil.convertTimeNumberToTimeView(Integer.parseInt(timeDoReadExam)));
         // Get map answerListen from session
         HashMap<String, String> mapAnswerListen = (HashMap<String, String>) session.getAttribute("mapAnswerListen");
 

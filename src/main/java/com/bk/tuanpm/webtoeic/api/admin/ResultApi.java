@@ -1,49 +1,30 @@
-package com.bk.tuanpm.webtoeic.controller.admin;
+package com.bk.tuanpm.webtoeic.api.admin;
 
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.MediaType;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.bk.tuanpm.webtoeic.dto.MemberDTO;
 import com.bk.tuanpm.webtoeic.dto.StaticResultDTO;
-import com.bk.tuanpm.webtoeic.entities.Account;
-import com.bk.tuanpm.webtoeic.entities.TutorialAdmin;
-import com.bk.tuanpm.webtoeic.entities.Group;
 import com.bk.tuanpm.webtoeic.entities.TestResult;
 import com.bk.tuanpm.webtoeic.entities.User;
-import com.bk.tuanpm.webtoeic.repository.TutorialAdminRepository;
-import com.bk.tuanpm.webtoeic.service.GroupService;
 import com.bk.tuanpm.webtoeic.service.PartService;
 import com.bk.tuanpm.webtoeic.service.impl.KetQuaBaiTestImpl;
 import com.bk.tuanpm.webtoeic.service.impl.UserAdminServiceImpl;
 
-@Controller
-@RequestMapping("/admin")
-public class ResultAdminController {
-
-	@Autowired
-	GroupService groupService;
-	@Autowired
-	UserAdminServiceImpl nguoiDungService;
-	@Autowired
-	TutorialAdminRepository adminRepository;
+@RestController
+@RequestMapping("/admin/api")
+public class ResultApi {
 	
-	@Autowired
+	@Autowired 
 	UserAdminServiceImpl userAdminServiceImpl;
 	
 	@Autowired
@@ -51,17 +32,10 @@ public class ResultAdminController {
 	
 	@Autowired
 	PartService partService;
-
-	@GetMapping("/memberResult/{idMem}")
-	public String getMemberResult(Model model, @PathVariable Integer idMem) {
-		User userResult = userAdminServiceImpl.getUserById(idMem);
-		List<TestResult> results = ketQuaBaiTestImpl.getResultMember(userResult);
-		model.addAttribute("results", results);
-		return "admin/memberResultDetail";
-	}
 	
 	@PostMapping("/staticResult")
-	public String staticResult(Model model, @RequestParam("idMem") Integer idMem,
+	@ResponseBody
+	public StaticResultDTO getStatistic(Model model, @RequestParam("idMem") Integer idMem,
 				@RequestParam("dateFrom") @DateTimeFormat(pattern="yyyy-MM-dd") Date fromDate,
 				@RequestParam("dateTo") @DateTimeFormat(pattern="yyyy-MM-dd") Date dateTo
 			) {
@@ -123,7 +97,6 @@ public class ResultAdminController {
 		resultDTO.setWrongPart5(wrongP5);
 		resultDTO.setWrongPart6(wrongP6);
 		resultDTO.setWrongPart7(wrongP7);
-		return "admin/memberResultDetail";
+		return resultDTO;
 	}
-	
 }

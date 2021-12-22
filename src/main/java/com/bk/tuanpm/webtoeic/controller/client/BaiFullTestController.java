@@ -178,7 +178,9 @@ public class BaiFullTestController {
         ketquabaitest.setNgaythi(time);
         ketquabaitest.setBaithithu(baithithuService.getBaiThiThu(examId).get(0));
         ketquabaitest.setCorrectlisten(totalCorrectAnswerListen);
+        ketquabaitest.setScoreListen(totalCorrectAnswerListen * 10);
         ketquabaitest.setCorrectreading(totalCorrectAnswerRead);
+        ketquabaitest.setScoreReading(totalCorrectAnswerRead * 10);
         ketquabaitest.setNguoidung(currentUser);
         ketquabaitest.setTotalTimeTest(totalTimeDoExam);
         ketquabaitestService.save(ketquabaitest);

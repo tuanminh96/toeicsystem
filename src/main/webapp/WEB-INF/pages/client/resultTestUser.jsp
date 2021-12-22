@@ -52,7 +52,7 @@
 <body>
 <div class="mainResultTestUser">
     <input id="baseUrl" value="${pageContext.request.contextPath}" style="display: none;"/>
-    <div class="row"><h3>Kết quả bài test:</h3></div>
+    <div class="row"><h3>Kết quả bài test</h3></div>
 
     <div class="row result">
         <table class="table table-sm">

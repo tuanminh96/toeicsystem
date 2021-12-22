@@ -11,6 +11,54 @@
             margin-top: 75px;
             margin-bottom: 75px;
         }
+
+        .formDoiMatKhau, #information {
+            margin-top: 20px;
+        }
+
+        .changeInput {
+            display: block;
+            width: 100%;
+            padding: 0.375rem 0;
+            margin-bottom: 0;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #212529;
+            background-color: transparent;
+            /* border: solid transparent; */
+            border-top-style: hidden;
+            border-right-style: hidden;
+            border-left-style: hidden;
+            border-bottom-style: groove;
+            border-width: 1px 0;
+        }
+
+        .changePass {
+            display: block;
+            width: 100%;
+            padding: 0.375rem 0;
+            margin-bottom: 0;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #212529;
+            background-color: transparent;
+            /* border: solid transparent; */
+            border-top-style: hidden;
+            border-right-style: hidden;
+            border-left-style: hidden;
+            border-bottom-style: groove;
+            border-width: 1px 0;
+            margin-top: -10px;
+        }
+
+        textarea:focus, input:focus {
+            outline: none;
+        }
+
+        .confirm {
+            margin-top: 40px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -33,13 +81,12 @@
                         <label style="font-weight: bold" for="staticEmail" class="col-sm-2 col-form-label">Email đăng
                             ký</label>
                         <div class="col-sm-10">
-                            <input type="text" readonly class="form-control-plaintext" value="${user.email }"
-                                   name="email">
+                            ${user.email }
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-10">
-                            <input type="hidden" class="form-control-plaintext nguoiDungId" value="${user.id }"
+                            <input type="hidden" class="form-control-plaintext nguoiDungId" value="${user.id}"
                                    name="id">
                         </div>
                     </div>
@@ -47,15 +94,15 @@
                         <label for="staticEmail" style="font-weight: bold" class="col-sm-2 col-form-label">Họ
                             Tên</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control-plaintext" value="${user.hoTen }" name="hoTen"
-                                   required="required">
+                            <input type="text" class="changeInput" value="${user.hoTen}" name="hoTen"
+                                   required="required" autofocus>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="staticEmail" style="font-weight: bold" class="col-sm-2 col-form-label">Số điện
                             thoại</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control-plaintext" value="${user.soDienThoai }"
+                            <input type="text" class="changeInput" value="${user.soDienThoai}"
                                    name="soDienThoai" required="required">
                         </div>
                     </div>
@@ -63,31 +110,36 @@
                         <label for="staticEmail" style="font-weight: bold" class="col-sm-2 col-form-label">Địa
                             chỉ</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control-plaintext" value="${user.diaChi }" name="diaChi"
-                                   required="required">
+                            <input type="text" class="changeInput" value="${user.diaChi}"
+                                   name="diaChi" required="required">
                         </div>
                     </div>
-                    <input class="btn btn-primary" id="btnSubmit" type="submit" value="Xác nhận"/>
+                    <div class="confirm">
+                        <input class="btn btn-primary" id="btnSubmit" type="submit" value="Xác nhận"/>
+                    </div>
                 </form>
             </div>
             <div class="tab-pane" id="changePass">
                 <form class="formDoiMatKhau">
                     <div>
-                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        <input class="changeInput" type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     </div>
                     <div class="form-group">
                         <label for="name">Mật khẩu cũ</label>
-                        <input type="password" class="form-control" name="oldPassword" required="required"/>
+                        <input type="password" class="changePass" name="oldPassword" required="required"
+                               autofocus/>
                     </div>
                     <div class="form-group">
                         <label for="name">Mật khẩu mới</label>
-                        <input type="password" class="form-control" name="newPassword" required="required"/>
+                        <input type="password" class="changePass" name="newPassword" required="required"/>
                     </div>
                     <div class="form-group">
                         <label for="name">Nhắc lại mật khẩu mới</label>
-                        <input type="password" class="form-control" name="confirmNewPassword" required="required"/>
+                        <input type="password" class="changePass" name="confirmNewPassword" required="required"/>
                     </div>
-                    <input class="btn btn-primary" type="button" id="btnXacNhanDoiMK" value="Xác nhận"/>
+                    <div class="confirm">
+                        <input class="btn btn-primary" type="button" id="btnXacNhanDoiMK" value="Xác nhận"/>
+                    </div>
                 </form>
             </div>
             <div class="tab-pane" id="history" style="padding-top: 20px">
@@ -97,9 +149,6 @@
                             Bạn đã thi tổng cộng ${listExamHistoryDTO.size()} lần và ${totalExam} bài thi.
                         </div>
                     </c:when>
-                    <%--                        <c:otherwise>--%>
-                    <%--                            Bạn đã thi tổng cộng 0 lần.--%>
-                    <%--                        </c:otherwise>--%>
                 </c:choose>
 
                 <table id="historyExam" class="table table-striped table-bordered taiKhoanVIP" style="width: 100%">
@@ -109,8 +158,8 @@
                         <th style="text-align: center">Title Exam</th>
                         <th style="text-align: center">Date Test</th>
                         <th style="text-align: center">Total Time Test</th>
-                        <th style="text-align: center">Score Reading</th>
                         <th style="text-align: center">Score Listen</th>
+                        <th style="text-align: center">Score Reading</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -120,8 +169,8 @@
                             <td>${examHistoryDTO.title}</td>
                             <td>${examHistoryDTO.dateTest}</td>
                             <td>${examHistoryDTO.totalTimeTest} phút</td>
-                            <td>${examHistoryDTO.scoreReading}/60</td>
-                            <td>${examHistoryDTO.scoreListen}/40</td>
+                            <td>${examHistoryDTO.scoreListen}/190</td>
+                            <td>${examHistoryDTO.scoreReading}/180</td>
                         </tr>
                     </c:forEach>
                     </tbody>

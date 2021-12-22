@@ -22,6 +22,7 @@
             width: 67%;
             margin-left: 30%;
         }
+
         .questionPart5 {
             margin: 30px 0 20px 0;
         }
@@ -33,6 +34,7 @@
         .questionPart7 {
             margin: 30px 0 20px 0;
         }
+
         .numberCircle {
             display: inline-block;
             width: 30px;
@@ -77,8 +79,8 @@
                         </div>
                     </div>
                     <hr width="80%">
-                    <input data-toggle="modal" data-target="#flipFlop" style="position: fixed;bottom: 80px;left: 5%;" type="button"
-                           type="button" class="btn btn-danger" id="btnSubmitReading" value="Nộp bài"/>
+                    <input style="position: fixed;bottom: 80px;left: 5%;" type="button" class="btn btn-danger"
+                           value="Nộp bài" data-bs-toggle="modal" data-bs-target="#modalReading"/>
                 </div>
             </div>
 
@@ -197,69 +199,27 @@
                 </div>
                 <hr>
                 <p>End Reading</p>
-
-                <!-- The modal -->
-                <div class="modal fade" id="flipFlop" tabindex="-1" role="dialog"
-                     aria-labelledby="modalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal"
-                                        aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <h4 class="modal-title" id="modalLabel">Xác nhận</h4>
-                            </div>
-                            <div class="modal-body">Bạn có muốn kết thúc phần nghe ?</div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" id="btnSubmit" data-dismiss="modal">
-                                    Yes
-                                </button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </form>
+    <!-- Modal -->
+    <div class="modal fade" id="modalReading" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Xác nhận</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn có muốn kết thúc phần thi đọc và nộp bài?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="btnSubmitReading" type="button" class="btn btn-primary">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
-<%--<script type="text/javascript">--%>
-<%--    $(document).ready(function () {--%>
-<%--        $('#tabs a').click(function (e) {--%>
-<%--            e.preventDefault();--%>
-<%--            $(this).tab('show');--%>
-<%--            $('.parttoeic').hide();--%>
-<%--            var a = '.part' + $(this).attr('partid');--%>
-<%--            $(a).show();--%>
-<%--        });--%>
-<%--        $('.part1').show();--%>
-<%--    });--%>
-<%--</script>--%>
-
-<%--<script type="text/javascript">--%>
-<%--    $('#testReading').bind("DOMSubtreeModified", function () {--%>
-<%--        $('#tabparts a').click(function (e) {--%>
-<%--            e.preventDefault();--%>
-<%--            $(this).tab('show');--%>
-<%--            $('.parttoeic').hide();--%>
-<%--            var a = '.part' + $(this).attr('partid');--%>
-<%--            $(a).show();--%>
-
-<%--        });--%>
-<%--        $('.part5').show();--%>
-<%--        if ($('.part6').is(":visible") || $('.part7').is(":visible")) {--%>
-<%--            $('.part5').hide();--%>
-<%--        }--%>
-
-<%--        var star = '.star', selected = '.selected';--%>
-
-<%--        $(star).on('click', function () {--%>
-<%--            $(selected).each(function () {--%>
-<%--                $(this).removeClass('selected');--%>
-<%--            });--%>
-<%--            $(this).addClass('selected');--%>
-<%--        });--%>
-<%--    });--%>
-<%--</script>--%>

@@ -145,6 +145,8 @@ public class BaiFullTestController {
         String timeDoListenExamNum = (String) session.getAttribute("timeDoListenExamNum");
         String timeDoReadExamNum = (String) session.getAttribute("timeDoReadExamNum");
         int totalTimeDoExam = Integer.parseInt(timeDoListenExamNum) + Integer.parseInt(timeDoReadExamNum);
+        String totalTimeDoExamStr = CommonUtil.convertTimeNumberToTimeView(totalTimeDoExam);
+        session.setAttribute("totalTimeDoExam", totalTimeDoExamStr);
 
         // Get map answerListen from session
         HashMap<String, String> mapAnswerListen = (HashMap<String, String>) session.getAttribute("mapAnswerListen");

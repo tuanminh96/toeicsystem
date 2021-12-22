@@ -84,6 +84,10 @@
             border: 2px solid #666;
             margin: 5px 5px 5px 15px;
         }
+        .numberCircle:hover{
+            cursor: pointer;
+            border: 2px solid red;
+        }
 
         #time {
             color: green;

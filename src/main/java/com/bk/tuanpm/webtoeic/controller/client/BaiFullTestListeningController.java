@@ -61,11 +61,6 @@ public class BaiFullTestListeningController {
         HashMap<String, String> mapAnswerListen = (HashMap<String, String>) session.getAttribute("mapAnswerListen");
         HashMap<String, String> mapAnswerRead = (HashMap<String, String>) session.getAttribute("mapAnswerRead");
 
-        String timeDoListenExamNum = (String) session.getAttribute("timeDoListenExamNum");
-        String timeDoReadExamNum = (String) session.getAttribute("timeDoReadExamNum");
-        String totalTimeDoExam = CommonUtil.convertTimeNumberToTimeView(Integer.parseInt(timeDoListenExamNum) + Integer.parseInt(timeDoReadExamNum));
-        session.setAttribute("totalTimeDoExam", totalTimeDoExam);
-
         // Get All Question of question, part, set_question, exam
         List<ExamQuestionDTO> listExamQuestionDTO = questionService.getAllListExamQuestionDTO(examId);
         model.addAttribute("fullListExamQuestionDTO", listExamQuestionDTO);

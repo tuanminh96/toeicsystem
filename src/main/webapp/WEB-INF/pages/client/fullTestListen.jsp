@@ -105,8 +105,8 @@
                         </div>
                     </div>
                     <hr width="80%">
-                    <input id="doReading" style="position: fixed;bottom: 80px;left: 5%;" type="button"
-                           class="btn btn-danger" value="Làm bài đọc" data-toggle="modal" data-target="#modalReading"/>
+                    <input style="position: fixed;bottom: 80px;left: 5%;" type="button"
+                           class="btn btn-danger" value="Làm bài đọc" data-bs-toggle="modal" data-bs-target="#modalListening"/>
                 </div>
             </div>
             <!--Nội dung bài test -->
@@ -283,31 +283,26 @@
                 </div>
                 <hr>
                 <p>End Part</p>
-
-                <!-- The modal -->
-                <div class="modal fade" id="modalReading" tabindex="-1" role="dialog"
-                     aria-labelledby="modalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal"
-                                        aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <h4 class="modal-title" id="modalLabel">Xác nhận</h4>
-                            </div>
-                            <div class="modal-body">Bạn có muốn kết thúc phần nghe ?</div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" id="btnSubmit" data-dismiss="modal">
-                                    Yes
-                                </button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </form>
+    <!-- Modal -->
+    <div class="modal fade" id="modalListening" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Xác nhận</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn có muốn kết thúc phần thi nghe?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="doReading" type="button" class="btn btn-primary">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>

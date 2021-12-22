@@ -21,6 +21,10 @@
     <script src="${pageContext.request.contextPath}/resources/js/client/resultTestUser.js"></script>
 
     <style>
+        body {
+            overflow: hidden; /* Hide scrollbars */
+        }
+
         #backhome {
             text-decoration: none;
             height: 40px;

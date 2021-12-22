@@ -21,7 +21,7 @@
         }
 
         .content-right {
-            width: 67%;
+            width: 69%;
             margin-left: 30%;
         }
 
@@ -84,6 +84,16 @@
             height: 60px;
             line-height: 60px;
         }
+
+        @media only screen and (min-width: 1000px) {
+            #nav-tabContent {
+                max-height: 500px;
+            }
+        }
+        #nav-tabContent {
+            max-height: 500px;
+            overflow-y: scroll;
+        }
     </style>
 </head>
 <body>
@@ -106,12 +116,13 @@
                     </div>
                     <hr width="80%">
                     <input style="position: fixed;bottom: 80px;left: 5%;" type="button"
-                           class="btn btn-danger" value="Làm bài đọc" data-bs-toggle="modal" data-bs-target="#modalListening"/>
+                           class="btn btn-danger" value="Làm bài đọc" data-bs-toggle="modal"
+                           data-bs-target="#modalListening"/>
                 </div>
             </div>
             <!--Nội dung bài test -->
             <div class="content-right">
-                <nav>
+                <nav class="tabsPart">
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <button class="nav-link active" id="nav-part1-tab" data-bs-toggle="tab"
                                 data-bs-target="#nav-part1" type="button" role="tab" aria-controls="nav-part1"
@@ -287,7 +298,8 @@
         </div>
     </form>
     <!-- Modal -->
-    <div class="modal fade" id="modalListening" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="modalListening" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">

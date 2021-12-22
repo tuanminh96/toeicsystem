@@ -168,7 +168,7 @@
                             <td style="text-align: center; width: 30px">${index.count}</td>
                             <td>${examHistoryDTO.title}</td>
                             <td>${examHistoryDTO.dateTest}</td>
-                            <td>${examHistoryDTO.totalTimeTest} phút</td>
+                            <td>${examHistoryDTO.totalTimeTest} s</td>
                             <td>${examHistoryDTO.scoreListen}/190</td>
                             <td>${examHistoryDTO.scoreReading}/180</td>
                         </tr>

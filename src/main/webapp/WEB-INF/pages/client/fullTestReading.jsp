@@ -19,7 +19,7 @@
         }
 
         .content-right {
-            width: 67%;
+            width: 69%;
             margin-left: 30%;
         }
 
@@ -57,6 +57,16 @@
         .timeDoExam {
             height: 60px;
             line-height: 60px;
+        }
+
+        @media only screen and (min-width: 1000px) {
+            #nav-tabContent {
+                max-height: 500px;
+            }
+        }
+        #nav-tabContent {
+            max-height: 500px;
+            overflow-y: scroll;
         }
     </style>
 </head>

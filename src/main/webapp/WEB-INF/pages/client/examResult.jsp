@@ -18,7 +18,7 @@
         }
 
         .content-right {
-            width: 67%;
+            width: 69%;
             margin-left: 30%;
         }
 
@@ -116,6 +116,15 @@
         #doNewExam{
             height: 40px;
             width: 190px;
+        }
+        @media only screen and (min-width: 1000px) {
+            #nav-tabContent {
+                max-height: 500px;
+            }
+        }
+        #nav-tabContent {
+            max-height: 500px;
+            overflow-y: scroll;
         }
     </style>
     <script>

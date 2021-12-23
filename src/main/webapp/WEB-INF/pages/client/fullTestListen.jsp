@@ -21,7 +21,7 @@
         }
 
         .content-right {
-            width: 67%;
+            width: 69%;
             margin-left: 30%;
         }
 
@@ -84,6 +84,16 @@
             height: 60px;
             line-height: 60px;
         }
+
+        @media only screen and (min-width: 1000px) {
+            #nav-tabContent {
+                max-height: 500px;
+            }
+        }
+        #nav-tabContent {
+            max-height: 500px;
+            overflow-y: scroll;
+        }
     </style>
 </head>
 <body>
@@ -105,13 +115,14 @@
                         </div>
                     </div>
                     <hr width="80%">
-                    <input id="doReading" style="position: fixed;bottom: 80px;left: 5%;" type="button"
-                           class="btn btn-danger" value="Làm bài đọc"/>
+                    <input style="position: fixed;bottom: 80px;left: 5%;" type="button"
+                           class="btn btn-danger" value="Làm bài đọc" data-bs-toggle="modal"
+                           data-bs-target="#modalListening"/>
                 </div>
             </div>
             <!--Nội dung bài test -->
             <div class="content-right">
-                <nav>
+                <nav class="tabsPart">
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <button class="nav-link active" id="nav-part1-tab" data-bs-toggle="tab"
                                 data-bs-target="#nav-part1" type="button" role="tab" aria-controls="nav-part1"
@@ -281,76 +292,29 @@
                         </c:forEach>
                     </div>
                 </div>
-                <%--                <c:forEach items="${listQuestion}" var="list2">--%>
-                <%--                    <input class="hidden" id=" answer"--%>
-                <%--                           name="correctanswer${list2.number}"--%>
-                <%--                           value="${list2.correctanswer}"/>--%>
-                <%--                </c:forEach>--%>
                 <hr>
                 <p>End Part</p>
-
-                <!-- The modal -->
-                <div class="modal fade" id="flipFlop" tabindex="-1" role="dialog"
-                     aria-labelledby="modalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal"
-                                        aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <h4 class="modal-title" id="modalLabel">Xác nhận</h4>
-                            </div>
-                            <div class="modal-body">Bạn có muốn kết thúc phần nghe ?</div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" id="btnSubmit" data-dismiss="modal">
-                                    Yes
-                                </button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </form>
+    <!-- Modal -->
+    <div class="modal fade" id="modalListening" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Xác nhận</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn có muốn kết thúc phần thi nghe?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="doReading" type="button" class="btn btn-primary">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
-<%--<script type="text/javascript">--%>
-<%--    $(document).ready(function () {--%>
-<%--        $('#tabs a').click(function (e) {--%>
-<%--            e.preventDefault();--%>
-<%--            $(this).tab('show');--%>
-<%--            $('.parttoeic').hide();--%>
-<%--            var a = '.part' + $(this).attr('partid');--%>
-<%--            $(a).show();--%>
-<%--        });--%>
-<%--        $('.part1').show();--%>
-<%--    });--%>
-<%--</script>--%>
-
-<%--<script type="text/javascript">--%>
-<%--    $('#testReading').bind("DOMSubtreeModified", function () {--%>
-<%--        $('#tabparts a').click(function (e) {--%>
-<%--            e.preventDefault();--%>
-<%--            $(this).tab('show');--%>
-<%--            $('.parttoeic').hide();--%>
-<%--            var a = '.part' + $(this).attr('partid');--%>
-<%--            $(a).show();--%>
-
-<%--        });--%>
-<%--        $('.part5').show();--%>
-<%--        if ($('.part6').is(":visible") || $('.part7').is(":visible")) {--%>
-<%--            $('.part5').hide();--%>
-<%--        }--%>
-
-<%--        var star = '.star', selected = '.selected';--%>
-
-<%--        $(star).on('click', function () {--%>
-<%--            $(selected).each(function () {--%>
-<%--                $(this).removeClass('selected');--%>
-<%--            });--%>
-<%--            $(this).addClass('selected');--%>
-<%--        });--%>
-<%--    });--%>
-<%--</script>--%>

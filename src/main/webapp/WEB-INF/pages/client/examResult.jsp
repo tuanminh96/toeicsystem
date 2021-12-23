@@ -18,7 +18,7 @@
         }
 
         .content-right {
-            width: 67%;
+            width: 69%;
             margin-left: 30%;
         }
 
@@ -84,6 +84,10 @@
             border: 2px solid #666;
             margin: 5px 5px 5px 15px;
         }
+        .numberCircle:hover{
+            cursor: pointer;
+            border: 2px solid red;
+        }
 
         #time {
             color: green;
@@ -107,6 +111,20 @@
 
         #noteNotDoExam {
             display: none;
+        }
+
+        #doNewExam{
+            height: 40px;
+            width: 190px;
+        }
+        @media only screen and (min-width: 1000px) {
+            #nav-tabContent {
+                max-height: 500px;
+            }
+        }
+        #nav-tabContent {
+            max-height: 500px;
+            overflow-y: scroll;
         }
     </style>
     <script>
@@ -172,8 +190,8 @@
                         <div id="noteNotDoExam">Do not exam</div>
                     </div>
 
-                    <input id="#" style="position: fixed;bottom: 80px;left: 5%;" type="button"
-                           class="btn btn-danger" value="Làm lại bài thi"/>
+                    <a id="doNewExam" href="${pageContext.request.contextPath}/listExam" style="position: fixed;bottom: 80px;left: 5%;" type="button"
+                       class="btn btn-danger">Làm bài thi thử khác</a>
                 </div>
             </div>
             <!--Nội dung bài test -->

@@ -1,12 +1,9 @@
 package com.bk.tuanpm.webtoeic.dto;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 public class ExamHistoryDTO {
     private String title;
     private String dateTest;
-    private int totalTimeTest;
+    private String totalTimeTest;
     private int scoreReading;
     private int scoreListen;
 
@@ -29,11 +26,11 @@ public class ExamHistoryDTO {
         this.dateTest = dateTest;
     }
 
-    public int getTotalTimeTest() {
+    public String getTotalTimeTest() {
         return totalTimeTest;
     }
 
-    public void setTotalTimeTest(int totalTimeTest) {
+    public void setTotalTimeTest(String totalTimeTest) {
         this.totalTimeTest = totalTimeTest;
     }
 

@@ -22,6 +22,9 @@ $(document).ready(function () {
             url: baseUrl + "/reading/" + examId,
             success: function (html) {
                 $('#mainContent').html(html);
+                $('.modal-backdrop').removeClass("modal-backdrop fade show");
+                $('.modal-open').removeAttr("style");
+                $('.modal-open').removeClass("modal-open");
                 // Stop dem nguoc
                 clearInterval(timeCheckListening);
             }, error: function (html) {

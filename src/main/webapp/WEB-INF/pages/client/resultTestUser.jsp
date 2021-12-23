@@ -7,6 +7,16 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Ket qua Reading</title>
     <style type="text/css">
+        .mainResultTestUser {
+            width: 80%;
+            margin: 75px auto;
+            text-align: center;
+        }
+
+        .result {
+            margin: 60px 0;
+        }
+
         .ratings {
             list-style-type: none;
             margin: 0;
@@ -35,44 +45,72 @@
             transition: color 0.8s ease;
             color: orange;
         }
+
     </style>
 </head>
 
 <body>
-<input id="baseUrl" value="${pageContext.request.contextPath}" style="display: none;"/>
-<h3 style="text-decoration: underline;">Kết quả bài test:</h3>
-<br>
-<h4 id="totalCorrect" totalCorrect="${total}">Tổng số câu đúng: ${total}/37</h4>
-<h4>Số câu đúng phần Listening: ${correctListening}/19 (Time ${timeDoListenExam})</h4>
-<h4>Số câu đúng phần Reading: ${correctReading}/18 (Time ${timeDoReadExam})</h4>
+<div class="mainResultTestUser">
+    <input id="baseUrl" value="${pageContext.request.contextPath}" style="display: none;"/>
+    <div class="row"><h3>Kết quả bài test</h3></div>
 
-<br>
-<%-- 	<a style="text-decoration: none;"
-    href="<%=request.getContextPath()%>/listExam">Làm các bài test khác</a> --%>
-<br>
-<br>
-<p id="seeDetailedAnswer" style="text-decoration: none; cursor: pointer">Xem giải đáp chi tiết</p>
-<br>
-<br>
-<a style="text-decoration: none;" href="#">Xem top người dùng đạt
-    điểm cao bài thi</a>
-<br>
-<a style="text-decoration: none;" href="<%=request.getContextPath()%>/listExam">Quay lại trang đề thi</a>
-<br>
-<button data-toggle="modal" data-target="#flipFlop" type="button"
-        class="btn btn-warning">Đánh giá
-</button>
-<div class="modal fade" id="flipFlop" tabindex="-1" role="dialog"
-     aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="row result">
+        <table class="table table-sm">
+            <thead>
+            <tr>
+                <th scope="col">Phần thi</th>
+                <th scope="col">Số câu đúng</th>
+                <th scope="col">Số điểm</th>
+                <th scope="col">Thời gian làm bài</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Listening</td>
+                <td>${correctListening}/19</td>
+                <td>-</td>
+                <td>${timeDoListenExam}</td>
+            </tr>
+            <tr>
+                <td>Reading</td>
+                <td>${correctReading}/18</td>
+                <td>-</td>
+                <td>${timeDoReadExam}</td>
+            </tr>
+            <tr>
+                <td>Total:</td>
+                <td>${total}/37</td>
+                <td>-</td>
+                <td>${totalTimeDoExam}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <button id="doAnotherExam" type="button" class="btn btn-success">
+                <a style="text-decoration:none; color: black;" href="${pageContext.request.contextPath}/listExam">Làm bài thi khác</a></button>
+        </div>
+        <div class="col-md-4">
+            <button id="seeDetailedAnswer" type="button" class="btn btn-info">Xem giải đáp chi tiết</button>
+        </div>
+        <div class="col-md-4">
+            <button data-bs-toggle="modal" data-bs-target="#evaluateExam" type="button"
+                    class="btn btn-warning">Đánh giá
+            </button>
+        </div>
+    </div>
+</div>
+
+<%--Modal--%>
+<div class="modal fade" id="evaluateExam" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"
-                        aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="modalLabel">Mời bạn đánh giá về
-                    trải nghiệm thi</h4>
+                <h5 class="modal-title" id="staticBackdropLabel">Mời bạn đánh giá về
+                    trải nghiệm thi</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <ul class="ratings">

@@ -21,6 +21,10 @@
     <script src="${pageContext.request.contextPath}/resources/js/client/resultTestUser.js"></script>
 
     <style>
+        body {
+            overflow: hidden; /* Hide scrollbars */
+        }
+
         #backhome {
             text-decoration: none;
             height: 40px;
@@ -63,7 +67,7 @@
 
 <body>
 <input id="baseUrl" value="${pageContext.request.contextPath}" style="display: none;"/>
-<input id="examId" value="6"/>
+<input id="examId" value="${examId}"/>
 <!--==========================Start Header==========================-->
 <div class="headerDoExam row">
     <div class="col-md-3">

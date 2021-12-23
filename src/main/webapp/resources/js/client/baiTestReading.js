@@ -27,6 +27,9 @@ $(document).ready(function () {
             success: function (html) {
                 clearInterval(interval);
                 $('#mainContent').html(html);
+                $('.modal-backdrop').removeClass("modal-backdrop fade show");
+                $('.modal-open').removeAttr("style");
+                $('.modal-open').removeClass("modal-open");
             }, error: function (html) {
                 alert('Error');
                 $('#mainContent').html(html.responseText);

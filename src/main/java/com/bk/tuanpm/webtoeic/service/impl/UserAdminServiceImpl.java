@@ -23,37 +23,41 @@ import com.bk.tuanpm.webtoeic.repository.UserRepository;
 @Service
 @Transactional
 public class UserAdminServiceImpl {
-	
+
 	@Autowired
 	private UserRepository userRepository;
 
 	@Autowired
 	private AccountRepository nguoiDungRepo;
-	
+
 	@Autowired
 	private RoleRepository roleRepository;
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-	
+
 	@Autowired
 	private ContentAdminRepository contentAdminRepository;
 
 	public Account findByEmail(String email) {
 		return nguoiDungRepo.findByEmail(email);
 	}
+
 	public TutorialAdmin findAdminByEmail(String email) {
 		return nguoiDungRepo.findAdminByEmail(email);
 	}
-	
+
 	public ContentAdmin findContentByEmail(String email) {
 		return contentAdminRepository.findByEmail(email);
 	}
+
 	public Account findByConfirmationToken(String confirmationToken) {
 		return null;
 	}
 
 	public Account saveUser(Account nd) {
-		nd.setPassword(bCryptPasswordEncoder.encode(nd.getPassword()));
+		if (nd.getPassword() != null || !"".equals(nd.getPassword())) {
+			nd.setPassword(bCryptPasswordEncoder.encode(nd.getPassword()));
+		}
 		return nguoiDungRepo.save(nd);
 	}
 
@@ -78,21 +82,21 @@ public class UserAdminServiceImpl {
 	public void deleteById(long id) {
 		nguoiDungRepo.deleteById(id);
 	}
-	
+
 	public List<User> getListVipNotAdded() {
 		Role role = roleRepository.findByCode(Role.ROLE_MEMBER_VIP);
 		List<User> list = userRepository.findByRoleAndGroupsIsNull(role);
 		return list;
 	}
-	
+
 	public List<User> getListUsers(List<Integer> idUsers) {
 		return userRepository.findAllById(idUsers);
 	}
-	
+
 	public User getUserById(int id) {
 		return userRepository.findById(id);
 	}
-	
+
 	public User findUserByEmail(String email) {
 		return userRepository.findByEmail(email);
 	}

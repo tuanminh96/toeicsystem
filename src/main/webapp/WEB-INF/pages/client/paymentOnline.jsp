@@ -44,7 +44,7 @@ input[type="radio"] {
 			<!-- For demo purpose -->
 			<div class="row mb-4">
 				<div class="col-lg-8 mx-auto text-center">
-					<h1 class="display-6">Nâng cấp tài khoản VIP</h1>
+					<h3 class="display-6">Nâng cấp tài khoản VIP</h3>
 				</div>
 			</div>
 			<!-- End -->
@@ -118,7 +118,7 @@ input[type="radio"] {
 						vnp_Amount: amount,
 						vnp_BankCode: bank,
 						vnp_OrderInfo: $("#payment-desc").val(),
-						vnp_ReturnUrl: appContext
+						vnp_ReturnUrl: "http://localhost:8080/webtoeic"
 				};
 				$.ajax({
 					url : appContext+"/processPayment",
@@ -126,7 +126,9 @@ input[type="radio"] {
 					data : JSON.stringify(payment),
 					contentType: "application/json",
 					success : function(response) {
-						
+						var presp = JSON.parse(response);
+						var url = presp.data;
+						$(location).attr('href',url);
 					},error: function () {
 						alert("Có lỗi xảy ra vui lòng thử lại");
 		    		}

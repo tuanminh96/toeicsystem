@@ -38,7 +38,7 @@ public class SetQuestion {
 	private String updateBy;
 	private Date updateDate;
 
-	@OneToMany
+	@OneToMany(mappedBy = "setQuestion")
 	private List<Question> listQuestion;
 	
 	public SetQuestion() {
@@ -113,4 +113,36 @@ public class SetQuestion {
 		this.exam = exam;
 	}
 
+	public int getTotalQuest() {
+		return totalQuest;
+	}
+
+	public void setTotalQuest(int totalQuest) {
+		this.totalQuest = totalQuest;
+	}
+
+	public String getUpdateBy() {
+		return updateBy;
+	}
+
+	public void setUpdateBy(String updateBy) {
+		this.updateBy = updateBy;
+	}
+
+	public Date getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
+	}
+
+	public List<Question> getListQuestion() {
+		return listQuestion;
+	}
+
+	public void setListQuestion(List<Question> listQuestion) {
+		this.listQuestion = listQuestion;
+	}
+	
 }

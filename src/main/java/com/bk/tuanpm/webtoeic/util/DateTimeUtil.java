@@ -1,5 +1,6 @@
 package com.bk.tuanpm.webtoeic.util;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -13,5 +14,10 @@ public class DateTimeUtil {
 		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyyMMddHHmmss");
 
 		return sdf2.format(date);
+	}
+	
+	public static Date convertStringToDate(String date) throws ParseException {
+		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyyMMddHHmmss");
+		return sdf2.parse(date);
 	}
 }

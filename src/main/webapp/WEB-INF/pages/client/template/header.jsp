@@ -104,11 +104,11 @@ margin: 75px;
 				<!-- /LOGO -->
 
 				<!-- MAIN NAVIGATION -->
-				<div class="col-md-8" style="padding-left: 150px;">
+				<div class="col-md-8" >
 					<ul class="nav nav-pills">
-						<li class="nav-item"><a class="nav-link active"
-							href="/webtoeic">Trang chủ</a></li>
 						<c:if test="${pageContext.request.userPrincipal.name == null}">
+							<li class="nav-item" style="padding-left: 300px;">
+							<a class="nav-link active" href="/webtoeic" >Trang chủ</a></li>
 							<li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
 							<li class="nav-item"><a class="nav-link"
 								href="<%=request.getContextPath()%>/signin">Đăng nhập</a></li>
@@ -116,6 +116,8 @@ margin: 75px;
 								href="<%=request.getContextPath()%>/register">Đăng ký</a></li>
 						</c:if>
 						<c:if test="${pageContext.request.userPrincipal.name != null}">
+						    <li class="nav-item" style="padding-left: 100px;"><a class="nav-link active"
+							href="/webtoeic">Trang chủ</a></li>
 							<c:if test="${pageContext.request.isUserInRole('MEMBER') || pageContext.request.isUserInRole('MEMBER_VIP')}" >
 								<li class="nav-item"><a class="nav-link"
 														href="<%=request.getContextPath()%>/listExam">Thi thử</a></li>

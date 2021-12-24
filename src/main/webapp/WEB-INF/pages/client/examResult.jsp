@@ -126,6 +126,10 @@
             max-height: 500px;
             overflow-y: scroll;
         }
+        .partDescription{
+            margin: 20px 0 0 0;
+            color: red;
+        }
     </style>
     <script>
         $(function() {
@@ -271,7 +275,11 @@
                                 <c:set var="correctAnswerD"
                                        value="${pageContext.request.contextPath}/resources/file/images/correct.png"/>
                             </c:if>
-
+                            <c:if test="${index.count == 1}">
+                                <div class="partDescription">
+                                        ${part1.description}
+                                </div>
+                            </c:if>
                             <div class="questionPart1">
                                 <div class="row question">
                                     <b id="question${index.count}"
@@ -347,6 +355,11 @@
                             </c:if>
 
                             <c:if test="${index.count == 1}">
+                                <div class="partDescription">
+                                        ${part2.description}
+                                </div>
+                            </c:if>
+                            <c:if test="${index.count == 1}">
                                 <div class="row questionPart2a">
                                     <audio controls style="width: 100%">
                                         <source src="${pageContext.request.contextPath}/resources/file/exams/${part2.idExam}/audio/${part2.audio}"
@@ -420,6 +433,11 @@
                             <c:if test="${part3.correctAnswer == 'D'}">
                                 <c:set var="correctAnswerD"
                                        value="${pageContext.request.contextPath}/resources/file/images/correct.png"/>
+                            </c:if>
+                            <c:if test="${index.count == 1}">
+                                <div class="partDescription">
+                                        ${part3.description}
+                                </div>
                             </c:if>
                             <c:if test="${index.count == 1 || index.count == 4}">
                                 <div class="row questionPart2a">
@@ -503,6 +521,12 @@
                                 <c:set var="correctAnswerD"
                                        value="${pageContext.request.contextPath}/resources/file/images/correct.png"/>
                             </c:if>
+
+                            <c:if test="${index.count == 1}">
+                                <div class="partDescription">
+                                        ${part4.description}
+                                </div>
+                            </c:if>
                             <c:if test="${index.count == 1 || index.count == 4}">
                                 <div class="row questionPart2a">
                                     <c:if test="${index.count == 4}">
@@ -585,6 +609,12 @@
                                 <c:set var="correctAnswerD"
                                        value="${pageContext.request.contextPath}/resources/file/images/correct.png"/>
                             </c:if>
+
+                            <c:if test="${index.count == 1}">
+                                <div class="partDescription">
+                                        ${part5.description}
+                                </div>
+                            </c:if>
                             <div class="questionPart5">
                                 <div class="row">
                                     <p>
@@ -655,6 +685,12 @@
                             <c:if test="${part6.correctAnswer == 'D'}">
                                 <c:set var="correctAnswerD"
                                        value="${pageContext.request.contextPath}/resources/file/images/correct.png"/>
+                            </c:if>
+
+                            <c:if test="${index.count == 1}">
+                                <div class="partDescription">
+                                        ${part6.description}
+                                </div>
                             </c:if>
                             <div class="questionPart6">
                                 <c:if test="${index.count == 1 || index.count == 4}">
@@ -734,6 +770,12 @@
                             <c:if test="${part7.correctAnswer == 'D'}">
                                 <c:set var="correctAnswerD"
                                        value="${pageContext.request.contextPath}/resources/file/images/correct.png"/>
+                            </c:if>
+
+                            <c:if test="${index.count == 1}">
+                                <div class="partDescription">
+                                        ${part7.description}
+                                </div>
                             </c:if>
                             <div class="questionPart7">
                                 <c:if test="${index.count == 1 || index.count == 4}">

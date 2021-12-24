@@ -95,6 +95,11 @@
             max-height: 500px;
             overflow-y: scroll;
         }
+
+        .partDescription{
+            margin: 20px 0 0 0;
+            color: red;
+        }
     </style>
 </head>
 <body>
@@ -270,6 +275,11 @@
                     </div>
                     <div class="tab-pane fade" id="nav-part4" role="tabpanel" aria-labelledby="nav-part4-tab">
                         <c:forEach items="${listQuestionPart4}" var="part4" varStatus="index">
+                            <c:if test="${index.count == 1}">
+                                <div class="partDescription">
+                                        ${part4.description}
+                                </div>
+                            </c:if>
                             <c:if test="${index.count == 1 || index.count == 4}">
                                 <div class="row questionPart2a">
                                     <c:if test="${index.count == 4}">

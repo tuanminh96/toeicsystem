@@ -11,16 +11,8 @@ $(document).ready(function () {
         const examDescription = $('#examDescription').val();
         const fileThumbnail = $('#fileThumbnail')[0].files[0];
         const fileQuestionExcel = $('#fileQuestionExcel')[0].files[0];
-        // var fp1 = $("#fileQuestionImageLst");
-        // var countFileQuestionImage = fp1[0].files.length; // get length
-        // var fp2 = $("#fileQuestionImageLst");
-        // var countFileQuestionAudio = fp2[0].files.length; // get length
         const countFileQuestionImage = $('#fileQuestionImageLst')[0].files.length;
-        const countFileQuestionAudio = $('#fileQuestionImageLst')[0].files.length;
-
-        // const countFileQuestionImage = document.getElementById('fileQuestionImage').files.length;
-        // const countFileQuestionAudio = $('#fileQuestionAudio')[0].files.length;
-
+        const countFileQuestionAudio = $('#fileQuestionAudioLst')[0].files.length;
 
         // Add data to FormData
         formData.append("examTitle", examTitle);

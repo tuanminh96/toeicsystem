@@ -96,7 +96,7 @@ public class BaiThiThuApi {
 
         List<String> response = new ArrayList<String>();
         String rootDirectory = request.getSession().getServletContext().getRealPath("/");
-
+        // Query vao DB lay ra exam.
         // Save data to table EXAM
         Exam exam = new Exam();
         exam.setTenbaithithu(examTitle);

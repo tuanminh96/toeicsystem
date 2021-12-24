@@ -25,12 +25,13 @@ public class ExamQuestionDTO {
     private Integer idExplainDetail;
     private String explain;
     private String userAnswer;
+    private String description;
 
 
     public ExamQuestionDTO() {
     }
 
-    public ExamQuestionDTO(Integer idExam, String title, Integer idSet, String audio, String content, String sImage, String sParagraph, Integer idPart, String partName, String type, Integer idQuestion, String audioMp3, String correctAnswer, String qImage, Integer number, String option1, String option2, String option3, String option4, String qParagraph, String question, Integer idExplainDetail, String explain, String userAnswer) {
+    public ExamQuestionDTO(Integer idExam, String title, Integer idSet, String audio, String content, String sImage, String sParagraph, Integer idPart, String partName, String type, Integer idQuestion, String audioMp3, String correctAnswer, String qImage, Integer number, String option1, String option2, String option3, String option4, String qParagraph, String question, Integer idExplainDetail, String explain, String userAnswer, String description) {
         this.idExam = idExam;
         this.title = title;
         this.idSet = idSet;
@@ -55,6 +56,7 @@ public class ExamQuestionDTO {
         this.idExplainDetail = idExplainDetail;
         this.explain = explain;
         this.userAnswer = userAnswer;
+        this.description = description;
     }
 
     public Integer getIdExam() {
@@ -249,6 +251,14 @@ public class ExamQuestionDTO {
         this.userAnswer = userAnswer;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public String toString() {
         return "ExamQuestionDTO{" +
@@ -276,6 +286,7 @@ public class ExamQuestionDTO {
                 ", idExplainDetail=" + idExplainDetail +
                 ", explain='" + explain + '\'' +
                 ", userAnswer='" + userAnswer + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 }

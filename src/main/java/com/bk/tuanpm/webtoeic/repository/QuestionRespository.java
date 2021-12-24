@@ -38,7 +38,8 @@ public interface QuestionRespository extends JpaRepository<Question, Integer> {
             "       q.option3,\n" +
             "       q.option4,\n" +
             "       q.paragraph,\n" +
-            "       q.question\n" +
+            "       q.question,\n" +
+            "       p.description\n" +
             "FROM dbo.exam e\n" +
             "INNER JOIN dbo.set_question s ON e.id_exam = s.exam_id_exam\n" +
             "INNER JOIN dbo.part p ON s.part_toeic_id_part = p.id_part\n" +
@@ -72,7 +73,8 @@ public interface QuestionRespository extends JpaRepository<Question, Integer> {
             "       q.paragraph,\n" +
             "       q.question,\n" +
             "       ed.id_explain,\n" +
-            "       ed.explain\n" +
+            "       ed.explain,\n" +
+            "       p.description\n" +
             "FROM dbo.exam e\n" +
             "INNER JOIN dbo.set_question s ON e.id_exam = s.exam_id_exam\n" +
             "INNER JOIN dbo.part p ON s.part_toeic_id_part = p.id_part\n" +

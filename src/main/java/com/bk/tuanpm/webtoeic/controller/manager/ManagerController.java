@@ -3,6 +3,8 @@ package com.bk.tuanpm.webtoeic.controller.manager;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +27,11 @@ public class ManagerController {
 	@Autowired
 	RoleService roleService;
 	
+	@ModelAttribute("loggedInUser")
+	public Account loggedInUser() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		return nguoiDungService.findByEmail(auth.getName());
+	}
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String home() {
 		return "manager/home";

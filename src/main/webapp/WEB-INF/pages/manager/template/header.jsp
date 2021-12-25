@@ -285,7 +285,7 @@ a.dropdown-menu-header {
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="<c:url value='/admin/profile' />"> <span
 								class="glyphicon glyphicon-user">&nbsp;</span>Xin chào:
-								${loggedInUser.hoTen }
+								${loggedInUser.hoTen}
 						</a></li>
 						<li><a href="<c:url value='/signout' />"><span
 								class="glyphicon glyphicon-log-out"></span> Đăng xuất</a></li>

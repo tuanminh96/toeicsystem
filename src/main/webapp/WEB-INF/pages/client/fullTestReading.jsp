@@ -68,6 +68,10 @@
             max-height: 500px;
             overflow-y: scroll;
         }
+        .partDescription{
+            margin: 20px 0 0 0;
+            color: red;
+        }
     </style>
 </head>
 <body>
@@ -116,6 +120,11 @@
                     <div class="tab-pane fade show active" id="nav-part5" role="tabpanel"
                          aria-labelledby="nav-part5-tab">
                         <c:forEach items="${listQuestionPart5}" var="part5" varStatus="index">
+                            <c:if test="${index.count == 1}">
+                                <div class="partDescription">
+                                        ${part5.description}
+                                </div>
+                            </c:if>
                             <div class="questionPart5">
                                 <div class="row">
                                     <p>
@@ -142,6 +151,11 @@
                     </div>
                     <div class="tab-pane fade" id="nav-part6" role="tabpanel" aria-labelledby="nav-part6-tab">
                         <c:forEach items="${listQuestionPart6}" var="part6" varStatus="index">
+                            <c:if test="${index.count == 1}">
+                                <div class="partDescription">
+                                        ${part6.description}
+                                </div>
+                            </c:if>
                             <div class="questionPart6">
                                 <c:if test="${index.count == 1 || index.count == 4}">
                                     <div class="row">
@@ -175,6 +189,11 @@
                     </div>
                     <div class="tab-pane fade" id="nav-part7" role="tabpanel" aria-labelledby="nav-part7-tab">
                         <c:forEach items="${listQuestionPart7}" var="part7" varStatus="index">
+                            <c:if test="${index.count == 1}">
+                                <div class="partDescription">
+                                        ${part7.description}
+                                </div>
+                            </c:if>
                             <div class="questionPart7">
                                 <c:if test="${index.count == 1 || index.count == 4}">
                                     <div class="row">

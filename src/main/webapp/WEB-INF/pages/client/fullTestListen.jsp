@@ -90,9 +90,15 @@
                 max-height: 500px;
             }
         }
+
         #nav-tabContent {
             max-height: 500px;
             overflow-y: scroll;
+        }
+
+        .partDescription{
+            margin: 20px 0 0 0;
+            color: red;
         }
     </style>
 </head>
@@ -151,6 +157,11 @@
                     <div class="tab-pane fade show active" id="nav-part1" role="tabpanel"
                          aria-labelledby="nav-part1-tab">
                         <c:forEach items="${listQuestionPart1}" var="part1" varStatus="index">
+                            <c:if test="${index.count == 1}">
+                                <div class="partDescription">
+                                        ${part1.description}
+                                </div>
+                            </c:if>
                             <c:if test="${not empty part1.sImage}">
                                 <div class="questionPart1">
                                     <div class="row question">
@@ -159,13 +170,13 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <img src="${pageContext.request.contextPath}/resources/file/exams/${part1.idExam}/images/${part1.sImage}.jpg"
+                                            <img src="${pageContext.request.contextPath}/resources/file/exams/${part1.idExam}/images/${part1.sImage}"
                                                  alt="Image not found"
                                                  style="height: 300px; width: 400px; float: left; margin-right: 10px"/>
                                         </div>
                                         <div class="col-md-6">
                                             <audio controls style="width: 100%">
-                                                <source src="${pageContext.request.contextPath}/resources/file/exams/${part1.idExam}/audio/${part1.audio}.mp3"
+                                                <source src="${pageContext.request.contextPath}/resources/file/exams/${part1.idExam}/audio/${part1.audio}"
                                                         type="audio/wav">
                                             </audio>
                                             <br>
@@ -191,9 +202,12 @@
                     <div class="tab-pane fade" id="nav-part2" role="tabpanel" aria-labelledby="nav-part2-tab">
                         <c:forEach items="${listQuestionPart2}" var="part2" varStatus="index">
                             <c:if test="${index.count == 1}">
+                                <div class="partDescription">
+                                        ${part2.description}
+                                </div>
                                 <div class="row questionPart2a">
                                     <audio controls style="width: 100%">
-                                        <source src="${pageContext.request.contextPath}/resources/file/exams/${part2.idExam}/audio/${part2.audio}.mp3"
+                                        <source src="${pageContext.request.contextPath}/resources/file/exams/${part2.idExam}/audio/${part2.audio}"
                                                 type="audio/wav">
                                     </audio>
                                 </div>
@@ -219,6 +233,11 @@
                     </div>
                     <div class="tab-pane fade" id="nav-part3" role="tabpanel" aria-labelledby="nav-part3-tab">
                         <c:forEach items="${listQuestionPart3}" var="part3" varStatus="index">
+                            <c:if test="${index.count == 1}">
+                                <div class="partDescription">
+                                        ${part3.description}
+                                </div>
+                            </c:if>
                             <c:if test="${index.count == 1 || index.count == 4}">
                                 <div class="row questionPart2a">
                                     <c:if test="${index.count == 4}">
@@ -227,7 +246,7 @@
                                     <p><b>Question ${index.count + 7} ~ ${index.count + 9} refer to following
                                         conversation:</b></p>
                                     <audio controls>
-                                        <source src="${pageContext.request.contextPath}/resources/file/exams/${part3.idExam}/audio/${part3.audio}.mp3"
+                                        <source src="${pageContext.request.contextPath}/resources/file/exams/${part3.idExam}/audio/${part3.audio}"
                                                 type="audio/wav">
                                     </audio>
                                 </div>
@@ -256,6 +275,11 @@
                     </div>
                     <div class="tab-pane fade" id="nav-part4" role="tabpanel" aria-labelledby="nav-part4-tab">
                         <c:forEach items="${listQuestionPart4}" var="part4" varStatus="index">
+                            <c:if test="${index.count == 1}">
+                                <div class="partDescription">
+                                        ${part4.description}
+                                </div>
+                            </c:if>
                             <c:if test="${index.count == 1 || index.count == 4}">
                                 <div class="row questionPart2a">
                                     <c:if test="${index.count == 4}">
@@ -264,7 +288,7 @@
                                     <p><b>Question ${index.count + 13} ~ ${index.count + 15} refer to following
                                         conversation:</b></p>
                                     <audio controls>
-                                        <source src="${pageContext.request.contextPath}/resources/file/exams/${part4.idExam}/audio/${part4.audio}.mp3"
+                                        <source src="${pageContext.request.contextPath}/resources/file/exams/${part4.idExam}/audio/${part4.audio}"
                                                 type="audio/wav">
                                     </audio>
                                 </div>

@@ -38,23 +38,24 @@ public class SetQuestion {
 	private String updateBy;
 	private Date updateDate;
 
-	@OneToMany(mappedBy = "setQuestion")
+	@OneToMany
 	private List<Question> listQuestion;
-	
-	public SetQuestion() {
-		super();
-	}
 
-	public SetQuestion(Integer idSet, String image, String audio, String paragraph, String content, PartToeic partToeic,
-			Exam exam) {
-		super();
-		this.idSet = idSet;
-		this.image = image;
-		this.audio = audio;
-		this.paragraph = paragraph;
-		this.content = content;
-		this.partToeic = partToeic;
-		this.exam = exam;
+	@Override
+	public String toString() {
+		return "SetQuestion{" +
+				"idSet=" + idSet +
+				", image='" + image + '\'' +
+				", audio='" + audio + '\'' +
+				", paragraph='" + paragraph + '\'' +
+				", content='" + content + '\'' +
+				", totalQuest=" + totalQuest +
+				", partToeic=" + partToeic +
+				", exam=" + exam +
+				", updateBy='" + updateBy + '\'' +
+				", updateDate=" + updateDate +
+				", listQuestion=" + listQuestion +
+				'}';
 	}
 
 	public Integer getIdSet() {
@@ -97,6 +98,14 @@ public class SetQuestion {
 		this.content = content;
 	}
 
+	public int getTotalQuest() {
+		return totalQuest;
+	}
+
+	public void setTotalQuest(int totalQuest) {
+		this.totalQuest = totalQuest;
+	}
+
 	public PartToeic getPartToeic() {
 		return partToeic;
 	}
@@ -111,14 +120,6 @@ public class SetQuestion {
 
 	public void setExam(Exam exam) {
 		this.exam = exam;
-	}
-
-	public int getTotalQuest() {
-		return totalQuest;
-	}
-
-	public void setTotalQuest(int totalQuest) {
-		this.totalQuest = totalQuest;
 	}
 
 	public String getUpdateBy() {
@@ -137,12 +138,20 @@ public class SetQuestion {
 		this.updateDate = updateDate;
 	}
 
-	public List<Question> getListQuestion() {
-		return listQuestion;
-	}
-
-	public void setListQuestion(List<Question> listQuestion) {
+	public SetQuestion(Integer idSet, String image, String audio, String paragraph, String content, int totalQuest, PartToeic partToeic, Exam exam, String updateBy, Date updateDate, List<Question> listQuestion) {
+		this.idSet = idSet;
+		this.image = image;
+		this.audio = audio;
+		this.paragraph = paragraph;
+		this.content = content;
+		this.totalQuest = totalQuest;
+		this.partToeic = partToeic;
+		this.exam = exam;
+		this.updateBy = updateBy;
+		this.updateDate = updateDate;
 		this.listQuestion = listQuestion;
 	}
-	
+
+	public SetQuestion() {
+	}
 }

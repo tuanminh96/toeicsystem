@@ -28,34 +28,27 @@ import com.bk.tuanpm.webtoeic.service.impl.UserAdminServiceImpl;
 @SessionAttributes("loggedInUser")
 public class AdminController {
 
-	
 	@Autowired
 	UserAdminServiceImpl nguoiDungService;
 
-	
 	@Autowired
 	RoleService roleService;
-	
+
 	@Autowired
 	GroupService groupService;
-	
+
 	@ModelAttribute("loggedInUser")
 	public Account loggedInUser() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		return nguoiDungService.findByEmail(auth.getName());
 	}
 
-//	@GetMapping()
-//	public String adminPage() {
-//		return "admin/homepage";
-//	}
-	
-	@GetMapping({"/exam", ""})
+	@GetMapping({ "/exam", "" })
 	public String quanLyExam(Model model) {
 		return "admin/quanLyExam";
 	}
 
-	@GetMapping({"/group"})
+	@GetMapping({ "/group" })
 	public String quanLyGroup(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		TutorialAdmin currentUser = nguoiDungService.findAdminByEmail(auth.getName());
@@ -63,12 +56,13 @@ public class AdminController {
 		model.addAttribute("groups", groups);
 		return "admin/quanLyGroup";
 	}
+
 	@GetMapping("/tai-khoan")
 	public String quanLyTaiKhoan(Model model) {
-	    model.addAttribute("listVaiTro", roleService.getListRoles());
+		model.addAttribute("listVaiTro", roleService.getListRoles());
 		return "admin/quanLyTaiKhoan";
 	}
-	
+
 	@GetMapping("/profile")
 	public String profilePage(Model model, HttpServletRequest request) {
 		model.addAttribute("user", getSessionUser(request));
@@ -84,10 +78,10 @@ public class AdminController {
 		nguoiDungService.updateUser(currentUser);
 		return "redirect:/admin/profile";
 	}
-	
+
 	public Account getSessionUser(HttpServletRequest request) {
 		return (Account) request.getSession().getAttribute("loggedInUser");
-		
+
 	}
 
 }

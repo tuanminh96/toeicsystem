@@ -1,11 +1,18 @@
 package com.bk.tuanpm.webtoeic.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.bk.tuanpm.webtoeic.interceptor.CheckRoleInterceptor;
+
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
+
+	@Autowired
+	private CheckRoleInterceptor checkRoleInterceptor;
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -13,12 +20,11 @@ public class WebConfig implements WebMvcConfigurer {
 		registry.addResourceHandler("/css/**").addResourceLocations("/resources/css/");
 		registry.addResourceHandler("/js/**").addResourceLocations("/resources/js/");
 		registry.addResourceHandler("/file/**").addResourceLocations("/resources/file/");
-//		registry.addResourceHandler("/Frontend/img/**").addResourceLocations("/resources/Frontend/images/");
-//		registry.addResourceHandler("/Frontend/css/**").addResourceLocations("/resources/Frontend/css/");
-//		registry.addResourceHandler("/Frontend/js/**").addResourceLocations("/resources/Frontend/js/");
 	}
-	
-	
-	
-	
+
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(checkRoleInterceptor).addPathPatterns("/processResultPayment**");
+	}
+
 }

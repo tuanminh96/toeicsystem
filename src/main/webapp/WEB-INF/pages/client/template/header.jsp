@@ -66,7 +66,7 @@ h3 {
 }
 /* Handle config CSS*/
 .mainListExam {
-margin: 75px;
+margin-top: 75px;
 }
 </style>
 <script type="text/javascript">
@@ -116,20 +116,27 @@ margin: 75px;
 								href="<%=request.getContextPath()%>/register">Đăng ký</a></li>
 						</c:if>
 						<c:if test="${pageContext.request.userPrincipal.name != null}">
-						    <li class="nav-item" style="padding-left: 100px;"><a class="nav-link active"
+						    <li class="nav-item" style="padding-left: 130px;"><a class="nav-link active"
 							href="/webtoeic">Trang chủ</a></li>
 							<c:if test="${pageContext.request.isUserInRole('MEMBER') || pageContext.request.isUserInRole('MEMBER_VIP')}" >
 								<li class="nav-item"><a class="nav-link"
 														href="<%=request.getContextPath()%>/listExam">Thi thử</a></li>
+								<c:if test="${pageContext.request.isUserInRole('MEMBER_VIP')}">
 								<li class="nav-item" style="background: gold;"><a
 										class="nav-link"
 										href="${pageContext.request.contextPath}/list_group"
 										style="color: black;">Học nhóm</a></li>
+								</c:if>	
 							</c:if>
 							<li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-
+							<c:if test="${pageContext.request.isUserInRole('MEMBER')}" >
 							<div class="navbar-nav flex-row  d-none d-md-flex"
-								style="margin-left: 20px;">
+								style="margin-left: 100px;">
+							</c:if>
+							<c:if test="${pageContext.request.isUserInRole('MEMBER_VIP')}" >
+							<div class="navbar-nav flex-row  d-none d-md-flex"
+								style="margin-left: 30px;">
+							</c:if>
 								<li class="nav-item dropdown"><a
 									class="nav-link dropdown-toggle" data-toggle="dropdown"
 									href="#">${nguoiDung.hoTen}</a>

@@ -55,9 +55,11 @@ public class UserAdminServiceImpl {
 	}
 
 	public Account saveUser(Account nd) {
-		if (nd.getPassword() != null || !"".equals(nd.getPassword())) {
-			nd.setPassword(bCryptPasswordEncoder.encode(nd.getPassword()));
-		}
+		nd.setPassword(bCryptPasswordEncoder.encode(nd.getPassword()));
+		return nguoiDungRepo.save(nd);
+	}
+	
+	public Account saveUserNotPass(Account nd) {
 		return nguoiDungRepo.save(nd);
 	}
 

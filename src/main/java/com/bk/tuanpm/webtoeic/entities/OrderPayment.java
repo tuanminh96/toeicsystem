@@ -26,6 +26,7 @@ public class OrderPayment {
 	private String transactionNo;
 	private String transactionStatus;
 	private String refNo;
+	private String status;
 	
 	@ManyToOne
 	private User user;
@@ -125,7 +126,13 @@ public class OrderPayment {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 }

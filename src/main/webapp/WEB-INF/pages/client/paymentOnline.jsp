@@ -22,10 +22,6 @@ body {
 	border-radius: 1rem
 }
 
-.nav-pills .nav-link {
-	color: #555
-}
-
 .nav-pills .nav-link.active {
 	color: white
 }
@@ -72,70 +68,90 @@ input[type="radio"] {
 								<div class="form-group ">
 									<label for="Select Your Bank">
 										<h6>Ngân hàng</h6>
-									</label> <select class="form-control" id="bankselect">
-										<option value="" selected disabled>--Chọn ngân hàng thanh toán--</option>
+									</label> 
+									<select class="form-control" id="bankselect">
+										<option value="" selected disabled>--Chọn ngân hàng
+											thanh toán--</option>
 										<option value="TPBANK">TPBank</option>
 										<option value="VIETCOMBANK">VietcomBank</option>
-										<option value="PVCOMBANK">PVCOMBANK-Ngân hàng TMCP Đại Chúng Việt Nam	</option>
-										<option value="SAIGONBANK">SAIGONBANK-Ngân hàng thương mại cổ phần Sài Gòn Công Thương	</option>
-										<option value="VPBANK">VPBANK-Ngân hàng Việt Nam Thịnh vượng (VPBank)	</option>
-										<option value="SEABANK">SEABANK-Ngân Hàng TMCP Đông Nam Á	</option>
-										<option value="VIETINBANK">VIETINBANK-Ngân hàng Công thương (Vietinbank)	</option>
-									</select>
-									<label for="Select Your Bank">Số tiền: <span style="color: red;">500.000</span> VNĐ</label>
-									
-									<label for="">Thông tin thanh toán: <input type="text" id="payment-desc" value="Nâng cấp tài khoản lên VIP"></label>
+										<option value="PVCOMBANK">PVCOMBANK-Ngân hàng TMCP
+											Đại Chúng Việt Nam</option>
+										<option value="SAIGONBANK">SAIGONBANK-Ngân hàng
+											thương mại cổ phần Sài Gòn Công Thương</option>
+										<option value="VPBANK">VPBANK-Ngân hàng Việt Nam
+											Thịnh vượng (VPBank)</option>
+										<option value="SEABANK">SEABANK-Ngân Hàng TMCP Đông
+											Nam Á</option>
+										<option value="VIETINBANK">VIETINBANK-Ngân hàng Công
+											thương (Vietinbank)</option>
+									</select> 
+									<label for="Select Your Bank">Số tiền: <span
+										style="font-family: cursive; font-size: 30px; color: red;">500.000</span>
+										VNĐ
+									</label>
+									<div class="input-group">
+										<label class="input-group-prepend">Thông tin thanh toán: </label>
+										<input id="payment-desc" type="text" class="form-control" value="Nâng cấp tài khoản lên VIP">
+									</div>
 								</div>
 								<div class="form-group">
 									<p>
-										<button type="button" class="btn btn-primary " id="process-payment">
+										<button type="button" class="btn btn-primary "
+											id="process-payment">
 											<i class="fas fa-mobile-alt mr-2"></i> Thanh toán
 										</button>
 									</p>
 								</div>
-								<p class="text-muted">Hướng dẫn: Chọn tài khoản ngân hàng liên kết với ví VNPay.</p>
+								<p class="text-muted">Hướng dẫn: Chọn tài khoản ngân hàng
+									liên kết với ví VNPay.</p>
 							</div>
 							<!-- End -->
 							<!-- payment parameter -->
 							<%-- <input type="hidden" value="${vnp_TmnCode}" id="vnp_TmnCode">
 							<input type="hidden" value="${vnp_HashSecret}" id="vnp_HashSecret">
 							<input type="hidden" value="${vnp_Url}" id="vnp_Url"> --%>
-							<input type="hidden" value="500000" id="amount">
-							<input type="hidden" id="appContext"
-						value="${pageContext.request.contextPath}">
+							<input type="hidden" value="500000" id="amount"> <input
+								type="hidden" id="appContext"
+								value="${pageContext.request.contextPath}">
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<script type="text/javascript">
+		<div style="margin: auto; width: 50%;">
+			<img alt=""
+				src="https://polarisvietnam.com/primary_polaris/resources/images/logo/logo_partner_vnpay.png">
+		</div>
+	</div>
+	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#process-payment").on("click", function() {
 				var amount = $("#amount").val();
 				var bank = $("#bankselect").val();
 				var appContext = $("#appContext").val();
 				var payment = {
-						vnp_Amount: amount,
-						vnp_BankCode: bank,
-						vnp_OrderInfo: $("#payment-desc").val(),
-						vnp_ReturnUrl: "http://localhost:8080/webtoeic"
+					vnp_Amount : amount,
+					vnp_BankCode : bank,
+					vnp_OrderInfo : $("#payment-desc").val(),
+					vnp_ReturnUrl : "http://localhost:8080/webtoeic"
 				};
 				$.ajax({
-					url : appContext+"/processPayment",
+					url : appContext + "/processPayment",
 					type : 'POST',
 					data : JSON.stringify(payment),
-					contentType: "application/json",
+					contentType : "application/json",
 					success : function(response) {
 						var presp = JSON.parse(response);
 						var url = presp.data;
-						$(location).attr('href',url);
-					},error: function () {
+						$(location).attr('href', url);
+					},
+					error : function() {
 						alert("Có lỗi xảy ra vui lòng thử lại");
-		    		}
+					}
 				});
 			});
 		});
-		</script>
-		<script src="<c:url value='/js/client/profileClient.js'/>"></script>
+	</script>
+	<script src="<c:url value='/js/client/profileClient.js'/>"></script>
 </body>
 </html>

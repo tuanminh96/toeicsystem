@@ -21,7 +21,10 @@ import javax.servlet.jsp.jstl.core.Config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -111,7 +114,7 @@ public class PaymentController {
         Gson gson = new Gson();
         response.getWriter().write(gson.toJson(job));
 	}
-	@GetMapping(value = "/processResult/{idMem}") 
+	@GetMapping(value = "/processResultPayment/{idMem}") 
 	public String resultPayment(Model model, HttpServletRequest request , @PathVariable("idMem") int idMem,
 			@RequestParam("vnp_Amount") String vnp_Amount,
 			@RequestParam("vnp_BankCode") String vnp_BankCode,
@@ -160,7 +163,14 @@ public class PaymentController {
 	                        //Cap nhat lại role của user lên VIP
 	                    	User userUp = userAdminServiceImpl.getUserById(idMem);
 	                    	userUp.setRole(roleService.getRole(Role.ROLE_MEMBER_VIP));
-	                    	userAdminServiceImpl.saveUser(userUp);
+	                    	userAdminServiceImpl.saveUserNotPass(userUp);
+	                    	
+	                    	//reload to role VIP
+	                    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	                    	List<GrantedAuthority> updatedAuthorities = new ArrayList<>();
+	                    	updatedAuthorities.add(new SimpleGrantedAuthority("ROLE_MEMBER_VIP"));
+	                    	Authentication newAuth = new UsernamePasswordAuthenticationToken(auth.getPrincipal(), auth.getCredentials(), updatedAuthorities);
+	                    	SecurityContextHolder.getContext().setAuthentication(newAuth);
 	                    	//gui thong bao cho user
 	                    	
 	                    	//Cap nhat thong tin thanh toan vao DB
@@ -176,7 +186,10 @@ public class PaymentController {
 	                    	orderPayment.setResponseCode(vnp_ResponseCode);
 	                    	orderPayment.setTransactionNo(vnp_TransactionNo);
 	                    	orderPayment.setTransactionStatus(vnp_TransactionStatus);
+	                    	orderPayment.setStatus("Paid");
 	                    	paymentServiceImpl.saveOrder(orderPayment);
+	                    	
+	                    	model.addAttribute("order", orderPayment);
 	                    } else {
 	                        //Xu ly thanh toan khong thanh cong
 	                        //  out.print("GD Khong thanh cong");

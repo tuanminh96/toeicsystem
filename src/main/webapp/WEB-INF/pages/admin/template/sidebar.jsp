@@ -31,10 +31,6 @@
             <a href='<c:url value="/admin/group"/>'>
               <span class="glyphicon glyphicon-tasks">&nbsp;</span>Quản lý Nhóm học</a>
           </li>
-          <li class="side-bar main-menu">
-            <a href="<c:url value='/admin/tai-khoan' />">
-              <span class="glyphicon glyphicon-th-list">&nbsp;</span>Quản lý Tài khoản</a>
-          </li>
 <%--           
           <li class="side-bar main-menu">
             <a href="<c:url value='/admin/thong-ke' />">

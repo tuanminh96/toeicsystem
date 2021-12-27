@@ -13,6 +13,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name="notification")
 public class Notification {
+	
+	public static final String TYPE_REMARK = "remark";
+	public static final String TYPE_POST = "post";
+	public static final String TYPE_COMMENT = "comment";
+	public static final String TYPE_ADD_GROUP = "add_group";
+	
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_notification", nullable = false)

@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.bk.tuanpm.webtoeic.entities.ContentAdmin;
 import com.bk.tuanpm.webtoeic.entities.Exam;
 import com.bk.tuanpm.webtoeic.repository.BaiThiThuRespository;
 import com.bk.tuanpm.webtoeic.service.BaiThiThuService;
@@ -37,6 +38,11 @@ public class BaiThiThuImpl implements BaiThiThuService {
 	@Override
 	public List<Exam> getAllBaiThiThu() {
 		return baithithuRepo.findAll();
+	}
+	
+	@Override
+	public List<Exam> getAllByContentAdmin(ContentAdmin admin) {
+		return baithithuRepo.findAllByUserAdd(admin);
 	}
 
 	@Override

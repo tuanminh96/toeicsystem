@@ -197,7 +197,7 @@ hr {
 
                             <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90">Ngày thanh toán:</span> ${order.payDate}</div>
 
-                            <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90">Trạng thái:</span> <span class="badge badge-warning badge-pill px-25">${order.status}</span></div>
+                            <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90">Trạng thái:</span> <span class="badge badge-success badge-pill px-25">${order.status}</span></div>
                         </div>
                     </div>
                     <!-- /.col -->

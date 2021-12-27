@@ -65,7 +65,9 @@ public class BaiThiThuApi {
 
     @GetMapping("/loadExam")
     public List<String> showAllExam() {
-        List<Exam> list = baithithuService.getAllBaiThiThu();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        ContentAdmin currentUser = userAdminService.findContentByEmail(auth.getName());
+        List<Exam> list = baithithuService.getAllByContentAdmin(currentUser);
         List<String> response = new ArrayList<String>();
         for (int i = 0; i < list.size(); i++) {
             String json = "baithithuid:" + list.get(i).getBaithithuid() + "," + "anhbaithithu:"

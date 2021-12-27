@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
+import com.bk.tuanpm.webtoeic.entities.ContentAdmin;
 import com.bk.tuanpm.webtoeic.entities.Exam;
 @Repository
 public interface BaiThiThuRespository extends JpaRepository<Exam,Integer>
@@ -22,5 +23,7 @@ public interface BaiThiThuRespository extends JpaRepository<Exam,Integer>
 	List<Exam> findTop10ByOrderByCountRateDesc();
 	
 	List<Exam> findTop10ByOrderByCountTestDesc();
+
+	List<Exam> findAllByUserAdd(ContentAdmin admin);
 
 }

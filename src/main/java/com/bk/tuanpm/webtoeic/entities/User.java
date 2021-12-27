@@ -15,7 +15,8 @@ import javax.persistence.ManyToMany;
 
 @Entity
 public class User extends Account {
-
+	
+	private String status;
 	private Date addDate;
 	private String school;
 	private String company;
@@ -48,6 +49,12 @@ public class User extends Account {
 	}
 	public void setGroups(List<Group> groups) {
 		this.groups = groups;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 }

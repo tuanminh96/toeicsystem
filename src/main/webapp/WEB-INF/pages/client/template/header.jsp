@@ -66,7 +66,7 @@ h3 {
 }
 /* Handle config CSS*/
 .mainListExam {
-margin-top: 75px;
+	margin-top: 75px;
 }
 </style>
 <script type="text/javascript">
@@ -104,11 +104,11 @@ margin-top: 75px;
 				<!-- /LOGO -->
 
 				<!-- MAIN NAVIGATION -->
-				<div class="col-md-8" >
+				<div class="col-md-8">
 					<ul class="nav nav-pills">
 						<c:if test="${pageContext.request.userPrincipal.name == null}">
-							<li class="nav-item" style="padding-left: 300px;">
-							<a class="nav-link active" href="/webtoeic" >Trang chủ</a></li>
+							<li class="nav-item" style="padding-left: 300px;"><a
+								class="nav-link active" href="/webtoeic">Trang chủ</a></li>
 							<li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
 							<li class="nav-item"><a class="nav-link"
 								href="<%=request.getContextPath()%>/signin">Đăng nhập</a></li>
@@ -116,43 +116,51 @@ margin-top: 75px;
 								href="<%=request.getContextPath()%>/register">Đăng ký</a></li>
 						</c:if>
 						<c:if test="${pageContext.request.userPrincipal.name != null}">
-						    <li class="nav-item" style="padding-left: 130px;"><a class="nav-link active"
-							href="/webtoeic">Trang chủ</a></li>
-							<c:if test="${pageContext.request.isUserInRole('MEMBER') || pageContext.request.isUserInRole('MEMBER_VIP')}" >
+							<li class="nav-item" style="padding-left: 130px;"><a
+								class="nav-link active" href="/webtoeic">Trang chủ</a></li>
+							<c:if
+								test="${pageContext.request.isUserInRole('MEMBER') || pageContext.request.isUserInRole('MEMBER_VIP')}">
 								<li class="nav-item"><a class="nav-link"
-														href="<%=request.getContextPath()%>/listExam">Thi thử</a></li>
+									href="<%=request.getContextPath()%>/listExam">Thi thử</a></li>
 								<c:if test="${pageContext.request.isUserInRole('MEMBER_VIP')}">
-								<li class="nav-item" style="background: gold;"><a
+									<li class="nav-item" style="background: gold;"><a
 										class="nav-link"
 										href="${pageContext.request.contextPath}/list_group"
 										style="color: black;">Học nhóm</a></li>
-								</c:if>	
+								</c:if>
 							</c:if>
 							<li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-							<c:if test="${pageContext.request.isUserInRole('MEMBER')}" >
-							<div class="navbar-nav flex-row  d-none d-md-flex"
-								style="margin-left: 100px;">
+							<c:if test="${pageContext.request.isUserInRole('MEMBER')}">
+								<div class="navbar-nav flex-row  d-none d-md-flex"
+									style="margin-left: 100px;">
 							</c:if>
-							<c:if test="${pageContext.request.isUserInRole('MEMBER_VIP')}" >
-							<div class="navbar-nav flex-row  d-none d-md-flex"
-								style="margin-left: 30px;">
+							<c:if test="${pageContext.request.isUserInRole('MEMBER_VIP')}">
+								<div class="navbar-nav flex-row  d-none d-md-flex"
+									style="margin-left: 30px;">
+									<input type="hidden" value="vip" id="vip">
 							</c:if>
-								<li class="nav-item dropdown"><a
-									class="nav-link dropdown-toggle" data-toggle="dropdown"
-									href="#">${nguoiDung.hoTen}</a>
-									<div class="dropdown-menu">
-										<c:if test="${pageContext.request.isUserInRole('MEMBER') || pageContext.request.isUserInRole('MEMBER_VIP')}" >
+							<li class="nav-item dropdown"><a
+								class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">${nguoiDung.hoTen}</a>
+								<div class="dropdown-menu">
+									<c:if
+										test="${pageContext.request.isUserInRole('MEMBER') || pageContext.request.isUserInRole('MEMBER_VIP')}">
 										<a class="dropdown-item"
 											href="<%=request.getContextPath()%>/profile">Tài khoản</a>
-											<c:if test="${pageContext.request.isUserInRole('MEMBER')}">
-												<a class="dropdown-item" href="<%=request.getContextPath()%>/payment">Nâng cấp VIP</a>
-											</c:if>
-										<a class="dropdown-item"
-											href="<%=request.getContextPath()%>/listnoti/1">Thông báo</a>
+										<c:if test="${pageContext.request.isUserInRole('MEMBER')}">
+											<a class="dropdown-item"
+												href="<%=request.getContextPath()%>/payment">Nâng cấp
+												VIP</a>
 										</c:if>
-										<a class="dropdown-item"
-											href="<%=request.getContextPath()%>/signout">Thoát</a>
-									</div></li>
+										<c:if test="${pageContext.request.isUserInRole('MEMBER_VIP')}">
+											<a class="dropdown-item"
+												href="<%=request.getContextPath()%>/listnoti/1">Thông
+												báo</a>
+										</c:if>
+									</c:if>
+									<a class="dropdown-item"
+										href="<%=request.getContextPath()%>/signout">Thoát</a>
+								</div></li>
+							<c:if test="${pageContext.request.isUserInRole('MEMBER_VIP')}">
 								<div class="nav-item" style="padding: 0 10px">
 									<a class="nav-link" href="#" rel="noopener" aria-label="GitHub"
 										id="bell"> <i class="fa fa-lg fa-bell"></i> <span
@@ -180,11 +188,12 @@ margin-top: 75px;
 										</div>
 									</div>
 								</div>
-							</div>
-						</c:if>
-					</ul>
+							</c:if>
 				</div>
-				<!-- MAIN NAVIGATION -->
+				</c:if>
+				</ul>
 			</div>
+			<!-- MAIN NAVIGATION -->
 		</div>
+	</div>
 	</div>

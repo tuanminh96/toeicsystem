@@ -62,10 +62,9 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="carousel-caption">
-                                <h1>Giải đáp chi tiết các đề thi</h1>
-                                <p class="lead">Chỉ với 300.000VNĐ/1 Tháng, bạn sẽ được mở
-                                    khóa chức năng này.</p>
+                            <div class="" style="margin-top: 50px;">
+                                <h1>Tham gia ngay với chúng tôi</h1>
+                                <p class="lead">Nhấn vào "Tham gia" để đăng ký tài khoản, trải nghiệm những tính năng hấp dẫn.</p>
                                 <c:if test="${pageContext.request.userPrincipal.name == null}">
                                     <a href="<%=request.getContextPath()%>/login"
                                        class="btn btn-large btn-primary" href="#" id="modal1">Tham
@@ -166,29 +165,23 @@
             <img
                     src="${pageContext.request.contextPath}/resources/file/images/feature-vocabulary1.jpg">
 
-            <h2>Học nhóm cùng những admin tận tâm</h2>
-            <p>Sẵn sàng giúp đỡ nếu hặp khó khăn.</p>
-            <a href="#" id="modal1" class="openModalFunction">Chi tiết
-                &rarr;</a>
-
+            <h2>Cung cấp giải đáp cho các đề thi</h2>
+            <p>Nâng cấp lên VIP để sở hữu tính năng này</p>
         </div>
 
         <div class="col-md-4">
             <img
                     src="${pageContext.request.contextPath}/resources/file/images/feature-listenandread.jpg">
-            <h2>Nâng cấp tài khoản</h2>
-            <p>Giúp bạn có những trải nghiệm thú vị hơn.</p>
-            <a href="#" id="modal2" class="openModalFunction">Chi tiết
-                &rarr;</a>
+            <h2>Học nhóm cùng người hướng dẫn học</h2>
+            <p>Đăng bài trong nhóm, hỏi đáp, thảo luận</p>
         </div>
 
         <div class="col-md-4">
             <img
                     src="${pageContext.request.contextPath}/resources/file/images/feature-lamdethithu.jpg"
                     height="170px" width="270px">
-            <h2>Đề thi thử</h2>
+            <h2>Đề thi được kiểm duyệt và đánh giá kỹ càng</h2>
             <p>Cập nhật, đổi mới liên tục, sát với đề thi thật nhất.</p>
-            <a href="#" class="doExam" id="doExam">Chi tiết &rarr;</a>
         </div>
     </div>
 

@@ -38,7 +38,7 @@ public class SetQuestion {
 	private String updateBy;
 	private Date updateDate;
 
-	@OneToMany
+	@OneToMany(mappedBy = "setQuestion")
 	private List<Question> listQuestion;
 
 	@Override

@@ -1,12 +1,14 @@
 package com.bk.tuanpm.webtoeic.service.impl;
 
 import java.io.IOException;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
@@ -15,9 +17,6 @@ import com.bk.tuanpm.webtoeic.config.MessageConfig;
 import com.bk.tuanpm.webtoeic.dto.NotificationDTO;
 import com.bk.tuanpm.webtoeic.entities.Notification;
 import com.bk.tuanpm.webtoeic.service.NotificationService;
-import com.google.gson.JsonObject;
-
-import net.minidev.json.JSONObject;
 
 @Service
 public class NotificationServiceImpl implements NotificationService {
@@ -25,10 +24,10 @@ public class NotificationServiceImpl implements NotificationService {
 	@Autowired
 	MessageConfig messageConfig;
 
-	public Map<Integer, SseEmitter> emitters = new HashMap<Integer, SseEmitter>();
+	public Map<String, SseEmitter> emitters = new HashMap<String, SseEmitter>();
 
 	@Override
-	public SseEmitter addEmmiter(SseEmitter emitter, int idUser) {
+	public SseEmitter addEmmiter(SseEmitter emitter, String idUser) {
 		emitter.onCompletion(() -> emitters.remove(idUser));
 		emitter.onTimeout(() -> emitters.remove(idUser));
 		emitter.onError((e) -> {
@@ -39,18 +38,18 @@ public class NotificationServiceImpl implements NotificationService {
 		return emitter;
 	}
 
-	public void pushRemarkNotification(int idUser) {
+	@Override
+	public void pushRemarkNotification(String idUser, String adminAdd, String weekNum) {
 
 		SseEmitter sentEmitter = emitters.get(idUser);
 
-		JsonObject notiMess = new JsonObject();
-		notiMess.addProperty("content", messageConfig.getProperty("noti.remark"));
+		JSONObject notiMess = new JSONObject();
+		String message = messageConfig.getProperty("noti.remark");
+		String result = MessageFormat.format(message, adminAdd, weekNum);
+		String event = notiMess.put("content", result).toString();
 		if (sentEmitter != null) {
 			try {
-				sentEmitter.send(SseEmitter
-						.event()
-						.name(Notification.TYPE_REMARK)
-						.data(notiMess));
+				sentEmitter.send(SseEmitter.event().name(Notification.TYPE_REMARK).data(event));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -61,8 +60,23 @@ public class NotificationServiceImpl implements NotificationService {
 	}
 
 	@Override
-	public SseEmitter addEmmiter(SseEmitter emitter) {
-		// TODO Auto-generated method stub
-		return null;
+	public void pushAddGroupNotification(String idUser, String admin, String nameGroup) {
+
+		SseEmitter sentEmitter = emitters.get(idUser);
+
+		JSONObject notiMess = new JSONObject();
+		String message = messageConfig.getProperty("noti.addgroup");
+		String result = MessageFormat.format(message, admin, nameGroup);
+		String event = notiMess.put("content", result).toString();
+		if (sentEmitter != null) {
+			try {
+				sentEmitter.send(SseEmitter.event().name(Notification.TYPE_ADD_GROUP).data(event));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				emitters.remove(sentEmitter);
+			}
+		}
+
 	}
 }

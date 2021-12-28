@@ -30,6 +30,7 @@ import com.bk.tuanpm.webtoeic.entities.Remark;
 import com.bk.tuanpm.webtoeic.entities.User;
 import com.bk.tuanpm.webtoeic.repository.TutorialAdminRepository;
 import com.bk.tuanpm.webtoeic.service.GroupService;
+import com.bk.tuanpm.webtoeic.service.NotificationService;
 import com.bk.tuanpm.webtoeic.service.RemarkService;
 import com.bk.tuanpm.webtoeic.service.impl.UserAdminServiceImpl;
 
@@ -52,6 +53,9 @@ public class RemarkController {
 	
 	@Autowired
 	RemarkService remarkService;
+	
+	@Autowired
+	NotificationService notificationService;
 
 	@PostMapping(value = "/addRemark")
 	@ResponseBody
@@ -71,10 +75,10 @@ public class RemarkController {
 		remarkToAdd.setUser(userAdded);
 		
 		remarkService.saveRemarkForUser(remarkToAdd);
+		notificationService.pushRemarkNotification(""+userAdded.getId(), 
+				""+currentUser.getUsername(),
+				""+weekNum);
 		String message = messageConfig.getProperty("add.success")+" Nhận xét cho: "+userAdded.getHoTen()+ "";
 		return new ResponseEntity<String>(message, HttpStatus.OK);
 	}
-	
-	
-
 }

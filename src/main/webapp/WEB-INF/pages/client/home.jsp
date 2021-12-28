@@ -189,7 +189,7 @@
     <!-- /.Feature -->
     <!-- Container (Contact Section) -->
     <div id="contact" class="container">
-        <h1 class="text-center">Contact</h1>
+        <h1 class="text-center">Thông tin liên hệ</h1>
         <p class="text-center">
             <em>Give us opinion about your experience!</em>
         </p>

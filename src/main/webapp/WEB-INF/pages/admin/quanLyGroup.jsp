@@ -9,8 +9,8 @@
 <title>Quản lý Exam</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<script
-	src="${pageContext.request.contextPath}/resources/js/jquery-1.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <script src="<c:url value='/js/admin/quanlyGroup.js'/>"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"

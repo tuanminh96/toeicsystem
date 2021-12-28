@@ -31,6 +31,9 @@
 	integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg=="
 	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<link rel="stylesheet prefetch" href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css">	
+<script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
 <script src="<c:url value='/js/admin/quanlyGroup.js'/>"></script>
 </head>
 <style>
@@ -481,7 +484,7 @@ a.dropdown-menu-header {
 								<div class="d-flex flex-row justify-content-between border-top">
 									<div class="d-flex flex-row publish-options">
 										<div class="align-items-center border-right p-2 share">
-											<i class="fa fa-camera text-black-50"></i><span class="ml-1">Photo</span>
+											<i class="fa fa-question-circle"></i><span class="ml-1">Bạn đang thắc mắc điều gì ?</span>
 										</div>
 									</div>
 									<div class="publish-button"
@@ -497,9 +500,6 @@ a.dropdown-menu-header {
 								<ul class="nav profile-navbar">
 									<li class="nav-item"><a class="nav-link active" href="#">
 											<i class="mdi mdi-newspaper"></i> Feed
-									</a></li>
-									<li class="nav-item"><a class="nav-link" href="#"> <i
-											class="mdi mdi-book-open"></i> Bài giao
 									</a></li>
 									<li class="nav-item"><a class="nav-link" href="#"
 										id="memberlist"> <i class="mdi mdi-account-multiple"></i>
@@ -611,7 +611,7 @@ a.dropdown-menu-header {
 					</div>
 				</div>
 			</div>
-		</div>
+		</div>	
 	</div>
 </body>
 </html>

@@ -43,30 +43,35 @@
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <div class="toast-body">
-      Hello, world! This is a toast message.
+    <div class="toast-body" id="message-content">
     </div>
   </div>
 </div>
-<%-- <audio autoplay id="autioNoti" src="${pageContext.request.contextPath}/resources/file/audio/notification.mp3"></audio> --%>
+<audio autoplay id="autioNoti" src="${pageContext.request.contextPath}/resources/file/audio/notification.mp3"></audio>
 <p id="clickaudio"></p>
+<input type="hidden" value="${loggedInUser.id}" id="idUser">
 </body>
 	<script type="text/javascript">
 		$(document).ready( function() {
 			$("#clickaudio").on('click', function() {
 				$('#autioNoti').get(0).play();
 			});
-		/* 	if ($("#vip").val() == 'vip') {
-				var urlEndPoint = 'http://localhost:8080/webtoeic/api/subcribe';
+			if ($("#vip").val() == 'vip') {
+				var idUser = $('#idUser').val();
+				var urlEndPoint = 'http://localhost:8080/webtoeic/api/subcribe?id='+idUser;
 				var eventSource = new EventSource(urlEndPoint);
 				eventSource.addEventListener('remark',
 				function(event) {
+					var noti = JSON.parse(event.data)
+					$("#message-content").text(noti.content);
+					$('.toast').toast({delay: 5000});
+					$('.toast').toast('show');
+					$('#autioNoti').get(0).play();
+					var totalUnseen = $("#totalUnseen").text();
+					totalUnseen++;
+					$("#totalUnseen").text(totalUnseen);
 				}); 
-
-			}*/
-			$('.toast').toast({delay: 50000});
-			$('.toast').toast('show');
-			
+			}
 			if($('.toast').css('display') == 'block') {
 				$("#clickaudio").click();
 				console.log("showwn");

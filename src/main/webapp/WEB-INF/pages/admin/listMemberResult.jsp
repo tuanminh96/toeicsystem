@@ -86,7 +86,15 @@
 				</div>
 				<form role="form" id="formAddRemark">
 				<div class="modal-body">
-					<label for="comment">Tuần từ: 12/13/2021 - 12/19/2021</label>
+					<div class="wrapper" style="width: 40%;">
+					<select style="margin-bottom: 30px;" name="" id="" class="form-control" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
+    					<c:forEach items="${totalrange}" var="rangee">
+    						<option value="">${rangee}</option>
+    					</c:forEach>
+					</select>
+					</div>
+					<input type="hidden" id="rangeRs" value="${currange}">
+					<input type="hidden" id="weekNum" value="${week}">
 					<div class="form-group">
 						<div id="chart_div"></div>
 						<br />
@@ -114,6 +122,7 @@
 			</div>
 		</div>
 	</div>
+	
 	<script type="text/javascript">
 	$(document).ready(function() {
 		$("#viewResultStatics").on('click', function() {
@@ -158,7 +167,7 @@
 				  var options = {
 				    chart: {
 				      title: 'Kết quả thi của user ',
-				      subtitle: 'Tuần từ: 12/13/2021 - 12/19/2021',
+				      subtitle: 'Tuần '+$("#weekNum").val()+' từ: '+$("#rangeRs").val(),
 				    },
 				    bars: 'vertical',
 				    vAxis: {format: 'decimal'},
@@ -204,8 +213,8 @@
 				var idMem = $("#viewResultStatics").attr('idMem');
 				var remark = $("#remark").val();
 		        var appContext = $("#appContext").val();
-		        var dateRange = '12/13/2021 - 12/19/2021';
-		        var weekNum = 10;
+		        var dateRange = $("#rangeRs").val();
+		        var weekNum = $("#weekNum").val();
 				$.ajax({
 					type: "POST",
 					data: {
@@ -228,13 +237,8 @@
 				});
 			}
 		});
+		
 	});
 	</script>
-	<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"
-	integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg=="
-	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/jquery.serializeJSON/2.9.0/jquery.serializejson.js"></script>
 </body>
 </html>

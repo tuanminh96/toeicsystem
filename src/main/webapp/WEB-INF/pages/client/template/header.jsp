@@ -109,7 +109,7 @@ h3 {
 						<c:if test="${pageContext.request.userPrincipal.name == null}">
 							<li class="nav-item" style="padding-left: 300px;"><a
 								class="nav-link active" href="/webtoeic">Trang chủ</a></li>
-							<li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+							<li class="nav-item"><a class="nav-link" href="#contact">Liên hệ</a></li>
 							<li class="nav-item"><a class="nav-link"
 								href="<%=request.getContextPath()%>/signin">Đăng nhập</a></li>
 							<li class="nav-item"><a class="nav-link"
@@ -129,7 +129,7 @@ h3 {
 										style="color: black;">Học nhóm</a></li>
 								</c:if>
 							</c:if>
-							<li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+							<li class="nav-item"><a class="nav-link" href="#contact">Liên hệ</a></li>
 							<c:if test="${pageContext.request.isUserInRole('MEMBER')}">
 								<div class="navbar-nav flex-row  d-none d-md-flex"
 									style="margin-left: 100px;">
@@ -164,23 +164,19 @@ h3 {
 								<div class="nav-item" style="padding: 0 10px">
 									<a class="nav-link" href="#" rel="noopener" aria-label="GitHub"
 										id="bell"> <i class="fa fa-lg fa-bell"></i> <span
-										class="notification-badge badge badge-danger">1</span>
+										class="notification-badge badge badge-danger" id="totalUnseen">1</span>
 									</a>
 									<div class="notifications" id="box">
 										<h2>
-											Notifications - <span>2</span>
+											Thông báo - <span>1</span>
 										</h2>
 										<div class="notifications-item">
-											<img src="https://i.imgur.com/uIgDDDd.jpg" alt="img">
 											<div class="text">
 												<h4>Samso aliao</h4>
 												<p>Samso Nagaro Like your home work</p>
 											</div>
 										</div>
 										<div class="notifications-item">
-											<img
-												src="https://img.icons8.com/flat_round/64/000000/vote-badge.png"
-												alt="img">
 											<div class="text">
 												<h4>John Silvester</h4>
 												<p>+20 vista badge earned</p>

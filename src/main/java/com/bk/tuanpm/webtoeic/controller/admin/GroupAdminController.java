@@ -24,6 +24,7 @@ import com.bk.tuanpm.webtoeic.entities.User;
 import com.bk.tuanpm.webtoeic.repository.TutorialAdminRepository;
 import com.bk.tuanpm.webtoeic.service.GroupService;
 import com.bk.tuanpm.webtoeic.service.impl.UserAdminServiceImpl;
+import com.bk.tuanpm.webtoeic.util.DateTimeUtil;
 
 @Controller
 @RequestMapping("/admin")
@@ -70,6 +71,12 @@ public class GroupAdminController {
 	public String getListMemberResult(Model model, @PathVariable Integer idGroup) {
 		List<MemberDTO> members = groupService.getListMember(idGroup);
 		model.addAttribute("members", members);
+		int weeknNum = DateTimeUtil.getCurrentWeekNum();
+		String currentRange = DateTimeUtil.getCurrentWeekRange();
+		List<String> listRage = DateTimeUtil.gettWeekListYear(2021);
+		model.addAttribute("week", weeknNum);
+		model.addAttribute("currange", currentRange);
+		model.addAttribute("totalrange", listRage);
 		return "admin/listMemberResult";
 	}
 	

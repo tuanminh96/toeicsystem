@@ -32,7 +32,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
 		Account nguoiDung = repo.findByEmail(username);
-		log.info("Login user: " + new Gson().toJson(nguoiDung));
 
 		if (nguoiDung == null) {
 			throw new UsernameNotFoundException("User with email " + username + " was not be found");

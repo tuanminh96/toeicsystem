@@ -47,15 +47,12 @@
     </div>
   </div>
 </div>
-<audio autoplay id="autioNoti" src="${pageContext.request.contextPath}/resources/file/audio/notification.mp3"></audio>
+<audio id="autioNoti" src="${pageContext.request.contextPath}/resources/file/audio/notification.mp3"></audio>
 <p id="clickaudio"></p>
 <input type="hidden" value="${loggedInUser.id}" id="idUser">
 </body>
 	<script type="text/javascript">
 		$(document).ready( function() {
-			$("#clickaudio").on('click', function() {
-				$('#autioNoti').get(0).play();
-			});
 			if ($("#vip").val() == 'vip') {
 				var idUser = $('#idUser').val();
 				var urlEndPoint = 'http://localhost:8080/webtoeic/api/subcribe?id='+idUser;
@@ -64,19 +61,25 @@
 				function(event) {
 					var noti = JSON.parse(event.data)
 					$("#message-content").text(noti.content);
-					$('.toast').toast({delay: 5000});
+					$('.toast').toast({delay: 7000});
 					$('.toast').toast('show');
 					$('#autioNoti').get(0).play();
 					var totalUnseen = $("#totalUnseen").text();
 					totalUnseen++;
 					$("#totalUnseen").text(totalUnseen);
 				}); 
+				eventSource.addEventListener('add_group',
+						function(event) {
+							var noti = JSON.parse(event.data)
+							$("#message-content").text(noti.content);
+							$('.toast').toast({delay: 7000});
+							$('.toast').toast('show');
+							$('#autioNoti').get(0).play();
+							var totalUnseen = $("#totalUnseen").text();
+							totalUnseen++;
+							$("#totalUnseen").text(totalUnseen);
+						}); 
 			}
-			if($('.toast').css('display') == 'block') {
-				$("#clickaudio").click();
-				console.log("showwn");
-			}
-			
 	});
 	</script>
 </html>

@@ -18,6 +18,7 @@ import com.bk.tuanpm.webtoeic.dto.NotificationDTO;
 import com.bk.tuanpm.webtoeic.entities.Notification;
 import com.bk.tuanpm.webtoeic.service.NotificationService;
 
+
 @Service
 public class NotificationServiceImpl implements NotificationService {
 
@@ -43,13 +44,16 @@ public class NotificationServiceImpl implements NotificationService {
 
 		SseEmitter sentEmitter = emitters.get(idUser);
 
-		JSONObject notiMess = new JSONObject();
+		JSONObject notiMess = new JSONObject(); 
 		String message = messageConfig.getProperty("noti.remark");
-		String result = MessageFormat.format(message, adminAdd, weekNum);
+		String result = MessageFormat.format(message, adminAdd , weekNum);
 		String event = notiMess.put("content", result).toString();
 		if (sentEmitter != null) {
 			try {
-				sentEmitter.send(SseEmitter.event().name(Notification.TYPE_REMARK).data(event));
+				sentEmitter.send(SseEmitter
+						.event()
+						.name(Notification.TYPE_REMARK)
+						.data(event));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -58,19 +62,21 @@ public class NotificationServiceImpl implements NotificationService {
 		}
 
 	}
-
 	@Override
 	public void pushAddGroupNotification(String idUser, String admin, String nameGroup) {
 
 		SseEmitter sentEmitter = emitters.get(idUser);
 
-		JSONObject notiMess = new JSONObject();
+		JSONObject notiMess = new JSONObject(); 
 		String message = messageConfig.getProperty("noti.addgroup");
-		String result = MessageFormat.format(message, admin, nameGroup);
+		String result = MessageFormat.format(message, admin , nameGroup);
 		String event = notiMess.put("content", result).toString();
 		if (sentEmitter != null) {
 			try {
-				sentEmitter.send(SseEmitter.event().name(Notification.TYPE_ADD_GROUP).data(event));
+				sentEmitter.send(SseEmitter
+						.event()
+						.name(Notification.TYPE_ADD_GROUP)
+						.data(event));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

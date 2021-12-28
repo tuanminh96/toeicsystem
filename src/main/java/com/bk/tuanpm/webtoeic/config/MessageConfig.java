@@ -6,7 +6,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 
 @Configuration
-@PropertySource("classpath:message.properties")
+@PropertySource(value="classpath:message.properties", encoding = "UTF-8")
 public class MessageConfig {
     @Autowired
     private Environment env;

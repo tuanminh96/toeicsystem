@@ -43,9 +43,8 @@
 					<td class="center"><a href="" data-toggle="modal"
 						data-target="#viewResult">${member.memName}</a></td>
 					<td class="center">${member.fullName}</td>
-					<td class="center"><button type="button" class="btn btn-info" idMem="${member.memId}"
-							data-toggle="modal" data-target="#viewResultStatics" id="viewResultStatics">Xem
-							thống kê </button> </td>
+					<td class="center"><button type="button" class="viewResultStatics btn btn-info" idmem="${member.memId}"
+							data-toggle="modal" data-target="#viewResultStatics">Xem thống kê </button> </td>
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -99,11 +98,11 @@
 						<div id="chart_div"></div>
 						<br />
 						<div id="btn-group">
-							<button class="button button-blue" id="none">No Format</button>
-							<button class="button button-blue" id="scientific">Scientific
+							<button type="button" class="button button-blue" id="none">No Format</button>
+							<button type="button" class="button button-blue" id="scientific">Scientific
 								Notation</button>
-							<button class="button button-blue" id="decimal">Decimal</button>
-							<button class="button button-blue" id="short">Short</button>
+							<button type="button" class="button button-blue" id="decimal">Decimal</button>
+							<button type="button" class="button button-blue" id="short">Short</button>
 						</div>
 					</div>
 					<div class="form-group">
@@ -116,7 +115,7 @@
 					value="${pageContext.request.contextPath}">
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal" id="close-modal">Close</button>
-					<button type="submit" class="btn btn-danger" id="sendRemark" idMem="${member.memId}">Gửi</button>
+					<button type="submit" class="btn btn-danger" id="sendRemark" idmem="${member.memId}">Gửi</button>
 				</div>
 				</form>
 			</div>
@@ -125,8 +124,9 @@
 	
 	<script type="text/javascript">
 	$(document).ready(function() {
-		$("#viewResultStatics").on('click', function() {
-			var idMem = $(this).attr('idMem');
+		$(".viewResultStatics").on('click', function() {
+			var idMem = $(this).attr('idmem');
+			$("#sendRemark").attr("idmem",idMem);
 	        var appContext = $("#appContext").val();
 			var dateFrom = "2021-12-13";
 			var dateTo = "2021-12-19";
@@ -210,7 +210,7 @@
 				}
 			},
 			submitHandler : function(form) {
-				var idMem = $("#viewResultStatics").attr('idMem');
+				var idMem = $("#sendRemark").attr('idmem');
 				var remark = $("#remark").val();
 		        var appContext = $("#appContext").val();
 		        var dateRange = $("#rangeRs").val();

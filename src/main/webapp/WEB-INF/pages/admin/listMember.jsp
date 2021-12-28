@@ -32,7 +32,7 @@
 						href="${pageContext.request.contextPath}/">${member.memName}</a></td>
 					<td class="center">${member.fullName}</td>
 					<td class="center">${member.dateAdd}</td>
-					<td class="center"><a href="#" id="deleteBut"
+					<td class="center"><a href="#" class="deleteBut"
 						idMem="${member.memId}" class="red deleteBaiThiThu"><button
 								class="delete btn btn-danger">Xóa</button></a></td>
 				</tr>
@@ -137,9 +137,12 @@
 	                },
 	                url: appContext + "/admin/addUserGroup",
 	                success: function (result) {
-	                    $('#addMemModal').modal('hide');
+	                    
 	                    alert("Thêm thành viên thành công");
-	                    $("#listUserOfGroup").html(result);
+	                    $("#appendContent").html(result);
+	                    $('#addMemModal').modal('hide');
+	                    $(".modal-fade").modal("hide");
+					    $(".modal-backdrop").remove();
 	                },
 	                error: function (e) {
 	                    alert("Error: ", e);
@@ -149,7 +152,7 @@
 	        }
 	    });
 
-	    $("#deleteBut").on('click', function (e) {
+	    $(".deleteBut").on('click', function (e) {
 	        e.preventDefault();
 	    	var idUser = $(this).attr('idMem')
 	        var appContext = $("#appContext").val();

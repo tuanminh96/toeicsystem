@@ -55,8 +55,8 @@ public class GroupServiceImpl implements GroupService{
 		Group group = groupRepository.findByIdGroup(idGroup);
 		List<User> members = group.getUsers();
 		List<MemberDTO> listMem = new ArrayList<>();
-		MemberDTO memberDTO = new MemberDTO();
 		for (User user : members) {
+			MemberDTO memberDTO = new MemberDTO();
 			memberDTO.setMemId(user.getId());
 			memberDTO.setMemName(user.getUsername());
 			memberDTO.setFullName(user.getHoTen());

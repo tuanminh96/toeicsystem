@@ -23,7 +23,7 @@ public class NotificationApi {
 	@GetMapping(value = "/api/subcribe",headers = "Accept=*/*", consumes = MediaType.ALL_VALUE, produces = MediaType.ALL_VALUE)
 	@CrossOrigin("*")
 	public SseEmitter subcribeEvent(@RequestParam("id") String idMem) {
-		SseEmitter sseEmitter = new SseEmitter(24 * 60 * 60 * 1000l);
+		SseEmitter sseEmitter = new SseEmitter();
 		notificationService.addEmmiter(sseEmitter, idMem);
 		return sseEmitter;
 	}

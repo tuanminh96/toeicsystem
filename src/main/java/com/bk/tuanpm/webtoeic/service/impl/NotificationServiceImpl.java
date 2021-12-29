@@ -100,4 +100,9 @@ public class NotificationServiceImpl implements NotificationService {
 	public Notification saveNotification(Notification notification) {
 		return notificationRepository.save(notification);
 	}
+
+	@Override
+	public Notification findByIdNoti(int idNoti) {
+		return notificationRepository.findByIdNoti(idNoti);
+	}
 }

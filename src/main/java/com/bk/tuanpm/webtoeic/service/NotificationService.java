@@ -13,7 +13,8 @@ public interface NotificationService {
 	void pushRemarkNotification(String idUser, String adminAdd, String weekNum);
 
 	void pushAddGroupNotification(String idUser, String admin, String nameGroup);
-	SseEmitter addEmmiter(SseEmitter emitter, int idUser);
+	
+	SseEmitter addEmmiter(SseEmitter emitter, String idUser);
 	
 	public List<Notification> getListNotifiByUser(User user);
 

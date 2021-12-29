@@ -50,219 +50,96 @@ body {
 			</div>
 			<div class="col-lg-9 right">
 				<div class="box shadow-sm rounded bg-white mb-3">
-					<div class="box-title border-bottom p-3">
-						<h6 class="m-0">Thông báo chưa xem</h6>
-					</div>
-					<div class="box-body p-0">
-						<div
-							class="p-3 d-flex align-items-center bg-light border-bottom osahan-post-header">
-							<div class="dropdown-list-image mr-3">
-								<img class="rounded-circle"
-									src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Circle-icons-mail.svg/768px-Circle-icons-mail.svg.png"
-									alt="" />
-							</div>
-							<div class="font-weight-bold mr-3">
-								<a href="<%=request.getContextPath()%>/detailnoti/1"><div
-										class="text-truncate">Nhận xét từ người hướng dẫn</div>
-									<div class="small">Income tax sops on the cards, The bias
-										in VC funding, and other top news for you</div></a>
-							</div>
-							<span class="ml-auto mb-auto">
-								<div class="btn-group">
-									<button type="button" class="btn btn-light btn-sm rounded"
-										data-toggle="dropdown" aria-haspopup="true"
-										aria-expanded="false">
-										<i class="mdi mdi-dots-vertical"></i>
-									</button>
-									<div class="dropdown-menu dropdown-menu-right">
-										<button class="dropdown-item" type="button">
-											<i class="mdi mdi-delete"></i> Delete
-										</button>
-										<button class="dropdown-item" type="button">
-											<i class="mdi mdi-close"></i> Turn Off
-										</button>
+					
+					<c:forEach items="${listData}" var="list" varStatus="loop">
+						<c:if test="${empty list.dateSeen}">
+							<div class="box-body p-0">
+								<div
+									class="p-3 d-flex align-items-center bg-light border-bottom osahan-post-header">
+									<div class="dropdown-list-image mr-3">
+										<img class="rounded-circle"
+											src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Circle-icons-mail.svg/768px-Circle-icons-mail.svg.png"
+											alt="" />
 									</div>
-								</div> <br />
-								<div class="text-right text-muted pt-1">12/17/2021</div>
-							</span>
-						</div>
-						<div
-							class="p-3 d-flex align-items-center bg-light border-bottom osahan-post-header">
-							<div class="dropdown-list-image mr-3">
-								<img class="rounded-circle"
-									src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Circle-icons-mail.svg/768px-Circle-icons-mail.svg.png"
-									alt="" />
-							</div>
-							<div class="font-weight-bold mr-3">
-								<a href="<%=request.getContextPath()%>/detailnoti/1"><div
-										class="text-truncate">Thông báo nhóm</div>
-									<div class="small">Bạn vừa được hướng dẫn học thêm vào
-										nhóm: , mời bạn nhấn vào để kiểm tra</div></a>
-							</div>
-							<span class="ml-auto mb-auto">
-								<div class="btn-group">
-									<button type="button" class="btn btn-light btn-sm rounded"
-										data-toggle="dropdown" aria-haspopup="true"
-										aria-expanded="false">
-										<i class="mdi mdi-dots-vertical"></i>
-									</button>
-									<div class="dropdown-menu dropdown-menu-right">
-										<button class="dropdown-item" type="button">
-											<i class="mdi mdi-delete"></i> Delete
-										</button>
-										<button class="dropdown-item" type="button">
-											<i class="mdi mdi-close"></i> Turn Off
-										</button>
+									<div class="font-weight-bold mr-3">
+										<a href="<%=request.getContextPath()%>/detailnoti/${list.idNoti}">
+											<c:if test="${list.type == '1'}">
+												<div class="text-truncate">Thông báo từ nhóm</div>
+											</c:if>
+											<c:if test="${list.type == '2'}">
+												<div class="text-truncate">Thông báo từ quản lý</div>
+											</c:if>
+											<div class="small">${list.content}</div></a>
 									</div>
-								</div> <br />
-								<div class="text-right text-muted pt-1">12/17/2021</div>
-							</span>
-						</div>
-					</div>
-				</div>
-				<div class="box shadow-sm rounded bg-white mb-3">
-					<div class="box-title border-bottom p-3">
-						<h6 class="m-0">Thông báo đã xem</h6>
-					</div>
-					<div class="box-body p-0">
-						<div
-							class="p-3 d-flex align-items-center border-bottom osahan-post-header">
-							<div class="dropdown-list-image mr-3">
-								<img class="rounded-circle"
-									src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Circle-icons-mail.svg/768px-Circle-icons-mail.svg.png"
-									alt="" />
-							</div>
-							<div class="font-weight-bold mr-3">
-								<div class="text-truncate">Thông báo bài đăng</div>
-								<div class="small">Tuanpm đã bình luận về bài đăng của bạn</div>
-								<div class="small text-success">
-									<i class="fa fa-check-circle"></i> seen
+									<span class="ml-auto mb-auto">
+										<div class="btn-group">
+											<button type="button" class="btn btn-light btn-sm rounded"
+												data-toggle="dropdown" aria-haspopup="true"
+												aria-expanded="false">
+												<i class="mdi mdi-dots-vertical"></i>
+											</button>
+											<div class="dropdown-menu dropdown-menu-right">
+												<button class="dropdown-item" type="button">
+													<i class="mdi mdi-delete"></i> Delete
+												</button>
+												<button class="dropdown-item" type="button">
+													<i class="mdi mdi-close"></i> Turn Off
+												</button>
+											</div>
+										</div> <br />
+										<div class="text-right text-muted pt-1">${list.dateSend}</div>
+									</span>
 								</div>
 							</div>
-							<span class="ml-auto mb-auto">
-								<div class="btn-group">
-									<button type="button" class="btn btn-light btn-sm rounded"
-										data-toggle="dropdown" aria-haspopup="true"
-										aria-expanded="false">
-										<i class="mdi mdi-dots-vertical"></i>
-									</button>
-									<div class="dropdown-menu dropdown-menu-right">
-										<button class="dropdown-item" type="button">
-											<i class="mdi mdi-delete"></i> Delete
-										</button>
-										<button class="dropdown-item" type="button">
-											<i class="mdi mdi-close"></i> Turn Off
-										</button>
+						</c:if>
+						
+						<c:if test="${not empty list.dateSeen}">
+							<div class="box-body p-0">
+								<div
+									class="p-3 d-flex align-items-center border-bottom osahan-post-header">
+									<div class="dropdown-list-image mr-3">
+										<img class="rounded-circle"
+											src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Circle-icons-mail.svg/768px-Circle-icons-mail.svg.png"
+											alt="" />
 									</div>
-								</div> <br />
-								<div class="text-right text-muted pt-1">3d</div>
-							</span>
-						</div>
-						<div
-							class="p-3 d-flex align-items-center border-bottom osahan-post-header">
-							<div class="dropdown-list-image mr-3">
-								<img class="rounded-circle"
-									src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Circle-icons-mail.svg/768px-Circle-icons-mail.svg.png"
-									alt="" />
-							</div>
-							<div class="font-weight-bold mr-3">
-								<div class="text-truncate">Thông báo nhóm</div>
-								<div class="small">Hướng dẫn học tuanpm96 đã đăng trong nhóm: Tổng hợp một số mẹo hay thi TOEIC</div>
-								<div class="small text-success">
-									<i class="fa fa-check-circle"></i> seen
-								</div>
-							</div>
-							<span class="ml-auto mb-auto">
-								<div class="btn-group">
-									<button type="button" class="btn btn-light btn-sm rounded"
-										data-toggle="dropdown" aria-haspopup="true"
-										aria-expanded="false">
-										<i class="mdi mdi-dots-vertical"></i>
-									</button>
-									<div class="dropdown-menu dropdown-menu-right">
-										<button class="dropdown-item" type="button">
-											<i class="mdi mdi-delete"></i> Delete
-										</button>
-										<button class="dropdown-item" type="button">
-											<i class="mdi mdi-close"></i> Turn Off
-										</button>
+									<div class="font-weight-bold mr-3">
+										<c:if test="${list.type == '1'}">
+											<div class="text-truncate">Thông báo từ nhóm</div>
+										</c:if>
+										<c:if test="${list.type == '2'}">
+											<div class="text-truncate">Thông báo từ quản lý</div>
+										</c:if>
+										<div class="small">${list.content}</div>
+										<div class="small text-success">
+											<i class="fa fa-check-circle"></i> seen
+										</div>
 									</div>
-								</div> <br />
-								<div class="text-right text-muted pt-1">3d</div>
-							</span>
-						</div>
-						<div
-							class="p-3 d-flex align-items-center border-bottom osahan-post-header">
-							<div class="dropdown-list-image mr-3">
-								<img class="rounded-circle"
-									src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Circle-icons-mail.svg/768px-Circle-icons-mail.svg.png"
-									alt="" />
+									<span class="ml-auto mb-auto">
+										<div class="btn-group">
+											<button type="button" class="btn btn-light btn-sm rounded"
+												data-toggle="dropdown" aria-haspopup="true"
+												aria-expanded="false">
+												<i class="mdi mdi-dots-vertical"></i>
+											</button>
+											<div class="dropdown-menu dropdown-menu-right">
+												<button class="dropdown-item" type="button">
+													<i class="mdi mdi-delete"></i> Delete
+												</button>
+												<button class="dropdown-item" type="button">
+													<i class="mdi mdi-close"></i> Turn Off
+												</button>
+											</div>
+										</div> <br />
+										<div type="date" class="text-right text-muted pt-1">${list.dateSend}</div>
+									</span>
+								</div>						
 							</div>
-							<div class="font-weight-bold mr-3">
-								<div class="text-truncate">Thông báo bài giao</div>
-								<div class="small">Hướng dẫn học tuanpm96 đã giao bài cho nhóm của bạn</div>
-								<div class="small text-success">
-									<i class="fa fa-check-circle"></i> seen
-								</div>
-							</div>
-							<span class="ml-auto mb-auto">
-								<div class="btn-group">
-									<button type="button" class="btn btn-light btn-sm rounded"
-										data-toggle="dropdown" aria-haspopup="true"
-										aria-expanded="false">
-										<i class="mdi mdi-dots-vertical"></i>
-									</button>
-									<div class="dropdown-menu dropdown-menu-right">
-										<button class="dropdown-item" type="button">
-											<i class="mdi mdi-delete"></i> Delete
-										</button>
-										<button class="dropdown-item" type="button">
-											<i class="mdi mdi-close"></i> Turn Off
-										</button>
-									</div>
-								</div> <br />
-								<div class="text-right text-muted pt-1">3d</div>
-							</span>
-						</div>
-						<div
-							class="p-3 d-flex align-items-center border-bottom osahan-post-header">
-							<div class="dropdown-list-image mr-3">
-								<img class="rounded-circle"
-									src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Circle-icons-mail.svg/768px-Circle-icons-mail.svg.png"
-									alt="" />
-							</div>
-							<div class="font-weight-bold mr-3">
-								<div class="text-truncate">Thông báo nâng cấp VIP thành công</div>
-								<div class="small">Bạn đã nâng cấp tài khoản thành công lên VIP, mã giao dịch: ...</div>
-								<div class="small text-success">
-									<i class="fa fa-check-circle"></i> seen
-								</div>
-							</div>
-							<span class="ml-auto mb-auto">
-								<div class="btn-group">
-									<button type="button" class="btn btn-light btn-sm rounded"
-										data-toggle="dropdown" aria-haspopup="true"
-										aria-expanded="false">
-										<i class="mdi mdi-dots-vertical"></i>
-									</button>
-									<div class="dropdown-menu dropdown-menu-right">
-										<button class="dropdown-item" type="button">
-											<i class="mdi mdi-delete"></i> Delete
-										</button>
-										<button class="dropdown-item" type="button">
-											<i class="mdi mdi-close"></i> Turn Off
-										</button>
-									</div>
-								</div> <br />
-								<div class="text-right text-muted pt-1">3d</div>
-							</span>
-						</div>
-					</div>
+						</c:if>
+					</c:forEach>
 				</div>
 			</div>
 		</div>
 	</div>
-
 	</div>
 	</form>
 	</div>

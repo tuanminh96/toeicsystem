@@ -32,6 +32,7 @@ public class Notification {
 	@ManyToOne 
 	private Account user;
 	private String hyperLink;
+	private Integer type;
 	public Integer getIdNoti() {
 		return idNoti;
 	}
@@ -73,6 +74,12 @@ public class Notification {
 	}
 	public void setHyperLink(String hyperLink) {
 		this.hyperLink = hyperLink;
+	}
+	public Integer getType() {
+		return type;
+	}
+	public void setType(Integer type) {
+		this.type = type;
 	}
 	@Override
 	public int hashCode() {

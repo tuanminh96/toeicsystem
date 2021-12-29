@@ -16,14 +16,19 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import com.bk.tuanpm.webtoeic.config.MessageConfig;
 import com.bk.tuanpm.webtoeic.dto.NotificationDTO;
 import com.bk.tuanpm.webtoeic.entities.Notification;
+import com.bk.tuanpm.webtoeic.entities.User;
+import com.bk.tuanpm.webtoeic.repository.NotificationRepository;
 import com.bk.tuanpm.webtoeic.service.NotificationService;
 
 
-@Service
+@Service("notificationService")
 public class NotificationServiceImpl implements NotificationService {
 
 	@Autowired
 	MessageConfig messageConfig;
+	
+	@Autowired
+	NotificationRepository notificationRepository;
 
 	public Map<String, SseEmitter> emitters = new HashMap<String, SseEmitter>();
 
@@ -84,5 +89,10 @@ public class NotificationServiceImpl implements NotificationService {
 			}
 		}
 
+	}
+
+	@Override
+	public List<Notification> getListNotifiByUser(User user) {
+		return notificationRepository.findAllByUser(user);
 	}
 }

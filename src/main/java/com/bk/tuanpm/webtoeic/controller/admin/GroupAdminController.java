@@ -1,5 +1,8 @@
 package com.bk.tuanpm.webtoeic.controller.admin;
 
+import java.text.MessageFormat;
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +19,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.bk.tuanpm.webtoeic.config.MessageConfig;
 import com.bk.tuanpm.webtoeic.dto.MemberDTO;
 import com.bk.tuanpm.webtoeic.entities.Account;
 import com.bk.tuanpm.webtoeic.entities.TutorialAdmin;
 import com.bk.tuanpm.webtoeic.entities.Group;
+import com.bk.tuanpm.webtoeic.entities.Notification;
 import com.bk.tuanpm.webtoeic.entities.User;
 import com.bk.tuanpm.webtoeic.repository.TutorialAdminRepository;
 import com.bk.tuanpm.webtoeic.service.GroupService;
@@ -43,6 +48,9 @@ public class GroupAdminController {
 
 	@Autowired
 	NotificationService notificationService;
+
+	@Autowired
+	MessageConfig messageConfig;
 
 	@PostMapping(value = "/addGroup", produces = MediaType.APPLICATION_JSON_VALUE)
 	public String addGroup(Model model, @RequestBody Group group) {
@@ -81,12 +89,14 @@ public class GroupAdminController {
 		model.addAttribute("week", weeknNum);
 		model.addAttribute("currange", currentRange);
 		model.addAttribute("totalrange", listRage);
+		model.addAttribute("firstday", DateTimeUtil.gettWeekFirstDay());
+		model.addAttribute("lastday", DateTimeUtil.gettWeekLastDay());
 		return "admin/listMemberResult";
 	}
 
 	@PostMapping("/addUserGroup")
 	public String addUsersToGroup(Model model, @RequestParam("listUser[]") List<Integer> listIdUsers,
-			@RequestParam("idGroup") int idGroup) {
+			@RequestParam("idGroup") int idGroup) throws ParseException {
 		List<User> users = userAdminServiceImpl.getListUsers(listIdUsers);
 
 		Group groupToAdd = groupService.getGroupById(idGroup);
@@ -101,7 +111,22 @@ public class GroupAdminController {
 		for (User user : users) {
 			notificationService.pushAddGroupNotification("" + user.getId(), currentUser.getUsername(),
 					groupToAdd.getName());
+			// after notify user send notification for every user
+			Notification notification = new Notification();
+			String message = messageConfig.getProperty("noti.addgroup");
+			String result = MessageFormat.format(message, currentUser.getUsername(), groupToAdd.getName());
+			notification.setBrief(result);
+			notification.setType(Notification.TYPE_ADD_GROUP);
+			notification.setDateSend(DateTimeUtil.convertDateToDate(new Date()));
+			notification.setUser(user);
+
+			// get url of group
+			String url = messageConfig.getProperty("noti.group.url");
+			String urlFormat = MessageFormat.format(url, groupToAdd.getIdGroup());
+			notification.setHyperLink(urlFormat);
+			notificationService.saveNotification(notification);
 		}
+
 		List<MemberDTO> members = groupService.getListMember(idGroup);
 		model.addAttribute("members", members);
 		return "admin/listMember";

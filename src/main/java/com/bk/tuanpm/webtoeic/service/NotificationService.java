@@ -18,4 +18,6 @@ public interface NotificationService {
 	
 	public List<Notification> getListNotifiByUser(User user);
 
+	Notification saveNotification(Notification notification);
+
 }

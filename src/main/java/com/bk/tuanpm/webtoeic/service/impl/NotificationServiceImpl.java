@@ -95,4 +95,9 @@ public class NotificationServiceImpl implements NotificationService {
 	public List<Notification> getListNotifiByUser(User user) {
 		return notificationRepository.findAllByUser(user);
 	}
+	
+	@Override
+	public Notification saveNotification(Notification notification) {
+		return notificationRepository.save(notification);
+	}
 }

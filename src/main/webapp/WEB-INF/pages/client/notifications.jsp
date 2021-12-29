@@ -50,7 +50,9 @@ body {
 			</div>
 			<div class="col-lg-9 right">
 				<div class="box shadow-sm rounded bg-white mb-3">
-					
+					<div class="box-title border-bottom p-3">
+						<h6 class="m-0">Danh sách thông báo</h6>
+					</div>
 					<c:forEach items="${listData}" var="list" varStatus="loop">
 						<c:if test="${empty list.dateSeen}">
 							<div class="box-body p-0">
@@ -63,17 +65,18 @@ body {
 									</div>
 									<div class="font-weight-bold mr-3">
 										<a href="<%=request.getContextPath()%>/detailnoti/${list.idNoti}">
-											<c:if test="${list.type == '1'}">
+											<c:if test="${list.type == 'post' || list.type == 'comment'}">
 												<div class="text-truncate">Thông báo từ nhóm</div>
 											</c:if>
-											<c:if test="${list.type == '2'}">
+											<c:if test="${list.type == 'remark' || list.type == 'add_group'}">
 												<div class="text-truncate">Thông báo từ quản lý</div>
 											</c:if>
-											<div class="small">${list.content}</div></a>
+											<div class="small">${list.brief}</div></a>
 									</div>
-									<span class="ml-auto mb-auto">
+									<span class="ml-auto mb-auto" style="display: flex;">
 										<div class="btn-group">
-											<button type="button" class="btn btn-light btn-sm rounded"
+										<div class="text-right text-muted pt-1">${list.dateSend}</div>
+										<button type="button" class="btn btn-light btn-sm rounded"
 												data-toggle="dropdown" aria-haspopup="true"
 												aria-expanded="false">
 												<i class="mdi mdi-dots-vertical"></i>
@@ -82,12 +85,8 @@ body {
 												<button class="dropdown-item" type="button">
 													<i class="mdi mdi-delete"></i> Delete
 												</button>
-												<button class="dropdown-item" type="button">
-													<i class="mdi mdi-close"></i> Turn Off
-												</button>
 											</div>
-										</div> <br />
-										<div class="text-right text-muted pt-1">${list.dateSend}</div>
+										</div>
 									</span>
 								</div>
 							</div>
@@ -103,18 +102,19 @@ body {
 											alt="" />
 									</div>
 									<div class="font-weight-bold mr-3">
-										<c:if test="${list.type == '1'}">
+										<c:if test="${list.type == 'post' || list.type == 'comment'}">
 											<div class="text-truncate">Thông báo từ nhóm</div>
 										</c:if>
-										<c:if test="${list.type == '2'}">
+										<c:if test="${list.type == 'remark' || list.type == 'add_group'}">
 											<div class="text-truncate">Thông báo từ quản lý</div>
 										</c:if>
-										<div class="small">${list.content}</div>
+										<div class="small">${list.brief}</div>
 										<div class="small text-success">
 											<i class="fa fa-check-circle"></i> seen
 										</div>
 									</div>
-									<span class="ml-auto mb-auto">
+									<span class="ml-auto mb-auto" style="display: flex;">
+										<div type="date" class="text-right text-muted pt-1">${list.dateSend}</div>
 										<div class="btn-group">
 											<button type="button" class="btn btn-light btn-sm rounded"
 												data-toggle="dropdown" aria-haspopup="true"
@@ -123,14 +123,10 @@ body {
 											</button>
 											<div class="dropdown-menu dropdown-menu-right">
 												<button class="dropdown-item" type="button">
-													<i class="mdi mdi-delete"></i> Delete
-												</button>
-												<button class="dropdown-item" type="button">
 													<i class="mdi mdi-close"></i> Turn Off
 												</button>
 											</div>
-										</div> <br />
-										<div type="date" class="text-right text-muted pt-1">${list.dateSend}</div>
+										</div>
 									</span>
 								</div>						
 							</div>

@@ -39,9 +39,14 @@ public class DateTimeUtil {
 		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyyMMddHHmmss");
 		return sdf2.parse(date);
 	}
-	
+
+	public static Date convertDateToDate(Date date) throws ParseException {
+		SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
+		return sdf2.parse(convertDate2String(date));
+	}
+
 	public static String convertDate2String(Date date) throws ParseException {
-		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy/MM/dd");
+		SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
 		return sdf2.format(date);
 	}
 
@@ -85,7 +90,7 @@ public class DateTimeUtil {
 			calendar.add(Calendar.DATE, 7);
 			Date end = calendar.getTime();
 			try {
-				range = "Tuần " + i + ": " + convertDate2String(date) + " - " + convertDate2String(end);
+				range = "Tuần " + i + ": " + convertDate2String(date) + " đến " + convertDate2String(end);
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -94,5 +99,24 @@ public class DateTimeUtil {
 		}
 		return rangeList;
 
+	}
+
+	public static String gettWeekFirstDay() {
+		LocalDate today = LocalDate.now();
+		LocalDate monday = today;
+		while (monday.getDayOfWeek() != DayOfWeek.MONDAY) {
+			monday = monday.minusDays(1);
+		}
+		return ""+monday;
+	}
+
+	public static String gettWeekLastDay() {
+		LocalDate today = LocalDate.now();
+		// Go forward to get Sunday
+		LocalDate sunday = today;
+		while (sunday.getDayOfWeek() != DayOfWeek.SUNDAY) {
+			sunday = sunday.plusDays(1);
+		}
+		return ""+sunday;
 	}
 }

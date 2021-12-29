@@ -94,6 +94,8 @@
 					</div>
 					<input type="hidden" id="rangeRs" value="${currange}">
 					<input type="hidden" id="weekNum" value="${week}">
+					<input type="hidden" id="firstday" value="${firstday}">
+					<input type="hidden" id="lastday" value="${lastday}">
 					<div class="form-group">
 						<div id="chart_div"></div>
 						<br />
@@ -128,8 +130,8 @@
 			var idMem = $(this).attr('idmem');
 			$("#sendRemark").attr("idmem",idMem);
 	        var appContext = $("#appContext").val();
-			var dateFrom = "2021-12-13";
-			var dateTo = "2021-12-19";
+			var dateFrom = $("#firstday").val();
+			var dateTo = $("#lastday").val();
 			$.ajax({
 	                type: "POST",
 	                data: {

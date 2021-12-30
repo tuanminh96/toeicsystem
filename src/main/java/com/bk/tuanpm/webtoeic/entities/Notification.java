@@ -27,6 +27,7 @@ public class Notification {
 	private String brief;
 	private String content;
 	private Date dateSend;
+	@Column(name = "date_seen", nullable = false)
 	private Date dateSeen;
 	
 	@ManyToOne 

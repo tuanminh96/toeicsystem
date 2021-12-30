@@ -105,4 +105,9 @@ public class NotificationServiceImpl implements NotificationService {
 	public Notification findByIdNoti(int idNoti) {
 		return notificationRepository.findByIdNoti(idNoti);
 	}
+
+	@Override
+	public int countNotificationByUserAndDateSeenIsNull(User user) {
+		return notificationRepository.countNotificationByUserAndDateSeenIsNull(user);
+	}
 }

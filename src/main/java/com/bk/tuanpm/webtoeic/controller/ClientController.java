@@ -10,6 +10,8 @@ import javax.servlet.http.HttpSession;
 
 import com.bk.tuanpm.webtoeic.dto.ExamHistoryDTO;
 import com.bk.tuanpm.webtoeic.service.ClientAccountService;
+import com.bk.tuanpm.webtoeic.service.NotificationService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -27,6 +29,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.bk.tuanpm.webtoeic.entities.Account;
+import com.bk.tuanpm.webtoeic.entities.User;
 import com.bk.tuanpm.webtoeic.service.SlideBannerService;
 import com.bk.tuanpm.webtoeic.service.impl.UserAdminServiceImpl;
 
@@ -41,6 +44,9 @@ public class ClientController {
 
 	@Autowired
 	private ClientAccountService clientAccountService;
+	
+	@Autowired
+	private NotificationService notificationService;
 
 	@ModelAttribute("loggedInUser")
 	public Account loggedInUser() {
@@ -66,6 +72,20 @@ public class ClientController {
 	@GetMapping(value = { "/home", "/" })
 	public String home(Model model, @AuthenticationPrincipal OAuth2User oauth2User, HttpServletRequest request) {
 		model.addAttribute("listslidebanner", slideBannerService.findAll());
+		Account account = getSessionUser(request);
+		if (account != null) {
+			try {
+				Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		        User currentUser = nguoiDungService.findUserByEmail(auth.getName());
+				HttpSession session = request.getSession();
+				int count_notifi = notificationService.countNotificationByUserAndDateSeenIsNull(currentUser);
+				session.setAttribute("count_notifi", count_notifi);
+				System.out.println(count_notifi);
+			} catch(Exception e) {
+	            e.printStackTrace();
+	            return "client/error";
+	        }
+		}
 		return "client/home";
 	}
 

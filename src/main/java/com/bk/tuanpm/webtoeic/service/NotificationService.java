@@ -21,5 +21,7 @@ public interface NotificationService {
 	Notification saveNotification(Notification notification);
 	
 	Notification findByIdNoti(int idNoti);
+	
+	int countNotificationByUserAndDateSeenIsNull(User user);
 
 }

@@ -15,4 +15,6 @@ public interface NotificationRepository extends JpaRepository<Notification, Inte
 	public Notification findByIdNoti(int idNoti);
 	
 	public Notification save(Notification notification);
+	
+	public int countNotificationByUserAndDateSeenIsNull(User user);
 }

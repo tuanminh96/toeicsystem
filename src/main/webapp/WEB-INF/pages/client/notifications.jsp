@@ -13,6 +13,7 @@
 	crossorigin="anonymous" />
 </head>
 <body>
+<style>
 body {
 	margin-top: 20px;
 	background-color: #f0f2f5;

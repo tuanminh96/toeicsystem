@@ -94,7 +94,7 @@ h3 {
 <body>
 	<!--HEADER ROW-->
 	<div id="header-row">
-		<div class="container">
+		<div style="margin: auto;margin-left: 200px;">
 			<div class="row">
 				<!--LOGO-->
 				<div class="col-md-4">

@@ -167,6 +167,7 @@ public class PostController {
 					notification.setType(Notification.TYPE_POST);
 					notification.setHyperLink("");
 					notification.setUser(user);
+					if(user.getId()!=currentUser.getId())
 					notificationService.saveNotification(notification);
 				}
 		

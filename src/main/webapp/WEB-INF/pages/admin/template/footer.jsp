@@ -13,7 +13,7 @@
   </div>
 </div>
 <audio id="autioNoti" src="${pageContext.request.contextPath}/resources/file/audio/notification.mp3"></audio>
-<input type="hidden" value="${loggedInUser.id}" id="idUser">
+<input type="hidden" value="${loggedInUser.id}" id="idUser"> 
 <script type="text/javascript">
 		$(document).ready( function() {
 			if (eventSource == null) {

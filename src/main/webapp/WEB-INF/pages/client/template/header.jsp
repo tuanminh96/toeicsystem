@@ -161,14 +161,15 @@ h3 {
 										href="<%=request.getContextPath()%>/signout">Thoát</a>
 								</div></li>
 							<c:if test="${pageContext.request.isUserInRole('MEMBER_VIP')}">
+								<c:set var="count_notifi" scope="session" value="${count_notifi}"/>
 								<div class="nav-item" style="padding: 0 10px">
 									<a class="nav-link" href="#" rel="noopener" aria-label="GitHub"
 										id="bell"> <i class="fa fa-lg fa-bell"></i> <span
-										class="notification-badge badge badge-danger" id="totalUnseen">1</span>
+										class="notification-badge badge badge-danger" id="totalUnseen">${count_notifi}</span>
 									</a>
 									<div class="notifications" id="box">
 										<h2>
-											Thông báo - <span>1</span>
+											Thông báo - <span>${count_notifi}</span>
 										</h2>
 										<div class="notifications-item">
 											<div class="text">

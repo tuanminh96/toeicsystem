@@ -19,6 +19,10 @@ public interface NotificationService {
 	public List<Notification> getListNotifiByUser(User user);
 
 	Notification saveNotification(Notification notification);
+	
+	Notification findByIdNoti(int idNoti);
+	
+	int countNotificationByUserAndDateSeenIsNull(User user);
 
 	void pushAddPostNotification(String idUser, String admin);
 

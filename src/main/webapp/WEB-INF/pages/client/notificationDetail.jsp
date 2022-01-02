@@ -40,17 +40,22 @@ body {
 	<div class="container mainListExam">
 		<section class="member-details">
 		<div class="container">
-			<div class="row">
+			<div class="row">				
 				<div class="col-lg-3 col-md-4">
 				</div>
 				<div class="col-lg-9 col-md-8">
 					<div class="member_designation">
-						<h3>Thông báo nhận xét từ người hướng dẫn: </h3>
-						<span>12/15/2021</span>
+						<c:set var="notification" scope="session" value="${notification}"/>							
+							<c:if test="${notification.type == 'post' || notification.type == 'comment'}">
+								<h3>Thông báo từ nhóm</h3>
+							</c:if>
+							<c:if test="${notification.type == 'remark' || notification.type == 'add_group'}">
+								<h3>Thông báo từ quản lý</h3>
+							</c:if>
+							<span>${notification.dateSend}</span>
 					</div>
 					<div class="member_desc">
-						<p>
-						</p>
+						<p>${notification.content}</p>
 					</div>
 				</div>
 			</div>

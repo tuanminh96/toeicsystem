@@ -1,5 +1,11 @@
 package com.bk.tuanpm.webtoeic.controller.client;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +38,7 @@ public class NotificationController {
 	
 	@Autowired
     private NotificationService notificationServiceImpl;
-
+	
 	@GetMapping("/listnoti/{idMember}")
 	public String getNotficationForUser(Model model, @PathVariable Integer idMember) {
 		try {
@@ -50,6 +56,15 @@ public class NotificationController {
 	
 	@GetMapping("/detailnoti/{idNoti}")
 	public String getDetailNotfication(Model model, @PathVariable Integer idNoti) {
+		try {
+			Notification notification = notificationServiceImpl.findByIdNoti(idNoti);
+			notification.setDateSeen(new Date());
+			notification = notificationServiceImpl.saveNotification(notification);
+			model.addAttribute("notification", notification);
+		} catch(Exception e) {
+            e.printStackTrace();
+            return "client/error";
+        }
 		return "client/notificationDetail";
 	}
 

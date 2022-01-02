@@ -11,4 +11,10 @@ import com.bk.tuanpm.webtoeic.entities.User;
 @Repository
 public interface NotificationRepository extends JpaRepository<Notification, Integer> {
 	public List<Notification> findAllByUser(User user);
+	
+	public Notification findByIdNoti(int idNoti);
+	
+	public Notification save(Notification notification);
+	
+	public int countNotificationByUserAndDateSeenIsNull(User user);
 }

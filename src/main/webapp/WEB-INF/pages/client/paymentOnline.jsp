@@ -123,6 +123,7 @@ input[type="radio"] {
 				src="https://polarisvietnam.com/primary_polaris/resources/images/logo/logo_partner_vnpay.png">
 		</div>
 	</div>
+	<jsp:include page="template/footer.jsp"></jsp:include>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#process-payment").on("click", function() {

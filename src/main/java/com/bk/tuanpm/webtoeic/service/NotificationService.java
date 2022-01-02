@@ -20,4 +20,7 @@ public interface NotificationService {
 
 	Notification saveNotification(Notification notification);
 
+	void pushAddPostNotification(String idUser, String admin);
+
+
 }

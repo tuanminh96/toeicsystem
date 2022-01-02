@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import com.bk.tuanpm.webtoeic.service.NotificationService;
+import com.bk.tuanpm.webtoeic.service.PostService;
 
 
 @RestController
@@ -20,6 +21,9 @@ public class NotificationApi {
 	@Autowired
 	NotificationService notificationService;
 	
+	@Autowired
+	PostService postService;
+	
 	@GetMapping(value = "/api/subcribe",headers = "Accept=*/*", consumes = MediaType.ALL_VALUE, produces = MediaType.ALL_VALUE)
 	@CrossOrigin("*")
 	public SseEmitter subcribeEvent(@RequestParam("id") String idMem) {
@@ -27,4 +31,5 @@ public class NotificationApi {
 		notificationService.addEmmiter(sseEmitter, idMem);
 		return sseEmitter;
 	}
+	
 }

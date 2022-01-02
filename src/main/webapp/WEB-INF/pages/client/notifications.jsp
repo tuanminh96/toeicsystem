@@ -13,7 +13,6 @@
 	crossorigin="anonymous" />
 </head>
 <body>
-	<style>
 body {
 	margin-top: 20px;
 	background-color: #f0f2f5;
@@ -136,11 +135,7 @@ body {
 			</div>
 		</div>
 	</div>
-	</div>
-	</form>
-	</div>
-	</div>
-	</div>
+	<jsp:include page="template/footer.jsp"></jsp:include>
 	<script src="<c:url value='/js/client/profileClient.js'/>"></script>
 </body>
 </html>

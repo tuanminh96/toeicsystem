@@ -2,6 +2,7 @@ package com.bk.tuanpm.webtoeic.controller.admin;
 
 import java.text.MessageFormat;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,14 +22,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bk.tuanpm.webtoeic.config.MessageConfig;
 import com.bk.tuanpm.webtoeic.dto.MemberDTO;
+import com.bk.tuanpm.webtoeic.dto.PostDTO;
 import com.bk.tuanpm.webtoeic.entities.Account;
 import com.bk.tuanpm.webtoeic.entities.TutorialAdmin;
 import com.bk.tuanpm.webtoeic.entities.Group;
 import com.bk.tuanpm.webtoeic.entities.Notification;
+import com.bk.tuanpm.webtoeic.entities.Post;
+import com.bk.tuanpm.webtoeic.entities.Role;
 import com.bk.tuanpm.webtoeic.entities.User;
 import com.bk.tuanpm.webtoeic.repository.TutorialAdminRepository;
 import com.bk.tuanpm.webtoeic.service.GroupService;
 import com.bk.tuanpm.webtoeic.service.NotificationService;
+import com.bk.tuanpm.webtoeic.service.PostService;
 import com.bk.tuanpm.webtoeic.service.impl.UserAdminServiceImpl;
 import com.bk.tuanpm.webtoeic.util.DateTimeUtil;
 
@@ -51,6 +56,9 @@ public class GroupAdminController {
 
 	@Autowired
 	MessageConfig messageConfig;
+	
+	@Autowired
+	PostService postService;
 
 	@PostMapping(value = "/addGroup", produces = MediaType.APPLICATION_JSON_VALUE)
 	public String addGroup(Model model, @RequestBody Group group) {
@@ -66,9 +74,21 @@ public class GroupAdminController {
 	}
 
 	@GetMapping("/group_detail/{idGroup}")
-	public String getGroup(Model model, @PathVariable Integer idGroup) {
+	public String getGroup(Model model, @PathVariable Integer idGroup) throws ParseException {
 		Group group = groupService.getGroupById(idGroup);
 		model.addAttribute("group", group);
+		List<Post> posts = postService.getAllPostOfGroup(group);
+		List<PostDTO> postDTOs = new ArrayList<PostDTO>();
+		for (Post post : posts) {
+			PostDTO dto = new PostDTO();
+			dto.setPost(post);
+			if(Role.ROLE_TUTORIAL == post.getUser().getRole().getCode()) {
+				dto.setAdminPost(true);
+			}
+			dto.setTimePost(DateTimeUtil.difDate(post.getDatePost(), new Date()));
+			postDTOs.add(dto);
+		}
+		model.addAttribute("listpost", postDTOs);
 		return "admin/groupDetailAdmin";
 	}
 
@@ -102,6 +122,7 @@ public class GroupAdminController {
 		Group groupToAdd = groupService.getGroupById(idGroup);
 		for (User user : users) {
 			groupToAdd.getUsers().add(user);
+			groupToAdd.setTotalMem(groupToAdd.getTotalMem() + 1);
 		}
 		groupService.saveGroup(groupToAdd);
 

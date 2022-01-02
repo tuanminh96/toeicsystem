@@ -1,6 +1,7 @@
 package com.bk.tuanpm.webtoeic.entities;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -21,6 +23,8 @@ public class Post {
 	private Date datePost;
 	
 	private String title;
+	
+	@Column(columnDefinition = "NVARCHAR(MAX)")
 	private String content;
 	
 	@ManyToOne
@@ -28,6 +32,9 @@ public class Post {
 	
 	@ManyToOne
 	private Group group;
+	
+	@OneToMany(mappedBy="post")
+	private List<Comment> comments;
 	
 	private Date updateDate;
 	private String updateBy;
@@ -79,6 +86,13 @@ public class Post {
 	}
 	public void setGroup(Group group) {
 		this.group = group;
+	}
+	
+	public List<Comment> getComments() {
+		return comments;
+	}
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 	@Override
 	public int hashCode() {

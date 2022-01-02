@@ -1,4 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,48 +8,21 @@
 <title>Insert title here</title>
 <link rel="stylesheet"
 	href="//cdn.materialdesignicons.com/3.7.95/css/materialdesignicons.min.css">
-
+<link rel="stylesheet" href="<c:url value='/css/group.css'/>">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="<c:url value='/js/client/group.js'/>"></script>
 </head>
-<style>
-body {
-	margin-top: 20px;
-}
-
-body {
-	color: #6c7293;
-}
-
-.profile-navbar .nav-item .nav-link {
-	color: #6c7293;
-}
-
-.profile-navbar .nav-item .nav-link.active {
-	color: #464dee;
-}
-
-.profile-navbar .nav-item .nav-link i {
-	font-size: 1.25rem;
-}
-
-.profile-feed-item {
-	padding: 1.5rem 0;
-	border-bottom: 1px solid #e9e9e9;
-}
-
-.img-sm {
-	width: 43px;
-	height: 43px;
-}
-</style>
 <body>
 	<jsp:include page="template/header.jsp"></jsp:include>
+	
 	<div class="container mainListExam">
 		<div class="">
 		<div class="col-md-12">
 			<div class="card">
 				<div class="card-body">
 					<div class="row">
-						<div class="col-lg-3">
+						<div class="col-lg-4">
 							<div class="border-bottom text-center pb-4">
 								<img style="width: 70%;"
 									src="https://cla.hust.edu.vn/xmedia/2014/05/ky-nang-lam-phan-nghe-trong-bai-thi-toeic.png"
@@ -57,26 +32,6 @@ body {
 									<input type="hidden" value="${group.idGroup}" id="idGroup">
 									<input type="hidden" value="${pageContext.request.contextPath}"
 										id="appContext">
-									<div class="d-flex align-items-center justify-content-center">
-										<div class="br-wrapper br-theme-css-stars">
-											<select id="profile-rating" name="rating" autocomplete="off"
-												style="display: none;">
-												<option value="1">1</option>
-												<option value="2">2</option>
-												<option value="3">3</option>
-												<option value="4">4</option>
-												<option value="5">5</option>
-											</select>
-											<div class="br-widget">
-												<a href="#" data-rating-value="1" data-rating-text="1"
-													class="br-selected br-current"></a><a href="#"
-													data-rating-value="2" data-rating-text="2"></a><a href="#"
-													data-rating-value="3" data-rating-text="3"></a><a href="#"
-													data-rating-value="4" data-rating-text="4"></a><a href="#"
-													data-rating-value="5" data-rating-text="5"></a>
-											</div>
-										</div>
-									</div>
 								</div>
 								<p class="w-75 mx-auto mb-3">${group.description}</p>
 							</div>
@@ -95,7 +50,7 @@ body {
 								</p>
 								<p class="clearfix">
 									<span class="float-left"> Ngày tạo </span> <span
-										class="float-right text-muted"> ${group.createDate} </span>
+										class="float-right text-muted"> <fmt:formatDate pattern="dd-MM-yyyy" value="${group.createDate}" /> </span>
 								</p>
 								<p class="clearfix">
 									<span class="float-left"> Số thành viên </span> <span
@@ -118,22 +73,29 @@ body {
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-9">
+						<div class="col-lg-8">
 							<div class="share border bg-white">
 								<div class=" flex-row inputs">
 									<input type="text" class=" form-control share-input"
-										placeholder="Nhập tiêu đề cho bài viết"> 
+										placeholder="Nhập tiêu đề cho bài viết" id="title">
 									<div class="form-group purple-border">
-										<label style="font-size: 12px;margin-left: 10px; color: cadetblue;" for="exampleFormControlTextarea4" > Nội
-											dung</label>
+										<label
+											style="font-size: 12px; margin-left: 10px; color: cadetblue;"
+											for="exampleFormControlTextarea4"> Nội dung</label>
 										<textarea class="form-control"
-											id="exampleFormControlTextarea4" rows="3"></textarea>
+											id="content" rows="3" style="white-space: pre-line"></textarea>
 									</div>
 								</div>
 								<div class="d-flex flex-row justify-content-between border-top">
+									<div class="d-flex flex-row publish-options">
+										<div class="align-items-center border-right p-2 share">
+											<i class="fa fa-question-circle"></i><span class="ml-1">Bạn
+												đang thắc mắc điều gì ?</span>
+										</div>
+									</div>
 									<div class="publish-button"
 										style="background-color: aliceblue;">
-										<div
+										<div id="addPost"
 											class="align-items-center border-left p-2 px-5 btn publish">
 											<span class="ml-1">Đăng</span>
 										</div>
@@ -142,8 +104,9 @@ body {
 							</div>
 							<div class="mt-4 py-2 border-top border-bottom">
 								<ul class="nav profile-navbar">
-									<li class="nav-item"><a class="nav-link active" href="#">
-											<i class="mdi mdi-newspaper"></i> Feed
+									<li class="nav-item"><a class="nav-link active" href="#"
+									id="feed">
+											<i class="mdi mdi-newspaper"></i> Bài viết
 									</a></li>
 									<li class="nav-item"><a class="nav-link" href="#"
 										id="memberlist"> <i class="mdi mdi-account-multiple"></i>
@@ -157,7 +120,7 @@ body {
 										<img
 											src="https://aui.atlassian.com/aui/latest/docs/images/avatar-person.svg"
 											alt="profile" class="img-sm rounded-circle">
-										<div class="ml-4">
+										<div class="ml-4" style="width: 80%;">
 											<h6>
 												<a href="#"> tuanminh96 </a> <i style="color: blue;"
 													class="fa fa-star" aria-hidden="true"></i><small
@@ -171,11 +134,11 @@ body {
 												</span> <span class="ml-2"> <i class="mdi mdi-comment mr-1"></i>11
 												</span>
 											<div class="bg-light p-2">
-												<div class="d-flex flex-row align-items-start">
+												<div class="d-flex flex-row align-items-start commentlist">
 													<img class="rounded-circle"
 														src="https://aui.atlassian.com/aui/latest/docs/images/avatar-person.svg"
 														width="30">
-													<textarea class="form-control ml-1 shadow-none textarea"></textarea>
+													<textarea class="form-control ml-1 shadow-none textarea" style="white-space: pre-wrap;"></textarea>
 												</div>
 												<div class="mt-2 text-right">
 													<button class="btn btn-primary btn-sm shadow-none"
@@ -190,23 +153,9 @@ body {
 															src="https://aui.atlassian.com/aui/latest/docs/images/avatar-person.svg"
 															width="30">
 														<div class="comment-text">
-															<span class="username"> <a href="#">tuanmino96</a>
-																: <span class="ml-4 text-muted pull-right"
-																style="font-size: 10px;">8:03 PM</span>
-															</span>
-															<p>Thank you so much</p>
-														</div>
-													</div>
-												</div>
-												<div class="box-comment">
-													<div class="flex-row align-items-start commentlist">
-														<img class="rounded-circle"
-															src="https://aui.atlassian.com/aui/latest/docs/images/avatar-person.svg"
-															width="30">
-														<div class="comment-text">
 															<span class="username"> <a href="#">chutuanthanh</a>
 																: <span class="ml-4 text-muted pull-right"
-																style="font-size: 10px;">8:03 PM</span>
+																style="float: right;font-size: 10px;">8:03 PM</span>
 															</span>
 															<p>Bai viet that huu ich</p>
 														</div>
@@ -214,37 +163,68 @@ body {
 												</div>
 											</div>
 											<!-- Card -->
-
-											</p>
-
-										</div>
-									</div>
-
-									<div class="d-flex align-items-start profile-feed-item">
-										<img class="rounded-circle"
-											src="https://aui.atlassian.com/aui/latest/docs/images/avatar-person.svg"
-											width="30">
-										<div class="ml-4">
-											<h6>
-												<a href="#">phanhai99</a> <small class="ml-4 text-muted"><i
-													class="mdi mdi-clock mr-1"></i>10 hours</small>
-											</h6>
-											<h3></h3>
-											<p>
-												Cho mình hỏi câu này chọn đáp án nào nhỉ:<br></br>The ode
-												was original (A) a ceremonial (B) poem written to (C)
-												celebrate public occasions or (D) exalted subjects.
-											</p>
-											<img src="https://bootdey.com/img/Content/avatar/avatar7.png"
-												alt="sample" class="rounded mw-100">
-											<p class="small text-muted mt-2 mb-0">
-												<span> <i class="mdi mdi-star mr-1"></i>4
-												</span> <span class="ml-2"> <i class="mdi mdi-comment mr-1"></i>11
-												</span> <span class="ml-2"> <i class="mdi mdi-reply"></i>
-												</span>
 											</p>
 										</div>
 									</div>
+									<c:forEach items="${listpost}" var="post">
+										<div class="d-flex align-items-start profile-feed-item">
+											<img
+												src="https://aui.atlassian.com/aui/latest/docs/images/avatar-person.svg"
+												alt="profile" class="img-sm rounded-circle">
+											<div class="ml-4" style="width: 80%;">
+												<h6>
+													<a href="#"> ${post.post.user.username} </a> 
+													<c:if test="${post.post.user.role.code == 1}">
+														<i style="color: blue;" class="fa fa-star" aria-hidden="true"></i>
+													</c:if>
+													<small
+														class="ml-4 text-muted"><i
+														class="mdi mdi-clock mr-1"></i>${post.timePost}</small>
+													<c:if test="${loggedInUser.id == post.post.user.id}">
+													<a href="#" class="deletepost" idPost="${post.post.idPost}"><i class="fa fa-trash" aria-hidden="true" style="color: red;float: right;font-size: 20px;"></i></a>														
+													</c:if>
+												</h6>
+												<h4>${post.post.title}</h4>
+												<p>${post.post.content}</p>
+												<p class="small text-muted mt-2 mb-0">
+													</span> <span class="ml-2"> <i class="mdi mdi-comment mr-1"></i>${post.totalComment}
+													</span>
+												<div class="bg-light p-2">
+													<div class="d-flex flex-row align-items-start">
+														<img class="rounded-circle"
+															src="https://aui.atlassian.com/aui/latest/docs/images/avatar-person.svg"
+															width="30">
+														<textarea class="form-control ml-1 shadow-none textarea"></textarea>
+													</div>
+													<div class="mt-2 text-right">
+														<button class="btn btn-primary btn-sm shadow-none"
+															type="button">Post comment</button>
+													</div>
+												</div>
+												<div class="box-footer box-comments"
+													style="padding: 10px; background-color: #f8f9fa; border-top: outset;">
+													<c:forEach items="${post.post.comments}" var="comment">
+														<div class="box-comment">
+															<div class="flex-row align-items-start commentlist">
+																<img class="rounded-circle"
+																	src="https://aui.atlassian.com/aui/latest/docs/images/avatar-person.svg"
+																	width="30">
+																<div class="comment-text">
+																	<span class="username"> <a href="#">tuanmino96</a>
+																		: <span class="ml-4 text-muted pull-right"
+																		style="float: right;font-size: 10px;">8:03 PM</span>
+																	</span>
+																	<p>Thank you so much</p>
+																</div>
+															</div>
+														</div>
+													</c:forEach>
+												</div>
+												<!-- Card -->
+												</p>
+											</div>
+										</div>
+									</c:forEach>
 								</div>
 							</div>
 						</div>
@@ -255,5 +235,7 @@ body {
 		</div>
 		</div>
 		<!-- Event main -->
+		<jsp:include page="template/footer.jsp"></jsp:include>
+		<script src="<c:url value='/js/client/post.js'/>"></script>
 </body>
 </html>

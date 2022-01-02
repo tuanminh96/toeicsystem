@@ -72,20 +72,16 @@ public class ClientController {
 	@GetMapping(value = { "/home", "/" })
 	public String home(Model model, @AuthenticationPrincipal OAuth2User oauth2User, HttpServletRequest request) {
 		model.addAttribute("listslidebanner", slideBannerService.findAll());
-		Account account = getSessionUser(request);
-		if (account != null) {
-			try {
-				Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		        User currentUser = nguoiDungService.findUserByEmail(auth.getName());
-				HttpSession session = request.getSession();
-				int count_notifi = notificationService.countNotificationByUserAndDateSeenIsNull(currentUser);
-				session.setAttribute("count_notifi", count_notifi);
-				System.out.println(count_notifi);
-			} catch(Exception e) {
-	            e.printStackTrace();
-	            return "client/error";
-	        }
-		}
+		try {
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	        User currentUser = nguoiDungService.findUserByEmail(auth.getName());
+			HttpSession session = request.getSession();
+			int count_notifi = notificationService.countNotificationByUserAndDateSeenIsNull(currentUser);
+			session.setAttribute("count_notifi", count_notifi);
+		} catch(Exception e) {
+            e.printStackTrace();
+            return "client/error";
+        }
 		return "client/home";
 	}
 

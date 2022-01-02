@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,304 +31,16 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"
 	integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg=="
 	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
 
-<link rel="stylesheet prefetch" href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css">	
-<script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
+<link rel="stylesheet prefetch"
+	href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css">
+<script
+	src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
 <script src="<c:url value='/js/admin/quanlyGroup.js'/>"></script>
 </head>
-<style>
-body {
-	color: #6c7293;
-}
-
-.profile-navbar .nav-item .nav-link {
-	color: #6c7293;
-}
-
-.profile-navbar .nav-item .nav-link.active {
-	color: #464dee;
-}
-
-.profile-navbar .nav-item .nav-link i {
-	font-size: 1.25rem;
-}
-
-.profile-feed-item {
-	padding: 1.5rem 0;
-	border-bottom: 1px solid #e9e9e9;
-}
-
-.img-sm {
-	width: 43px;
-	height: 43px;
-}
-</style>
-<style type="text/css">
-/* -----------------------------------------
-   Timeline
------------------------------------------ */
-.timeline {
-	list-style: none;
-	padding-left: 0;
-	position: relative;
-}
-
-.timeline:after {
-	content: "";
-	height: auto;
-	width: 1px;
-	background: #e3e3e3;
-	position: absolute;
-	top: 5px;
-	left: 30px;
-	bottom: 25px;
-}
-
-.timeline.timeline-sm:after {
-	left: 12px;
-}
-
-.timeline li {
-	position: relative;
-	padding-left: 70px;
-	margin-bottom: 20px;
-}
-
-.timeline li:after {
-	content: "";
-	width: 12px;
-	height: 12px;
-	border-radius: 50%;
-	background: #e3e3e3;
-	position: absolute;
-	left: 24px;
-	top: 5px;
-}
-
-.timeline li .timeline-date {
-	display: inline-block;
-	width: 100%;
-	color: #a6a6a6;
-	font-style: italic;
-	font-size: 13px;
-}
-
-.timeline.timeline-icons li {
-	padding-top: 7px;
-}
-
-.timeline.timeline-icons li:after {
-	width: 32px;
-	height: 32px;
-	background: #fff;
-	border: 1px solid #e3e3e3;
-	left: 14px;
-	top: 0;
-	z-index: 11;
-}
-
-.timeline.timeline-icons li .timeline-icon {
-	position: absolute;
-	left: 23.5px;
-	top: 7px;
-	z-index: 12;
-}
-
-.timeline.timeline-icons li .timeline-icon [class*=glyphicon] {
-	top: -1px !important;
-}
-
-.timeline.timeline-icons.timeline-sm li {
-	padding-left: 40px;
-	margin-bottom: 10px;
-}
-
-.timeline.timeline-icons.timeline-sm li:after {
-	left: -5px;
-}
-
-.timeline.timeline-icons.timeline-sm li .timeline-icon {
-	left: 4.5px;
-}
-
-.timeline.timeline-advanced li {
-	padding-top: 0;
-}
-
-.timeline.timeline-advanced li:after {
-	background: #fff;
-	border: 1px solid #29b6d8;
-}
-
-.timeline.timeline-advanced li:before {
-	content: "";
-	width: 52px;
-	height: 52px;
-	border: 10px solid #fff;
-	position: absolute;
-	left: 4px;
-	top: -10px;
-	border-radius: 50%;
-	z-index: 12;
-}
-
-.timeline.timeline-advanced li .timeline-icon {
-	color: #29b6d8;
-}
-
-.timeline.timeline-advanced li .timeline-date {
-	width: 75px;
-	position: absolute;
-	right: 5px;
-	top: 3px;
-	text-align: right;
-}
-
-.timeline.timeline-advanced li .timeline-title {
-	font-size: 17px;
-	margin-bottom: 0;
-	padding-top: 5px;
-	font-weight: bold;
-}
-
-.timeline.timeline-advanced li .timeline-subtitle {
-	display: inline-block;
-	width: 100%;
-	color: #a6a6a6;
-}
-
-.timeline.timeline-advanced li .timeline-content {
-	margin-top: 10px;
-	margin-bottom: 10px;
-	padding-right: 70px;
-}
-
-.timeline.timeline-advanced li .timeline-content p {
-	margin-bottom: 3px;
-}
-
-.timeline.timeline-advanced li .timeline-content .divider-dashed {
-	padding-top: 0px;
-	margin-bottom: 7px;
-	width: 200px;
-}
-
-.timeline.timeline-advanced li .timeline-user {
-	display: inline-block;
-	width: 100%;
-	margin-bottom: 10px;
-}
-
-.timeline.timeline-advanced li .timeline-user:before, .timeline.timeline-advanced li .timeline-user:after
-	{
-	content: " ";
-	display: table;
-}
-
-.timeline.timeline-advanced li .timeline-user:after {
-	clear: both;
-}
-
-.timeline.timeline-advanced li .timeline-user .timeline-avatar {
-	border-radius: 50%;
-	width: 32px;
-	height: 32px;
-	float: left;
-	margin-right: 10px;
-}
-
-.timeline.timeline-advanced li .timeline-user .timeline-user-name {
-	font-weight: bold;
-	margin-bottom: 0;
-}
-
-.timeline.timeline-advanced li .timeline-user .timeline-user-subtitle {
-	color: #a6a6a6;
-	margin-top: -4px;
-	margin-bottom: 0;
-}
-
-.timeline.timeline-advanced li .timeline-link {
-	margin-left: 5px;
-	display: inline-block;
-}
-
-.timeline-load-more-btn {
-	margin-left: 70px;
-}
-
-.timeline-load-more-btn i {
-	margin-right: 5px;
-}
-
-/* -----------------------------------------
-   Dropdown
------------------------------------------ */
-.dropdown-menu {
-	padding: 0 0 0 0;
-}
-
-a.dropdown-menu-header {
-	background: #f7f9fe;
-	font-weight: bold;
-	border-bottom: 1px solid #e3e3e3;
-}
-
-.dropdown-menu>li a {
-	padding: 10px 20px;
-}
-
-/* -----------------------------------------
-   Badge
------------------------------------------ */
-.badge {
-	padding: 3px 5px 2px;
-	position: absolute;
-	top: 8px;
-	right: 5px;
-	display: inline-block;
-	min-width: 10px;
-	font-size: 12px;
-	font-weight: bold;
-	color: #ffffff;
-	line-height: 1;
-	vertical-align: baseline;
-	white-space: nowrap;
-	text-align: center;
-	border-radius: 10px;
-}
-
-.badge-danger {
-	background-color: #db5565;
-}
-
-.nav.navbar-nav.navbar-right li a {
-	color: white !important;
-}
-
-.navbar-brand {
-	color: #9d9d9d !important;
-}
-
-.navbar-expand-sm {
-	justify-content: space-between;
-}
-
-.leftbar {
-	background-color: #343a40 !important
-}
-
-.comment-text {
-	font-size: x-small;
-	width: 90%;
-}
-
-.commentlist {
-	display: flex;
-	justify-content: space-between;
-}
-</style>
+<link rel="stylesheet" href="<c:url value='/css/group.css'/>">
 <body>
 	<nav class="navbar navbar-light navbar-expand-sm sticky-top bg-dark">
 		<a class="navbar-brand" href="<c:url value='/admin'/>">BK Toeic
@@ -408,26 +121,6 @@ a.dropdown-menu-header {
 									<input type="hidden" value="${group.idGroup}" id="idGroup">
 									<input type="hidden" value="${pageContext.request.contextPath}"
 										id="appContext">
-									<div class="d-flex align-items-center justify-content-center">
-										<div class="br-wrapper br-theme-css-stars">
-											<select id="profile-rating" name="rating" autocomplete="off"
-												style="display: none;">
-												<option value="1">1</option>
-												<option value="2">2</option>
-												<option value="3">3</option>
-												<option value="4">4</option>
-												<option value="5">5</option>
-											</select>
-											<div class="br-widget">
-												<a href="#" data-rating-value="1" data-rating-text="1"
-													class="br-selected br-current"></a><a href="#"
-													data-rating-value="2" data-rating-text="2"></a><a href="#"
-													data-rating-value="3" data-rating-text="3"></a><a href="#"
-													data-rating-value="4" data-rating-text="4"></a><a href="#"
-													data-rating-value="5" data-rating-text="5"></a>
-											</div>
-										</div>
-									</div>
 								</div>
 								<p class="w-75 mx-auto mb-3">${group.description}</p>
 							</div>
@@ -446,7 +139,7 @@ a.dropdown-menu-header {
 								</p>
 								<p class="clearfix">
 									<span class="float-left"> Ngày tạo </span> <span
-										class="float-right text-muted"> ${group.createDate} </span>
+										class="float-right text-muted"> <fmt:formatDate pattern="dd-MM-yyyy" value="${group.createDate}" /> </span>
 								</p>
 								<p class="clearfix">
 									<span class="float-left"> Số thành viên </span> <span
@@ -473,23 +166,24 @@ a.dropdown-menu-header {
 							<div class="share border bg-white">
 								<div class=" flex-row inputs">
 									<input type="text" class=" form-control share-input"
-										placeholder="Nhập tiêu đề cho bài viết"> 
+										placeholder="Nhập tiêu đề cho bài viết" id="title">
 									<div class="form-group purple-border">
-										<label style="font-size: 12px;margin-left: 10px; color: cadetblue;" for="exampleFormControlTextarea4" > Nội
-											dung</label>
+										<label
+											style="font-size: 12px; margin-left: 10px; color: cadetblue;"
+											for="exampleFormControlTextarea4"> Nội dung</label>
 										<textarea class="form-control"
-											id="exampleFormControlTextarea4" rows="3"></textarea>
+											id="content" rows="3" style="white-space: pre-line"></textarea>
 									</div>
 								</div>
 								<div class="d-flex flex-row justify-content-between border-top">
 									<div class="d-flex flex-row publish-options">
 										<div class="align-items-center border-right p-2 share">
-											<i class="fa fa-question-circle"></i><span class="ml-1">Bạn đang thắc mắc điều gì ?</span>
+											<i class="fa fa-question-circle"></i><span class="ml-1">Bạn muốn chia sẻ điều với nhóm ?</span>
 										</div>
 									</div>
 									<div class="publish-button"
 										style="background-color: aliceblue;">
-										<div
+										<div id="addPost"
 											class="align-items-center border-left p-2 px-5 btn publish">
 											<span class="ml-1">Đăng</span>
 										</div>
@@ -498,8 +192,9 @@ a.dropdown-menu-header {
 							</div>
 							<div class="mt-4 py-2 border-top border-bottom">
 								<ul class="nav profile-navbar">
-									<li class="nav-item"><a class="nav-link active" href="#">
-											<i class="mdi mdi-newspaper"></i> Feed
+									<li class="nav-item"><a class="nav-link active" href="#"
+									id="feed">
+											<i class="mdi mdi-newspaper"></i> Bài viết
 									</a></li>
 									<li class="nav-item"><a class="nav-link" href="#"
 										id="memberlist"> <i class="mdi mdi-account-multiple"></i>
@@ -517,7 +212,7 @@ a.dropdown-menu-header {
 										<img
 											src="https://aui.atlassian.com/aui/latest/docs/images/avatar-person.svg"
 											alt="profile" class="img-sm rounded-circle">
-										<div class="ml-4">
+										<div class="ml-4" style="width: 80%;">
 											<h6>
 												<a href="#"> tuanminh96 </a> <i style="color: blue;"
 													class="fa fa-star" aria-hidden="true"></i><small
@@ -535,7 +230,7 @@ a.dropdown-menu-header {
 													<img class="rounded-circle"
 														src="https://aui.atlassian.com/aui/latest/docs/images/avatar-person.svg"
 														width="30">
-													<textarea class="form-control ml-1 shadow-none textarea"></textarea>
+													<textarea class="form-control ml-1 shadow-none textarea" style="white-space: pre-wrap;"></textarea>
 												</div>
 												<div class="mt-2 text-right">
 													<button class="btn btn-primary btn-sm shadow-none"
@@ -574,44 +269,76 @@ a.dropdown-menu-header {
 												</div>
 											</div>
 											<!-- Card -->
-
-											</p>
-
-										</div>
-									</div>
-
-									<div class="d-flex align-items-start profile-feed-item">
-										<img class="rounded-circle"
-											src="https://aui.atlassian.com/aui/latest/docs/images/avatar-person.svg"
-											width="30">
-										<div class="ml-4">
-											<h6>
-												<a href="#">phanhai99</a> <small class="ml-4 text-muted"><i
-													class="mdi mdi-clock mr-1"></i>10 hours</small>
-											</h6>
-											<h3></h3>
-											<p>
-												Cho mình hỏi câu này chọn đáp án nào nhỉ:<br></br>The ode
-												was original (A) a ceremonial (B) poem written to (C)
-												celebrate public occasions or (D) exalted subjects.
-											</p>
-											<img src="https://bootdey.com/img/Content/avatar/avatar7.png"
-												alt="sample" class="rounded mw-100">
-											<p class="small text-muted mt-2 mb-0">
-												<span> <i class="mdi mdi-star mr-1"></i>4
-												</span> <span class="ml-2"> <i class="mdi mdi-comment mr-1"></i>11
-												</span> <span class="ml-2"> <i class="mdi mdi-reply"></i>
-												</span>
 											</p>
 										</div>
 									</div>
+									<c:forEach items="${listpost}" var="post">
+										<div class="d-flex align-items-start profile-feed-item">
+											<img
+												src="https://aui.atlassian.com/aui/latest/docs/images/avatar-person.svg"
+												alt="profile" class="img-sm rounded-circle">
+											<div class="ml-4" style="width: 80%;">
+												<h6>
+													<a href="#"> ${post.post.user.username} </a> 
+													<c:if test="${post.post.user.role.code == 1}">
+														<i style="color: blue;" class="fa fa-star" aria-hidden="true"></i>
+													</c:if>
+													<small
+														class="ml-4 text-muted"><i
+														class="mdi mdi-clock mr-1"></i>${post.timePost}</small>
+													<a href="#" class="deletepost" idPost="${post.post.idPost}"><i class="fa fa-trash" aria-hidden="true" style="color: red;float: right;font-size: 20px;"></i></a>														
+												</h6>
+												
+												<h4>${post.post.title}</h4>
+												<p>${post.post.content}</p>
+												<p class="small text-muted mt-2 mb-0">
+													</span> <span class="ml-2"> <i class="mdi mdi-comment mr-1"></i>${post.totalComment}
+													</span>
+												<div class="bg-light p-2">
+													<div class="d-flex flex-row align-items-start">
+														<img class="rounded-circle"
+															src="https://aui.atlassian.com/aui/latest/docs/images/avatar-person.svg"
+															width="30">
+														<textarea class="form-control ml-1 shadow-none textarea"></textarea>
+													</div>
+													<div class="mt-2 text-right">
+														<button class="btn btn-primary btn-sm shadow-none"
+															type="button">Post comment</button>
+													</div>
+												</div>
+												<div class="box-footer box-comments"
+													style="padding: 10px; background-color: #f8f9fa; border-top: outset;">
+													<c:forEach items="${post.post.comments}" var="comment">
+														<div class="box-comment">
+															<div class="flex-row align-items-start commentlist">
+																<img class="rounded-circle"
+																	src="https://aui.atlassian.com/aui/latest/docs/images/avatar-person.svg"
+																	width="30">
+																<div class="comment-text">
+																	<span class="username"> <a href="#">tuanmino96</a>
+																		: <span class="ml-4 text-muted pull-right"
+																		style="font-size: 10px;">8:03 PM</span>
+																	</span>
+																	<p>Thank you so much</p>
+																</div>
+															</div>
+														</div>
+													</c:forEach>
+												</div>
+												<!-- Card -->
+												</p>
+											</div>
+										</div>
+									</c:forEach>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>	
+		</div>
 	</div>
+	<script src="<c:url value='/js/client/post.js'/>"></script>
 </body>
+
 </html>

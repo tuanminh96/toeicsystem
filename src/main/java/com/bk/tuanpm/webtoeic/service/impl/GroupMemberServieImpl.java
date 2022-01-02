@@ -31,4 +31,9 @@ public class GroupMemberServieImpl implements GroupMemberService {
 	public GroupMember getGroupMember(int idGroup, int idMem) {
 		return groupMemberRepository.findByGroupAndUser(idGroup, idMem);
 	}
+	
+	@Override
+	public List<GroupMember> findGroupsOfUser(int idUser) {
+		return groupMemberRepository.findByUser(idUser);
+	}
 }

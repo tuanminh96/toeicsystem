@@ -53,15 +53,16 @@
 </body>
 	<script type="text/javascript">
 		$(document).ready( function() {
-			if ($("#vip").val() == 'vip') {
+			if ($("#vip").val() == 'vip' && eventSource == null) {
 				var idUser = $('#idUser').val();
 				var urlEndPoint = 'http://localhost:8080/webtoeic/api/subcribe?id='+idUser;
 				var eventSource = new EventSource(urlEndPoint);
+				console.log("state"+eventSource.readyState);
 				eventSource.addEventListener('remark',
 				function(event) {
 					var noti = JSON.parse(event.data)
 					$("#message-content").text(noti.content);
-					$('.toast').toast({delay: 7000});
+					$('.toast').toast({delay: 5000});
 					$('.toast').toast('show');
 					$('#autioNoti').get(0).play();
 					var totalUnseen = $("#totalUnseen").text();
@@ -72,13 +73,27 @@
 						function(event) {
 							var noti = JSON.parse(event.data)
 							$("#message-content").text(noti.content);
-							$('.toast').toast({delay: 7000});
+							$('.toast').toast({delay: 5000});
+							$('.toast').toast('show');
+							$('#autioNoti').get(0).play();
+							var totalUnseen = $("#totalUnseen").text();
+							totalUnseen++;
+							$("#totalUnseen").text(totalUnseen);
+				}); 
+				eventSource.addEventListener('post',
+						function(event) {
+							var noti = JSON.parse(event.data)
+							$("#message-content").text(noti.content);
+							$('.toast').toast({delay: 5000});
 							$('.toast').toast('show');
 							$('#autioNoti').get(0).play();
 							var totalUnseen = $("#totalUnseen").text();
 							totalUnseen++;
 							$("#totalUnseen").text(totalUnseen);
 						}); 
+				window.addEventListener('beforeunload', () => {
+					eventSource.close();
+				    });
 			}
 	});
 	</script>

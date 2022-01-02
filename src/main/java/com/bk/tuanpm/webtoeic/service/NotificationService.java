@@ -24,4 +24,7 @@ public interface NotificationService {
 	
 	int countNotificationByUserAndDateSeenIsNull(User user);
 
+	void pushAddPostNotification(String idUser, String admin);
+
+
 }

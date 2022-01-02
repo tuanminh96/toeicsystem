@@ -15,8 +15,7 @@ import com.bk.tuanpm.webtoeic.service.PostService;
 
 
 @RestController
-@CrossOrigin("*")
-public class NotificationApi {
+public class PostApi {
 	
 	@Autowired
 	NotificationService notificationService;
@@ -24,12 +23,12 @@ public class NotificationApi {
 	@Autowired
 	PostService postService;
 	
-	@GetMapping(value = "/api/subcribe",headers = "Accept=*/*", consumes = MediaType.ALL_VALUE, produces = MediaType.ALL_VALUE)
 	@CrossOrigin("*")
-	public SseEmitter subcribeEvent(@RequestParam("id") String idMem) {
+	@GetMapping(value = "/subcribePost",headers = "Accept=*/*", consumes = MediaType.ALL_VALUE, produces = MediaType.ALL_VALUE)
+	
+	public SseEmitter subcribeEventPostGroup(@RequestParam("id") int idMem) {
 		SseEmitter sseEmitter = new SseEmitter();
-		notificationService.addEmmiter(sseEmitter, idMem);
+		postService.addPostGroupEmitter(sseEmitter, idMem);
 		return sseEmitter;
 	}
-	
 }

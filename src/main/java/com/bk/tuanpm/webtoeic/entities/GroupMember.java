@@ -65,5 +65,22 @@ public class GroupMember {
 	public void setUpdateBy(String updateBy) {
 		this.updateBy = updateBy;
 	}
-	
+	public int getIsDisabled() {
+		return isDisabled;
+	}
+	public void setIsDisabled(int isDisabled) {
+		this.isDisabled = isDisabled;
+	}
+	public int getGroup() {
+		return group;
+	}
+	public void setGroup(int group) {
+		this.group = group;
+	}
+	public int getUser() {
+		return user;
+	}
+	public void setUser(int user) {
+		this.user = user;
+	}
 }

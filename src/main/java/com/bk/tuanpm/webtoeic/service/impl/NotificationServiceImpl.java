@@ -31,6 +31,7 @@ public class NotificationServiceImpl implements NotificationService {
 	NotificationRepository notificationRepository;
 
 	public Map<String, SseEmitter> emitters = new HashMap<String, SseEmitter>();
+	
 
 	@Override
 	public SseEmitter addEmmiter(SseEmitter emitter, String idUser) {
@@ -91,6 +92,29 @@ public class NotificationServiceImpl implements NotificationService {
 
 	}
 
+	@Override
+	public void pushAddPostNotification(String idUser, String admin) {
+
+		SseEmitter sentEmitter = emitters.get(idUser);
+
+		JSONObject notiMess = new JSONObject(); 
+		String message = messageConfig.getProperty("noti.post");
+		String result = MessageFormat.format(message, admin);
+		String event = notiMess.put("content", result).toString();
+		if (sentEmitter != null) {
+			try {
+				sentEmitter.send(SseEmitter
+						.event()
+						.name(Notification.TYPE_POST)
+						.data(event));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				emitters.remove(sentEmitter);
+			}
+		}
+
+	}
 	@Override
 	public List<Notification> getListNotifiByUser(User user) {
 		return notificationRepository.findAllByUser(user);

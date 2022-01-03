@@ -25,15 +25,10 @@
 	<div class="col-md-9 animated bounce">
 		<h3 class="page-header">Quản lý bài thi thử Toeic</h3>
 
-		<button class="btn btn-success btnAddExam" data-toggle="modal"
-			data-target="#examModal">Thêm mới</button>
-		<h4 style="color: red" id="info-success"></h4>
-
 		<c:if test="${errorInfo != null }">
 			<h4 style="color: red" id="info-error">${error}</h4>
 			<h4>error: ${errorInfo}</h4>
 		</c:if>
-		<hr />
 
 		<table class="table table-hover nhanHieuTable" id="tableExam">
 			<thead>

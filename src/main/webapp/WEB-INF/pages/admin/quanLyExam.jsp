@@ -18,7 +18,6 @@
 	class="ace-main-stylesheet" id="main-ace-style" />
 </head>
 
-
 <body>
 	<jsp:include page="template/header.jsp"></jsp:include>
 	<jsp:include page="template/sidebar.jsp"></jsp:include>

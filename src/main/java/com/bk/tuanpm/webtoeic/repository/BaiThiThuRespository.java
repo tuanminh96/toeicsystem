@@ -24,6 +24,6 @@ public interface BaiThiThuRespository extends JpaRepository<Exam,Integer>
 	
 	List<Exam> findTop10ByOrderByCountTestDesc();
 
-	List<Exam> findAllByIsActive(String isActive);
+	List<Exam> findAllByIsActiveAndDelFlg(String isActive, String delFlg);
 
 }

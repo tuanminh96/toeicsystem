@@ -65,18 +65,19 @@ public class BaiThiThuApi {
     @GetMapping("/loadExam")
     public List<String> showAllExam() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Account account = userAdminService.findAccountByEmail(auth.getName());
+        Account account = userAdminService.findByEmail(auth.getName());
         String roleAccount = account.getRole().getRole();
         List<String> response = new ArrayList<String>();
-
         List<Exam> list = new ArrayList<>();
-        if(CommonConst.ROLE_CONTENT.equals(roleAccount)){
-            list = baithithuService.getAllExamNotActive(CommonConst.FLG_OFF);
-        } else if(CommonConst.ROLE_TUTORIAL.equals(roleAccount)){
-            list = baithithuService.getAllExamActive(CommonConst.FLG_OFF);
-        } else{
+        String flag = CommonConst.FLG_ON;
+        if (CommonConst.ROLE_CONTENT.equals(roleAccount)) {
+            flag = CommonConst.FLG_OFF;
+        } else if (CommonConst.ROLE_TUTORIAL.equals(roleAccount)) {
+            flag = CommonConst.FLG_ON;
+        } else {
             return response;
         }
+        list = baithithuService.getAllExamSubmited(flag);
 
         for (int i = 0; i < list.size(); i++) {
             String json = "baithithuid:" + list.get(i).getBaithithuid() + "," + "anhbaithithu:"
@@ -88,15 +89,15 @@ public class BaiThiThuApi {
 
     @GetMapping("/loadExamApprove")
     public List<String> showListExamApprove() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Account account = userAdminService.findAccountByEmail(auth.getName());
-        String roleAccount = account.getRole().getRole();
         List<String> response = new ArrayList<String>();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        TutorialAdmin currentUser = userAdminService.findTutorialAdminByEmail(auth.getName());
+        String roleAccount = currentUser.getRole().getRole();
 
         List<Exam> list = new ArrayList<>();
-        if(CommonConst.ROLE_TUTORIAL.equals(roleAccount)){
-            list = baithithuService.getAllExamNotActive(CommonConst.FLG_OFF);
-        } else{
+        if (CommonConst.ROLE_TUTORIAL.equals(roleAccount)) {
+            list = baithithuService.getAllExamSubmited(CommonConst.FLG_OFF);
+        } else {
             return response;
         }
 
@@ -106,6 +107,20 @@ public class BaiThiThuApi {
             response.add(json);
         }
         return response;
+    }
+
+    @RequestMapping(value = "/approve/{examId}")
+    public String approveExam(@PathVariable("examId") int examId) {
+        List<Exam> listExam = baithithuService.getBaiThiThu(Integer.valueOf(examId));
+        baithithuService.approveExam(listExam.get(0));
+        return "success";
+    }
+
+    @RequestMapping(value = "/reject/{examId}")
+    public String rejectExam(@PathVariable("examId") int examId) {
+        List<Exam> listExam = baithithuService.getBaiThiThu(Integer.valueOf(examId));
+        baithithuService.rejectExam(listExam.get(0));
+        return "success";
     }
 
     @RequestMapping(value = "/delete/{idBaiThiThu}")
@@ -125,7 +140,7 @@ public class BaiThiThuApi {
             @RequestParam("fileQuestionImageLst") MultipartFile[] fileQuestionImageLst,
             @RequestParam("fileQuestionAudioLst") MultipartFile[] fileQuestionAudioLst) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        ContentAdmin currentUser = userAdminService.findAccountByEmail(auth.getName());
+        ContentAdmin currentUser = userAdminService.findContentAdminByEmail(auth.getName());
 
         List<String> response = new ArrayList<String>();
         String rootDirectory = request.getSession().getServletContext().getRealPath("/");
@@ -138,6 +153,10 @@ public class BaiThiThuApi {
         exam.setAnhbaithithu(fileThumbnail.getOriginalFilename());
         exam.setUserAdd(currentUser);
         exam.setDateAdd(Date.valueOf(LocalDate.now()));
+        exam.setUpdateDate(Date.valueOf(LocalDate.now()));
+        exam.setUpdateBy(currentUser.getUsername());
+        exam.setIsActive(CommonConst.FLG_OFF);
+        exam.setDelFlg(CommonConst.FLG_ON);
         baithithuService.save(exam);
 
         System.out.println("id=" + exam.getBaithithuid());

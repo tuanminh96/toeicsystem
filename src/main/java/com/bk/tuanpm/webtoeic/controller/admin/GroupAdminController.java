@@ -13,7 +13,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.bk.tuanpm.webtoeic.config.MessageConfig;
 import com.bk.tuanpm.webtoeic.dto.MemberDTO;
 import com.bk.tuanpm.webtoeic.dto.PostDTO;
-import com.bk.tuanpm.webtoeic.entities.Account;
 import com.bk.tuanpm.webtoeic.entities.TutorialAdmin;
 import com.bk.tuanpm.webtoeic.entities.Group;
 import com.bk.tuanpm.webtoeic.entities.Notification;
@@ -63,7 +61,7 @@ public class GroupAdminController {
 	@PostMapping(value = "/addGroup", produces = MediaType.APPLICATION_JSON_VALUE)
 	public String addGroup(Model model, @RequestBody Group group) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		TutorialAdmin currentUser = nguoiDungService.findAdminByEmail(auth.getName());
+		TutorialAdmin currentUser = nguoiDungService.findTutorialAdminByEmail(auth.getName());
 		System.out.println(currentUser);
 		group.setCreateAdmin(currentUser);
 		groupService.saveGroup(group);
@@ -128,7 +126,7 @@ public class GroupAdminController {
 
 		// notify user
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		TutorialAdmin currentUser = nguoiDungService.findAdminByEmail(auth.getName());
+		TutorialAdmin currentUser = nguoiDungService.findTutorialAdminByEmail(auth.getName());
 		for (User user : users) {
 			notificationService.pushAddGroupNotification("" + user.getId(), currentUser.getUsername(),
 					groupToAdd.getName());

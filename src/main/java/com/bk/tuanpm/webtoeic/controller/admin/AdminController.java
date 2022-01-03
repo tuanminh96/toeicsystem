@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.bk.tuanpm.webtoeic.entities.Account;
 import com.bk.tuanpm.webtoeic.entities.TutorialAdmin;
 import com.bk.tuanpm.webtoeic.entities.Group;
-import com.bk.tuanpm.webtoeic.entities.Role;
 import com.bk.tuanpm.webtoeic.service.GroupService;
 import com.bk.tuanpm.webtoeic.service.RoleService;
 import com.bk.tuanpm.webtoeic.service.impl.UserAdminServiceImpl;
@@ -48,10 +47,16 @@ public class AdminController {
 		return "admin/quanLyExam";
 	}
 
+	@GetMapping({ "/exam-approve"})
+	public String quanLyExamApprove(Model model) {
+		System.out.println("Vao quanLyExamApprove");
+		return "admin/quanLyExamApprove";
+	}
+
 	@GetMapping({ "/group" })
 	public String quanLyGroup(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		TutorialAdmin currentUser = nguoiDungService.findAdminByEmail(auth.getName());
+		TutorialAdmin currentUser = nguoiDungService.findTutorialAdminByEmail(auth.getName());
 		List<Group> groups = groupService.getGroupOfAdmin(currentUser);
 		model.addAttribute("groups", groups);
 		return "admin/quanLyGroup";

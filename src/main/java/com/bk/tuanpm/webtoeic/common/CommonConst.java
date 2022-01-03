@@ -6,8 +6,8 @@ public class CommonConst {
     public static final String FLG_OFF = "1";
 
     public static final String ROLE_TUTORIAL = "ROLE_TUTORIAL";
-    public static final String ROLE_MEMBER = "ROLE_TUTORIAL";
-    public static final String ROLE_MEMBER_VIP = "ROLE_TUTORIAL";
-    public static final String ROLE_CONTENT = "ROLE_TUTORIAL";
-    public static final String ROLE_MANAGER = "ROLE_TUTORIAL";
+    public static final String ROLE_MEMBER = "ROLE_MEMBER";
+    public static final String ROLE_MEMBER_VIP = "ROLE_MEMBER_VIP";
+    public static final String ROLE_CONTENT = "ROLE_CONTENT";
+    public static final String ROLE_MANAGER = "ROLE_MANAGER";
 }

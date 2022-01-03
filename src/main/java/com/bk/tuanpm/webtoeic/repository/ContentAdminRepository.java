@@ -8,6 +8,6 @@ import com.bk.tuanpm.webtoeic.entities.ContentAdmin;
 import com.bk.tuanpm.webtoeic.entities.TutorialAdmin;
 
 @Repository
-public interface ContentAdminRepository extends JpaRepository<Account, Integer> {
+public interface ContentAdminRepository extends JpaRepository<ContentAdmin, Integer> {
 	public ContentAdmin findByEmail(String email);
 }

@@ -24,82 +24,82 @@ import com.bk.tuanpm.webtoeic.repository.UserRepository;
 @Transactional
 public class UserAdminServiceImpl {
 
-	@Autowired
-	private UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-	@Autowired
-	private AccountRepository nguoiDungRepo;
+    @Autowired
+    private AccountRepository nguoiDungRepo;
 
-	@Autowired
-	private RoleRepository roleRepository;
-	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private RoleRepository roleRepository;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	@Autowired
-	private ContentAdminRepository contentAdminRepository;
+    @Autowired
+    private ContentAdminRepository contentAdminRepository;
 
-	public Account findByEmail(String email) {
-		return nguoiDungRepo.findByEmail(email);
-	}
+    public Account findByEmail(String email) {
+        return nguoiDungRepo.findByEmail(email);
+    }
 
-	public TutorialAdmin findAdminByEmail(String email) {
-		return nguoiDungRepo.findAdminByEmail(email);
-	}
+    public TutorialAdmin findTutorialAdminByEmail(String email) {
+        return nguoiDungRepo.findAdminByEmail(email);
+    }
 
-	public Account findAccountByEmail(String email) {
-		return contentAdminRepository.findByEmail(email);
-	}
+    public ContentAdmin findContentAdminByEmail(String email) {
+        return contentAdminRepository.findByEmail(email);
+    }
 
-	public Account findByConfirmationToken(String confirmationToken) {
-		return null;
-	}
+    public Account findByConfirmationToken(String confirmationToken) {
+        return null;
+    }
 
-	public Account saveUser(Account nd) {
-		nd.setPassword(bCryptPasswordEncoder.encode(nd.getPassword()));
-		return nguoiDungRepo.save(nd);
-	}
-	
-	public Account saveUserNotPass(Account nd) {
-		return nguoiDungRepo.save(nd);
-	}
+    public Account saveUser(Account nd) {
+        nd.setPassword(bCryptPasswordEncoder.encode(nd.getPassword()));
+        return nguoiDungRepo.save(nd);
+    }
 
-	public Account findById(long id) {
-		Account nd = nguoiDungRepo.findById(id).get();
-		return nd;
-	}
+    public Account saveUserNotPass(Account nd) {
+        return nguoiDungRepo.save(nd);
+    }
 
-	public Account updateUser(Account nd) {
-		return nguoiDungRepo.save(nd);
-	}
+    public Account findById(long id) {
+        Account nd = nguoiDungRepo.findById(id).get();
+        return nd;
+    }
 
-	public void changePass(Account nd, String newPass) {
-		nd.setPassword(bCryptPasswordEncoder.encode(newPass));
-		nguoiDungRepo.save(nd);
-	}
+    public Account updateUser(Account nd) {
+        return nguoiDungRepo.save(nd);
+    }
 
-	public Page<Account> findByVaiTro(int page, Role vaiTro) {
-		return nguoiDungRepo.findByRole(vaiTro, PageRequest.of(page - 1, 6));
-	}
+    public void changePass(Account nd, String newPass) {
+        nd.setPassword(bCryptPasswordEncoder.encode(newPass));
+        nguoiDungRepo.save(nd);
+    }
 
-	public void deleteById(long id) {
-		nguoiDungRepo.deleteById(id);
-	}
+    public Page<Account> findByVaiTro(int page, Role vaiTro) {
+        return nguoiDungRepo.findByRole(vaiTro, PageRequest.of(page - 1, 6));
+    }
 
-	public List<User> getListVipNotAdded() {
-		Role role = roleRepository.findByCode(Role.ROLE_MEMBER_VIP);
-		List<User> list = userRepository.findByRoleAndGroupsIsNull(role);
-		return list;
-	}
+    public void deleteById(long id) {
+        nguoiDungRepo.deleteById(id);
+    }
 
-	public List<User> getListUsers(List<Integer> idUsers) {
-		return userRepository.findAllById(idUsers);
-	}
+    public List<User> getListVipNotAdded() {
+        Role role = roleRepository.findByCode(Role.ROLE_MEMBER_VIP);
+        List<User> list = userRepository.findByRoleAndGroupsIsNull(role);
+        return list;
+    }
 
-	public User getUserById(int id) {
-		return userRepository.findById(id);
-	}
+    public List<User> getListUsers(List<Integer> idUsers) {
+        return userRepository.findAllById(idUsers);
+    }
 
-	public User findUserByEmail(String email) {
-		return userRepository.findByEmail(email);
-	}
+    public User getUserById(int id) {
+        return userRepository.findById(id);
+    }
+
+    public User findUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
 }

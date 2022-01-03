@@ -2,6 +2,7 @@ package com.bk.tuanpm.webtoeic.service.impl;
 
 import java.util.List;
 
+import com.bk.tuanpm.webtoeic.entities.TutorialAdmin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -41,8 +42,13 @@ public class BaiThiThuImpl implements BaiThiThuService {
 	}
 	
 	@Override
-	public List<Exam> getAllByContentAdmin(ContentAdmin admin) {
-		return baithithuRepo.findAllByUserAdd(admin);
+	public List<Exam> getAllExamActive(String isActive) {
+		return baithithuRepo.findAllByIsActive(isActive);
+	}
+
+	@Override
+	public List<Exam> getAllExamNotActive(String isActive) {
+		return baithithuRepo.findAllByIsActive(isActive);
 	}
 
 	@Override

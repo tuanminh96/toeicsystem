@@ -1,5 +1,13 @@
 package com.bk.tuanpm.webtoeic.common;
 
 public class CommonConst {
-    public static int[] listRowNumberSetQuestion = new int[]{1, 2, 3, 8, 11, 14, 17, 20, 26, 29, 32, 35};
+    public static int[] LIST_ROW_NUMBER_SET_QUESTION = new int[]{1, 2, 3, 8, 11, 14, 17, 20, 26, 29, 32, 35};
+    public static final String FLG_ON = "0";
+    public static final String FLG_OFF = "1";
+
+    public static final String ROLE_TUTORIAL = "ROLE_TUTORIAL";
+    public static final String ROLE_MEMBER = "ROLE_TUTORIAL";
+    public static final String ROLE_MEMBER_VIP = "ROLE_TUTORIAL";
+    public static final String ROLE_CONTENT = "ROLE_TUTORIAL";
+    public static final String ROLE_MANAGER = "ROLE_TUTORIAL";
 }

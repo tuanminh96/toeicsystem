@@ -159,7 +159,7 @@ $(document).ready(function () {
         $.ajax({
             dataType: 'json',
             type: 'GET',
-            url: "http://localhost:8080/webtoeic/api/admin/exam/loadExam",
+            url: "http://localhost:8080/webtoeic/api/admin/exam/loadExamApprove",
             success: function (data) {
                 //convert array to json type
                 var jsonArray = new Array();

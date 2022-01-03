@@ -17,168 +17,187 @@ import javax.persistence.Transient;
 @Entity
 @Table(name = "exam")
 public class Exam implements Serializable {
-	@Transient
-	public static final String EASY = "1";
-	@Transient
-	public static final String MEDIUM = "2";
-	@Transient
-	public static final String HARD = "3";
+    @Transient
+    public static final String EASY = "1";
+    @Transient
+    public static final String MEDIUM = "2";
+    @Transient
+    public static final String HARD = "3";
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id_exam", nullable = false)
-	private Integer baithithuid;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_exam", nullable = false)
+    private Integer baithithuid;
 
-	@Column(name = "title")
-	private String tenbaithithu;
+    @Column(name = "title")
+    private String tenbaithithu;
 
-	@Column(name = "thumbnail")
-	private String anhbaithithu;
+    @Column(name = "thumbnail")
+    private String anhbaithithu;
 
-	@Column
-	private Date dateAdd;
+    @Column
+    private Date dateAdd;
 
-	private int countTest;
+    private int countTest;
 
-	@Column(nullable = true, columnDefinition = "float default 0")
-	private float countRate;
-	private String description;
-	private String level;
-	private String updateBy;
-	private Date updateDate;
+    @Column(nullable = true, columnDefinition = "float default 0")
+    private float countRate;
+    private String description;
+    private String level;
+    private String updateBy;
+    private Date updateDate;
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	private ContentAdmin userAdd;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private ContentAdmin userAdd;
 
-	public Integer getBaithithuid() {
-		return baithithuid;
-	}
+    private String isActive;
+    private String delFlg;
 
-	public void setBaithithuid(Integer baithithuid) {
-		this.baithithuid = baithithuid;
-	}
+    public Integer getBaithithuid() {
+        return baithithuid;
+    }
 
-	public String getTenbaithithu() {
-		return tenbaithithu;
-	}
+    public void setBaithithuid(Integer baithithuid) {
+        this.baithithuid = baithithuid;
+    }
 
-	public void setTenbaithithu(String tenbaithithu) {
-		this.tenbaithithu = tenbaithithu;
-	}
+    public String getTenbaithithu() {
+        return tenbaithithu;
+    }
 
-	public String getAnhbaithithu() {
-		return anhbaithithu;
-	}
+    public void setTenbaithithu(String tenbaithithu) {
+        this.tenbaithithu = tenbaithithu;
+    }
 
-	public void setAnhbaithithu(String anhbaithithu) {
-		this.anhbaithithu = anhbaithithu;
-	}
+    public String getAnhbaithithu() {
+        return anhbaithithu;
+    }
 
-	public Date getDateAdd() {
-		return dateAdd;
-	}
+    public void setAnhbaithithu(String anhbaithithu) {
+        this.anhbaithithu = anhbaithithu;
+    }
 
-	public void setDateAdd(Date dateAdd) {
-		this.dateAdd = dateAdd;
-	}
+    public Date getDateAdd() {
+        return dateAdd;
+    }
 
-	public int getCountTest() {
-		return countTest;
-	}
+    public void setDateAdd(Date dateAdd) {
+        this.dateAdd = dateAdd;
+    }
 
-	public void setCountTest(int countTest) {
-		this.countTest = countTest;
-	}
+    public int getCountTest() {
+        return countTest;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public void setCountTest(int countTest) {
+        this.countTest = countTest;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public String getLevel() {
-		return level;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public void setLevel(String level) {
-		this.level = level;
-	}
+    public String getLevel() {
+        return level;
+    }
 
-	public String getUpdateBy() {
-		return updateBy;
-	}
+    public void setLevel(String level) {
+        this.level = level;
+    }
 
-	public void setUpdateBy(String updateBy) {
-		this.updateBy = updateBy;
-	}
+    public String getUpdateBy() {
+        return updateBy;
+    }
 
-	public Date getUpdateDate() {
-		return updateDate;
-	}
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy;
+    }
 
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
-	}
+    public Date getUpdateDate() {
+        return updateDate;
+    }
 
-	public ContentAdmin getUserAdd() {
-		return userAdd;
-	}
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
 
-	public void setUserAdd(ContentAdmin userAdd) {
-		this.userAdd = userAdd;
-	}
+    public ContentAdmin getUserAdd() {
+        return userAdd;
+    }
 
-	public float getCountRate() {
-		return countRate;
-	}
+    public void setUserAdd(ContentAdmin userAdd) {
+        this.userAdd = userAdd;
+    }
 
-	public void setCountRate(float countRate) {
-		this.countRate = countRate;
-	}
+    public float getCountRate() {
+        return countRate;
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((baithithuid == null) ? 0 : baithithuid.hashCode());
-		result = prime * result + ((dateAdd == null) ? 0 : dateAdd.hashCode());
-		result = prime * result + ((userAdd == null) ? 0 : userAdd.hashCode());
-		return result;
-	}
+    public void setCountRate(float countRate) {
+        this.countRate = countRate;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Exam other = (Exam) obj;
-		if (baithithuid == null) {
-			if (other.baithithuid != null)
-				return false;
-		} else if (!baithithuid.equals(other.baithithuid))
-			return false;
-		if (dateAdd == null) {
-			if (other.dateAdd != null)
-				return false;
-		} else if (!dateAdd.equals(other.dateAdd))
-			return false;
-		if (userAdd == null) {
-			if (other.userAdd != null)
-				return false;
-		} else if (!userAdd.equals(other.userAdd))
-			return false;
-		return true;
-	}
+    public String getIsActive() {
+        return isActive;
+    }
 
-	@Override
-	public String toString() {
-		return "Exam [baithithuid=" + baithithuid + ", tenbaithithu=" + tenbaithithu + ", anhbaithithu=" + anhbaithithu
-				+ ", dateAdd=" + dateAdd + "]";
-	}
+    public void setIsActive(String isActive) {
+        this.isActive = isActive;
+    }
+
+    public String getDelFlg() {
+        return delFlg;
+    }
+
+    public void setDelFlg(String delFlg) {
+        this.delFlg = delFlg;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((baithithuid == null) ? 0 : baithithuid.hashCode());
+        result = prime * result + ((dateAdd == null) ? 0 : dateAdd.hashCode());
+        result = prime * result + ((userAdd == null) ? 0 : userAdd.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Exam other = (Exam) obj;
+        if (baithithuid == null) {
+            if (other.baithithuid != null)
+                return false;
+        } else if (!baithithuid.equals(other.baithithuid))
+            return false;
+        if (dateAdd == null) {
+            if (other.dateAdd != null)
+                return false;
+        } else if (!dateAdd.equals(other.dateAdd))
+            return false;
+        if (userAdd == null) {
+            if (other.userAdd != null)
+                return false;
+        } else if (!userAdd.equals(other.userAdd))
+            return false;
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Exam [baithithuid=" + baithithuid + ", tenbaithithu=" + tenbaithithu + ", anhbaithithu=" + anhbaithithu
+                + ", dateAdd=" + dateAdd + "]";
+    }
 
 }

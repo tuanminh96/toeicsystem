@@ -17,7 +17,6 @@ import com.bk.tuanpm.webtoeic.service.*;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.apache.tomcat.jni.Local;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -66,9 +65,41 @@ public class BaiThiThuApi {
     @GetMapping("/loadExam")
     public List<String> showAllExam() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        ContentAdmin currentUser = userAdminService.findContentByEmail(auth.getName());
-        List<Exam> list = baithithuService.getAllByContentAdmin(currentUser);
+        Account account = userAdminService.findAccountByEmail(auth.getName());
+        String roleAccount = account.getRole().getRole();
         List<String> response = new ArrayList<String>();
+
+        List<Exam> list = new ArrayList<>();
+        if(CommonConst.ROLE_CONTENT.equals(roleAccount)){
+            list = baithithuService.getAllExamNotActive(CommonConst.FLG_OFF);
+        } else if(CommonConst.ROLE_TUTORIAL.equals(roleAccount)){
+            list = baithithuService.getAllExamActive(CommonConst.FLG_OFF);
+        } else{
+            return response;
+        }
+
+        for (int i = 0; i < list.size(); i++) {
+            String json = "baithithuid:" + list.get(i).getBaithithuid() + "," + "anhbaithithu:"
+                    + list.get(i).getAnhbaithithu() + "," + "tenbaithithu:" + list.get(i).getTenbaithithu();
+            response.add(json);
+        }
+        return response;
+    }
+
+    @GetMapping("/loadExamApprove")
+    public List<String> showListExamApprove() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Account account = userAdminService.findAccountByEmail(auth.getName());
+        String roleAccount = account.getRole().getRole();
+        List<String> response = new ArrayList<String>();
+
+        List<Exam> list = new ArrayList<>();
+        if(CommonConst.ROLE_TUTORIAL.equals(roleAccount)){
+            list = baithithuService.getAllExamNotActive(CommonConst.FLG_OFF);
+        } else{
+            return response;
+        }
+
         for (int i = 0; i < list.size(); i++) {
             String json = "baithithuid:" + list.get(i).getBaithithuid() + "," + "anhbaithithu:"
                     + list.get(i).getAnhbaithithu() + "," + "tenbaithithu:" + list.get(i).getTenbaithithu();
@@ -94,7 +125,7 @@ public class BaiThiThuApi {
             @RequestParam("fileQuestionImageLst") MultipartFile[] fileQuestionImageLst,
             @RequestParam("fileQuestionAudioLst") MultipartFile[] fileQuestionAudioLst) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        ContentAdmin currentUser = userAdminService.findContentByEmail(auth.getName());
+        ContentAdmin currentUser = userAdminService.findAccountByEmail(auth.getName());
 
         List<String> response = new ArrayList<String>();
         String rootDirectory = request.getSession().getServletContext().getRealPath("/");
@@ -233,7 +264,7 @@ public class BaiThiThuApi {
                 }
 
                 int finalI = i;
-                Boolean isAddSetQuestion = Arrays.stream(CommonConst.listRowNumberSetQuestion).anyMatch(x -> x == finalI);
+                Boolean isAddSetQuestion = Arrays.stream(CommonConst.LIST_ROW_NUMBER_SET_QUESTION).anyMatch(x -> x == finalI);
                 if (isAddSetQuestion) {
                     setQuestion.setExam(exam);
                     setQuestion.setUpdateDate(Date.valueOf(LocalDate.now()));

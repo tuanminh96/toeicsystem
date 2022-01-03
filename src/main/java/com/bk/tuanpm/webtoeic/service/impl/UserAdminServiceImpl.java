@@ -46,7 +46,7 @@ public class UserAdminServiceImpl {
 		return nguoiDungRepo.findAdminByEmail(email);
 	}
 
-	public ContentAdmin findContentByEmail(String email) {
+	public Account findAccountByEmail(String email) {
 		return contentAdminRepository.findByEmail(email);
 	}
 

@@ -2,6 +2,7 @@ package com.bk.tuanpm.webtoeic.service;
 
 import java.util.List;
 
+import com.bk.tuanpm.webtoeic.entities.TutorialAdmin;
 import org.springframework.data.domain.Page;
 
 import com.bk.tuanpm.webtoeic.entities.ContentAdmin;
@@ -17,6 +18,7 @@ public interface BaiThiThuService {
 	void delete(int id);
 	List<Exam> getTopRatingExam();
 	List<Exam> getTopViewExam();
-	List<Exam> getAllByContentAdmin(ContentAdmin admin);
+	List<Exam> getAllExamActive(String isActive);
+	List<Exam> getAllExamNotActive(String isActive);
 	
 }

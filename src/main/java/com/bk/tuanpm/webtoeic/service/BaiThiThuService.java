@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 
-import com.bk.tuanpm.webtoeic.entities.ContentAdmin;
 import com.bk.tuanpm.webtoeic.entities.Exam;
 
 public interface BaiThiThuService {
@@ -17,6 +16,7 @@ public interface BaiThiThuService {
 	void delete(int id);
 	List<Exam> getTopRatingExam();
 	List<Exam> getTopViewExam();
-	List<Exam> getAllByContentAdmin(ContentAdmin admin);
-	
+	List<Exam> getAllExamSubmited(String isActive);
+	void approveExam(Exam exam);
+	void rejectExam(Exam exam);
 }

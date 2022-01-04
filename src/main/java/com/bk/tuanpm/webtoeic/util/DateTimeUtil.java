@@ -12,10 +12,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Map;
 import java.util.TimeZone;
-
-import com.mysql.fabric.xmlrpc.base.Array;
 
 public class DateTimeUtil {
 	public static String getDateStringForVNP() {

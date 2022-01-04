@@ -1,23 +1,9 @@
 package com.bk.tuanpm.webtoeic.util;
 
-import java.text.ParseException;
-import static java.time.DayOfWeek.MONDAY;
-import static java.time.DayOfWeek.SUNDAY;
-import java.text.SimpleDateFormat;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Map;
-import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import com.mysql.fabric.xmlrpc.base.Array;
 
 public class StringUtil {
 	public static String formatPost(String content) {

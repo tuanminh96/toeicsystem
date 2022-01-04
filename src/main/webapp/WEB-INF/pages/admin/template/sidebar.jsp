@@ -24,7 +24,7 @@
               <span class="glyphicon glyphicon-tasks">&nbsp;</span>Quản lý Đề thi</a>
           </li>
           <li class="side-bar">
-            <a href='<c:url value="/admin/exam"/>'>
+            <a href='<c:url value="/admin/exam-approve"/>'>
               <span class="glyphicon glyphicon-tasks">&nbsp;</span>Xét duyệt đề thi</a>
           </li>
           <li class="side-bar">

@@ -42,10 +42,14 @@ public class UserAdminServiceImpl {
 		return nguoiDungRepo.findByEmail(email);
 	}
 
-	public TutorialAdmin findAdminByEmail(String email) {
+	public TutorialAdmin findTutorialAdminByEmail(String email) {
 		return nguoiDungRepo.findAdminByEmail(email);
 	}
 
+	public ContentAdmin findContentAdminByEmail(String email) {
+        return contentAdminRepository.findByEmail(email);
+    }
+	
 	public ContentAdmin findContentByEmail(String email) {
 		return contentAdminRepository.findByEmail(email);
 	}
@@ -106,4 +110,5 @@ public class UserAdminServiceImpl {
 	public Account findUserByUsername(String username) {
 		return nguoiDungRepo.findByUsername(username);
 	}
+
 }

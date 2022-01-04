@@ -67,20 +67,20 @@
             <tbody>
             <tr>
                 <td>Listening</td>
-                <td>${correctListening}/19</td>
-                <td>-</td>
+                <td>${correctListening}/${totalListen}</td>
+                <td>${scoreListen}</td>
                 <td>${timeDoListenExam}</td>
             </tr>
             <tr>
                 <td>Reading</td>
-                <td>${correctReading}/18</td>
-                <td>-</td>
+                <td>${correctReading}/${totalReading}</td>
+                <td>${scoreReading}</td>
                 <td>${timeDoReadExam}</td>
             </tr>
             <tr>
                 <td>Total:</td>
-                <td>${total}/37</td>
-                <td>-</td>
+                <td>${total}/${totalListen+totalReading}</td>
+                <td>${totalScore}</td>
                 <td>${totalTimeDoExam}</td>
             </tr>
             </tbody>

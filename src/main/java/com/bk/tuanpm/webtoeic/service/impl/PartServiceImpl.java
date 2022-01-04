@@ -32,5 +32,31 @@ public class PartServiceImpl implements PartService {
 		// TODO Auto-generated method stub
 		return partRepository.findByPartName(part);
 	}
+	
+	@Override
+	public int getScoreListening() {
+		// TODO Auto-generated method stub
+		int score = 0;
+		int totalQuest = 0;
+		List<PartToeic> part = partRepository.findByType("Listening");
+		for (PartToeic partToeic : part) {
+			totalQuest = totalQuest + partToeic.getQuestionTotal();
+		}
+		score = totalQuest * 10;
+		return score;
+	}
+	
+	@Override
+	public int getScoreReading() {
+		// TODO Auto-generated method stub
+		int score = 0;
+		int totalQuest = 0;
+		List<PartToeic> part = partRepository.findByType("Reading");
+		for (PartToeic partToeic : part) {
+			totalQuest = totalQuest + partToeic.getQuestionTotal();
+		}
+		score = totalQuest * 10;
+		return score;
+	}
 
 }

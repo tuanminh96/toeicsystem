@@ -154,7 +154,7 @@ hr {
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
 <div class="page-content container mainListExam">
-<h3>${message}</h3>
+<h3>${messagePayment}</h3>
 <c:if test="${order.responseCode == 00}">
     <div class="container px-0">
         <div class="row mt-4">

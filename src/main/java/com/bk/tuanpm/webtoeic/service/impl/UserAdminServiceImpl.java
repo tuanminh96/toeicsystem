@@ -102,4 +102,8 @@ public class UserAdminServiceImpl {
 	public User findUserByEmail(String email) {
 		return userRepository.findByEmail(email);
 	}
+	
+	public Account findUserByUsername(String username) {
+		return nguoiDungRepo.findByUsername(username);
+	}
 }

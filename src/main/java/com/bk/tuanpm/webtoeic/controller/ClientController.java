@@ -8,9 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.bk.tuanpm.webtoeic.config.MessageConfig;
 import com.bk.tuanpm.webtoeic.dto.ExamHistoryDTO;
 import com.bk.tuanpm.webtoeic.service.ClientAccountService;
 import com.bk.tuanpm.webtoeic.service.NotificationService;
+import com.bk.tuanpm.webtoeic.service.PartService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -47,6 +49,12 @@ public class ClientController {
 	
 	@Autowired
 	private NotificationService notificationService;
+	
+	@Autowired
+	private MessageConfig messageConfig;
+	
+	@Autowired
+	private PartService partService;
 
 	@ModelAttribute("loggedInUser")
 	public Account loggedInUser() {
@@ -96,8 +104,10 @@ public class ClientController {
 		int idAccount = account.getId();
 		model.addAttribute("user", account);
 
+		int totalscoreListening = partService.getScoreListening();
+		int totalscoreReading = partService.getScoreReading();
 		// Lay ra list cac bai thi accout da thi.
-		List<ExamHistoryDTO> listExamHistoryDTO = clientAccountService.findAllExamHistory(idAccount);
+		List<ExamHistoryDTO> listExamHistoryDTO = clientAccountService.findAllExamHistory(idAccount, totalscoreListening, totalscoreReading);
 		model.addAttribute("listExamHistoryDTO", listExamHistoryDTO);
 
 		// Lay ra tong so bai thi(exam) account da thi.
@@ -111,6 +121,15 @@ public class ClientController {
 	public String updateNguoiDung(@ModelAttribute Account nd, HttpServletRequest request) {
 		Account currentUser = getSessionUser(request);
 		currentUser.setDiaChi(nd.getDiaChi());
+		HttpSession session = request.getSession();
+
+		if(nguoiDungService.findUserByUsername(nd.getUsername())!=null && !currentUser.getUsername().equals(nd.getUsername()) ) {
+			session.setAttribute("errorupprofile", messageConfig.getProperty("profile.username.duplicate"));
+		}
+		else {
+			session.removeAttribute("errorupprofile");
+			currentUser.setUsername(nd.getUsername());
+		}
 		currentUser.setHoTen(nd.getHoTen());
 		currentUser.setSoDienThoai(nd.getSoDienThoai());
 		nguoiDungService.updateUser(currentUser);

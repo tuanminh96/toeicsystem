@@ -82,4 +82,9 @@ public class PaymentServiceImpl implements PaymentService {
 	public OrderPayment saveOrder(OrderPayment op) {
 		return paymentRepository.save(op);
 	}
+	
+	@Override
+	public OrderPayment findOrderByRef(String refNo) {
+		return paymentRepository.findByRefNo(refNo);
+	}
 }

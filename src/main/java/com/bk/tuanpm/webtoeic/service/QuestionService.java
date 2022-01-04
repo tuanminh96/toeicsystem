@@ -22,4 +22,6 @@ public interface QuestionService {
     Map<String, List<Question>> getMapPartQuestionReading(List<Question> list);
 
     public List<Question> getListCauHoiByPart(List<PartToeic> part);
+
+	Question getQuestionId(int id);
 }

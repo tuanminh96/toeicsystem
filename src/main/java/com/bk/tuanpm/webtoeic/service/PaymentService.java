@@ -6,4 +6,6 @@ public interface PaymentService {
 
 	OrderPayment saveOrder(OrderPayment op);
 
+	OrderPayment findOrderByRef(String refNo);
+
 }

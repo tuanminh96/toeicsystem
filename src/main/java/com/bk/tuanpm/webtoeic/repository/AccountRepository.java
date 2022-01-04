@@ -6,6 +6,7 @@ import java.util.Set;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.bk.tuanpm.webtoeic.entities.Account;
@@ -17,6 +18,8 @@ import com.bk.tuanpm.webtoeic.entities.User;
 public interface AccountRepository extends JpaRepository<Account, Long> {
 
 	Account findByEmail(String email);
+	
+	Account findByUsername(String newUsername);
 	
 	Page<Account> findByRole(Role vaiTro, Pageable of);
 

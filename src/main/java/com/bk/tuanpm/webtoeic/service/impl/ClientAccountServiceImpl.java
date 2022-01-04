@@ -3,6 +3,7 @@ package com.bk.tuanpm.webtoeic.service.impl;
 import com.bk.tuanpm.webtoeic.dto.ExamHistoryDTO;
 import com.bk.tuanpm.webtoeic.repository.ClientAccountRepository;
 import com.bk.tuanpm.webtoeic.service.ClientAccountService;
+import com.bk.tuanpm.webtoeic.service.PartService;
 import com.bk.tuanpm.webtoeic.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ public class ClientAccountServiceImpl implements ClientAccountService {
     private ClientAccountRepository clientAccountRepository;
 
     @Override
-    public List<ExamHistoryDTO> findAllExamHistory(int userId) {
+    public List<ExamHistoryDTO> findAllExamHistory(int userId, int totalscoreListening, int totalscoreReading) {
         List<Object[]> listObject = clientAccountRepository.findAllExamHistory(userId);
         List<ExamHistoryDTO> listExamHistoryDTO = new ArrayList<ExamHistoryDTO>();
         for (Object[] obj : listObject) {
@@ -28,6 +29,8 @@ public class ClientAccountServiceImpl implements ClientAccountService {
             examHistoryDTO.setTotalTimeTest(CommonUtil.convertTimeNumberToTimeView((Integer) obj[2]));
             examHistoryDTO.setScoreReading((int) obj[3]);
             examHistoryDTO.setScoreListen((int) obj[4]);
+            examHistoryDTO.setTotalScoreListen(totalscoreListening);
+            examHistoryDTO.setTotalScoreRead(totalscoreReading);
             listExamHistoryDTO.add(examHistoryDTO);
         }
         return listExamHistoryDTO;

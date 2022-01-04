@@ -131,4 +131,9 @@ public class QuestionImpl implements QuestionService {
         }
         return newMapPartQuestion;
     }
+    
+    @Override
+    public Question getQuestionId(int id) {
+    	return questionRespository.findById(id).orElse(null);
+    }
 }

@@ -82,6 +82,8 @@ public class PaymentController {
 		//Get current payment user
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userAdminServiceImpl.findUserByEmail(auth.getName());
+		
+		//chuẩn bị tham số truyền lên API
 		String urlPayment = paymentConfig.getProperty("vnp_Url");
 		
 		String vnp_Command = paymentConfig.getProperty("vnp_Command");
@@ -106,6 +108,18 @@ public class PaymentController {
 		paymentDTO.setVnp_SecureHash(paymentConfig.getProperty("vnp_HashSecret"));
 		paymentDTO.setVnp_CurrCode(paymentConfig.getProperty("vnp_CurrCode"));
 		paymentDTO.setVnp_Version(paymentConfig.getProperty("vnp_Version"));
+		
+		//Cap nhat thong tin thanh toan vao DB
+    	OrderPayment orderPayment = new OrderPayment();
+    	orderPayment.setUser(user);
+    	orderPayment.setAmount(paymentDTO.getVnp_Amount() * 100);
+    	orderPayment.setBankCode(paymentDTO.getVnp_BankCode());
+    	orderPayment.setOrderInfo(vnp_OrderInfo);
+    	orderPayment.setRefNo(""+vnp_TxnRef);
+    	orderPayment.setStatus("Processing");
+    	paymentServiceImpl.saveOrder(orderPayment);
+    	
+    	//tạo query api
 		String queryUrl = paymentServiceImpl.getUrlVNPayPayment(paymentDTO, urlPayment);
 		com.google.gson.JsonObject job = new JsonObject();
         job.addProperty("code", "00");
@@ -153,9 +167,17 @@ public class PaymentController {
 	        - Neu trang thai don hang OK, tien hanh cap nhat vao DB, tra lai cho VNPAY RspCode=00
 	        - Neu trang thai don hang (da cap nhat roi) => khong cap nhat vao DB, tra lai cho VNPAY RspCode=02
 	         */
-	        boolean checkOrderId = true; // vnp_TxnRef đơn hàng có tồn tại trong database merchant
-	        boolean checkAmount = true; // vnp_Amount is valid  (so sánh số tiền VNPAY request và sô tiền của giao dịch trong database merchant)
-	        boolean checkOrderStatus = true; // PaymnentStatus = 0 (pending)
+	        // vnp_TxnRef đơn hàng có tồn tại trong database merchant
+	    	boolean checkOrderId = false; 
+	    	OrderPayment orderPayment = paymentServiceImpl.findOrderByRef(vnp_TxnRef);
+	    	if(orderPayment!=null) {
+	    		checkOrderId = true;
+	    	}
+	        // vnp_Amount is valid  (so sánh số tiền VNPAY request và sô tiền của giao dịch trong database merchant)
+	    	boolean checkAmount =  (vnp_Amount.equals(""+orderPayment.getAmount())); 
+	    	
+	    	//Kiem tra neu status thanh toán đang chưa Paid thì mới đc tiến hành cạp nhật DB là Paid
+	        boolean checkOrderStatus = ("Processing").equals(orderPayment.getStatus());
 	        if (checkOrderId) {
 	            if (checkAmount) {
 	                if (checkOrderStatus) {
@@ -174,14 +196,9 @@ public class PaymentController {
 	                    	//gui thong bao cho user
 	                    	
 	                    	//Cap nhat thong tin thanh toan vao DB
-	                    	OrderPayment orderPayment = new OrderPayment();
-	                    	orderPayment.setUser(userUp);
-	                    	orderPayment.setAmount(Integer.parseInt(vnp_Amount));
-	                    	orderPayment.setBankCode(vnp_BankCode);
 	                    	orderPayment.setBankTranNo(vnp_BankTranNo);
 	                    	orderPayment.setCardType(vnp_CardType);
-	                    	orderPayment.setOrderInfo(vnp_OrderInfo);
-	                    	orderPayment.setRefNo(vnp_TxnRef);
+	                    	orderPayment.setBankCode(vnp_BankCode);
 	                    	orderPayment.setPayDate(DateTimeUtil.convertStringToDate(vnp_PayDate));
 	                    	orderPayment.setResponseCode(vnp_ResponseCode);
 	                    	orderPayment.setTransactionNo(vnp_TransactionNo);
@@ -193,6 +210,15 @@ public class PaymentController {
 	                    } else {
 	                        //Xu ly thanh toan khong thanh cong
 	                        //  out.print("GD Khong thanh cong");
+	                    	orderPayment.setBankTranNo(vnp_BankTranNo);
+	                    	orderPayment.setCardType(vnp_CardType);
+	                    	orderPayment.setBankCode(vnp_BankCode);
+	                    	orderPayment.setPayDate(DateTimeUtil.convertStringToDate(vnp_PayDate));
+	                    	orderPayment.setResponseCode(vnp_ResponseCode);
+	                    	orderPayment.setTransactionNo(vnp_TransactionNo);
+	                    	orderPayment.setTransactionStatus(vnp_TransactionStatus);
+	                    	orderPayment.setStatus("Failed");
+	                    	model.addAttribute("messagePayment", messageConfig.getProperty("payment.failed"));
 	                    }
 	                    model.addAttribute("messagePayment", messageConfig.getProperty("payment.success"));
 	                } else {
@@ -202,7 +228,8 @@ public class PaymentController {
 	            } else {
 	            	model.addAttribute("messagePayment", messageConfig.getProperty("payment.04"));
 	            }
-	        } else {
+	        }
+	        else {
 	        	model.addAttribute("messagePayment", messageConfig.getProperty("payment.01"));
 	        }
 

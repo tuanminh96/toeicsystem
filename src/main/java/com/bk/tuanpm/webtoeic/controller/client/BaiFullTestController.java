@@ -152,7 +152,17 @@ public class BaiFullTestController {
         HashMap<String, String> mapAnswerListen = (HashMap<String, String>) session.getAttribute("mapAnswerListen");
 
         List<Question> listQuestion = questionService.getListCauHoi(baithithuService.getBaiThiThu(examId).get(0));
-
+        
+        //caculate so cau dung tung part;
+        int correctPart1 = 0;
+        int correctPart2 = 0;
+        int correctPart3 = 0;
+        int correctPart4 = 0;
+        int correctPart5 = 0;
+        int correctPart6 = 0;
+        int correctPart7 = 0;
+        
+        
         int totalCorrectAnswerListen = 0;
         for (Map.Entry<String, String> entry : mapAnswerListen.entrySet()) {
             String quesId = entry.getKey();
@@ -160,6 +170,21 @@ public class BaiFullTestController {
             String corectAnswer = listQuestion.stream().filter(item -> item.getCauhoibaithithuid().toString().equals(quesId)).findFirst().orElseGet(() -> new Question()).getCorrectanswer();
             if (userAnser.equals(corectAnswer)) {
                 totalCorrectAnswerListen++;
+                
+                //lưu lại các câu đúng của mỗi part
+                Question question = questionService.getQuestionId(Integer.parseInt(quesId));
+                if("Part I".equals(question.getPartToeic().getPartName())) {
+                	correctPart1++;
+                }
+                if("Part II".equals(question.getPartToeic().getPartName())) {
+                	correctPart2++;
+                }
+                if("Part III".equals(question.getPartToeic().getPartName())) {
+                	correctPart3++;
+                }
+                if("Part IV".equals(question.getPartToeic().getPartName())) {
+                	correctPart4++;
+                }
             }
         }
 
@@ -170,6 +195,18 @@ public class BaiFullTestController {
             String corectAnswer = listQuestion.stream().filter(item -> item.getCauhoibaithithuid().toString().equals(quesId)).findFirst().orElseGet(() -> new Question()).getCorrectanswer();
             if (userAnser.equals(corectAnswer)) {
                 totalCorrectAnswerRead++;
+                
+                //lưu lại các câu đúng của mỗi part
+                Question question = questionService.getQuestionId(Integer.parseInt(quesId));
+                if("Part V".equals(question.getPartToeic().getPartName())) {
+                	correctPart5++;
+                }
+                if("Part VI".equals(question.getPartToeic().getPartName())) {
+                	correctPart6++;
+                }
+                if("Part VII".equals(question.getPartToeic().getPartName())) {
+                	correctPart7++;
+                }
             }
         }
 
@@ -181,12 +218,36 @@ public class BaiFullTestController {
         ketquabaitest.setScoreListen(totalCorrectAnswerListen * 10);
         ketquabaitest.setCorrectreading(totalCorrectAnswerRead);
         ketquabaitest.setScoreReading(totalCorrectAnswerRead * 10);
+        ketquabaitest.setRightPart1(correctPart1);
+        ketquabaitest.setRightPart2(correctPart2);
+        ketquabaitest.setRightPart3(correctPart3);
+        ketquabaitest.setRightPart4(correctPart4);
+        ketquabaitest.setRightPart5(correctPart5);
+        ketquabaitest.setRightPart6(correctPart6);
+        ketquabaitest.setRightPart7(correctPart7);
         ketquabaitest.setNguoidung(currentUser);
         ketquabaitest.setTotalTimeTest(totalTimeDoExam);
         ketquabaitestService.save(ketquabaitest);
 
+        //Get total question Listening
+        int totalLi = 0;
+        for (PartToeic part : partService.getPartByType("Listening")) {
+			totalLi+= part.getQuestionTotal();
+		}
+        
+        //Get total question Reading
+        int totalRe = 0;
+        for (PartToeic part : partService.getPartByType("Reading")) {
+        	totalRe+= part.getQuestionTotal();
+		}
+        
         model.addAttribute("correctListening", totalCorrectAnswerListen);
         model.addAttribute("correctReading", totalCorrectAnswerRead);
+        model.addAttribute("scoreListen", ketquabaitest.getScoreListen());
+        model.addAttribute("scoreReading", ketquabaitest.getScoreReading());
+        model.addAttribute("totalListen", totalLi);
+        model.addAttribute("totalReading", totalRe);
+        model.addAttribute("totalScore", ketquabaitest.getScoreListen()+ketquabaitest.getScoreReading());
         model.addAttribute("total", totalCorrectAnswerRead + totalCorrectAnswerListen);
 
         return "client/resultTestUser";

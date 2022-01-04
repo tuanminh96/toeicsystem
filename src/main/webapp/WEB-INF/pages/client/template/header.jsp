@@ -154,7 +154,7 @@ h3 {
 										<c:if test="${pageContext.request.isUserInRole('MEMBER_VIP')}">
 											<a class="dropdown-item"
 												href="<%=request.getContextPath()%>/listnoti/1">Thông
-												báo</a>
+												báo - <span class="badge badge-danger">${count_notifi}</span> </a>
 										</c:if>
 									</c:if>
 									<a class="dropdown-item"
@@ -167,9 +167,9 @@ h3 {
 										id="bell"> <i class="fa fa-lg fa-bell"></i> <span
 										class="notification-badge badge badge-danger" id="totalUnseen">${count_notifi}</span>
 									</a>
-									<div class="notifications" id="box">
+								<%-- 	<div class="notifications" id="box">
 										<h2>
-											Thông báo - <span>${count_notifi}</span>
+											Thông báo - <span class="badge badge-danger">${count_notifi}</span>
 										</h2>
 										<div class="notifications-item">
 											<div class="text">
@@ -183,7 +183,7 @@ h3 {
 												<p>+20 vista badge earned</p>
 											</div>
 										</div>
-									</div>
+									</div> --%>
 								</div>
 							</c:if>
 				</div>

@@ -10,4 +10,8 @@ public interface PartService {
 	public List<PartToeic> getPartByType(String type);
 	
 	public PartToeic getPartByName(String type);
+
+	int getScoreListening();
+
+	int getScoreReading();
 }

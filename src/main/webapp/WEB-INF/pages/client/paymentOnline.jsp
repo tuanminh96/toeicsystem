@@ -35,8 +35,14 @@ input[type="radio"] {
 }
 </style>
 	<jsp:include page="template/header.jsp"></jsp:include>
+
 	<div class="container mainListExam">
-		<div class="container py-5">
+		<div class="container">
+			<div class="alert alert-warning alert-dismissible">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+				<strong>Chú ý!</strong> Nâng cấp lên VIP sẽ cần phải trả một khoản phí 500.000VNĐ 
+				Hãy chọn một trong các phương thức dưới sau đó nhấn Thanh toán
+			</div>
 			<!-- For demo purpose -->
 			<div class="row mb-4">
 				<div class="col-lg-8 mx-auto text-center">
@@ -68,8 +74,7 @@ input[type="radio"] {
 								<div class="form-group ">
 									<label for="Select Your Bank">
 										<h6>Ngân hàng</h6>
-									</label> 
-									<select class="form-control" id="bankselect">
+									</label> <select class="form-control" id="bankselect">
 										<option value="" selected disabled>--Chọn ngân hàng
 											thanh toán--</option>
 										<option value="TPBANK">TPBank</option>
@@ -84,14 +89,14 @@ input[type="radio"] {
 											Nam Á</option>
 										<option value="VIETINBANK">VIETINBANK-Ngân hàng Công
 											thương (Vietinbank)</option>
-									</select> 
-									<label for="Select Your Bank">Số tiền: <span
+									</select> <label for="Select Your Bank">Số tiền: <span
 										style="font-family: cursive; font-size: 30px; color: red;">500.000</span>
 										VNĐ
 									</label>
 									<div class="input-group">
-										<label class="input-group-prepend">Thông tin thanh toán: </label>
-										<input id="payment-desc" type="text" class="form-control" value="Nâng cấp tài khoản lên VIP">
+										<label class="input-group-prepend">Thông tin thanh
+											toán: </label> <input id="payment-desc" type="text"
+											class="form-control" value="Nâng cấp tài khoản lên VIP">
 									</div>
 								</div>
 								<div class="form-group">
@@ -118,9 +123,9 @@ input[type="radio"] {
 				</div>
 			</div>
 		</div>
-		<div style="margin: auto; width: 50%;">
+		<div style="margin-left: 30%; width: 50%;">
 			<img alt=""
-				src="https://polarisvietnam.com/primary_polaris/resources/images/logo/logo_partner_vnpay.png">
+				src="https://tuhoclamweb.com/wp-content/uploads/2020/07/vnpay_qr.png">
 		</div>
 	</div>
 	<jsp:include page="template/footer.jsp"></jsp:include>

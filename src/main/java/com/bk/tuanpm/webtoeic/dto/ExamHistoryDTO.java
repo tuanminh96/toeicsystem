@@ -5,7 +5,9 @@ public class ExamHistoryDTO {
     private String dateTest;
     private String totalTimeTest;
     private int scoreReading;
+    private int totalScoreRead;
     private int scoreListen;
+    private int totalScoreListen;
 
     public ExamHistoryDTO() {
     }
@@ -50,7 +52,24 @@ public class ExamHistoryDTO {
         this.scoreListen = scoreListen;
     }
 
-    @Override
+    
+    public int getTotalScoreRead() {
+		return totalScoreRead;
+	}
+
+	public void setTotalScoreRead(int totalScoreRead) {
+		this.totalScoreRead = totalScoreRead;
+	}
+
+	public int getTotalScoreListen() {
+		return totalScoreListen;
+	}
+
+	public void setTotalScoreListen(int totalScoreListen) {
+		this.totalScoreListen = totalScoreListen;
+	}
+
+	@Override
     public String toString() {
         return "ExamHistoryDTO{" +
                 "title='" + title + '\'' +

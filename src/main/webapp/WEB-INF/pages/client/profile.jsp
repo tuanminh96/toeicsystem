@@ -100,6 +100,16 @@ textarea:focus, input:focus {
 						</div>
 						<div class="form-group">
 							<label for="staticEmail" style="font-weight: bold"
+								class="col-sm-2 col-form-label">Tên người dùng</label>
+							<div class="col-sm-10">
+								<input type="text" class="changeInput" value="${user.username}"
+									name="username" required="required" autofocus>
+							</div>
+							<c:set var="errorupprofile" scope="session" value="${errorupprofile}"/>
+							<p style="color: red;">${errorupprofile}</p>
+						</div>
+						<div class="form-group">
+							<label for="staticEmail" style="font-weight: bold"
 								class="col-sm-2 col-form-label">Họ Tên</label>
 							<div class="col-sm-10">
 								<input type="text" class="changeInput" value="${user.hoTen}"
@@ -184,8 +194,8 @@ textarea:focus, input:focus {
 									<td>${examHistoryDTO.title}</td>
 									<td>${examHistoryDTO.dateTest}</td>
 									<td>${examHistoryDTO.totalTimeTest}s</td>
-									<td>${examHistoryDTO.scoreListen}/190</td>
-									<td>${examHistoryDTO.scoreReading}/180</td>
+									<td>${examHistoryDTO.scoreListen}/${examHistoryDTO.totalScoreListen}</td>
+									<td>${examHistoryDTO.scoreReading}/${examHistoryDTO.totalScoreRead}</td>
 								</tr>
 							</c:forEach>
 						</tbody>

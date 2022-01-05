@@ -5,6 +5,10 @@ public class CommonConst {
     public static final String FLG_ON = "0";
     public static final String FLG_OFF = "1";
 
+    public static final String CREATE = "0";
+    public static final String APPROVE = "1";
+    public static final String REJECT = "2";
+
     public static final String ROLE_TUTORIAL = "ROLE_TUTORIAL";
     public static final String ROLE_MEMBER = "ROLE_MEMBER";
     public static final String ROLE_MEMBER_VIP = "ROLE_MEMBER_VIP";

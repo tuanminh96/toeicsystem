@@ -1,5 +1,6 @@
 package com.bk.tuanpm.webtoeic.service.impl;
 
+import java.util.Collection;
 import java.util.List;
 
 import com.bk.tuanpm.webtoeic.common.CommonConst;
@@ -33,8 +34,7 @@ public class BaiThiThuImpl implements BaiThiThuService {
 
     @Override
     public Page<Exam> getBaiThiThu(int page, int size) {
-        return baithithuRepo.findAll(PageRequest.of(page, size));
-
+        return baithithuRepo.findAll(PageRequest.of(page, size), CommonConst.APPROVE, CommonConst.FLG_ON);
     }
 
     @Override
@@ -43,19 +43,19 @@ public class BaiThiThuImpl implements BaiThiThuService {
     }
 
     @Override
-    public List<Exam> getAllExamSubmited(String isActive) {
-        return baithithuRepo.findAllByIsActiveAndDelFlg(isActive, CommonConst.FLG_ON);
+    public List<Exam> getAllExamSubmited(Collection<String> status) {
+        return baithithuRepo.findAllByIsActiveAndDelFlg(status, CommonConst.FLG_ON);
     }
 
     @Override
     public void approveExam(Exam exam) {
-        exam.setIsActive(CommonConst.FLG_ON);
+        exam.setIsActive(CommonConst.APPROVE);
         baithithuRepo.save(exam);
     }
 
     @Override
     public void rejectExam(Exam exam) {
-        exam.setDelFlg(CommonConst.FLG_OFF);
+        exam.setIsActive(CommonConst.REJECT);
         baithithuRepo.save(exam);
     }
 

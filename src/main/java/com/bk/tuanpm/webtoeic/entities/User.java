@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -18,7 +19,10 @@ public class User extends Account {
 	
 	private String status;
 	private Date addDate;
+	
+	@Column(columnDefinition = "nvarchar(255)")
 	private String school;
+	@Column(columnDefinition = "nvarchar(255)")
 	private String company;
 	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	@JoinTable(name = "group_member", joinColumns = { @JoinColumn(name = "id_user") }, inverseJoinColumns = {

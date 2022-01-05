@@ -18,6 +18,8 @@ public class Rating {
 	private Integer idRating;
 	
 	private int star;
+	
+	@Column(columnDefinition = "nvarchar(MAX)")
 	private String review;
 	private Date dateReview;
 	

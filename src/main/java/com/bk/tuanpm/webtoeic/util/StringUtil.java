@@ -1,5 +1,6 @@
 package com.bk.tuanpm.webtoeic.util;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -35,6 +36,11 @@ public class StringUtil {
 	    }
 
 	    return containedUrls;
+	}
+	
+	public static String autoGenUsername(int hashCode) {
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		return ""+timestamp.getTime()+hashCode;
 	}
 
 }	

@@ -2,6 +2,7 @@ package com.bk.tuanpm.webtoeic.entities;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,6 +17,7 @@ public class Remark {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int idRemark;
 	
+	@Column(columnDefinition = "nvarchar(MAX)")
 	private String remark;
 	private Date timeRemark;
 	private String weekNum;

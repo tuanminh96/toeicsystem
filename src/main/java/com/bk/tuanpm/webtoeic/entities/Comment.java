@@ -19,6 +19,7 @@ public class Comment {
 	@Column(name = "id_comment", nullable = false)
 	private Integer idCom;
 	private Date dateCom;
+	@Column(columnDefinition = "nvarchar(MAX)")
 	private String comment;
 	
 	@ManyToOne

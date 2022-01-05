@@ -76,7 +76,11 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label>Level</label>
-                        <input id="examLevel" class="form-control">
+                        <select class="form-control" id="selectLevel">
+                            <option value="1">Dễ</option>
+                            <option value="2">Trung Bình</option>
+                            <option value="3">Khó</option>
+                        </select>
                     </div>
                     <div class="form-group col-md-12">
                         <label>Mô tả bài thi</label>

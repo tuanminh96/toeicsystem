@@ -18,6 +18,8 @@ public class ExplainDetail {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_explain", nullable = false)
 	private Integer idExplain;
+	
+	@Column(columnDefinition = "nvarchar(MAX)")
 	private String explain;
 	
 	@ManyToOne

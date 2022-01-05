@@ -29,7 +29,7 @@ public class Exam implements Serializable {
     @Column(name = "id_exam", nullable = false)
     private Integer baithithuid;
 
-    @Column(name = "title")
+    @Column(name = "title", columnDefinition = "nvarchar(255)")
     private String tenbaithithu;
 
     @Column(name = "thumbnail")
@@ -42,7 +42,10 @@ public class Exam implements Serializable {
 
     @Column(nullable = true, columnDefinition = "float default 0")
     private float countRate;
+    
+    @Column(columnDefinition = "nvarchar(MAX)")
     private String description;
+    
     private String level;
     private String updateBy;
     private Date updateDate;

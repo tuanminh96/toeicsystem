@@ -24,8 +24,10 @@ public class Group {
 	@Column(name = "id_group", nullable = false)
 	private Integer idGroup;
 
+	@Column(columnDefinition = "nvarchar(255)")
 	private String name;
 	private String image;
+	@Column(columnDefinition = "nvarchar(MAX)")
 	private String description;
 	private Date createDate;
 	private int totalMem;

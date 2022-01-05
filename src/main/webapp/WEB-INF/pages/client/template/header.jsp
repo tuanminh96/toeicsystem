@@ -140,7 +140,7 @@ h3 {
 									<input type="hidden" value="vip" id="vip">
 							</c:if>
 							<li class="nav-item dropdown"><a
-								class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">${nguoiDung.hoTen}</a>
+								class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">${nguoiDung.username}</a>
 								<div class="dropdown-menu">
 									<c:if
 										test="${pageContext.request.isUserInRole('MEMBER') || pageContext.request.isUserInRole('MEMBER_VIP')}">

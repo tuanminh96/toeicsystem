@@ -37,8 +37,10 @@ public class Account {
 	@Transient
 	@JsonIgnore
 	private String confirmPassword;
+	@Column(name = "ho_ten", columnDefinition = "nvarchar(255)")
 	private String hoTen;
 	private String soDienThoai;
+	@Column(columnDefinition = "nvarchar(255)")
 	private String diaChi;
 	private int gender;
 	private boolean isDelete;

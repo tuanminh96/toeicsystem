@@ -29,6 +29,7 @@ public class SetQuestion {
 	@Column(columnDefinition = "TEXT")
 	private String paragraph;
 
+	@Column(columnDefinition = "TEXT")
 	private String content;
 	private int totalQuest;
 	@ManyToOne

@@ -24,7 +24,10 @@ public class Notification {
 	@Column(name = "id_notification", nullable = false)
 	private Integer idNoti;
 	
+	@Column(columnDefinition = "nvarchar(255)")
 	private String brief;
+	
+	@Column(columnDefinition = "nvarchar(MAX)")
 	private String content;
 	private Date dateSend;
 	@Column(name = "date_seen", nullable = false)

@@ -16,6 +16,7 @@ import com.bk.tuanpm.webtoeic.entities.User;
 import com.bk.tuanpm.webtoeic.service.RoleService;
 import com.bk.tuanpm.webtoeic.service.SecurityService;
 import com.bk.tuanpm.webtoeic.service.impl.UserAdminServiceImpl;
+import com.bk.tuanpm.webtoeic.util.StringUtil;
 import com.bk.tuanpm.webtoeic.validator.NguoiDungValidator;
 
 @Controller
@@ -48,6 +49,7 @@ public class RegisterController {
 			return "register";
 		}
 		nguoiDung.setRole(roleService.getRole(Role.ROLE_MEMBER));
+		nguoiDung.setUsername(StringUtil.autoGenUsername(nguoiDung.hashCode()));
 		nguoiDungService.saveUser(nguoiDung);
 		securityService.autologin(nguoiDung.getEmail(), nguoiDung.getConfirmPassword());
 		return "redirect:/";

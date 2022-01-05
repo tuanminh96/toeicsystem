@@ -22,6 +22,7 @@ public class Post {
 	
 	private Date datePost;
 	
+	@Column(columnDefinition = "nvarchar(255)")
 	private String title;
 	
 	@Column(columnDefinition = "NVARCHAR(MAX)")

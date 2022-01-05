@@ -2,6 +2,7 @@ package com.bk.tuanpm.webtoeic.entities;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +21,7 @@ public class OrderPayment {
 	private String bankCode;
 	private String bankTranNo;
 	private String cardType;
+	@Column(columnDefinition = "nvarchar(MAX)")
 	private String orderInfo;
 	private Date payDate;
 	private String responseCode;

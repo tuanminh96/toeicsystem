@@ -44,7 +44,11 @@
 					<p>Bạn không có quyền truy cập vào trang này</p>
 				</div>
 			</c:if>
-
+			<c:if test="${param.invalidSession != null}">
+				<div class="alert alert-danger">
+					<p>Phiên đăng nhập đã kết thúc. Vui lòng đăng nhập lại</p>
+				</div>
+			</c:if>
 			<form class="login-form" method="POST" action="${contextPath}/login">
 
 				<input type="text" placeholder="Email" name="email" required="required"

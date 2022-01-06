@@ -27,6 +27,7 @@ import com.bk.tuanpm.webtoeic.entities.Notification;
 import com.bk.tuanpm.webtoeic.entities.User;
 import com.bk.tuanpm.webtoeic.service.GroupService;
 import com.bk.tuanpm.webtoeic.service.NotificationService;
+import com.bk.tuanpm.webtoeic.service.SendingEmailService;
 import com.bk.tuanpm.webtoeic.service.impl.NotificationServiceImpl;
 import com.bk.tuanpm.webtoeic.service.impl.UserAdminServiceImpl;
 
@@ -42,12 +43,15 @@ public class NotificationController {
 	@Autowired
     private NotificationService notificationServiceImpl;
 	
+	@Autowired
+	private SendingEmailService sendingEmailService;
+	
 	@GetMapping("/listnoti/{idMember}")
 	public String getNotficationForUser(Model model, @PathVariable Integer idMember) {
 		try {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             User currentUser = nguoiDungService.findUserByEmail(auth.getName());
-            
+            sendingEmailService.sendingEmail(currentUser);
             List<Notification> list = notificationServiceImpl.getListNotifiByUser(currentUser);
             model.addAttribute("listData", list);
 		} catch (Exception e) {

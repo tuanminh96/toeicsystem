@@ -1,5 +1,6 @@
 package com.bk.tuanpm.webtoeic.service;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -16,7 +17,7 @@ public interface BaiThiThuService {
 	void delete(int id);
 	List<Exam> getTopRatingExam();
 	List<Exam> getTopViewExam();
-	List<Exam> getAllExamSubmited(String isActive);
+	List<Exam> getAllExamSubmited(Collection<String> isActive);
 	void approveExam(Exam exam);
 	void rejectExam(Exam exam);
 }

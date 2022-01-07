@@ -9,6 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -185,6 +186,7 @@ public class PaymentController {
 	                        //Cap nhat lại role của user lên VIP
 	                    	User userUp = userAdminServiceImpl.getUserById(idMem);
 	                    	userUp.setRole(roleService.getRole(Role.ROLE_MEMBER_VIP));
+	                    	userUp.setUpgradeDate(new Date());
 	                    	userAdminServiceImpl.saveUserNotPass(userUp);
 	                    	
 	                    	//reload to role VIP
@@ -204,6 +206,7 @@ public class PaymentController {
 	                    	orderPayment.setTransactionNo(vnp_TransactionNo);
 	                    	orderPayment.setTransactionStatus(vnp_TransactionStatus);
 	                    	orderPayment.setStatus("Paid");
+	                    	
 	                    	paymentServiceImpl.saveOrder(orderPayment);
 	                    	
 	                    	model.addAttribute("order", orderPayment);
@@ -218,19 +221,29 @@ public class PaymentController {
 	                    	orderPayment.setTransactionNo(vnp_TransactionNo);
 	                    	orderPayment.setTransactionStatus(vnp_TransactionStatus);
 	                    	orderPayment.setStatus("Failed");
+	                    	paymentServiceImpl.saveOrder(orderPayment);
 	                    	model.addAttribute("messagePayment", messageConfig.getProperty("payment.failed"));
 	                    }
 	                    model.addAttribute("messagePayment", messageConfig.getProperty("payment.success"));
 	                } else {
 	                    //Don hang nay da duoc cap nhat roi, Merchant khong cap nhat nua (Duplicate callback)
 	                    model.addAttribute("messagePayment", messageConfig.getProperty("payment.02"));
+	                    orderPayment.setResponseCode("02");
+                    	orderPayment.setStatus("Failed");
+                    	paymentServiceImpl.saveOrder(orderPayment);
 	                }
 	            } else {
 	            	model.addAttribute("messagePayment", messageConfig.getProperty("payment.04"));
+	            	orderPayment.setResponseCode("04");
+                	orderPayment.setStatus("Failed");
+                	paymentServiceImpl.saveOrder(orderPayment);
 	            }
 	        }
 	        else {
 	        	model.addAttribute("messagePayment", messageConfig.getProperty("payment.01"));
+	        	orderPayment.setResponseCode("01");
+            	orderPayment.setStatus("Failed");
+            	paymentServiceImpl.saveOrder(orderPayment);
 	        }
 
 	    } else {

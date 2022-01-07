@@ -89,7 +89,7 @@ public class DataSeeder implements ApplicationListener<ContextRefreshedEvent> {
 			user.setEmail("user1@gmail.com");
 			user.setPassword(passwordEncoder.encode("123456789"));
 			user.setUsername("tuanmino96");
-			user.setAddDate(new Date());
+			user.setJoinDate(new Date());
 			user.setRole(roleService.getRole(2));
 			userRepository.save(user);
 		}
@@ -99,7 +99,7 @@ public class DataSeeder implements ApplicationListener<ContextRefreshedEvent> {
 			user.setEmail("uservip1@gmail.com");
 			user.setPassword(passwordEncoder.encode("123456789"));
 			user.setUsername("tuanmino97");
-			user.setAddDate(new Date());
+			user.setJoinDate(new Date());
 			user.setRole(roleService.getRole(3));
 			userRepository.save(user);
 		}
@@ -108,7 +108,7 @@ public class DataSeeder implements ApplicationListener<ContextRefreshedEvent> {
 			user.setEmail("uservip2@gmail.com");
 			user.setPassword(passwordEncoder.encode("123456789"));
 			user.setUsername("tuanmino98");
-			user.setAddDate(new Date());
+			user.setJoinDate(new Date());
 			user.setRole(roleService.getRole(3));
 			userRepository.save(user);
 		}
@@ -117,7 +117,7 @@ public class DataSeeder implements ApplicationListener<ContextRefreshedEvent> {
 			user.setEmail("uservip3@gmail.com");
 			user.setPassword(passwordEncoder.encode("123456789"));
 			user.setUsername("tuanmino99");
-			user.setAddDate(new Date());
+			user.setJoinDate(new Date());
 			user.setRole(roleService.getRole(3));
 			userRepository.save(user);
 		}
@@ -126,7 +126,7 @@ public class DataSeeder implements ApplicationListener<ContextRefreshedEvent> {
 			user.setEmail("uservip4@gmail.com");
 			user.setPassword(passwordEncoder.encode("123456789"));
 			user.setUsername("tuanmino2k");
-			user.setAddDate(new Date());
+			user.setJoinDate(new Date());
 			user.setRole(roleService.getRole(3));
 			userRepository.save(user);
 		}

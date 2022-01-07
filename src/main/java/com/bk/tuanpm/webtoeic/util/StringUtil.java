@@ -1,7 +1,9 @@
 package com.bk.tuanpm.webtoeic.util;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -41,6 +43,11 @@ public class StringUtil {
 	public static String autoGenUsername(int hashCode) {
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		return ""+timestamp.getTime()+hashCode;
+	}
+	
+	public static String autoGenGroupCode(int total) {
+		LocalDate now = LocalDate.now();
+        return "G-"+now.getYear()+""+(total+1);
 	}
 
 }	

@@ -98,7 +98,7 @@ h3 {
 			<div class="row">
 				<!--LOGO-->
 				<div class="col-md-4">
-					<a class="brand" href="/webtoeic"><img style="height: 40px;"
+					<a class="brand" href="/webtoeic"><img style="width: 150px;"
 						src="/webtoeic/resources/file/images/logotest.png" /></a>
 				</div>
 				<!-- /LOGO -->

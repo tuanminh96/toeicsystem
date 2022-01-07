@@ -206,6 +206,7 @@
                                         ${part2.description}
                                 </div>
                                 <div class="row questionPart2a">
+                                	<pre><b>${part2.content}:</b></pre>
                                     <audio controls style="width: 100%">
                                         <source src="${pageContext.request.contextPath}/resources/file/exams/${part2.idExam}/audio/${part2.audio}"
                                                 type="audio/wav">
@@ -243,8 +244,7 @@
                                     <c:if test="${index.count == 4}">
                                         <hr style="height:2px;border-width:0;color:gray;background-color:gray">
                                     </c:if>
-                                    <p><b>Question ${index.count + 7} ~ ${index.count + 9} refer to following
-                                        conversation:</b></p>
+                                    <p><b>${part3.content}:</b></p>
                                     <audio controls>
                                         <source src="${pageContext.request.contextPath}/resources/file/exams/${part3.idExam}/audio/${part3.audio}"
                                                 type="audio/wav">
@@ -285,8 +285,7 @@
                                     <c:if test="${index.count == 4}">
                                         <hr style="height:2px;border-width:0;color:gray;background-color:gray">
                                     </c:if>
-                                    <p><b>Question ${index.count + 13} ~ ${index.count + 15} refer to following
-                                        conversation:</b></p>
+                                    <p><b>${part4.content}:</b></p>
                                     <audio controls>
                                         <source src="${pageContext.request.contextPath}/resources/file/exams/${part4.idExam}/audio/${part4.audio}"
                                                 type="audio/wav">

@@ -51,7 +51,7 @@
 				<li class="nav-item"><a class="nav-link"
 					href="<c:url value='/admin/profile' />"> <i
 						class="fa fa-user-o" aria-hidden="true"></i> Xin chào:
-						${loggedInUser.hoTen }
+						${loggedInUser.username }
 				</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="<c:url value='/signout' />"><i class="fa fa-sign-out"
@@ -117,25 +117,25 @@
 									src="https://cla.hust.edu.vn/xmedia/2014/05/ky-nang-lam-phan-nghe-trong-bai-thi-toeic.png"
 									alt="profile" class="img-lg rounded-circle mb-3">
 								<div class="mb-3">
-									<h3>${group.name}</h3>
+									<h4>[${group.groupCode}]</h4>
+									<h4><input class="form-control" type="text" id="name_group" value="${group.name}"></h4>
 									<input type="hidden" value="${group.idGroup}" id="idGroup">
 									<input type="hidden" value="${pageContext.request.contextPath}"
 										id="appContext">
 								</div>
-								<p class="w-75 mx-auto mb-3">${group.description}</p>
+								<p class="w-75 mx-auto mb-3"><input class="form-control" type="text" id="name_group" value="${group.description}"/></p>
+								<p class="w-75 mx-auto mb-3"><i class="fa fa-pencil" aria-hidden="true"></i></p>
 							</div>
 
 
 							<div class="py-4">
 								<p class="clearfix">
-									<span class="float-left"> Chủ nhóm</span> <span
-										class="float-right text-muted">
-										${group.createAdmin.username} </span>
+									<span class="float-left"> Chủ nhóm</span> 
+									<span class="float-right text-muted">${group.createAdmin.username} </span>
 								</p>
 								<p class="clearfix">
-									<span class="float-left"> Email </span> <span
-										class="float-right text-muted">
-										${group.createAdmin.email} </span>
+									<span class="float-left"> Email </span> 
+									<span class="float-right text-muted">${group.createAdmin.email} </span>
 								</p>
 								<p class="clearfix">
 									<span class="float-left"> Ngày tạo </span> <span

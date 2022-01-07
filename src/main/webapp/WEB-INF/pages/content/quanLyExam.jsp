@@ -76,7 +76,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label>Level</label>
-                        <select class="form-control" id="selectLevel">
+                        <select class="form-control" id="examLevel">
                             <option value="1">Dễ</option>
                             <option value="2">Trung Bình</option>
                             <option value="3">Khó</option>

@@ -34,6 +34,7 @@ import com.bk.tuanpm.webtoeic.service.NotificationService;
 import com.bk.tuanpm.webtoeic.service.PostService;
 import com.bk.tuanpm.webtoeic.service.impl.UserAdminServiceImpl;
 import com.bk.tuanpm.webtoeic.util.DateTimeUtil;
+import com.bk.tuanpm.webtoeic.util.StringUtil;
 
 @Controller
 @RequestMapping("/admin")
@@ -64,6 +65,7 @@ public class GroupAdminController {
 		TutorialAdmin currentUser = nguoiDungService.findTutorialAdminByEmail(auth.getName());
 		System.out.println(currentUser);
 		group.setCreateAdmin(currentUser);
+		group.setGroupCode(StringUtil.autoGenGroupCode(groupService.getTotalGroupThisYear()));
 		groupService.saveGroup(group);
 
 		List<Group> groups = groupService.getGroupOfAdmin(currentUser);
@@ -157,6 +159,7 @@ public class GroupAdminController {
 		User user = userAdminServiceImpl.getUserById(idUser);
 		Group groupToDel = groupService.getGroupById(idGroup);
 		groupToDel.getUsers().remove(user);
+		groupToDel.setTotalMem(groupToDel.getTotalMem()-1);
 		groupService.saveGroup(groupToDel);
 		List<MemberDTO> members = groupService.getListMember(idGroup);
 		model.addAttribute("members", members);

@@ -24,6 +24,7 @@ public class Group {
 	@Column(name = "id_group", nullable = false)
 	private Integer idGroup;
 
+	private String groupCode;
 	@Column(columnDefinition = "nvarchar(255)")
 	private String name;
 	private String image;
@@ -125,6 +126,13 @@ public class Group {
 		this.maxMem = maxMem;
 	}
 	
+	public String getGroupCode() {
+		return groupCode;
+	}
+
+	public void setGroupCode(String groupCode) {
+		this.groupCode = groupCode;
+	}
 
 	public int getTotalMem() {
 		return totalMem;

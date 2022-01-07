@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html>
@@ -18,86 +18,85 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <!-- Inline CSS based on choices in "Settings" tab -->
-    <style>
-        .bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p,
-        .bootstrap-iso form {
-            font-family: Arial, Helvetica, sans-serif;
-            color: black
-        }
+<style>
+.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p,
+	.bootstrap-iso form {
+	font-family: Arial, Helvetica, sans-serif;
+	color: black
+}
 
-        .bootstrap-iso form button, .bootstrap-iso form button:hover {
-            color: white !important;
-        }
+.bootstrap-iso form button, .bootstrap-iso form button:hover {
+	color: white !important;
+}
 
-        .asteriskField {
-            color: red;
-        }
-    </style>
-    <style>
-        .checked {
-            color: orange;
-        }
-    </style>
-    <style type="text/css">
-        .hidden {
-            display: none;
-        }
+.asteriskField {
+	color: red;
+}
+</style>
+<style>
+.checked {
+	color: orange;
+}
+</style>
+<style type="text/css">
+.hidden {
+	display: none;
+}
 
-        .error-message {
-            color: red;
-        }
+.error-message {
+	color: red;
+}
 
-        .anchor {
-            display: block;
-            height: 115px; /*same height as header*/
-            margin-top: -115px; /*same height as header*/
-            visibility: hidden;
-        }
+.anchor {
+	display: block;
+	height: 115px; /*same height as header*/
+	margin-top: -115px; /*same height as header*/
+	visibility: hidden;
+}
 
-        .imageExam {
-            float: left;
-            height: 150px;
-            width: 250px;
-            margin-bottom: 25px;
-        }
+.imageExam {
+	float: left;
+	height: 150px;
+	width: 250px;
+	margin-bottom: 25px;
+}
 
+#datepicker {
+	width: 180px;
+	margin: 0 20px 20px 20px;
+}
 
-        #datepicker {
-            width: 180px;
-            margin: 0 20px 20px 20px;
-        }
+#datepicker>span:hover {
+	cursor: pointer;
+}
 
-        #datepicker > span:hover {
-            cursor: pointer;
-        }
-
-        /* Handle config CSS*/
-        .mainListExam {
-            margin: 75px;
-        }
-    </style>
+/* Handle config CSS*/
+.mainListExam {
+	margin: 75px;
+}
+</style>
 
 <script type="text/javascript">
-        $(document).ready(function () {
-            var buttons = document.getElementsByClassName('openModalExam');
-            for (var i = 0; i < buttons.length; i++) {
-                buttons[i].addEventListener("click", clickHandler);
-            }
+	$(document).ready(function() {
+		var buttons = document.getElementsByClassName('openModalExam');
+		for (var i = 0; i < buttons.length; i++) {
+			buttons[i].addEventListener("click", clickHandler);
+		}
 
-            function clickHandler(event) {
-                var buttonId = event.target.id;
-                var idExam = document.getElementById(buttonId).value;
-                $('#examModal').modal('show');
-                $('#examModal #idExamModal').val(idExam);
-            }
+		function clickHandler(event) {
+			var buttonId = event.target.id;
+			var idExam = document.getElementById(buttonId).value;
+			$('#examModal').modal('show');
+			$('#examModal #idExamModal').val(idExam);
+		}
 
-            $('#btnLamBaiThi').click(function () {
-                var baseUrl = $('#baseUrl').val();
-                var examId = $('#idExamModal').val();
-                window.location.href = baseUrl + "/doExam/" + examId;
-            });
-        });
-    </script>
+		$('#btnLamBaiThi').click(function() {
+			var baseUrl = $('#baseUrl').val();
+			var examId = $('#idExamModal').val();
+			window.location.href = baseUrl + "/doExam/" + examId;
+		});
+	});
+</script>
 </head>
 <body>
 	<jsp:include page="template/header.jsp"></jsp:include>
@@ -148,8 +147,9 @@
 
 									<c:forEach items="${examsTested}" var="idExamTested">
 										<c:if test="${list.baithithuid == idExamTested}">
-										<label style="padding-top: 25px;" class="col-md-2"><i
-										style="color: green;" class="fas fa-check-circle"></i> Đã thi</label>
+											<label style="padding-top: 25px;" class="col-md-2"><i
+												style="color: green;" class="fas fa-check-circle"></i> Đã
+												thi</label>
 										</c:if>
 									</c:forEach>
 								</div>
@@ -160,7 +160,14 @@
 									| <i class="fa fa-calendar" aria-hidden="true"></i>
 									${list.dateAdd} | <i class="fa fa-eye" aria-hidden="true"></i>
 									${list.countTest } | <span class="glyphicon glyphicon-tags">
-									</span>Level :<span class="label label-info">${list.level}</span>
+									</span>Level :
+									<c:choose>
+										<c:when test="${list.level == 1}"><span class="label label-info"> Dễ </span></c:when>
+										<c:when test="${list.level == 2}"><span class="label label-info"> Trung bình </span></c:when>
+										<c:when test="${list.level == 3}"><span class="label label-info"> Khó </span></c:when>
+										<c:otherwise>undefined</c:otherwise>
+									</c:choose>
+									
 								</div>
 							</div>
 							<div class="row post-content">
@@ -183,24 +190,24 @@
 											style="font-family: cursive; margin-left: 10px; color: brown;">4.57/5</span>
 									</div>
 									<p>
-									<c:set var = "isNotAllow" scope = "session" value = "0"/>
-									<c:forEach items="${listNotAllow}" var="idNot">
-										<c:if test="${list.baithithuid == idNot}">
-											<c:set var = "isNotAllow" scope = "session" value = "1"/>
-										</c:if>
+										<c:set var="isNotAllow" scope="session" value="0" />
+										<c:forEach items="${listNotAllow}" var="idNot">
+											<c:if test="${list.baithithuid == idNot}">
+												<c:set var="isNotAllow" scope="session" value="1" />
+											</c:if>
 
-									</c:forEach>
-									<c:choose>
-    									<c:when test="${isNotAllow == 1}">
-    										<button class="btn btn-primary" data-toggle="modal" data-target="#notAllowedModel">
-											Chi tiết</button>
-    									</c:when>    
-    									<c:otherwise>
-    										<button class="btn btn-primary openModalExam"
-											value="${list.baithithuid}" id="openModalExam.${loop.index}">
-											Chi tiết</button>
-    									</c:otherwise>
-									</c:choose>
+										</c:forEach>
+										<c:choose>
+											<c:when test="${isNotAllow == 1}">
+												<button class="btn btn-primary" data-toggle="modal"
+													data-target="#notAllowedModel">Chi tiết</button>
+											</c:when>
+											<c:otherwise>
+												<button class="btn btn-primary openModalExam"
+													value="${list.baithithuid}"
+													id="openModalExam.${loop.index}">Chi tiết</button>
+											</c:otherwise>
+										</c:choose>
 									</p>
 								</div>
 							</div>
@@ -238,7 +245,8 @@
 					</c:forEach>
 
 					<c:if test="${currentPage != totalPage}">
-						<a href="/webtoeic/listExam?page=${currentPage+1} " class="pageNext">Next</a>
+						<a href="/webtoeic/listExam?page=${currentPage+1} "
+							class="pageNext">Next</a>
 					</c:if>
 				</div>
 			</c:if>
@@ -261,15 +269,25 @@
 				</div>
 				<div class="modal-body">
 					<input class="hidden" id="idExamModal">
-					<p>Bài thi thử gồm 2 phần: (100 câu hỏi)</p>
+					<p>Bài thi thử gồm 2 phần: (34 câu hỏi)</p>
 					<img style="float: left"
 						src="https://img.icons8.com/nolan/64/000000/reading.png"> <br>
-					<p>Phần 1: Listening skills (30 phút - 50 câu hỏi)</p>
+					<p>Phần 1: Listening (20 phút - 19 câu hỏi)</p>
+					<p>Phần thi này sẽ đánh giá khả năng nghe hiểu của bạn. Phần
+						thi này bao gồm 4 phần thi nhỏ: mô tả hình (2 câu), hỏi - đáp (5
+						câu), hội thoại (6 câu), bài nói ngắn (6 câu), thời gian thi tối
+						đa là 20 phút.</p>
 					<br> <img style="float: left"
 						src="https://img.icons8.com/nolan/64/000000/reading.png"> <br>
-					<p>Phần 2: Reading skills (45 phút - 50 câu hỏi)</p>
-
+					<p>Phần 2: Reading (20 phút - 18 câu hỏi)</p>
+					<p>Phần thi này sẽ đánh giá khả năng đọc hiểu của bạn. Phần thi
+						này bao gồm 3 phần thi nhỏ: điền chỗ trống (6 câu), điền đoạn văn
+						(6 câu), đọc hiểu (6 câu), thời gian thi tối đa là 20 phút.</p>
 					<br>
+					<p>Sẽ có 4 đáp án mỗi câu hỏi cho người dùng lựa chọn. Hệ thống
+						sẽ tính điểm dựa trên số câu đúng khi bạn nhấn Nộp bài hoặc hết
+						thời gian làm bài. Mỗi câu trả lời đúng sẽ tương ứng với 10 điểm.
+					</p>
 					<p>Bài thi được thực hiện sau khi xác nhận làm bài thi</p>
 				</div>
 				<div class="modal-footer">
@@ -281,8 +299,8 @@
 			</div>
 		</div>
 	</div>
-	<div class="modal fade" id="notAllowedModel" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="notAllowedModel" tabindex="-1"
+		role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -305,23 +323,23 @@
 	<%--<jsp:include page="include/footerHome.jsp"></jsp:include>--%>
 	<jsp:include page="template/footer.jsp"></jsp:include>
 	<script type="text/javascript">
-	$("#viewTopRating").on('click', function (e) {
-		e.preventDefault();
-        var appContext = $("#baseUrl").val();
-        $.ajax({
-            type: "GET",
-            url: appContext + "/getTopRating",
-            success: function (result) {
-                $(".divToChange").html(result);
-                $(".paging").hide();
-            },
-            error: function (e) {
-                alert("Error: ", e);
-                console.log("Error", e);
-            }
-        });
-    });
-</script>
+		$("#viewTopRating").on('click', function(e) {
+			e.preventDefault();
+			var appContext = $("#baseUrl").val();
+			$.ajax({
+				type : "GET",
+				url : appContext + "/getTopRating",
+				success : function(result) {
+					$(".divToChange").html(result);
+					$(".paging").hide();
+				},
+				error : function(e) {
+					alert("Error: ", e);
+					console.log("Error", e);
+				}
+			});
+		});
+	</script>
 </body>
 
 </html>

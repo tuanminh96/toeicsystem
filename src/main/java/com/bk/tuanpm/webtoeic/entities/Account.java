@@ -1,6 +1,6 @@
 package com.bk.tuanpm.webtoeic.entities;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -44,6 +44,8 @@ public class Account {
 	private String diaChi;
 	private int gender;
 	private boolean isDelete;
+	
+	private Date joinDate;
 	
 	@Transient
 	private boolean loginOauth2;
@@ -155,6 +157,14 @@ public class Account {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	
+	public Date getJoinDate() {
+		return joinDate;
+	}
+
+	public void setJoinDate(Date joinDate) {
+		this.joinDate = joinDate;
 	}
 
 	@Override

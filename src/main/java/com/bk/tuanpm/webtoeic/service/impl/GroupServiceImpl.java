@@ -1,5 +1,6 @@
 package com.bk.tuanpm.webtoeic.service.impl;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -64,6 +65,14 @@ public class GroupServiceImpl implements GroupService{
 			listMem.add(memberDTO);
 		}
 		return listMem;
+	}
+
+
+	@Override
+	public int getTotalGroupThisYear() {
+		// TODO Auto-generated method stub
+		LocalDate now = LocalDate.now();
+		return groupRepository.getTotalGroupThisYear("G-"+now.getYear());
 	}
 
 }

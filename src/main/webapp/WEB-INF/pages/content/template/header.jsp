@@ -286,8 +286,8 @@ a.dropdown-menu-header {
 					style="float: right; margin-right: 100px;">
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="<c:url value='/admin/profile' />"> <span
-								class="glyphicon glyphicon-user">&nbsp;</span>Xin chào:
-								${loggedInUser.hoTen }
+								class="glyphicon glyphicon-user">&nbsp;</span>Chào Admin:
+								${loggedInUser.username }
 						</a></li>
 						<li><a href="<c:url value='/signout' />"><span
 								class="glyphicon glyphicon-log-out"></span> Đăng xuất</a></li>

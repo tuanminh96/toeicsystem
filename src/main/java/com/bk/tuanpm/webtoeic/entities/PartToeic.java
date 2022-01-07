@@ -1,5 +1,6 @@
 package com.bk.tuanpm.webtoeic.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +18,8 @@ public class PartToeic {
 	private int idPart;
 	private String partName;
 	private String type;
+	
+	@Column(columnDefinition = "nvarchar(MAX)")
 	private String description;
 	private int questionTotal;
 	private int setQuestionTotal;

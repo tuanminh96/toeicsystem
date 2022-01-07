@@ -162,9 +162,8 @@
                                         <c:if test="${index.count == 4}">
                                             <hr style="height:2px;border-width:0;color:gray;background-color:gray">
                                         </c:if>
-                                        <p><b>Question ${index.count + 25} ~ ${index.count + 27} refer to following
-                                            conversation:</b></p>
-                                        <p style="border: 2px dashed #949494;">${part6.sParagraph}</p>
+                                        <p><b>${part6.content}:</b></p>
+                                        <pre style="border: 2px dashed #949494; white-space: pre;">${part6.sParagraph}</pre>
                                     </div>
                                 </c:if>
                                 <p>
@@ -200,9 +199,8 @@
                                         <c:if test="${index.count == 4}">
                                             <hr style="height:2px;border-width:0;color:gray;background-color:gray">
                                         </c:if>
-                                        <p><b>Question ${index.count + 31} ~ ${index.count + 33} refer to following
-                                            conversation:</b></p>
-                                        <p style="border: 2px dashed #949494;">${part7.sParagraph}</p>
+                                        <p><b>${part7.content}:</b></p>
+                                        <pre style="border: 2px dashed #949494;">${part7.sParagraph}</pre>
                                     </div>
                                 </c:if>
                                 <p>

@@ -112,7 +112,10 @@
 
 	                });
 	                $('.taiKhoanVIP tbody').html(taiKhoanRow);
-	                $('#example').DataTable(); 
+	                $('#example').DataTable({
+	                	"order": [],
+	                }); 
+	                
 	            },
 	            error: function (e) {
 	                alert("Error: ", e);

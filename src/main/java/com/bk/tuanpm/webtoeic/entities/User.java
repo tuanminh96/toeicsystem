@@ -18,7 +18,7 @@ import javax.persistence.ManyToMany;
 public class User extends Account {
 	
 	private String status;
-	private Date addDate;
+	private Date upgradeDate;
 	
 	@Column(columnDefinition = "nvarchar(255)")
 	private String school;
@@ -29,11 +29,12 @@ public class User extends Account {
 			@JoinColumn(name = "id_group") })
 	List<Group> groups;
 
-	public Date getAddDate() {
-		return addDate;
+	
+	public Date getUpgradeDate() {
+		return upgradeDate;
 	}
-	public void setAddDate(Date addDate) {
-		this.addDate = addDate;
+	public void setUpgradeDate(Date upgradeDate) {
+		this.upgradeDate = upgradeDate;
 	}
 	public String getSchool() {
 		return school;

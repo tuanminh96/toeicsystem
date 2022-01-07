@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h3>Danh sánh thành viên nhóm</h3>
+	<h4>Danh sánh thành viên nhóm</h4>
 	<button class="btn btn-success btnAdd" data-toggle="modal"
 		data-target="#addMemModal" id="#addMemModal">Thêm thành viên</button>
 
@@ -99,20 +99,24 @@
 	            success: function (result) {
 	                var taiKhoanRow = "<p id='nodata'>No data found</p>";
 	                $.each(result, function (i, taiKhoan) {
+	                	var date = new Date(taiKhoan.upgradeDate);
+	                	var dateUp = ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '/' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '/' + date.getFullYear();
 	                    $("#nodata").text("");
 	                    taiKhoanRow = taiKhoanRow + '<tr>' +
 	                        '<td>' + taiKhoan.id + '</td>' +
+	                        '<td>' + taiKhoan.username + '</td>' +
 	                        '<td>' + taiKhoan.hoTen + '</td>' +
-	                        '<td>' + taiKhoan.email + '</td>' +
-	                        '<td>' + taiKhoan.soDienThoai + '</td>' +
-	                        '<td>' + taiKhoan.diaChi + '</td>';
+	                        '<td>' + taiKhoan.gender + '</td>' +
+	                        '<td>' + dateUp + '</td>';
 	                    taiKhoanRow += '<td><label class="form-check-label">';
 	                    taiKhoanRow += '<input type="checkbox" class="checkAdd" value="' + taiKhoan.id + '">';
 	                    taiKhoanRow += '</label></td>';
 
 	                });
 	                $('.taiKhoanVIP tbody').html(taiKhoanRow);
-	                $('#example').DataTable(); 
+	                $('#example').DataTable({
+	                	"order": [],
+	                }); 
 	            },
 	            error: function (e) {
 	                alert("Error: ", e);

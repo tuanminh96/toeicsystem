@@ -20,4 +20,6 @@ public interface GroupService {
 	Group getGroupById(Integer id);
 
 	List<MemberDTO> getListMember(Integer idGroup);
+	
+	public int getTotalGroupThisYear();
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns:th="http://www.thymeleaf.org">
@@ -208,7 +209,7 @@ hr {
                         <div class="d-none d-sm-block col-1">#</div>
                         <div class="col-9 col-sm-5">Nội dung thanh toán</div>
                         <div class="d-none d-sm-block col-sm-2">Đơn vị</div>
-                        <div class="col-2">Amount</div>
+                        <div class="col-2">Số tiền</div>
                     </div>
 
                     <div class="text-95 text-secondary-d3">
@@ -216,7 +217,7 @@ hr {
                             <div class="d-none d-sm-block col-1">1</div>
                             <div class="col-9 col-sm-5">${order.orderInfo}</div>
                             <div class="d-none d-sm-block col-2 text-95">VND</div>
-                            <div class="col-2 text-secondary-d2">${order.amount}</div>
+                            <div class="col-2 text-secondary-d2">${order.amount/100}</div>
                         </div>
                     </div>
                     <div class="row border-b-2 brc-default-l2"></div>

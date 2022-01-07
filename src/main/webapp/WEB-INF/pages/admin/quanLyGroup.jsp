@@ -48,7 +48,7 @@
 		<table class="table table-hover nhanHieuTable" id="tableExam">
 			<thead>
 				<tr>
-					<th>ID</th>
+					<th>Code nhóm</th>
 					<th>Tên nhóm</th>
 					<th>Ngày tạo</th>
 					<th>Số thành viên</th>

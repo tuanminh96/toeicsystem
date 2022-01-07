@@ -9,11 +9,11 @@
 <body>
 	<c:forEach items="${groups}" var="group">
 		<tr>
-			<td class="center">${group.idGroup}</td>
+			<td class="center">${group.groupCode}</td>
 			<td class="center"><a
 				href="${pageContext.request.contextPath}/admin/group_detail/${group.idGroup}">${group.name}</a></td>
 			<td class="center">${group.createDate}</td>
-			<td class="center">${group.maxMem}</td>
+			<td class="center">${group.totalMem}</td>
 			<td class="center"><a id="" class="red deleteBaiThiThu"><button
 						class="delete btn btn-danger">Xóa</button></a></td>
 		</tr>

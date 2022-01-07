@@ -1,5 +1,7 @@
 package com.bk.tuanpm.webtoeic.service.impl;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -91,7 +93,14 @@ public class UserAdminServiceImpl {
 
 	public List<User> getListVipNotAdded() {
 		Role role = roleRepository.findByCode(Role.ROLE_MEMBER_VIP);
-		List<User> list = userRepository.findByRoleAndGroupsIsNull(role);
+		List<User> list = userRepository.findByRoleAndGroupsIsNullOrderByUpgradeDateAsc(role);
+		Collections.sort(list, new Comparator<User>() {
+			@Override
+			public int compare(User o1, User o2) {
+				// TODO Auto-generated method stub
+				return o1.getUpgradeDate().compareTo(o2.getUpgradeDate()) ;
+			}
+		});
 		return list;
 	}
 

@@ -364,13 +364,6 @@ public class BaiThiThuApi {
                 if (row.getCell(0) != null)
                     question.setNumber((int) row.getCell(0).getNumericCellValue());
 
-                if (row.getCell(1) != null)
-                    question.setImage(row.getCell(1).getStringCellValue().toString());
-
-                if (row.getCell(2) != null)
-                    question.setAudiomp3(row.getCell(2).getStringCellValue().toString());
-                if (row.getCell(3) != null)
-                    question.setParagraph(row.getCell(3).getStringCellValue().toString());
                 if (row.getCell(4) != null)
                     question.setQuestion(row.getCell(4).getStringCellValue().toString());
 

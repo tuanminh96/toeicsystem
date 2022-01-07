@@ -227,6 +227,12 @@ public class BaiFullTestController {
         ketquabaitest.setRightPart7(correctPart7);
         ketquabaitest.setNguoidung(currentUser);
         ketquabaitest.setTotalTimeTest(totalTimeDoExam);
+        
+        //tăng lượt thi lên 1
+        Exam exam = baithithuService.getBaiThiThu(examId).get(0);
+        exam.setCountTest(exam.getCountTest()+1);
+        baithithuService.save(exam);
+        
         ketquabaitestService.save(ketquabaitest);
 
         //Get total question Listening

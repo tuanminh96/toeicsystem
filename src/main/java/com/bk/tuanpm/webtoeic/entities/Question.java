@@ -28,15 +28,6 @@ public class Question {
     @Column(name = "number")
     private Integer number;
 
-    @Column(name = "image")
-    private String image;
-
-    @Column(name = "audiomp3")
-    private String audiomp3;
-
-    @Column(columnDefinition = "TEXT")
-    private String paragraph;
-
     @Column(name = "question")
     private String question;
 
@@ -83,9 +74,6 @@ public class Question {
         super();
         this.cauhoibaithithuid = cauhoibaithithuid;
         this.number = number;
-        this.image = image;
-        this.audiomp3 = audiomp3;
-        this.paragraph = paragraph;
         this.question = question;
         this.option1 = option1;
         this.option2 = option2;
@@ -109,30 +97,6 @@ public class Question {
 
     public void setNumber(Integer number) {
         this.number = number;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public String getAudiomp3() {
-        return audiomp3;
-    }
-
-    public void setAudiomp3(String audiomp3) {
-        this.audiomp3 = audiomp3;
-    }
-
-    public String getParagraph() {
-        return paragraph;
-    }
-
-    public void setParagraph(String paragraph) {
-        this.paragraph = paragraph;
     }
 
     public String getQuestion() {

@@ -1,5 +1,7 @@
 package com.bk.tuanpm.webtoeic.controller;
 
+import java.util.Date;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +51,8 @@ public class RegisterController {
 			return "register";
 		}
 		nguoiDung.setRole(roleService.getRole(Role.ROLE_MEMBER));
-		nguoiDung.setUsername(StringUtil.autoGenUsername(nguoiDung.hashCode()));
+		nguoiDung.setUsername("user"+nguoiDung.hashCode());
+		nguoiDung.setJoinDate(new Date());
 		nguoiDungService.saveUser(nguoiDung);
 		securityService.autologin(nguoiDung.getEmail(), nguoiDung.getConfirmPassword());
 		return "redirect:/";

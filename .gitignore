@@ -5,6 +5,7 @@
 /build/
 /bin/
 /target/classes/*
+/src/main/webapp/resources/file/exams/*
 # Eclipse
 # -------
 .checkstyle

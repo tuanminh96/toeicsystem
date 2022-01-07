@@ -8,6 +8,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
@@ -69,15 +70,17 @@ public class BaiThiThuApi {
         String roleAccount = account.getRole().getRole();
         List<String> response = new ArrayList<String>();
         List<Exam> list = new ArrayList<>();
-        String flag = CommonConst.FLG_ON;
+        Collection<String> listStatus = new ArrayList<>();
         if (CommonConst.ROLE_CONTENT.equals(roleAccount)) {
-            flag = CommonConst.FLG_OFF;
+            listStatus.add(CommonConst.CREATE);
+            listStatus.add(CommonConst.REJECT);
         } else if (CommonConst.ROLE_TUTORIAL.equals(roleAccount)) {
-            flag = CommonConst.FLG_ON;
+            listStatus.add(CommonConst.APPROVE);
         } else {
             return response;
         }
-        list = baithithuService.getAllExamSubmited(flag);
+
+        list = baithithuService.getAllExamSubmited(listStatus);
 
         for (int i = 0; i < list.size(); i++) {
             String json = "baithithuid:" + list.get(i).getBaithithuid() + "," + "anhbaithithu:"
@@ -95,11 +98,13 @@ public class BaiThiThuApi {
         String roleAccount = currentUser.getRole().getRole();
 
         List<Exam> list = new ArrayList<>();
+        Collection<String> listStatus = new ArrayList<>();
         if (CommonConst.ROLE_TUTORIAL.equals(roleAccount)) {
-            list = baithithuService.getAllExamSubmited(CommonConst.FLG_OFF);
+            listStatus.add(CommonConst.CREATE);
         } else {
             return response;
         }
+        list = baithithuService.getAllExamSubmited(listStatus);
 
         for (int i = 0; i < list.size(); i++) {
             String json = "baithithuid:" + list.get(i).getBaithithuid() + "," + "anhbaithithu:"
@@ -155,7 +160,7 @@ public class BaiThiThuApi {
         exam.setDateAdd(Date.valueOf(LocalDate.now()));
         exam.setUpdateDate(Date.valueOf(LocalDate.now()));
         exam.setUpdateBy(currentUser.getUsername());
-        exam.setIsActive(CommonConst.FLG_OFF);
+        exam.setIsActive(CommonConst.CREATE);
         exam.setDelFlg(CommonConst.FLG_ON);
         baithithuService.save(exam);
 

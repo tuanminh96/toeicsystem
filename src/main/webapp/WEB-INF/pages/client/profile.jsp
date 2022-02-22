@@ -88,7 +88,7 @@ textarea:focus, input:focus {
 							<c:if test="${pageContext.request.isUserInRole('MEMBER_VIP')}">
 								<img class="col-sm-5"
 									style="position: absolute; width: 5%; top: 190px; left: 25%;"
-									src="https://aboco.vn/wp-content/uploads/2021/05/VIP-1-THANG.png">
+									src="https://cdn-icons-png.flaticon.com/512/3791/3791579.png">
 							</c:if>
 
 						</div>
@@ -178,12 +178,12 @@ textarea:focus, input:focus {
 						style="width: 100%">
 						<thead>
 							<tr>
-								<th style="text-align: center">STT</th>
-								<th style="text-align: center">Title Exam</th>
-								<th style="text-align: center">Date Test</th>
-								<th style="text-align: center">Total Time Test</th>
-								<th style="text-align: center">Score Listen</th>
-								<th style="text-align: center">Score Reading</th>
+					<th style="text-align: center">STT</th>
+					<th style="text-align: center">Tên đề thi</th>
+					<th style="text-align: center">Ngày thi</th>
+					<th style="text-align: center">Thời gian làm</th>
+					<th style="text-align: center">Điểm nghe</th>
+					<th style="text-align: center">Điểm đọc</th>
 							</tr>
 						</thead>
 						<tbody>

@@ -91,9 +91,11 @@
             <button id="doAnotherExam" type="button" class="btn btn-success">
                 <a style="text-decoration:none; color: black;" href="${pageContext.request.contextPath}/listExam">Làm bài thi khác</a></button>
         </div>
+        <c:if test="${pageContext.request.isUserInRole('MEMBER_VIP')}">
         <div class="col-md-4">
             <button id="seeDetailedAnswer" type="button" class="btn btn-info">Xem giải đáp chi tiết</button>
         </div>
+        </c:if>
         <div class="col-md-4">
             <button data-bs-toggle="modal" data-bs-target="#evaluateExam" type="button"
                     class="btn btn-warning">Đánh giá

@@ -22,4 +22,12 @@ public interface GroupService {
 	List<MemberDTO> getListMember(Integer idGroup);
 	
 	public int getTotalGroupThisYear();
+
+	boolean checkUserInGroup(int idGr, int idUser);
+
+	long getTotalGroup();
+
+	List<Group> getListTotalGroup();
+
+	boolean checkIsAdminGroup(int idGr, int admin);
 }

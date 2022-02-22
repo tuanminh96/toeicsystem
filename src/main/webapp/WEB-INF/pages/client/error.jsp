@@ -23,26 +23,11 @@
 		<!--PAGE TITLE-->
 		<div class="span9" style="text-align: center">
 			<div class="page-header">
-				<h4 style="font-weight: bold;">KẾT QUẢ TÌM KIẾM</h4>
+				<h4 style="font-weight: bold;">Rất tiếc vì sự bất tiện này</h4>
 			</div>
 		</div>
-
 		<!-- /. PAGE TITLE-->
-		<div class="row">
-
-			<div class="span9">
-
-				<h3>Không tìm thấy dữ liệu</h3>
-
-				<br>
-			</div>
-
-
-			<jsp:include page="template/leftbar.jsp"></jsp:include>
-
-		</div>
-
-
+		
 	</div>
 	<br>
 	<br>
@@ -51,8 +36,5 @@
 	<br>
 	<br>
 	<jsp:include page="include/footerHome.jsp"></jsp:include>
-
-
 </body>
-
 </html>

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.bk.tuanpm.webtoeic.entities.Account;
 import com.bk.tuanpm.webtoeic.entities.Group;
 import com.bk.tuanpm.webtoeic.entities.TutorialAdmin;
+import com.bk.tuanpm.webtoeic.service.BaiThiThuService;
 import com.bk.tuanpm.webtoeic.service.GroupService;
 import com.bk.tuanpm.webtoeic.service.RoleService;
 import com.bk.tuanpm.webtoeic.service.impl.UserAdminServiceImpl;
@@ -35,6 +36,9 @@ public class ContentController {
 	@Autowired
 	GroupService groupService;
 	
+	@Autowired
+	BaiThiThuService baiThiThuService;
+	
 	@ModelAttribute("loggedInUser")
 	public Account loggedInUser() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -42,8 +46,15 @@ public class ContentController {
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String home() {
-		System.out.println("Vao home content");
+	public String home(Model model) {
+		long totalUsers = nguoiDungService.getTotalUser();
+		long userVip = nguoiDungService.getTotalVip();
+		long totalGroup = groupService.getTotalGroup();
+		long totalExam = baiThiThuService.getTotalExam();
+		model.addAttribute("totalUsers", totalUsers);
+		model.addAttribute("userVip", userVip);
+		model.addAttribute("totalGroup", totalGroup);
+		model.addAttribute("totalExam", totalExam);
 		return "content/home";
 	}
 	

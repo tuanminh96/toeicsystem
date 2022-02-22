@@ -81,7 +81,7 @@
             <div id="navigation" class="content-left">
                 <div class="fix-scrolling">
                     <div class="timeDoExam" style="width: 80%">
-                        Time <i class="fas fa-clock"> : </i><span id="time">20:00</span>
+                        Time <i class="fas fa-clock"> : </i><span id="time">05:00</span>
                     </div>
                     <hr width="80%">
                     <div class="panel panel-info">

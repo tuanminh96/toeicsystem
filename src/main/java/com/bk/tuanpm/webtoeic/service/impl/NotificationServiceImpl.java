@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.json.JSONObject;
@@ -30,7 +31,7 @@ public class NotificationServiceImpl implements NotificationService {
 	@Autowired
 	NotificationRepository notificationRepository;
 
-	public Map<String, SseEmitter> emitters = new HashMap<String, SseEmitter>();
+	public Map<String, SseEmitter> emitters = new ConcurrentHashMap<String, SseEmitter>();
 	
 
 	@Override
@@ -117,7 +118,7 @@ public class NotificationServiceImpl implements NotificationService {
 	}
 	@Override
 	public List<Notification> getListNotifiByUser(User user) {
-		return notificationRepository.findAllByUser(user);
+		return notificationRepository.findAllByUserOrderByDateSendDesc (user);
 	}
 	
 	@Override

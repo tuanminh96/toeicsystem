@@ -5,9 +5,12 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -55,7 +58,7 @@ public class GroupAdminController {
 
 	@Autowired
 	MessageConfig messageConfig;
-	
+
 	@Autowired
 	PostService postService;
 
@@ -73,6 +76,25 @@ public class GroupAdminController {
 		return "admin/listGroupAdmin";
 	}
 
+	@GetMapping(value = "/delGroup/{idGroup}")
+	public String delGroup(@PathVariable("idGroup") int idGroup, Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		TutorialAdmin currentUser = nguoiDungService.findTutorialAdminByEmail(auth.getName());
+		Group group = groupService.getGroupById(idGroup);
+		group.setDelFlag(1);
+
+		try {
+			groupService.saveGroup(group);
+			List<Group> groups = groupService.getGroupOfAdmin(currentUser);
+			List<Group> displayGroup =  groups.stream().filter(g -> g.getDelFlag() == 0).collect(Collectors.toList());
+			model.addAttribute("groups", displayGroup);
+			return "admin/quanLyGroup";
+		} catch (Exception e) {
+			// TODO: handle exception
+			return "client/error";
+		}
+	}
+
 	@GetMapping("/group_detail/{idGroup}")
 	public String getGroup(Model model, @PathVariable Integer idGroup) throws ParseException {
 		Group group = groupService.getGroupById(idGroup);
@@ -82,7 +104,7 @@ public class GroupAdminController {
 		for (Post post : posts) {
 			PostDTO dto = new PostDTO();
 			dto.setPost(post);
-			if(Role.ROLE_TUTORIAL == post.getUser().getRole().getCode()) {
+			if (Role.ROLE_TUTORIAL == post.getUser().getRole().getCode()) {
 				dto.setAdminPost(true);
 			}
 			dto.setTimePost(DateTimeUtil.difDate(post.getDatePost(), new Date()));
@@ -120,6 +142,18 @@ public class GroupAdminController {
 		List<User> users = userAdminServiceImpl.getListUsers(listIdUsers);
 
 		Group groupToAdd = groupService.getGroupById(idGroup);
+		
+		//Check xem số lượng còn đủ chỗ trống không
+		int vacancy = groupToAdd.getMaxMem() - groupToAdd.getTotalMem();
+		String messageAdd = "";
+		if(listIdUsers.size() > vacancy) {
+			 messageAdd = ""+messageConfig.getProperty("add.failed")+ ": Số lượng thành viên thêm vào vượt quá tối đa";
+			List<MemberDTO> members = groupService.getListMember(idGroup);
+			model.addAttribute("members", members);
+			model.addAttribute("messageadd", messageAdd);
+			return "admin/listMember";
+		}
+		
 		for (User user : users) {
 			groupToAdd.getUsers().add(user);
 			groupToAdd.setTotalMem(groupToAdd.getTotalMem() + 1);
@@ -138,7 +172,7 @@ public class GroupAdminController {
 			String result = MessageFormat.format(message, currentUser.getUsername(), groupToAdd.getName());
 			notification.setBrief(result);
 			notification.setType(Notification.TYPE_ADD_GROUP);
-			notification.setDateSend(DateTimeUtil.convertDateToDate(new Date()));
+			notification.setDateSend(new Date());
 			notification.setUser(user);
 
 			// get url of group
@@ -147,7 +181,8 @@ public class GroupAdminController {
 			notification.setHyperLink(urlFormat);
 			notificationService.saveNotification(notification);
 		}
-
+		 messageAdd = ""+messageConfig.getProperty("add.success");
+		model.addAttribute("messageadd", messageAdd);
 		List<MemberDTO> members = groupService.getListMember(idGroup);
 		model.addAttribute("members", members);
 		return "admin/listMember";
@@ -159,7 +194,7 @@ public class GroupAdminController {
 		User user = userAdminServiceImpl.getUserById(idUser);
 		Group groupToDel = groupService.getGroupById(idGroup);
 		groupToDel.getUsers().remove(user);
-		groupToDel.setTotalMem(groupToDel.getTotalMem()-1);
+		groupToDel.setTotalMem(groupToDel.getTotalMem() - 1);
 		groupService.saveGroup(groupToDel);
 		List<MemberDTO> members = groupService.getListMember(idGroup);
 		model.addAttribute("members", members);

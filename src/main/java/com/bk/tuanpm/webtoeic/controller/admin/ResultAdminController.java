@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.bk.tuanpm.webtoeic.dto.ExamHistoryDTO;
 import com.bk.tuanpm.webtoeic.dto.MemberDTO;
 import com.bk.tuanpm.webtoeic.dto.StaticResultDTO;
 import com.bk.tuanpm.webtoeic.entities.Account;
@@ -27,6 +28,7 @@ import com.bk.tuanpm.webtoeic.entities.Group;
 import com.bk.tuanpm.webtoeic.entities.TestResult;
 import com.bk.tuanpm.webtoeic.entities.User;
 import com.bk.tuanpm.webtoeic.repository.TutorialAdminRepository;
+import com.bk.tuanpm.webtoeic.service.ClientAccountService;
 import com.bk.tuanpm.webtoeic.service.GroupService;
 import com.bk.tuanpm.webtoeic.service.PartService;
 import com.bk.tuanpm.webtoeic.service.impl.KetQuaBaiTestImpl;
@@ -45,7 +47,8 @@ public class ResultAdminController {
 	
 	@Autowired
 	UserAdminServiceImpl userAdminServiceImpl;
-	
+	@Autowired
+	private ClientAccountService clientAccountService;
 	@Autowired
 	KetQuaBaiTestImpl ketQuaBaiTestImpl;
 	
@@ -54,9 +57,12 @@ public class ResultAdminController {
 
 	@GetMapping("/memberResult/{idMem}")
 	public String getMemberResult(Model model, @PathVariable Integer idMem) {
-		User userResult = userAdminServiceImpl.getUserById(idMem);
-		List<TestResult> results = ketQuaBaiTestImpl.getResultMember(userResult);
-		model.addAttribute("results", results);
+
+		int totalscoreListening = partService.getScoreListening();
+		int totalscoreReading = partService.getScoreReading();
+		// Lay ra list cac bai thi accout da thi.
+		List<ExamHistoryDTO> listExamHistoryDTO = clientAccountService.findAllExamHistory(idMem, totalscoreListening, totalscoreReading);
+		model.addAttribute("listExamHistoryDTO", listExamHistoryDTO);
 		return "admin/memberResultDetail";
 	}
 	

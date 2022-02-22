@@ -30,7 +30,7 @@ public class Notification {
 	@Column(columnDefinition = "nvarchar(MAX)")
 	private String content;
 	private Date dateSend;
-	@Column(name = "date_seen", nullable = false)
+	
 	private Date dateSeen;
 	
 	@ManyToOne 

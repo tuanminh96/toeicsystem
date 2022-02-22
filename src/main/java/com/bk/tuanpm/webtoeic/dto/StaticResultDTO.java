@@ -16,6 +16,8 @@ public class StaticResultDTO {
 	private int wrongPart6;
 	private int wrongPart7;
 	private String rageDate;
+	private boolean isRemarked;
+	private String remarke;
 	public int getRightPart1() {
 		return rightPart1;
 	}
@@ -106,4 +108,18 @@ public class StaticResultDTO {
 	public void setRageDate(String rageDate) {
 		this.rageDate = rageDate;
 	}
+	public boolean isRemarked() {
+		return isRemarked;
+	}
+	public void setRemarked(boolean isRemarked) {
+		this.isRemarked = isRemarked;
+	}
+	public String getRemarke() {
+		return remarke;
+	}
+	public void setRemarke(String remarke) {
+		this.remarke = remarke;
+	}
+	
+	
 }

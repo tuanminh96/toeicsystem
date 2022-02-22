@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ import com.bk.tuanpm.webtoeic.dto.PostDTO;
 import com.bk.tuanpm.webtoeic.entities.Group;
 import com.bk.tuanpm.webtoeic.entities.Post;
 import com.bk.tuanpm.webtoeic.entities.Role;
+import com.bk.tuanpm.webtoeic.entities.TutorialAdmin;
 import com.bk.tuanpm.webtoeic.entities.User;
 import com.bk.tuanpm.webtoeic.repository.PostRepository;
 import com.bk.tuanpm.webtoeic.service.PostService;
@@ -33,7 +35,7 @@ public class PostServiceImpl implements PostService {
 	@Autowired
 	PostRepository postRepository;
 
-	public Map<Integer, SseEmitter> postEmitters = new HashMap<Integer, SseEmitter>();
+	public Map<Integer, SseEmitter> postEmitters = new ConcurrentHashMap<Integer, SseEmitter>();
 
 	@Override
 	public List<Post> getAllPostOfGroup(Group group) {
@@ -69,38 +71,72 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public void addPostRealtime(Post p, List<MemberDTO> users) throws ParseException, IOException {
+		try {
+			PostDTO post = new PostDTO();
+			post.setPost(p);
 
-		PostDTO post = new PostDTO();
-		post.setPost(p);
+			boolean isFromAdmin = false;
+			if (Role.ROLE_TUTORIAL == post.getPost().getUser().getRole().getCode()) {
+				isFromAdmin = true;
+			}
+			List<Integer> idUsers = new ArrayList<Integer>();
+			for (MemberDTO user : users) {
+				idUsers.add(user.getMemId());
+			}
+			for (Integer integer : idUsers) {
 
-		boolean isFromAdmin = false;
-		if (Role.ROLE_TUTORIAL == post.getPost().getUser().getRole().getCode()) {
-			isFromAdmin = true;
-		}
-		List<Integer> idUsers = new ArrayList<Integer>();
-		for (MemberDTO user : users) {
-			idUsers.add(user.getMemId());
-		}
-		for (Integer integer : idUsers) {
-
-			SseEmitter emitter2Sent = postEmitters.get(integer);
-			JSONObject object = new JSONObject();
-//				object.put("post", post.getPost());
-				object.put("isAdmin", ""+isFromAdmin);
-				object.put("timePost", DateTimeUtil.difDate(post.getPost().getDatePost(),new Date()));
+				SseEmitter emitter2Sent = postEmitters.get(integer);
+				JSONObject object = new JSONObject();
+//			object.put("post", post.getPost());
+				object.put("isAdmin", "" + isFromAdmin);
+				object.put("timePost", DateTimeUtil.difDate(post.getPost().getDatePost(), new Date()));
 				object.put("totalComments", post.getTotalComment());
+				System.out.println(postEmitters.size());
+				System.out.println("iduser: " + integer);
+				for (int string : postEmitters.keySet()) {
+					System.out.println(string);
+				}
+				if (emitter2Sent != null) {
+
+					emitter2Sent.send(SseEmitter.event().name("post_realtime").data(object.toString()));
+
+					System.out.println("da sent");
+
+				}
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+
+	}
+
+	@Override
+	public void addPostRealtime(Post p, TutorialAdmin admin) throws ParseException, IOException {
+		try {
+			PostDTO post = new PostDTO();
+			post.setPost(p);
+
+			boolean isFromAdmin = false;
+
+			SseEmitter emitter2Sent = postEmitters.get(admin.getId());
+			JSONObject object = new JSONObject();
+//			object.put("post", post.getPost());
+			object.put("isAdmin", "" + isFromAdmin);
+			object.put("timePost", DateTimeUtil.difDate(post.getPost().getDatePost(), new Date()));
+			object.put("totalComments", post.getTotalComment());
 			System.out.println(postEmitters.size());
-			System.out.println("iduser: " + integer);
+			System.out.println("idadmin: " + admin.getId());
 			for (int string : postEmitters.keySet()) {
 				System.out.println(string);
 			}
 			if (emitter2Sent != null) {
-
 				emitter2Sent.send(SseEmitter.event().name("post_realtime").data(object.toString()));
-
 				System.out.println("da sent");
-
 			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
 		}
 
 	}

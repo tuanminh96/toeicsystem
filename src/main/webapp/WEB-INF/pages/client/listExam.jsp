@@ -187,7 +187,7 @@
 											<span class="fa fa-star "></span>
 										</c:forEach>
 										<span
-											style="font-family: cursive; margin-left: 10px; color: brown;">4.57/5</span>
+											style="font-family: cursive; margin-left: 10px; color: brown;">0/5</span>
 									</div>
 									<p>
 										<c:set var="isNotAllow" scope="session" value="0" />
@@ -257,7 +257,7 @@
 	<!-- Modal -->
 	<div class="modal fade" id="examModal" tabindex="-1" role="dialog"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
+		<div class="modal-dialog" role="document" style="max-width: 700px;">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">HƯỚNG DẪN LÀM
@@ -283,7 +283,7 @@
 					<p>Phần thi này sẽ đánh giá khả năng đọc hiểu của bạn. Phần thi
 						này bao gồm 3 phần thi nhỏ: điền chỗ trống (6 câu), điền đoạn văn
 						(6 câu), đọc hiểu (6 câu), thời gian thi tối đa là 20 phút.</p>
-					<br>
+					<br> 
 					<p>Sẽ có 4 đáp án mỗi câu hỏi cho người dùng lựa chọn. Hệ thống
 						sẽ tính điểm dựa trên số câu đúng khi bạn nhấn Nộp bài hoặc hết
 						thời gian làm bài. Mỗi câu trả lời đúng sẽ tương ứng với 10 điểm.

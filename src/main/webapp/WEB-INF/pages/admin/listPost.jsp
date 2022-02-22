@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet"
 	href="//cdn.materialdesignicons.com/3.7.95/css/materialdesignicons.min.css">
-
+<script src="<c:url value='/js/admin/quanlyGroup.js'/>"></script>
 </head>
 <style>
 body {
@@ -54,7 +54,7 @@ body {
 							<i style="color: blue;" class="fa fa-star" aria-hidden="true"></i>
 						</c:if>
 						<small class="ml-4 text-muted"><i
-							class="mdi mdi-clock mr-1"></i>${post.timePost}</small> <a href="#"><i
+							class="mdi mdi-clock mr-1"></i>${post.timePost}</small> <a href="#" class="deletepost" idPost="${post.post.idPost}"><i
 							class="fa fa-trash" aria-hidden="true"
 							style="color: red; float: right; font-size: 20px;"></i></a>
 					</h6>

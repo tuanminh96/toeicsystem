@@ -20,4 +20,10 @@ public interface GroupRepository extends JpaRepository<Group, Integer> {
 	
 	@Query("SELECT count(g) FROM Group g WHERE g.groupCode LIKE ?1% ")
 	public int getTotalGroupThisYear(String year);
+	
+	@Query(value="SELECT count(*) FROM group_member gm WHERE gm.id_group = ?1 AND gm.id_user = ?2 ", nativeQuery=true)
+	public int findUserInGroup(int idGroup, int idUser);
+	
+	@Query(value="SELECT count(*) FROM group gm WHERE g.id_group = ?1 AND g.id_admin = ?2 ", nativeQuery=true)
+	public int findAdminInGroup(int idGroup, int idAmin);
 }

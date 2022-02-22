@@ -80,7 +80,7 @@ public class ClientController {
 	@GetMapping(value = { "/home", "/" })
 	public String home(Model model, @AuthenticationPrincipal OAuth2User oauth2User, HttpServletRequest request) {
 		model.addAttribute("listslidebanner", slideBannerService.findAll());
-		try {
+		/*try {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	        User currentUser = nguoiDungService.findUserByEmail(auth.getName());
 			HttpSession session = request.getSession();
@@ -89,7 +89,7 @@ public class ClientController {
 		} catch(Exception e) {
             e.printStackTrace();
             return "client/error";
-        }
+        }*/
 		return "client/home";
 	}
 
@@ -143,6 +143,22 @@ public class ClientController {
 			new SecurityContextLogoutHandler().logout(request, response, auth);
 		}
 		return "redirect:/login?logout";
+	}
+	
+	//return login-page admin
+	@GetMapping(value = { "/adminPage"})
+	public String homeAdmin(Model model) {
+		/*try {
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	        User currentUser = nguoiDungService.findUserByEmail(auth.getName());
+			HttpSession session = request.getSession();
+			int count_notifi = notificationService.countNotificationByUserAndDateSeenIsNull(currentUser);
+			session.setAttribute("count_notifi", count_notifi);
+		} catch(Exception e) {
+            e.printStackTrace();
+            return "client/error";
+        }*/
+		return "client/adminHome";
 	}
 
 }

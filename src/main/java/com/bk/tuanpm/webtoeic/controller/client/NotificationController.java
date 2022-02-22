@@ -51,7 +51,7 @@ public class NotificationController {
 		try {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             User currentUser = nguoiDungService.findUserByEmail(auth.getName());
-            sendingEmailService.sendingEmail(currentUser);
+//            sendingEmailService.sendingEmail(currentUser);
             List<Notification> list = notificationServiceImpl.getListNotifiByUser(currentUser);
             model.addAttribute("listData", list);
 		} catch (Exception e) {

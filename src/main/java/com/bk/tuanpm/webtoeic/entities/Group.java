@@ -33,7 +33,9 @@ public class Group {
 	private Date createDate;
 	private int totalMem;
 	private int maxMem;
-
+	
+	@Column(columnDefinition = "int default 0")
+	private int delFlag;
 	@ManyToOne
 	@JoinColumn(name = "id_admin")
 	private TutorialAdmin createAdmin;
@@ -140,6 +142,14 @@ public class Group {
 
 	public void setTotalMem(int totalMem) {
 		this.totalMem = totalMem;
+	}
+	
+	public int getDelFlag() {
+		return delFlag;
+	}
+
+	public void setDelFlag(int delFlag) {
+		this.delFlag = delFlag;
 	}
 
 	@Override

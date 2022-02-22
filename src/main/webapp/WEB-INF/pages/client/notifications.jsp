@@ -50,9 +50,12 @@ body {
 			</div>
 			<div class="col-lg-9 right">
 				<div class="box shadow-sm rounded bg-white mb-3">
-					<div class="box-title border-bottom p-3">
-						<h6 class="m-0">Danh sách thông báo</h6>
+					<div class="box-title border-bottom p-3" style="margin: auto;">
+						<h4 class="m-0">DANH SÁCH THÔNG BÁO</h4>
 					</div>
+					<c:if test="${listData.size()==0}">
+						<p style="width: 40%;margin: auto;padding: 30px;">Bạn chưa có thông báo nào</p>
+					</c:if>
 					<c:forEach items="${listData}" var="list" varStatus="loop">
 						<c:if test="${empty list.dateSeen}">
 							<div class="box-body p-0">
@@ -102,6 +105,7 @@ body {
 											alt="" />
 									</div>
 									<div class="font-weight-bold mr-3">
+										<a href="<%=request.getContextPath()%>/detailnoti/${list.idNoti}">
 										<c:if test="${list.type == 'post' || list.type == 'comment'}">
 											<div class="text-truncate">Thông báo từ nhóm</div>
 										</c:if>
@@ -112,6 +116,7 @@ body {
 										<div class="small text-success">
 											<i class="fa fa-check-circle"></i> seen
 										</div>
+										</a>
 									</div>
 									<span class="ml-auto mb-auto" style="display: flex;">
 										<div type="date" class="text-right text-muted pt-1">${list.dateSend}</div>

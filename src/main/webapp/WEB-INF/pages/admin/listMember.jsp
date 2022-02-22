@@ -14,6 +14,7 @@
 	<h4 style="color: red" id="info-success"></h4>
 	<input id="appContext" type="hidden"
 		value="${pageContext.request.contextPath}">
+	<p style="color: red;">${messageadd}</p>
 	<table class="table table-hover nhanHieuTable" id="tableMember">
 		<thead>
 			<tr>
@@ -141,8 +142,7 @@
 	                },
 	                url: appContext + "/admin/addUserGroup",
 	                success: function (result) {
-	                    
-	                    alert("Thêm thành viên thành công");
+
 	                    $("#appendContent").html(result);
 	                    $('#addMemModal').modal('hide');
 	                    $(".modal-fade").modal("hide");

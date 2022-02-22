@@ -155,7 +155,11 @@ hr {
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
 <div class="page-content container mainListExam">
-<h3>${messagePayment}</h3>
+<div class="alert alert-warning alert-dismissible">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+				<strong>Thông báo!</strong> <p style="">${messagePayment}</p>
+			</div>
+
 <c:if test="${order.responseCode == 00}">
     <div class="container px-0">
         <div class="row mt-4">
@@ -175,12 +179,12 @@ hr {
                 <div class="row">
                     <div class="col-sm-6">
                         <div>
-                            <span class="text-sm text-grey-m2 align-middle">Người thanh toán:</span>
+                            <span class="text-sm text-grey-m2 align-middle"> <i class="fa fa-user-circle-o" aria-hidden="true"></i> Người thanh toán:</span>
                             <span class="text-600 text-110 text-blue align-middle">${order.user.hoTen}</span>
                         </div>
                         <div class="text-grey-m2">
                             <div class="my-1">
-                                ${order.user.diaChi}
+                                <i class="fa fa-globe" aria-hidden="true"></i> Địa chỉ: ${order.user.diaChi}
                             </div>
                             <div class="my-1"><i class="fa fa-phone fa-flip-horizontal text-secondary"></i> <b class="text-600">${order.user.soDienThoai}</b></div>
                         </div>
@@ -196,7 +200,8 @@ hr {
 
                             <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90">Ref-No:</span>${order.refNo}</div>
 
-                            <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90">Ngày thanh toán:</span> ${order.payDate}</div>
+                            <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90">Ngày thanh toán:</span>
+                            <fmt:formatDate pattern = "yyyy-MM-dd" value = "${order.payDate}" /></div>
 
                             <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90">Trạng thái:</span> <span class="badge badge-success badge-pill px-25">${order.status}</span></div>
                         </div>

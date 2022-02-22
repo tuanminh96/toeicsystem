@@ -63,7 +63,7 @@
 							style="float: left" aria-expanded="true"> <i
 							class="fa fa-bell-o"
 							style="font-size: 20px; float: left; color: black"> </i>
-						</a> <span class="badge badge-danger">6</span>
+						</a> <span class="badge badge-danger"></span>
 						<ul class="dropdown-menu dropdown-menu-left pull-right"
 							style="left: -100px;" role="menu" aria-labelledby="dropdownMenu1">
 							<li role="presentation"><a href="#"
@@ -72,26 +72,6 @@
 								style="margin: 10px; width: 210px">
 								<li>
 									<p>
-										Your “Volume Trendline” PDF is ready <a href="">here</a> <span
-											class="timeline-icon"><i class="fa fa-file-pdf-o"
-											style="color: red"></i></span> <span class="timeline-date">Dec
-											10, 22:00</span>
-									</p>
-								</li>
-								<li>
-									<p>
-										Your “Marketplace Report” PDF is ready <a href="">here</a> <span
-											class="timeline-icon"><i class="fa fa-file-pdf-o"
-											style="color: red"></i></span> <span class="timeline-date">Dec
-											6, 10:17</span>
-									</p>
-								</li>
-								<li>
-									<p>
-										Your “Top Words” spreadsheet is ready <a href="">here</a> <span
-											class="timeline-icon"><i class="fa fa-file-excel-o"
-											style="color: green"></i></span> <span class="timeline-date">Dec
-											5, 04:36</span>
 									</p>
 								</li>
 							</ul>
@@ -149,7 +129,7 @@
 							<div class="card">
 								<h5 class="card-header">Bài đăng được quan tâm</h5>
 								<div class="card-body">
-									<ul class="list-group list-group-flush">
+<!-- 									<ul class="list-group list-group-flush">
 										<li class="list-group-item">Tổng hợp các mẹo thi TOEIC
 											hay nhất đủ 7 phần</li>
 										<li class="list-group-item">Tổng hợp các mẹo thi TOEIC
@@ -158,7 +138,7 @@
 											hay nhất đủ 7 phần</li>
 										<li class="list-group-item">Tổng hợp các mẹo thi TOEIC
 											hay nhất đủ 7 phần</li>
-									</ul>
+									</ul> -->
 								</div>
 							</div>
 						</div>
@@ -208,70 +188,9 @@
 							</div>
 							<div id="appendContent">
 								<div class="profile-feed">
-									<div class="d-flex align-items-start profile-feed-item">
-										<img
-											src="https://aui.atlassian.com/aui/latest/docs/images/avatar-person.svg"
-											alt="profile" class="img-sm rounded-circle">
-										<div class="ml-4" style="width: 80%;">
-											<h6>
-												<a href="#"> tuanminh96 </a> <i style="color: blue;"
-													class="fa fa-star" aria-hidden="true"></i><small
-													class="ml-4 text-muted"><i
-													class="mdi mdi-clock mr-1"></i>10 hours</small>
-											</h6>
-											<h4>Tổng hợp các mẹo thi TOEIC hay nhất đủ 7 phần</h4>
-											<p>Mình gửi các bạn tham khảo nhé.</p>
-											<a href="https://tienganhmoingay.com/meo-thi-toeic/">https://tienganhmoingay.com/meo-thi-toeic/</a>
-											<p class="small text-muted mt-2 mb-0">
-												</span> <span class="ml-2"> <i class="mdi mdi-comment mr-1"></i>11
-												</span>
-											<div class="bg-light p-2">
-												<div class="d-flex flex-row align-items-start">
-													<img class="rounded-circle"
-														src="https://aui.atlassian.com/aui/latest/docs/images/avatar-person.svg"
-														width="30">
-													<textarea class="form-control ml-1 shadow-none textarea" style="white-space: pre-wrap;"></textarea>
-												</div>
-												<div class="mt-2 text-right">
-													<button class="btn btn-primary btn-sm shadow-none"
-														type="button">Post comment</button>
-												</div>
-											</div>
-											<div class="box-footer box-comments"
-												style="padding: 10px; background-color: #f8f9fa; border-top: outset;">
-												<div class="box-comment">
-													<div class="flex-row align-items-start commentlist">
-														<img class="rounded-circle"
-															src="https://aui.atlassian.com/aui/latest/docs/images/avatar-person.svg"
-															width="30">
-														<div class="comment-text">
-															<span class="username"> <a href="#">tuanmino96</a>
-																: <span class="ml-4 text-muted pull-right"
-																style="font-size: 10px;">8:03 PM</span>
-															</span>
-															<p>Thank you so much</p>
-														</div>
-													</div>
-												</div>
-												<div class="box-comment">
-													<div class="flex-row align-items-start commentlist">
-														<img class="rounded-circle"
-															src="https://aui.atlassian.com/aui/latest/docs/images/avatar-person.svg"
-															width="30">
-														<div class="comment-text">
-															<span class="username"> <a href="#">chutuanthanh</a>
-																: <span class="ml-4 text-muted pull-right"
-																style="font-size: 10px;">8:03 PM</span>
-															</span>
-															<p>Bai viet that huu ich</p>
-														</div>
-													</div>
-												</div>
-											</div>
-											<!-- Card -->
-											</p>
-										</div>
-									</div>
+									<c:if test="${listpost.size()==0}">
+									<p style=" margin: auto;width: 30%;margin-top: 20px; ">Nhóm chưa có bài đăng nào</p>
+									</c:if>
 									<c:forEach items="${listpost}" var="post">
 										<div class="d-flex align-items-start profile-feed-item">
 											<img
@@ -339,6 +258,7 @@
 		</div>
 	</div>
 	<script src="<c:url value='/js/client/post.js'/>"></script>
+	<jsp:include page="template/footer.jsp"></jsp:include>
 </body>
 
 </html>

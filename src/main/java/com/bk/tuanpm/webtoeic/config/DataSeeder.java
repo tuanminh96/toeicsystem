@@ -164,6 +164,8 @@ public class DataSeeder implements ApplicationListener<ContextRefreshedEvent> {
 			partToeic.setDescription(
 					"Look at the picture and listen to the sentences. Choose the sentence that best describes the picture:");
 			partToeic.setType("Listening");
+			partToeic.setQuestionTotal(2);
+			partToeic.setSetQuestionTotal(2);
 			partRepository.save(partToeic);
 		}
 		if (partRepository.findByPartName("Part II") == null) {
@@ -172,6 +174,8 @@ public class DataSeeder implements ApplicationListener<ContextRefreshedEvent> {
 			partToeic.setDescription(
 					"Listen to the question and the three responses. Choose the response that best answers the question:");
 			partToeic.setType("Listening");
+			partToeic.setQuestionTotal(5);
+			partToeic.setSetQuestionTotal(1);
 			partRepository.save(partToeic);
 		}
 		if (partRepository.findByPartName("Part III") == null) {
@@ -179,6 +183,8 @@ public class DataSeeder implements ApplicationListener<ContextRefreshedEvent> {
 			partToeic.setPartName("Part III");
 			partToeic.setDescription("Listen to the dialogue. Then read each question and choose the best answer:");
 			partToeic.setType("Listening");
+			partToeic.setQuestionTotal(6);
+			partToeic.setSetQuestionTotal(2);
 			partRepository.save(partToeic);
 		}
 		if (partRepository.findByPartName("Part IV") == null) {
@@ -186,6 +192,8 @@ public class DataSeeder implements ApplicationListener<ContextRefreshedEvent> {
 			partToeic.setPartName("Part IV");
 			partToeic.setDescription("Listen to the talk. Then read each question and choose the best answer:");
 			partToeic.setType("Listening");
+			partToeic.setQuestionTotal(6);
+			partToeic.setSetQuestionTotal(2);
 			partRepository.save(partToeic);
 		}
 		if (partRepository.findByPartName("Part V") == null) {
@@ -193,6 +201,8 @@ public class DataSeeder implements ApplicationListener<ContextRefreshedEvent> {
 			partToeic.setPartName("Part V");
 			partToeic.setDescription("Choose the word that best completes the sentence:");
 			partToeic.setType("Reading");
+			partToeic.setQuestionTotal(6);
+			partToeic.setSetQuestionTotal(1);
 			partRepository.save(partToeic);
 		}
 		if (partRepository.findByPartName("Part VI") == null) {
@@ -200,6 +210,8 @@ public class DataSeeder implements ApplicationListener<ContextRefreshedEvent> {
 			partToeic.setPartName("Part VI");
 			partToeic.setDescription("Choose the word or phrase that best completes the blanks:");
 			partToeic.setType("Reading");
+			partToeic.setQuestionTotal(6);
+			partToeic.setSetQuestionTotal(2);
 			partRepository.save(partToeic);
 		}
 		if (partRepository.findByPartName("Part VII") == null) {
@@ -207,6 +219,8 @@ public class DataSeeder implements ApplicationListener<ContextRefreshedEvent> {
 			partToeic.setPartName("Part VII");
 			partToeic.setDescription("Read the passage and choose the correct answer");
 			partToeic.setType("Reading");
+			partToeic.setQuestionTotal(6);
+			partToeic.setSetQuestionTotal(2);
 			partRepository.save(partToeic);
 		}
 	}

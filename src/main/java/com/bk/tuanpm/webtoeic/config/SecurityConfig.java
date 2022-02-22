@@ -3,6 +3,7 @@ package com.bk.tuanpm.webtoeic.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,6 +17,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 
 @Configuration
 @EnableWebSecurity
+@Order(1)
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
@@ -53,8 +55,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.antMatchers("/admin/**").hasRole("TUTORIAL")
 				.antMatchers("/content/**").hasRole("CONTENT")
 				.antMatchers("/manager/**").hasRole("MANAGER")
-				.antMatchers("/list_group").hasAnyRole("MEMBER,", "MEMBER_VIP")
+				.antMatchers("/list_group").hasAnyRole("MEMBER_VIP")
 				.antMatchers("/listExam").hasAnyRole("MEMBER","MEMBER_VIP")
+				.antMatchers("/showResultExam").hasRole("MEMBER_VIP")
 				.and()
 			.formLogin()
 			    .loginPage("/login")
@@ -74,6 +77,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	         .rememberMe().key("uniqueAndSecret").rememberMeParameter("remember-me")
 	            .and()
 			.exceptionHandling().accessDeniedPage("/signin?accessDenied");
+		
 	}
 	
 }

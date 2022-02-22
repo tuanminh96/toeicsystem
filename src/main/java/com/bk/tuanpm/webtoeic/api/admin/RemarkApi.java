@@ -1,4 +1,4 @@
-package com.bk.tuanpm.webtoeic.controller.admin;
+package com.bk.tuanpm.webtoeic.api.admin;
 
 import java.text.MessageFormat;
 import java.text.ParseException;
@@ -30,7 +30,7 @@ import com.bk.tuanpm.webtoeic.util.DateTimeUtil;
 
 @RestController
 @RequestMapping("/admin")
-public class RemarkController {
+public class RemarkApi {
 
 	@Autowired
 	GroupService groupService;
@@ -38,24 +38,23 @@ public class RemarkController {
 	UserAdminServiceImpl nguoiDungService;
 	@Autowired
 	TutorialAdminRepository adminRepository;
-	
+
 	@Autowired
 	UserAdminServiceImpl userAdminServiceImpl;
-	
+
 	@Autowired
 	MessageConfig messageConfig;
-	
+
 	@Autowired
 	RemarkService remarkService;
-	
+
 	@Autowired
 	NotificationService notificationService;
 
 	@PostMapping(value = "/addRemark")
 	@ResponseBody
 	public ResponseEntity<String> addGroup(Model model, @RequestParam("idMem") int idMem,
-			@RequestParam("remark") String remark,
-			@RequestParam("dateRange") String dateRange,
+			@RequestParam("remark") String remark, @RequestParam("dateRange") String dateRange,
 			@RequestParam("weekNum") String weekNum) throws ParseException {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		TutorialAdmin currentUser = nguoiDungService.findTutorialAdminByEmail(auth.getName());
@@ -65,27 +64,31 @@ public class RemarkController {
 		remarkToAdd.setTimeRemark(new Date());
 		remarkToAdd.setAdminRemark(currentUser);
 		remarkToAdd.setDateRange(dateRange);
-		remarkToAdd.setWeekNum(weekNum); 
+		remarkToAdd.setWeekNum(weekNum);
 		remarkToAdd.setUser(userAdded);
-		
-		remarkService.saveRemarkForUser(remarkToAdd);
-		//push remark notifcation to user
-		notificationService.pushRemarkNotification(""+userAdded.getId(), 
-				""+currentUser.getUsername(),
-				""+weekNum);
-		
-		//thêm notification vào database
+
+		Remark remarkSaved = remarkService.saveRemarkForUser(remarkToAdd);
+		// push remark notifcation to user
+		notificationService.pushRemarkNotification("" + userAdded.getId(), "" + currentUser.getUsername(),
+				"" + weekNum);
+
+		// thêm notification vào database
 		Notification notification = new Notification();
 		String mess = messageConfig.getProperty("noti.remark");
-		String result = MessageFormat.format(mess, currentUser.getUsername() , weekNum);
+		String result = MessageFormat.format(mess, currentUser.getUsername(), weekNum);
 		notification.setBrief(result);
 		notification.setContent(remark);
 		notification.setType(Notification.TYPE_REMARK);
-		notification.setDateSend(DateTimeUtil.convertDateToDate(new Date()));
+		notification.setDateSend(new Date());
 		notification.setUser(userAdded);
-		notificationService.saveNotification(notification);
 		
-		String messageReturn = messageConfig.getProperty("add.success")+" Nhận xét cho: "+userAdded.getHoTen()+ "";
+		// add hyperlink cho thong bao de nguoi dung click vao
+		String urlPost = messageConfig.getProperty("noti.post.url");
+		String link = MessageFormat.format(urlPost, remarkSaved.getIdRemark());
+		notification.setHyperLink(link);
+		notificationService.saveNotification(notification);
+
+		String messageReturn = messageConfig.getProperty("add.success") + " Nhận xét cho: " + userAdded.getHoTen() + "";
 		return new ResponseEntity<String>(messageReturn, HttpStatus.OK);
 	}
 }

@@ -1,6 +1,7 @@
 package com.bk.tuanpm.webtoeic.controller.admin;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.bk.tuanpm.webtoeic.entities.Account;
 import com.bk.tuanpm.webtoeic.entities.TutorialAdmin;
 import com.bk.tuanpm.webtoeic.entities.Group;
+import com.bk.tuanpm.webtoeic.service.BaiThiThuService;
 import com.bk.tuanpm.webtoeic.service.GroupService;
 import com.bk.tuanpm.webtoeic.service.RoleService;
 import com.bk.tuanpm.webtoeic.service.impl.UserAdminServiceImpl;
@@ -35,6 +37,9 @@ public class AdminController {
 
 	@Autowired
 	GroupService groupService;
+	
+	@Autowired
+	BaiThiThuService baiThiThuService;
 
 	@ModelAttribute("loggedInUser")
 	public Account loggedInUser() {
@@ -42,15 +47,22 @@ public class AdminController {
 		return nguoiDungService.findByEmail(auth.getName());
 	}
 
-	@GetMapping({ "/exam", "" })
+	@GetMapping({ "/exam"})
 	public String quanLyExam(Model model) {
 		return "admin/quanLyExam";
 	}
 
-	@GetMapping({ "/exam-approve"})
-	public String quanLyExamApprove(Model model) {
-		System.out.println("Vao quanLyExamApprove");
-		return "admin/quanLyExamApprove";
+	@GetMapping("")
+	public String home(Model model) {
+		long totalUsers = nguoiDungService.getTotalUser();
+		long userVip = nguoiDungService.getTotalVip();
+		long totalGroup = groupService.getTotalGroup();
+		long totalExam = baiThiThuService.getTotalExam();
+		model.addAttribute("totalUsers", totalUsers);
+		model.addAttribute("userVip", userVip);
+		model.addAttribute("totalGroup", totalGroup);
+		model.addAttribute("totalExam", totalExam);
+		return "admin/home";
 	}
 
 	@GetMapping({ "/group" })
@@ -58,7 +70,8 @@ public class AdminController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		TutorialAdmin currentUser = nguoiDungService.findTutorialAdminByEmail(auth.getName());
 		List<Group> groups = groupService.getGroupOfAdmin(currentUser);
-		model.addAttribute("groups", groups);
+		List<Group> displayGroup =  groups.stream().filter(g -> g.getDelFlag() == 0).collect(Collectors.toList());
+		model.addAttribute("groups", displayGroup);
 		return "admin/quanLyGroup";
 	}
 

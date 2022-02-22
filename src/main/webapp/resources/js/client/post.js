@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	if ($("#vip").val() == 'vip' && eventSource2 == null) {
+	if (eventSource2 == null) {
 	var idUser = $('#idUser').val();
 	var urlEnd = 'http://localhost:8080/webtoeic/subcribePost?id='+idUser;
 	var eventSource2 = new EventSource(urlEnd);
@@ -15,8 +15,9 @@ $(document).ready(function() {
 			}
 		});
 	});
-	window.addEventListener('beforeunload', () => {
+	eventSource2.addEventListener('close', () => {
 		eventSource2.close();
-	    });
+		eventSource2 = null;
+		});
 	}
 });

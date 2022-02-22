@@ -39,6 +39,9 @@ public class Post {
 	
 	private Date updateDate;
 	private String updateBy;
+	
+	@Column(columnDefinition = "int default 0")
+	private int delFlag;
 	public Integer getIdPost() {
 		return idPost;
 	}
@@ -94,6 +97,13 @@ public class Post {
 	}
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
+	}
+	
+	public int getDelFlag() {
+		return delFlag;
+	}
+	public void setDelFlag(int delFlag) {
+		this.delFlag = delFlag;
 	}
 	@Override
 	public int hashCode() {

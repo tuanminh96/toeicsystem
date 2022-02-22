@@ -55,7 +55,8 @@ body {
 							<span>${notification.dateSend}</span>
 					</div>
 					<div class="member_desc">
-						<p>${notification.content}</p>
+						<p>${notification.brief}</p>
+						<p>Bấm vào <a href="<%=request.getContextPath()%>${notification.hyperLink}">đây</a> để xem chi tiết</p>
 					</div>
 				</div>
 			</div>

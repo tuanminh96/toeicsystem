@@ -17,8 +17,10 @@ import com.bk.tuanpm.webtoeic.dto.StaticResultDTO;
 import com.bk.tuanpm.webtoeic.entities.TestResult;
 import com.bk.tuanpm.webtoeic.entities.User;
 import com.bk.tuanpm.webtoeic.service.PartService;
+import com.bk.tuanpm.webtoeic.service.RemarkService;
 import com.bk.tuanpm.webtoeic.service.impl.KetQuaBaiTestImpl;
 import com.bk.tuanpm.webtoeic.service.impl.UserAdminServiceImpl;
+import com.bk.tuanpm.webtoeic.util.DateTimeUtil;
 
 @RestController
 @RequestMapping("/admin/api")
@@ -31,13 +33,16 @@ public class ResultApi {
 	KetQuaBaiTestImpl ketQuaBaiTestImpl;
 	
 	@Autowired
+	RemarkService remarkService;
+	
+	@Autowired
 	PartService partService;
 	
 	@PostMapping("/staticResult")
 	@ResponseBody
 	public StaticResultDTO getStatistic(Model model, @RequestParam("idMem") Integer idMem,
-				@RequestParam("dateFrom") @DateTimeFormat(pattern="yyyy-MM-dd") Date fromDate,
-				@RequestParam("dateTo") @DateTimeFormat(pattern="yyyy-MM-dd") Date dateTo
+				@RequestParam("dateFrom") @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") Date fromDate,
+				@RequestParam("dateTo") @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") Date dateTo
 			) {
 		User userResult = userAdminServiceImpl.getUserById(idMem);
 		List<TestResult> results = ketQuaBaiTestImpl.getResultMemberDateRange(idMem, fromDate, dateTo);
@@ -97,6 +102,13 @@ public class ResultApi {
 		resultDTO.setWrongPart5(wrongP5);
 		resultDTO.setWrongPart6(wrongP6);
 		resultDTO.setWrongPart7(wrongP7);
+		
+		//Check xem quản lý đã thêm nhận xét cho tuần này chưa
+		int weeknNum = DateTimeUtil.getCurrentWeekNum();
+		String currentRange = DateTimeUtil.getCurrentWeekRange();
+		boolean isPresentRemark = remarkService.isPresentRemark(idMem, currentRange, ""+weeknNum);
+		resultDTO.setRemarked(isPresentRemark);
+		resultDTO.setRemarke(remarkService.getRemark(idMem, currentRange, ""+weeknNum).getRemark());
 		return resultDTO;
 	}
 }

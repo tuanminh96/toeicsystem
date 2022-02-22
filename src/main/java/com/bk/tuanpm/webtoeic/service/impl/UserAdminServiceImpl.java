@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,16 +15,17 @@ import org.springframework.stereotype.Service;
 
 import com.bk.tuanpm.webtoeic.entities.Account;
 import com.bk.tuanpm.webtoeic.entities.ContentAdmin;
+import com.bk.tuanpm.webtoeic.entities.ManagerAdmin;
 import com.bk.tuanpm.webtoeic.entities.TutorialAdmin;
 import com.bk.tuanpm.webtoeic.entities.Role;
 import com.bk.tuanpm.webtoeic.entities.User;
 import com.bk.tuanpm.webtoeic.repository.AccountRepository;
 import com.bk.tuanpm.webtoeic.repository.ContentAdminRepository;
+import com.bk.tuanpm.webtoeic.repository.ManagerAdminRepository;
 import com.bk.tuanpm.webtoeic.repository.RoleRepository;
 import com.bk.tuanpm.webtoeic.repository.UserRepository;
 
 @Service
-@Transactional
 public class UserAdminServiceImpl {
 
 	@Autowired
@@ -40,6 +42,9 @@ public class UserAdminServiceImpl {
 	@Autowired
 	private ContentAdminRepository contentAdminRepository;
 
+	@Autowired
+	private ManagerAdminRepository managerAdminRepository;
+	
 	public Account findByEmail(String email) {
 		return nguoiDungRepo.findByEmail(email);
 	}
@@ -54,6 +59,10 @@ public class UserAdminServiceImpl {
 	
 	public ContentAdmin findContentByEmail(String email) {
 		return contentAdminRepository.findByEmail(email);
+	}
+	
+	public ManagerAdmin findManagerByEmail(String email) {
+		return managerAdminRepository.findByEmail(email);
 	}
 
 	public Account findByConfirmationToken(String confirmationToken) {
@@ -118,6 +127,15 @@ public class UserAdminServiceImpl {
 	
 	public Account findUserByUsername(String username) {
 		return nguoiDungRepo.findByUsername(username);
+	}
+	
+	public long getTotalUser() {
+		return userRepository.count();
+	}
+	
+	public long getTotalVip() {
+		Role rolevIP = roleRepository.findByCode(Role.ROLE_MEMBER_VIP);
+		return userRepository.countByRole(rolevIP);
 	}
 
 }

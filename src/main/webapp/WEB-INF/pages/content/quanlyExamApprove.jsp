@@ -35,11 +35,12 @@
     <table class="table table-hover nhanHieuTable" id="tableExam">
         <thead>
         <tr>
-            <th>ID</th>
-            <th>Tên bài thi thử</th>
-            <th>Ảnh</th>
-            <th></th>
-        </tr>
+					<th>ID</th>
+					<th>Tên bài thi thử</th>
+					<th>Ngày đăng</th>
+					<th>Trạng thái</th>
+					<th>Chọn</th>
+				</tr>
         </thead>
         <tbody>
         </tbody>

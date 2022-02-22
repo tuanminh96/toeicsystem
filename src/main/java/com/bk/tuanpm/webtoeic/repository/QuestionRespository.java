@@ -29,15 +29,12 @@ public interface QuestionRespository extends JpaRepository<Question, Integer> {
             "       p.part_name,\n" +
             "       p.type,\n" +
             "       q.cauhoibaithithuid,\n" +
-            "       q.audiomp3,\n" +
             "       q.correctanswer,\n" +
-            "       q.image,\n" +
             "       q.number,\n" +
             "       q.option1,\n" +
             "       q.option2,\n" +
             "       q.option3,\n" +
             "       q.option4,\n" +
-            "       q.paragraph,\n" +
             "       q.question,\n" +
             "       p.description\n" +
             "FROM dbo.exam e\n" +
@@ -62,15 +59,12 @@ public interface QuestionRespository extends JpaRepository<Question, Integer> {
             "       p.part_name,\n" +
             "       p.type,\n" +
             "       q.cauhoibaithithuid,\n" +
-            "       q.audiomp3,\n" +
             "       q.correctanswer,\n" +
-            "       q.image,\n" +
             "       q.number,\n" +
             "       q.option1,\n" +
             "       q.option2,\n" +
             "       q.option3,\n" +
             "       q.option4,\n" +
-            "       q.paragraph,\n" +
             "       q.question,\n" +
             "       ed.id_explain,\n" +
             "       ed.explain,\n" +

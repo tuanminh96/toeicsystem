@@ -1,9 +1,10 @@
 $(document).ready(function () {
+
     const baseUrl = $('#baseUrl').val();
     const examId = $("#examId").val();
-    const totalTimeListemExam = 60 * 20;
+    const totalTimeListemExam = 60 * 5;
     let timeCheckListening;
-    let timeDoListenExam = 60 * 20;
+    let timeDoListenExam = 60 * 5;
 
     $('#doReading').click(function () {
         const answerArr = answerListen();
@@ -48,7 +49,7 @@ $(document).ready(function () {
             if (--timer < 0) {
                 clearInterval(timeCheckListening);
 
-                //do someth after countdown
+                // do someth after countdown
                 alert("Listening time-out. Hệ thống sẽ tự động chuyển qua bài test Reading");
                 $("#doReading").click()
             }
@@ -59,11 +60,40 @@ $(document).ready(function () {
         display = document.querySelector('#time');
         startTimer(totalTimeListemExam, display);
     };
+    
+	// ham check so lan bam file nghe
+	var countListen = new Array();
+	$('audio').each(function(){
+	    var audioClicked = {
+	    		name : $(this).attr("audioId"),
+	    		count: 0
+	    }
+	    countListen.push(audioClicked);
+	});
+
+	$('.audiobut').on('playing', function(){
+		var nameAudio = $(this).attr("audioId");
+
+		for (var i = 0, len = countListen.length; i < len; i++) {
+			
+	        if (countListen[i].name && countListen[i].name === nameAudio) {
+	        	if(countListen[i].count == 2) {
+	        		alert("Rất tiếc chỉ được phép nghe tối đa 2 lần"); 
+	        		$(this).hide();
+	        		return;
+	        	}
+	        	else {
+		        	countListen[i].count++;
+	        	}
+	        }
+	}
+		console.log(countListen);
+	});
 });
 
 // Mark color danh sach cau hoi.
 function markColorListening(id) {
-    //tách lấy id của câu hỏi
+    // tách lấy id của câu hỏi
     const fields = id.split('.');
     const answerId = fields[1];
     $("#answer" + answerId).css('background-color', 'rgb(167,162,162)');

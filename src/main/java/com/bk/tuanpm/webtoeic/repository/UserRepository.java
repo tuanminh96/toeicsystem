@@ -18,4 +18,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	public List<User> findByRoleAndGroupsIsNullOrderByUpgradeDateAsc(Role role);
 	
 	public List<User> findByIdIn(List<Integer> ids);
+	
+	public long countByRole(Role role);
+	
 }

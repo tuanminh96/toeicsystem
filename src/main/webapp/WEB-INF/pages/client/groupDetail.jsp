@@ -116,7 +116,7 @@
 							</div>
 							<div id="appendContent">
 								<div class="profile-feed">
-									<div class="d-flex align-items-start profile-feed-item">
+									<!-- <div class="d-flex align-items-start profile-feed-item">
 										<img
 											src="https://aui.atlassian.com/aui/latest/docs/images/avatar-person.svg"
 											alt="profile" class="img-sm rounded-circle">
@@ -162,10 +162,10 @@
 													</div>
 												</div>
 											</div>
-											<!-- Card -->
+											Card
 											</p>
 										</div>
-									</div>
+									</div> -->
 									<c:forEach items="${listpost}" var="post">
 										<div class="d-flex align-items-start profile-feed-item">
 											<img

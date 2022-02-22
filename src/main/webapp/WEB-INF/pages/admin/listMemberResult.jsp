@@ -40,8 +40,7 @@
 			<c:forEach items="${members}" var="member">
 				<tr>
 					<td class="center">${member.memId}</td>
-					<td class="center"><a href="" data-toggle="modal"
-						data-target="#viewResult">${member.memName}</a></td>
+					<td class="center"><a href="#" idMem="${member.memId}" class="viewResult">${member.memName}</a></td>
 					<td class="center">${member.fullName}</td>
 					<td class="center"><button type="button" class="viewResultStatics btn btn-info" idmem="${member.memId}"
 							data-toggle="modal" data-target="#viewResultStatics">Xem thống kê </button> </td>
@@ -49,7 +48,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	<div class="modal fade" id="viewResult" tabindex="-1" role="dialog"
+	<div class="modal fade" id="viewResultModal" tabindex="-1" role="dialog"
 		aria-labelleby="myModalLable">
 		<div class="modal-dialog" role="document" style="max-width: 1000px;">
 			<div class="modal-content">
@@ -62,7 +61,8 @@
 						${member.fullName}</h4>
 				</div>
 				<div class="modal-body">
-					<jsp:include page="listMemberVIP.jsp"></jsp:include>
+					<div id="bodyHistory">
+					</div>
 				</div>
 
 				<div class="modal-footer">
@@ -86,6 +86,7 @@
 				<form role="form" id="formAddRemark">
 				<div class="modal-body">
 					<div class="wrapper" style="width: 40%;">
+					<p>Chọn 1 tuần để xem thống kê kêt quả</p>
 					<select style="margin-bottom: 30px;" name="" id="" class="form-control" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
     					<c:forEach items="${totalrange}" var="rangee">
     						<option value="">${rangee}</option>
@@ -100,11 +101,7 @@
 						<div id="chart_div"></div>
 						<br />
 						<div id="btn-group">
-							<button type="button" class="button button-blue" id="none">No Format</button>
-							<button type="button" class="button button-blue" id="scientific">Scientific
-								Notation</button>
-							<button type="button" class="button button-blue" id="decimal">Decimal</button>
-							<button type="button" class="button button-blue" id="short">Short</button>
+							<button type="button" class="button button-blue" id="none">Xem biểu đồ</button>
 						</div>
 					</div>
 					<div class="form-group">
@@ -115,6 +112,7 @@
 				
 				<input type="hidden" id="appContext"
 					value="${pageContext.request.contextPath}">
+				<p id="checkremarked" style="margin-left: 18px;color: red;"></p>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal" id="close-modal">Close</button>
 					<button type="submit" class="btn btn-danger" id="sendRemark" idmem="${member.memId}">Gửi</button>
@@ -126,12 +124,32 @@
 	
 	<script type="text/javascript">
 	$(document).ready(function() {
+		
+		$(".viewResult").on('click', function(e) {
+			e.preventDefault();
+			var idMem = $(this).attr('idmem');
+			var appContext = $("#appContext").val();
+			$.ajax({
+				type:"GET",
+				url: appContext + "/admin/memberResult/"+idMem,
+                success: function (result) {
+                	$("#bodyHistory").html(result);
+                	$("#viewResultModal").modal('show');
+                	$("#historyExam").DataTable({
+                		language: {
+                			emptyTable: "Người dùng chưa có lịch sử thi."
+                		}
+	                }); 
+                }
+			});
+		});
+		
 		$(".viewResultStatics").on('click', function() {
 			var idMem = $(this).attr('idmem');
 			$("#sendRemark").attr("idmem",idMem);
 	        var appContext = $("#appContext").val();
-			var dateFrom = $("#firstday").val();
-			var dateTo = $("#lastday").val();
+			var dateFrom = $("#firstday").val() +" 00:00:00";
+			var dateTo = $("#lastday").val() +" 23:59:59";
 			$.ajax({
 	                type: "POST",
 	                data: {
@@ -168,8 +186,8 @@
 
 				  var options = {
 				    chart: {
-				      title: 'Kết quả thi của user ',
-				      subtitle: 'Tuần '+$("#weekNum").val()+' từ: '+$("#rangeRs").val(),
+				      title: 'Thống kê kết quả thi của người dùng ',
+				      subtitle: 'Tuần hiện tại: '+$("#weekNum").val()+' từ: '+$("#rangeRs").val(),
 				    },
 				    bars: 'vertical',
 				    vAxis: {format: 'decimal'},
@@ -191,6 +209,14 @@
 				    }
 				  }
 				}	
+				$("#checkremarked").text("");
+				//bỏ ô text box remark nếu như đã remark rồi
+				
+				if(responseSt.remarked==true) {
+					$("#remark").val(responseSt.remarke);
+					$("#checkremarked").text("Bạn đã nhập nhận xét tuần này cho người dùng");
+					$("#sendRemark").prop('disabled', true);
+				}
 			}
 			$("#statisticResult").modal('show');
 		});
@@ -228,6 +254,7 @@
 					url: appContext + "/admin/addRemark",
 					success: function(result){
 						alert(result);
+						$("#remark").val("");
 						$("#statisticResult").modal('hide');
 						$(".modal-fade").modal("hide");
 					    $(".modal-backdrop").remove();

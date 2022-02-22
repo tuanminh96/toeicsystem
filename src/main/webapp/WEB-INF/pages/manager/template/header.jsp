@@ -5,27 +5,22 @@
 <html lang="en">
 
 <head>
-
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-	crossorigin="anonymous">
-
-<!-- Optional theme -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-	crossorigin="anonymous">
-
-<!-- Latest compiled and minified JavaScript -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-	crossorigin="anonymous"></script>
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
+<script
+	src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <link rel="stylesheet" href="<c:url value='/css/admin.css' />" />
 
@@ -34,6 +29,10 @@
 /* -----------------------------------------
    Timeline
 ----------------------------------------- */
+
+.nav.navbar-nav.navbar-right li a {
+	color: white !important;
+}
 .timeline {
 	list-style: none;
 	padding-left: 0;
@@ -272,70 +271,45 @@ a.dropdown-menu-header {
 </head>
 
 <body>
-
-	<nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="">
-			<div class="row">
-				<div class="navbar-header col-md-3">
-					<a class="navbar-brand" href="<c:url value='/admin'/>">BK Toeic
-						Admin</a>
-				</div>
-				<div class="collapse navbar-collapse col-md-9"
-					style="float: right; margin-right: 100px;">
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="<c:url value='/admin/profile' />"> <span
-								class="glyphicon glyphicon-user">&nbsp;</span>Chào Admin:
-								${loggedInUser.username}
-						</a></li>
-						<li><a href="<c:url value='/signout' />"><span
-								class="glyphicon glyphicon-log-out"></span> Đăng xuất</a></li>
-						<li>
-							<div class="dropdown" style="float: right; padding: 13px">
-								<a href="#" onclick="return false;" role="button"
-									data-toggle="dropdown" id="dropdownMenu1" data-target="#"
-									style="float: left" aria-expanded="true"> <i
-									class="fa fa-bell-o"
-									style="font-size: 20px; float: left; color: black"> </i>
-								</a> <span class="badge badge-danger">6</span>
-								<ul class="dropdown-menu dropdown-menu-left pull-right"
-									style="left: -100px;"  role="menu"
-									aria-labelledby="dropdownMenu1">
-									<li role="presentation"><a href="#"
-										class="dropdown-menu-header">Notifications</a></li>
-									<ul class="timeline timeline-icons timeline-sm"
-										style="margin: 10px; width: 210px">
-										<li>
-											<p>
-												Your “Volume Trendline” PDF is ready <a href="">here</a> <span
-													class="timeline-icon"><i class="fa fa-file-pdf-o"
-													style="color: red"></i></span> <span class="timeline-date">Dec
-													10, 22:00</span>
-											</p>
-										</li>
-										<li>
-											<p>
-												Your “Marketplace Report” PDF is ready <a href="">here</a> <span
-													class="timeline-icon"><i class="fa fa-file-pdf-o"
-													style="color: red"></i></span> <span class="timeline-date">Dec
-													6, 10:17</span>
-											</p>
-										</li>
-										<li>
-											<p>
-												Your “Top Words” spreadsheet is ready <a href="">here</a> <span
-													class="timeline-icon"><i class="fa fa-file-excel-o"
-													style="color: green"></i></span> <span class="timeline-date">Dec
-													5, 04:36</span>
-											</p>
-										</li>
-									</ul>
-									<li role="presentation"><a href="#"
-										class="dropdown-menu-header"></a></li>
-								</ul>
-							</div>
-						</li>
-					</ul>
-				</div>
-			</div>
+	<nav class="navbar navbar-light navbar-expand-sm sticky-top bg-dark" style="justify-content: space-between;">
+		<a style="color: gray;" class="navbar-brand" href="<c:url value='/manager/'/>">BK Toeic
+			Admin</a>
+		<div class="col-md-9 collapse navbar-collapse"
+			style="float: right; margin-right: 30px;">
+			<ul class="navbar-nav nav navbar-right ml-auto"
+				style="padding-bottom: 0px;">
+				<li class="nav-item"><a class="nav-link"
+					href="<c:url value='/admin/profile' />"> <i
+						class="fa fa-user-o" aria-hidden="true"></i> Xin chào:
+						${loggedInUser.username }
+				</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="<c:url value='/signout' />"><i class="fa fa-sign-out"
+						aria-hidden="true"></i> Đăng xuất</a></li>
+				<li class="nav-item">
+					<div class="dropdown" style="float: right; padding: 13px">
+						<a href="#" onclick="return false;" role="button"
+							data-toggle="dropdown" id="dropdownMenu1" data-target="#"
+							style="float: left" aria-expanded="true"> <i
+							class="fa fa-bell-o"
+							style="font-size: 20px; float: left; color: black"> </i>
+						</a> <span class="badge badge-danger"></span>
+						<ul class="dropdown-menu dropdown-menu-left pull-right"
+							style="left: -100px;" role="menu" aria-labelledby="dropdownMenu1">
+							<li role="presentation"><a href="#"
+								class="dropdown-menu-header">Notifications</a></li>
+							<ul class="timeline timeline-icons timeline-sm"
+								style="margin: 10px; width: 210px">
+								<li>
+									<p>
+									</p>
+								</li>
+							</ul>
+							<li role="presentation"><a href="#"
+								class="dropdown-menu-header"></a></li>
+						</ul>
+					</div>
+				</li>
+			</ul>
 		</div>
 	</nav>

@@ -27,7 +27,9 @@ public interface BaiThiThuRespository extends JpaRepository<Exam, Integer>
 
     List<Exam> findTop10ByOrderByCountTestDesc();
 
-    @Query("SELECT e FROM Exam e WHERE e.isActive IN :status AND e.delFlg = :delFlg ORDER BY e.dateAdd DESC")
-    List<Exam> findAllByIsActiveAndDelFlg(@Param("status") Collection<String> status, @Param("delFlg") String delFlg);
+    @Query("SELECT e FROM Exam e WHERE e.isActive IN :status ORDER BY e.dateAdd DESC")
+    List<Exam> findAllByIsActiveAndDelFlg(@Param("status") Collection<String> status);
+    
+    List<Exam> findByUserAdd(ContentAdmin admin);
 
 }

@@ -11,6 +11,7 @@
 </head>
 <body>
 	<jsp:include page="template/header.jsp"></jsp:include>
+	<div class="row">
 	<jsp:include page="template/sidebar.jsp"></jsp:include>
 
 	<div class="col-md-9 animated bounce">
@@ -40,13 +41,11 @@
 					<th>Số điện thoại</th>
 					<th>Địa chỉ</th>
 					<th>Vai trò</th>
-					<th></th>
+					<th>Chọn</th>
 				</tr>
-
 			</thead>
 			<tbody>
 			</tbody>
-
 		</table>
 	</div>
 	<div class="row col-md-6">
@@ -123,10 +122,6 @@
 	</div>
 
 	<jsp:include page="template/footer.jsp"></jsp:include>
-	<script
-	src="${pageContext.request.contextPath}/resources/js/jquery-1.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/jquery.serializeJSON/2.9.0/jquery.serializejson.js"></script>
 	<script src="<c:url value='/js/admin/taiKhoanAjax.js'/>"></script>
 </body>
 </html>

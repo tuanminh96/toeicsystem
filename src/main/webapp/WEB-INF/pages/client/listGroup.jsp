@@ -146,8 +146,8 @@ body {
 					rel="stylesheet" />
 
 				<div class="">
-					<h4 class="header-title mb-4">Nhóm của user:
-						${nguoiDung.hoTen}</h4>
+					<h4 class="header-title mb-4">Nhóm của người dùng:
+						${loggedInUser.hoTen}</h4>
 					<div class="card">
 						<div class="card-body">
 							<c:if test="${groups.size() == 0}">
@@ -165,7 +165,7 @@ body {
 											<div class="me-3">
 												<h5 class="font-size-15 mb-1">
 													<a
-														href="${pageContext.request.contextPath}/group_detail/${group.idGroup}">${group.name}</a>
+														href="${pageContext.request.contextPath}/group/group_detail/${group.idGroup}">${group.name}</a>
 												</h5>
 												<p class="text-muted font-size-14 mb-0">${group.totalMem}</p>
 											</div>

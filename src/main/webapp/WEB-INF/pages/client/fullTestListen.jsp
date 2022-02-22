@@ -109,7 +109,7 @@
             <div id="navigation" class="content-left">
                 <div class="fix-scrolling">
                     <div class="timeDoExam" style="width: 80%">
-                        Time <i class="fas fa-clock"> : </i><span id="time">20:00</span>
+                        Time <i class="fas fa-clock"> : </i><span id="time">05:00</span>
                     </div>
                     <hr width="80%">
                     <div class="panel panel-info">
@@ -174,8 +174,8 @@
                                                  alt="Image not found"
                                                  style="height: 300px; width: 400px; float: left; margin-right: 10px"/>
                                         </div>
-                                        <div class="col-md-6">
-                                            <audio controls style="width: 100%">
+                                        <div class="col-md-6 ">
+                                            <audio disabled class="audiobut" audioId="${part1.audio}" controls style="width: 100%">
                                                 <source src="${pageContext.request.contextPath}/resources/file/exams/${part1.idExam}/audio/${part1.audio}"
                                                         type="audio/wav">
                                             </audio>
@@ -207,7 +207,7 @@
                                 </div>
                                 <div class="row questionPart2a">
                                 	<pre><b>${part2.content}:</b></pre>
-                                    <audio controls style="width: 100%">
+                                    <audio class="audiobut" audioId="${part2.audio}" controls style="width: 100%">
                                         <source src="${pageContext.request.contextPath}/resources/file/exams/${part2.idExam}/audio/${part2.audio}"
                                                 type="audio/wav">
                                     </audio>
@@ -245,7 +245,7 @@
                                         <hr style="height:2px;border-width:0;color:gray;background-color:gray">
                                     </c:if>
                                     <p><b>${part3.content}:</b></p>
-                                    <audio controls>
+                                    <audio class="audiobut" audioId="${part3.audio}" controls>
                                         <source src="${pageContext.request.contextPath}/resources/file/exams/${part3.idExam}/audio/${part3.audio}"
                                                 type="audio/wav">
                                     </audio>
@@ -286,7 +286,7 @@
                                         <hr style="height:2px;border-width:0;color:gray;background-color:gray">
                                     </c:if>
                                     <p><b>${part4.content}:</b></p>
-                                    <audio controls>
+                                    <audio class="audiobut" audioId="${part4.audio}" controls>
                                         <source src="${pageContext.request.contextPath}/resources/file/exams/${part4.idExam}/audio/${part4.audio}"
                                                 type="audio/wav">
                                     </audio>

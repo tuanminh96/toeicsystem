@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.bk.tuanpm.webtoeic.config.Registration;
 
 @Controller
 public class LoginController {
@@ -30,5 +29,10 @@ public class LoginController {
 	public String loginPageForward(Model model) {
 		return "redirect:/signin?accessDenied";
 	}
+//	
+//	@GetMapping("/adminPage/login")
+//	public String adminLoginPageForward(Model model) {
+//		return "redirect:/signin?accessDenied";
+//	}
 
 }

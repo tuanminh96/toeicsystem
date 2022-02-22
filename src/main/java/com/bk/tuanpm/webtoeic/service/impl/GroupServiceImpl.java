@@ -74,5 +74,34 @@ public class GroupServiceImpl implements GroupService{
 		LocalDate now = LocalDate.now();
 		return groupRepository.getTotalGroupThisYear("G-"+now.getYear());
 	}
+	
+	@Override
+	public boolean checkUserInGroup(int idGr, int idUser) {
+		if(groupRepository.findUserInGroup(idGr, idUser) != 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	@Override
+	public boolean checkIsAdminGroup(int idGr, int admin) {
+		if(groupRepository.findAdminInGroup(idGr, admin) != 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	@Override
+	public long getTotalGroup() {
+		return groupRepository.count();
+	}
+	
+	@Override
+	public List<Group> getListTotalGroup() {
+		return groupRepository.findAll();
+	}
 
 }

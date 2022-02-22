@@ -2,8 +2,8 @@ $(document).ready(function () {
     const baseUrl = $('#baseUrl').val();
     const examId = $("#examId").val();
     let interval;
-    const totalTimeReadExam = 60 * 20;
-    let timeDoReadExam = 60 * 20;
+    const totalTimeReadExam = 60 * 5;
+    let timeDoReadExam = 60 * 5;
 
     // Start time do Reading
     onLoadReadTimer();

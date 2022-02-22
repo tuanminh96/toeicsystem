@@ -10,6 +10,7 @@ import com.bk.tuanpm.webtoeic.dto.MemberDTO;
 import com.bk.tuanpm.webtoeic.dto.PostDTO;
 import com.bk.tuanpm.webtoeic.entities.Group;
 import com.bk.tuanpm.webtoeic.entities.Post;
+import com.bk.tuanpm.webtoeic.entities.TutorialAdmin;
 
 public interface PostService {
 
@@ -24,5 +25,7 @@ public interface PostService {
 	void addPostRealtime(Post p, List<MemberDTO> users) throws ParseException, IOException;
 
 	SseEmitter addPostGroupEmitter(SseEmitter emitter, int idUser);
+
+	void addPostRealtime(Post p, TutorialAdmin admin) throws ParseException, IOException;
 
 }

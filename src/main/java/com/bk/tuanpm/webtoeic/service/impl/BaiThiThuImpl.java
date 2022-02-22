@@ -44,7 +44,12 @@ public class BaiThiThuImpl implements BaiThiThuService {
 
     @Override
     public List<Exam> getAllExamSubmited(Collection<String> status) {
-        return baithithuRepo.findAllByIsActiveAndDelFlg(status, CommonConst.FLG_ON);
+        return baithithuRepo.findAllByIsActiveAndDelFlg(status);
+    }
+    
+    @Override
+    public List<Exam> getExamByAdmi(ContentAdmin admin) {
+        return baithithuRepo.findByUserAdd(admin);
     }
 
     @Override
@@ -76,5 +81,8 @@ public class BaiThiThuImpl implements BaiThiThuService {
         return baithithuRepo.findTop10ByOrderByCountTestDesc();
     }
 
-    ;
+    @Override
+    public long getTotalExam() {
+    	return baithithuRepo.count();
+    }
 }

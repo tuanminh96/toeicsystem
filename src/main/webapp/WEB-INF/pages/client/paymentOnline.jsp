@@ -60,11 +60,11 @@ input[type="radio"] {
 									class="nav bg-light nav-pills rounded nav-fill mb-3">
 									<li class="nav-item"><a data-toggle="pill"
 										href="#credit-card" class="nav-link  "> <i
-											class="fas fa-credit-card mr-2"></i> Credit Card
+											class="fas fa-credit-card mr-2"></i> Thẻ tín dụng
 									</a></li>
 									<li class="nav-item"><a data-toggle="pill"
 										href="#net-banking" class="nav-link active"> <i
-											class="fas fa-mobile-alt mr-2"></i> Net Banking
+											class="fas fa-mobile-alt mr-2"></i> Ví điện tử
 									</a></li>
 								</ul>
 							</div>
@@ -77,6 +77,7 @@ input[type="radio"] {
 									</label> <select class="form-control" id="bankselect">
 										<option value="" selected disabled>--Chọn ngân hàng
 											thanh toán--</option>
+										<option value="NCB">Ngân hàng NCB</option>
 										<option value="TPBANK">TPBank</option>
 										<option value="VIETCOMBANK">VietcomBank</option>
 										<option value="PVCOMBANK">PVCOMBANK-Ngân hàng TMCP
@@ -93,14 +94,17 @@ input[type="radio"] {
 										style="font-family: cursive; font-size: 30px; color: red;">500.000</span>
 										VNĐ
 									</label>
-									<div class="input-group">
-										<label class="input-group-prepend">Thông tin thanh
-											toán: </label> <input id="payment-desc" type="text"
-											class="form-control" value="Nâng cấp tài khoản lên VIP">
+									<div class="">
+										<label class="input-group-prepend">Nhập thông tin thanh
+											toán: </label> 
+										<div>
+										<input id="payment-desc" type="text" placeholder="Nhập thông tin cần thanh toán ở đây: Nâng cấp tài khoản lên VIP"
+											class="form-control">
+										</div>
 									</div>
 								</div>
 								<div class="form-group">
-									<p>
+									<p style="width: 30%;margin: auto;">
 										<button type="button" class="btn btn-primary "
 											id="process-payment">
 											<i class="fas fa-mobile-alt mr-2"></i> Thanh toán
@@ -125,7 +129,7 @@ input[type="radio"] {
 		</div>
 		<div style="margin-left: 30%; width: 50%;">
 			<img alt=""
-				src="https://tuhoclamweb.com/wp-content/uploads/2020/07/vnpay_qr.png">
+				src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBZgWDVlHFnhXbiUuVN8YaSalbX0u13_zkrEa5d4QR7Wlf2P62BlHzMCLtf6OFpMj86g&usqp=CAU">
 		</div>
 	</div>
 	<jsp:include page="template/footer.jsp"></jsp:include>

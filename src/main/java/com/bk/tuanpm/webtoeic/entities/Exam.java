@@ -159,6 +159,8 @@ public class Exam implements Serializable {
     public void setDelFlg(String delFlg) {
         this.delFlg = delFlg;
     }
+    
+    
 
     @Override
     public int hashCode() {

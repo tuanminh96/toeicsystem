@@ -19,27 +19,11 @@ $(document).ready(function() {
 					                  '<td>' + taiKhoan.soDienThoai + '</td>' +
 					                  '<td>' + taiKhoan.diaChi + '</td>'+ 
 					                  '<td>' + taiKhoan.role.role + '</td>';				  
-					  taiKhoanRow +='</td>' +
-					                  '<td width="0%">'+'<input type="hidden" id="idTaiKhoan" value=' + taiKhoan.id + '>'+ '</td>'+
-//					                  '<td><button class="btn btn-primary btnCapNhat" >Cập nhật</button></td>' + 
-					                  '<td><button class="btn btn-danger btnXoa" >Xóa</button></td>';			;				                  
+					  taiKhoanRow +='<td><button id="idTaiKhoan" value=' + taiKhoan.id +' class="btn btn-danger btnXoa" >Xóa</button></td></tr>';				                  
 					$('.taiKhoanTable tbody').append(taiKhoanRow);
-
-				});
-								
-				if(result.totalPages > 1 ){
-					for(var numberPage = 1; numberPage <= result.totalPages; numberPage++) {
-						var li = '<li class="page-item "><a class="pageNumber">'+numberPage+'</a></li>';
-					    $('.pagination').append(li);
-					};				
 					
-					// active page pagination
-			    	$(".pageNumber").each(function(index){	
-			    		if($(this).text() == page){
-			    			$(this).parent().removeClass().addClass("page-item active");
-			    		}
-			    	});
-				};
+				});
+				$(".taiKhoanTable").DataTable();			
 			},
 			error : function(e){
 				alert("Error: ",e);

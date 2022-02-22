@@ -109,7 +109,7 @@ h3 {
 						<c:if test="${pageContext.request.userPrincipal.name == null}">
 							<li class="nav-item" style="padding-left: 300px;"><a
 								class="nav-link active" href="/webtoeic">Trang chủ</a></li>
-							<li class="nav-item"><a class="nav-link" href="#contact">Liên hệ</a></li>
+							<li class="nav-item"><a class="nav-link" href="#contact"></a></li>
 							<li class="nav-item"><a class="nav-link"
 								href="<%=request.getContextPath()%>/signin">Đăng nhập</a></li>
 							<li class="nav-item"><a class="nav-link"
@@ -129,7 +129,7 @@ h3 {
 										style="color: black;">Học nhóm</a></li>
 								</c:if>
 							</c:if>
-							<li class="nav-item"><a class="nav-link" href="#contact">Liên hệ</a></li>
+							<li class="nav-item"><a class="nav-link" href="#contact"></a></li>
 							<c:if test="${pageContext.request.isUserInRole('MEMBER')}">
 								<div class="navbar-nav flex-row  d-none d-md-flex"
 									style="margin-left: 100px;">
@@ -140,7 +140,7 @@ h3 {
 									<input type="hidden" value="vip" id="vip">
 							</c:if>
 							<li class="nav-item dropdown"><a
-								class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">${nguoiDung.username}</a>
+								class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">${loggedInUser.username}</a>
 								<div class="dropdown-menu">
 									<c:if
 										test="${pageContext.request.isUserInRole('MEMBER') || pageContext.request.isUserInRole('MEMBER_VIP')}">
@@ -154,7 +154,7 @@ h3 {
 										<c:if test="${pageContext.request.isUserInRole('MEMBER_VIP')}">
 											<a class="dropdown-item"
 												href="<%=request.getContextPath()%>/listnoti/1">Thông
-												báo - <span class="badge badge-danger">${count_notifi}</span> </a>
+												báo - <span class="badge badge-danger totalNotiUnseen">${count_notifi}</span> </a>
 										</c:if>
 									</c:if>
 									<a class="dropdown-item"

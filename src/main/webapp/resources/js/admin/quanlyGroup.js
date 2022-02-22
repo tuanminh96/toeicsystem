@@ -1,4 +1,18 @@
 $(document).ready(function() {
+	var datatable;
+	datatable = $("#tableGroup").DataTable({
+		language: {
+			emptyTable: "Bạn chưa tạo nhóm học tập nào."
+		},
+		lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+		searching: true, // Mặc định là true, set false để tắt chức năng search
+		ordering:  true, // Mặc định là true, set false để tắt chức năng sắp xếp theo collumn
+		paging: true, // Mặc định là true, set false để tắt chức năng phân trang
+		// scrollX: 400, // Nội dụng của table sẽ hiện thị với with 400px, Nếu quá thì sẽ có thanh scroll
+		// scrollY: 300, // Nội dụng của table sẽ hiện thị với hieght 400px, Nếu quá thì sẽ có thanh scroll
+		processing: true,
+    });
+    
 	$.validator.addMethod("validateNameGroup", function(value, element) {
 		if (value) {
 			return true;
@@ -6,13 +20,23 @@ $(document).ready(function() {
 			return false;
 		}
 	});
+	function reloadDataTable() {
+		var appContext = $("#appContext").val();
+		$.get(appContext+'/api/group', function(response) {
+		
+		    datatable.clear();
+		    datatable.rows.add(response);
+		    datatable.draw();
+		});
+	}
 	$("#formAddGroup").validate({
 		rules : {
 			nameGroup : {
 				required : true
 			},
 			maxmem : {
-				required : true
+				required : true,
+				digits: true
 			}
 		},
 		messages : {
@@ -20,7 +44,8 @@ $(document).ready(function() {
 				required : "Tên không được để trống"
 			},
 			maxmem : {
-				required : "Số lượng thành viên giới hạn không được để trống"
+				required : "Số lượng thành viên giới hạn không được để trống",
+				digits: "Chỉ được nhập dữ liệu số"
 			}
 		},
 		submitHandler : function(form) {
@@ -39,12 +64,24 @@ $(document).ready(function() {
 					$('#addGrModal').modal('hide');
 					alert("Thêm nhóm thành công");
 					$("#appendGroup").html(response);
+//					reloadDataTable();
 				},error: function () {
 	    			console.log("Có lỗi xảy ra vui lòng thử lại");
 	    		}
 			});
 		}
 	});
+	
+	//delete group
+//	$(".deleteGroup").on("click", function(e) {
+//		e.preventDefault();
+//		var idGroup = $(this).attr("idGroup");
+//		var appContext = $("#appContext").val();
+//		if (confirm('Bạn có muốn xóa nhóm này ?')) {
+//			var buttonD = "#del"+idGroup;
+//	           $(buttonD).click();
+//		}
+//	});
 	
 	$("#memberlist").on('click', function(e) {
 		e.preventDefault();

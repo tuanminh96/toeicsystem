@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.bk.tuanpm.webtoeic.dto.PostDTO;
 import com.bk.tuanpm.webtoeic.entities.Group;
@@ -36,14 +37,14 @@ public class GroupController {
 
 	@Autowired
 	UserAdminServiceImpl userAdminServiceImpl;
-	
+
 	@Autowired
 	GroupMemberService groupMemberService;
-	
+
 	@Autowired
 	PostService postService;
-	
-	@GetMapping("/group_detail/{idGroup}")
+
+	@GetMapping("/group/group_detail/{idGroup}")
 	public String getGroup(Model model, @PathVariable Integer idGroup) throws ParseException {
 		Group group = groupService.getGroupById(idGroup);
 		model.addAttribute("group", group);
@@ -52,7 +53,7 @@ public class GroupController {
 		for (Post post : posts) {
 			PostDTO dto = new PostDTO();
 			dto.setPost(post);
-			if(Role.ROLE_TUTORIAL == post.getUser().getRole().getCode()) {
+			if (Role.ROLE_TUTORIAL == post.getUser().getRole().getCode()) {
 				dto.setAdminPost(true);
 			}
 			dto.setTimePost(DateTimeUtil.difDate(post.getDatePost(), new Date()));
@@ -62,6 +63,23 @@ public class GroupController {
 		for (PostDTO postDTO : postDTOs) {
 			System.out.println(postDTO);
 		}
+		return "client/groupDetail";
+	}
+
+	@GetMapping("/group/post_detail/{idGroup}/{idPost}")
+	public String getPost(Model model, @PathVariable("idPost") int idPost, @PathVariable Integer idGroup) throws ParseException {
+		Group group = groupService.getGroupById(idGroup);
+		model.addAttribute("group", group);
+		List<PostDTO> list = new ArrayList<>();
+		Post post = postService.getPost(idPost);
+		PostDTO dto = new PostDTO();
+		dto.setPost(post);
+		if (Role.ROLE_TUTORIAL == post.getUser().getRole().getCode()) {
+			dto.setAdminPost(true);
+		}
+		dto.setTimePost(DateTimeUtil.difDate(post.getDatePost(), new Date()));
+		list.add(dto);
+		model.addAttribute("listpost", list);
 		return "client/groupDetail";
 	}
 

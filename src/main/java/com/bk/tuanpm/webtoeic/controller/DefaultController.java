@@ -20,20 +20,11 @@ public class DefaultController {
 
 	@ModelAttribute
 	public void load(Model model, @AuthenticationPrincipal Object user) {
-		if (user != null) {
+		if (user == null) {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			Account nguoiDung;
-			if (auth.getClass().isAssignableFrom(OAuth2AuthenticationToken.class)) {
-				nguoiDung = new Account();
-				String principal = auth.getPrincipal().toString();
-				String[] part = principal.split(",");
-				String name = part[2].split("=")[1];
-				nguoiDung.setHoTen(name);
-				nguoiDung.setLoginOauth2(true);
-			} else {
-				nguoiDung = nguoiDungService.findByEmail(auth.getName());
-			}
-			model.addAttribute("nguoiDung", nguoiDung );
+			nguoiDung = nguoiDungService.findByEmail(auth.getName());
+			model.addAttribute("nguoiDung", nguoiDung);
 		}
 
 	}

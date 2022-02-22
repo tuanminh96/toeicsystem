@@ -45,6 +45,7 @@ import com.bk.tuanpm.webtoeic.entities.Role;
 import com.bk.tuanpm.webtoeic.entities.User;
 import com.bk.tuanpm.webtoeic.service.GroupService;
 import com.bk.tuanpm.webtoeic.service.RoleService;
+import com.bk.tuanpm.webtoeic.service.SendingEmailService;
 import com.bk.tuanpm.webtoeic.service.impl.PaymentServiceImpl;
 import com.bk.tuanpm.webtoeic.service.impl.UserAdminServiceImpl;
 import com.bk.tuanpm.webtoeic.util.DateTimeUtil;
@@ -71,6 +72,9 @@ public class PaymentController {
 	
 	@Autowired
 	RoleService roleService;
+	
+	@Autowired
+	SendingEmailService emailService;
 	
 	@GetMapping("/payment")
 	public String showPaymentPage(Model model) {
@@ -208,6 +212,9 @@ public class PaymentController {
 	                    	orderPayment.setStatus("Paid");
 	                    	
 	                    	paymentServiceImpl.saveOrder(orderPayment);
+	                    	
+	                    	//Gửi thông tin thanh toán qua email
+	                    	emailService.sendingEmail(userUp, orderPayment);
 	                    	
 	                    	model.addAttribute("order", orderPayment);
 	                    } else {

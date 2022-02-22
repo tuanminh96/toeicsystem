@@ -98,6 +98,8 @@ public class BaiFullTestController {
 
             List<Integer> exams = ketquabaitestService.getExamOfUsers(currentUser);
             model.addAttribute("examsTested", exams);
+            
+            //lấy danh sách đề thi ko được phép test
             List<Integer> notAllowedTest = ketquabaitestService.getListExamNotAllowedTest(currentUser);
             model.addAttribute("listNotAllow", notAllowedTest);
 
@@ -124,7 +126,7 @@ public class BaiFullTestController {
 
             return "client/doExam";
         } catch (Exception e) {
-            System.out.println("error:" + e);
+            e.printStackTrace();
             return "client/error";
         }
     }
